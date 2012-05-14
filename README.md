@@ -24,3 +24,12 @@ The UI was chosen natually to be HTML+JavaScript (HTML 5 as much as possible).
 The nodes are currently designed to use CppCMS.
 
 The reason behind this choice of tools is simply this: this is a pet project of mine in its infancy. I want to learn CppCMS better, and on paper at least - it looks like a good choice in terms of capabilities performance and platform support.
+
+Licensing
+---------
+The current plan is to release this project under GPLv3.
+
+Developers
+----------
+
+Lee Elenbaas - lee [dot] elenbaas [at] gmail [dot] com - Owner
