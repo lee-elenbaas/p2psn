@@ -33,3 +33,8 @@ Developers
 ----------
 
 Lee Elenbaas - lee [dot] elenbaas [at] gmail [dot] com - Owner
+
+Known Issues
+------------
+Each node needs to deal with large amount of data (all the objects created by its users + all objects visible to the users) and large amount of communication bandwidth (communication of those said objects to other nodes + communication of online status info or other users)
+At the same time each node is intended to run on a normal home PC with its limited capabilities.
