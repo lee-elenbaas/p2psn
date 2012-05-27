@@ -17,28 +17,37 @@
 */
 
 
-#ifndef FULL_POLYNOMIAL_H
-#define FULL_POLYNOMIAL_H
-
-#include<vector>
+#include "full_polynomial_stream_traits.h"
 
 namespace lee {
 namespace math {
 namespace polynomial {
 
-template<typename F>
-// F should have field semantics
-class full_polynomial {
-public:
-	typedef F Field_Type;
+  const int polynomial_variable::_xalloc = std::ios_base::xalloc();
+  
+  ostream& operator<<(ostream& os, const polynomial_variable& variable) {
+    os.iword(polynomial_variable::_xalloc) = variable._variable;
+    
+    return os;
+  }
 
-	constexpr const std::vector<const F> get_coefficients() { return _coefficients; }
-private:
-	std::vector<F> _coefficients = {};
-};
-
-} /* namespace polynomial */
+  template<typename F>
+  ostream& operator<<(ostream& os, const full_polynomial<F>& polynomial) {
+    if (!os.good())
+      return os;
+    
+    polynomial_variable variable(os.iword(polynomial_variable::_xalloc));
+    
+    bool showSign = false;
+    for(F coefficient : polynomial.get_coeficients()) {
+      if (coefficient){
+      if (showSign)
+	os << std::showpos;
+      
+      os<<coefficient
+    }
+  }
+  
+  } /* namespace polynomial */
 } /* namespace math */
 } /* namespace lee */
-
-#endif // FULL_POLYNOMIAL_H
