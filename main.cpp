@@ -1,6 +1,9 @@
 #include <iostream>
 
 int main(int argc, char **argv) {
-    std::cout << "Hello, world!" << std::endl;
+    using namespace std;
+    
+    cout << "Math unit tests." << endl;
+    
     return 0;
 }
