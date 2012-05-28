@@ -27,14 +27,20 @@ namespace math {
 namespace polynomial {
 
 template<typename F>
-// F should have field semantics
+// F should have field semantics: supports operators + * and has zero in the form F()
 class full_polynomial {
 public:
 	typedef F Field_Type;
 
 	constexpr const std::vector<const F> get_coefficients() { return _coefficients; }
+	constexpr F operator()(const F& val) {
+	   return eval(val, 0);
+	}
 private:
 	std::vector<F> _coefficients = {};
+	constexpr F eval(const F& val, const int level) {
+	  return (level >= _coefficients.size())?F():_coefficients[level]+val*eval(val, level+1);
+	}
 };
 
 } /* namespace polynomial */
