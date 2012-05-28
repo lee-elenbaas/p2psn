@@ -33,13 +33,13 @@ public:
 	typedef F Field_Type;
 
 	constexpr const std::vector<const F> get_coefficients() { return _coefficients; }
-	constexpr F operator()(const F& val) {
-	   return eval(val, 0);
+	constexpr F operator()(const F& scalar) {
+	   return eval(scalar, 0);
 	}
 private:
 	std::vector<F> _coefficients = {};
-	constexpr F eval(const F& val, const int level) {
-	  return (level >= _coefficients.size())?F():_coefficients[level]+val*eval(val, level+1);
+	constexpr F eval(const F& scalar, const int level) {
+	  return (level >= _coefficients.size())?F():_coefficients[level]+scalar*eval(scalar, level+1);
 	}
 };
 
