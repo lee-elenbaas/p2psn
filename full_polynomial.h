@@ -32,12 +32,29 @@ class full_polynomial {
 public:
 	typedef F Field_Type;
 
-	constexpr const std::vector<const F> get_coefficients() { return _coefficients; }
-	constexpr F operator()(const F& scalar) {
-	   return eval(scalar, 0);
-	}
+	// polynom construction
+	constexpr full_polynomial() : full_polynomial({}) {}
+	constexpr full_polynomial(std::initializer_list<F> coefficients) : _coefficients(coefficients) {}
+	
+	// destruction
+	~full_polynomial() = default;
+	
+	// copy
+	constexpr full_polynomial(const full_polynomial<F>& other) : _coefficients(other._coefficients) {}
+	full_polynomial<F>& operator=(const full_polynomial<F>& other) { _coefficients = other._coefficients; return *this; }
+	
+	// move
+	constexpr full_polynomial(full_polynomial<F>&& other) : _coefficients(std::move(other._coefficients)) {}
+	full_polynomial<F>&& operator=(full_polynomial<F>&& other) { _coefficients = std::move(other._coefficients); return *this; }
+	
+	// accessor
+	constexpr const std::vector<const F> get_coefficients() const { return _coefficients; }
+	
+	// Scalar assignment
+	constexpr F operator()(const F& scalar) { return eval(scalar, 0); }
 private:
-	std::vector<F> _coefficients = {};
+	std::vector<F> _coefficients;
+	
 	constexpr F eval(const F& scalar, const int level) {
 	  return (level >= _coefficients.size())?F():_coefficients[level]+scalar*eval(scalar, level+1);
 	}

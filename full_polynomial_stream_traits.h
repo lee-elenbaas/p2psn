@@ -30,15 +30,16 @@ namespace polynomial {
   class polynomial_variable
 {
 public:
-  explicit polynomial_variable(char variable)
-  :_variable(variable) {}
-  polynomial_variable() {}
-    friend std::ostream& operator<<  (std::ostream& os, const polynomial_variable & variable);
+  explicit polynomial_variable(char variable);
+  static const char DEFAULT_VARIABLE='x';
+  
+  friend std::ostream& operator<<  (std::ostream& os, const polynomial_variable & variable);
+  
   template<typename F>
-  friend ostream& operator<<(ostream& os, const full_polynomial<F>& polynomial);
+  friend std::ostream& operator<<(std::ostream& os, const full_polynomial<F>& polynomial);
 private: 
   static const int _xalloc;
-  char _variable = 'x';
+  char _variable;
 };
 
 } /* namespace polynomial */

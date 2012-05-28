@@ -25,27 +25,51 @@ namespace polynomial {
 
   const int polynomial_variable::_xalloc = std::ios_base::xalloc();
   
-  ostream& operator<<(ostream& os, const polynomial_variable& variable) {
+  std::ostream& operator<<(std::ostream& os, const polynomial_variable& variable) {
     os.iword(polynomial_variable::_xalloc) = variable._variable;
     
     return os;
   }
 
+  polynomial_variable::polynomial_variable(char variable) : _variable(variable?variable:DEFAULT_VARIABLE) {}
+  
   template<typename F>
-  ostream& operator<<(ostream& os, const full_polynomial<F>& polynomial) {
+  std::ostream& operator<<(std::ostream& os, const full_polynomial<F>& polynomial) {
     if (!os.good())
       return os;
     
     polynomial_variable variable(os.iword(polynomial_variable::_xalloc));
+    char power='^';
+    char multiply='*';
     
-    bool showSign = false;
+    bool generatedSomeOutput = false;
+    int level = 0;
+    
     for(F coefficient : polynomial.get_coeficients()) {
-      if (coefficient){
-      if (showSign)
-	os << std::showpos;
+      if (coefficient) {
+	if (generatedSomeOutput)
+	  os << std::showpos;
       
-      os<<coefficient
+	os<<coefficient;
+      
+	if (level) {
+	  if (multiply)
+	    os << multiply;
+	
+	  os << variable._variable;
+	
+	  if (level > 1)
+	    os << power << level;
+	}
+	
+	generatedSomeOutput = true;
+      }
+      
+      ++level;
     }
+    
+    if (!generatedSomeOutput)
+      os << F();
   }
   
   } /* namespace polynomial */
