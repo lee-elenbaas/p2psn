@@ -33,7 +33,8 @@ public:
 	typedef F Field_Type;
 
 	// polynom construction
-	constexpr full_polynomial() : full_polynomial({}) {}
+	constexpr full_polynomial() : _coefficients({}) {} // when c++11 will be working completely: full_polynomial({}) {}
+	constexpr full_polynomial(const F& scalar) : _coefficients({scalar}) {} // when c++11 will be working completely: full_polynomial({scalar}) {}
 	constexpr full_polynomial(std::initializer_list<F> coefficients) : _coefficients(coefficients) {}
 	
 	// destruction
