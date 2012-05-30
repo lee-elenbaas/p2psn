@@ -1,0 +1,218 @@
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/gcc-4.7 
+Build flags: 
+Id flags: 
+
+The output was:
+1
+gcc-4.7: error trying to exec 'cc1plus': execvp: No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/gcc-4.7 
+Build flags: 
+Id flags: -c
+
+The output was:
+1
+gcc-4.7: error trying to exec 'cc1plus': execvp: No such file or directory
+
+
+Determining if the CXX compiler works failed with the following output:
+Change Dir: /home/lee/projects/math/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+make[1]: Entering directory `/home/lee/projects/math/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o
+/usr/bin/gcc-4.7     -o CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o -c /home/lee/projects/math/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+gcc-4.7: error trying to exec 'cc1plus': execvp: No such file or directory
+make[1]: Leaving directory `/home/lee/projects/math/build/CMakeFiles/CMakeTmp'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/gcc-4.7 
+Build flags: 
+Id flags: 
+
+The output was:
+1
+gcc-4.7: error trying to exec 'cc1plus': execvp: No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/gcc-4.7 
+Build flags: 
+Id flags: -c
+
+The output was:
+1
+gcc-4.7: error trying to exec 'cc1plus': execvp: No such file or directory
+
+
+Determining if the CXX compiler works failed with the following output:
+Change Dir: /home/lee/projects/math/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+make[1]: Entering directory `/home/lee/projects/math/build/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+make[2]: Entering directory `/home/lee/projects/math/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o
+/usr/bin/gcc-4.7     -o CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o -c /home/lee/projects/math/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+gcc-4.7: error trying to exec 'cc1plus': execvp: No such file or directory
+make[2]: *** [CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o] Error 1
+make[2]: Leaving directory `/home/lee/projects/math/build/CMakeFiles/CMakeTmp'
+make[1]: *** [cmTryCompileExec/fast] Error 2
+make[1]: Leaving directory `/home/lee/projects/math/build/CMakeFiles/CMakeTmp'
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/gcc-4.7 
+Build flags: 
+Id flags: 
+
+The output was:
+1
+gcc-4.7: error trying to exec 'cc1plus': execvp: No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/gcc-4.7 
+Build flags: 
+Id flags: -c
+
+The output was:
+1
+gcc-4.7: error trying to exec 'cc1plus': execvp: No such file or directory
+
+
+Determining if the CXX compiler works failed with the following output:
+Change Dir: /home/lee/projects/math/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+make[1]: Entering directory `/home/lee/projects/math/build/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+make[2]: Entering directory `/home/lee/projects/math/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o
+/usr/bin/gcc-4.7     -o CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o -c /home/lee/projects/math/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+gcc-4.7: error trying to exec 'cc1plus': execvp: No such file or directory
+make[2]: *** [CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o] Error 1
+make[2]: Leaving directory `/home/lee/projects/math/build/CMakeFiles/CMakeTmp'
+make[1]: *** [cmTryCompileExec/fast] Error 2
+make[1]: Leaving directory `/home/lee/projects/math/build/CMakeFiles/CMakeTmp'
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/gcc-4.7 
+Build flags: 
+Id flags: 
+
+The output was:
+1
+gcc-4.7: error trying to exec 'cc1plus': execvp: No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/gcc-4.7 
+Build flags: 
+Id flags: -c
+
+The output was:
+1
+gcc-4.7: error trying to exec 'cc1plus': execvp: No such file or directory
+
+
+Determining if the CXX compiler works failed with the following output:
+Change Dir: /home/lee/projects/math/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+make[1]: Entering directory `/home/lee/projects/math/build/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+make[2]: Entering directory `/home/lee/projects/math/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o
+/usr/bin/gcc-4.7     -o CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o -c /home/lee/projects/math/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+gcc-4.7: error trying to exec 'cc1plus': execvp: No such file or directory
+make[2]: *** [CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o] Error 1
+make[2]: Leaving directory `/home/lee/projects/math/build/CMakeFiles/CMakeTmp'
+make[1]: *** [cmTryCompileExec/fast] Error 2
+make[1]: Leaving directory `/home/lee/projects/math/build/CMakeFiles/CMakeTmp'
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/gcc-4.7 
+Build flags: -std=c++11
+Id flags: 
+
+The output was:
+1
+gcc-4.7: error trying to exec 'cc1plus': execvp: No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/gcc-4.7 
+Build flags: -std=c++11
+Id flags: -c
+
+The output was:
+1
+gcc-4.7: error trying to exec 'cc1plus': execvp: No such file or directory
+
+
+Determining if the CXX compiler works failed with the following output:
+Change Dir: /home/lee/projects/math/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+make[1]: Entering directory `/home/lee/projects/math/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o
+/usr/bin/gcc-4.7    -std=c++11     -o CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o -c /home/lee/projects/math/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+gcc-4.7: error trying to exec 'cc1plus': execvp: No such file or directory
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o] Error 1
+make[1]: Leaving directory `/home/lee/projects/math/build/CMakeFiles/CMakeTmp'
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/gcc-4.7 
+Build flags: -std=c++11
+Id flags: 
+
+The output was:
+1
+gcc-4.7: error trying to exec 'cc1plus': execvp: No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/gcc-4.7 
+Build flags: -std=c++11
+Id flags: -c
+
+The output was:
+1
+gcc-4.7: error trying to exec 'cc1plus': execvp: No such file or directory
+
+
+Determining if the CXX compiler works failed with the following output:
+Change Dir: /home/lee/projects/math/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+make[1]: Entering directory `/home/lee/projects/math/build/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+make[2]: Entering directory `/home/lee/projects/math/build/CMakeFiles/CMakeTmp'
+/usr/bin/cmake -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o
+/usr/bin/gcc-4.7    -std=c++11     -o CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o -c /home/lee/projects/math/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+gcc-4.7: error trying to exec 'cc1plus': execvp: No such file or directory
+make[2]: *** [CMakeFiles/cmTryCompileExec.dir/testCXXCompiler.cxx.o] Error 1
+make[2]: Leaving directory `/home/lee/projects/math/build/CMakeFiles/CMakeTmp'
+make[1]: *** [cmTryCompileExec/fast] Error 2
+make[1]: Leaving directory `/home/lee/projects/math/build/CMakeFiles/CMakeTmp'
+
+

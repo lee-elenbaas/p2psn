@@ -1,0 +1,32 @@
+/*
+    <one line to give the program's name and a brief idea of what it does.>
+    Copyright (C) 2012  <copyright holder> <email>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#include "full_polynomial_tests.h"
+#include "full_polynomial.h"
+#include "full_polynomial_stream_traits.h"
+  
+using lee::math::polynomial::full_polynomial;
+
+void lee::tests::math::polynomial::full_polynomial_ctr_test()
+{
+    full_polynomial<int> p1{1,0,4}; // initialization list
+    full_polynomial<int> p2(5); // scalar
+    full_polynomial<int> p3 = 7; // scalar
+    full_polynomial<int> p4; // zero
+    full_polynomial<int> p5 = p1; // copy
+}
