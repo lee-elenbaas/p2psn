@@ -62,6 +62,19 @@ public:
   // explicit conversion back to the integer type
   explicit constexpr operator const T() { return val; }
     
+  // modulu assignment operations
+  constexpr mod<T,n>& operator+=(const mod<T,n>& o) {
+    val = (val+o.val)%n;
+    return *this;
+  }
+  constexpr mod<T,n>& operator-=(const mod<T,n>& o) {
+    val = (n-o.val+val)%n;
+    return *this;
+  }
+  constexpr mod<T,n>& operator*=(const mod<T,n>& o) {
+    val = (val*o.val)%n;
+    return *this;
+  }
 private:
   T val;
 };
@@ -69,33 +82,20 @@ private:
 // modulu operations
 template<typename T, T n>
 constexpr mod<T,n> operator+(const mod<T,n>& lhs, const mod<T,n>& rhs) {
-  return mod<T,n>((((T)lhs)+(T)rhs)%n);
+  auto res = lhs;
+  return res+=rhs;
 }
 
 template<typename T, T n>
 constexpr mod<T,n> operator-(const mod<T,n>& lhs, const mod<T,n>& rhs) {
-  return mod<T,n>((n-((T)rhs)+(T)lhs)%n);
+  auto res = lhs;
+  return res-=rhs;
 }
 
 template<typename T, T n>
 constexpr mod<T,n> operator*(const mod<T,n>& lhs, const mod<T,n>& rhs) {
-  return mod<T,n>((((T)lhs)*(T)rhs)%n);
-}
-
-// modulu assignment operations
-template<typename T, T n>
-constexpr mod<T,n>& operator+=(mod<T,n>& lhs, const mod<T,n>& rhs) {
-  return lhs=(lhs+rhs);
-}
-
-template<typename T, T n>
-constexpr mod<T,n>& operator-=(mod<T,n>& lhs, const mod<T,n>& rhs) {
-  return lhs=(lhs-rhs);
-}
-
-template<typename T, T n>
-constexpr mod<T,n>& operator*=(mod<T,n>& lhs, const mod<T,n>& rhs) {
-  return lhs=(lhs*rhs);
+  auto res = lhs;
+  return res*=rhs;
 }
 
 } /* namespace modulu */
