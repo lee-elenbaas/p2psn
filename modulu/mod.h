@@ -1,0 +1,105 @@
+/*
+    <one line to give the program's name and a brief idea of what it does.>
+    Copyright (C) 2012  <copyright holder> <email>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+
+#ifndef MODULU_H
+#define MODULU_H
+
+#include <utility>
+
+namespace lee {
+namespace math {
+namespace modulu {
+
+  // Zn implementation
+  // that can be on top of any integral type T that supports the following operations: + - % *
+  // overflow of T will not occure for any operation if n<=sqrt(T::max_value)
+  // without the * operation overflow will never occure if n<=T::max_value/2
+  template<typename T, T n>
+class mod
+{
+public:
+  typedef T integer_type;
+  
+  // scalar construction
+  constexpr mod(const T& v):val(v){}
+  constexpr mod(T&&v):val(v){}
+  
+  // copy & move - from any explicitly convirtible field type - but that uses the same modulu limit
+  template<typename OT, OT m>
+  constexpr mod(const mod<OT,m>& o) : val(o.val) { static_assert(n==m, "copy construction modulus from a different modulus"); } // copy constructor
+  template<typename OT, OT m>
+  constexpr mod(mod<OT, m>&& o) : val(std::move(o.val)) { static_assert(n==m, "move construction of modulus from a different modulus"); } // move constructor
+  
+  template<typename OT, OT m>
+  constexpr mod<T,n>& operator=(mod<OT,m>& o) { 
+      static_assert(n==m, "copy assignment of modulus from a differen modulus"); 
+      val = o.val; 
+      return *this; 
+  };
+  template<typename OT, OT m>
+  constexpr mod<T,n>& operator=(mod<OT,m>&& o) { 
+    static_assert(n==m, "move assignment of modulus from a different modulus");
+    val = std::move(o.val); 
+    return *this; 
+  }
+  
+  // explicit conversion back to the integer type
+  explicit constexpr operator const T() { return val; }
+    
+private:
+  T val;
+};
+
+// modulu operations
+template<typename T, T n>
+constexpr mod<T,n> operator+(const mod<T,n>& lhs, const mod<T,n>& rhs) {
+  return mod<T,n>((((T)lhs)+(T)rhs)%n);
+}
+
+template<typename T, T n>
+constexpr mod<T,n> operator-(const mod<T,n>& lhs, const mod<T,n>& rhs) {
+  return mod<T,n>((n-((T)rhs)+(T)lhs)%n);
+}
+
+template<typename T, T n>
+constexpr mod<T,n> operator*(const mod<T,n>& lhs, const mod<T,n>& rhs) {
+  return mod<T,n>((((T)lhs)*(T)rhs)%n);
+}
+
+// modulu assignment operations
+template<typename T, T n>
+constexpr mod<T,n>& operator+=(mod<T,n>& lhs, const mod<T,n>& rhs) {
+  return lhs=(lhs+rhs);
+}
+
+template<typename T, T n>
+constexpr mod<T,n>& operator-=(mod<T,n>& lhs, const mod<T,n>& rhs) {
+  return lhs=(lhs-rhs);
+}
+
+template<typename T, T n>
+constexpr mod<T,n>& operator*=(mod<T,n>& lhs, const mod<T,n>& rhs) {
+  return lhs=(lhs*rhs);
+}
+
+} /* namespace modulu */
+} /* namespace math */
+} /* namespace lee */
+
+#endif // MODULU_H

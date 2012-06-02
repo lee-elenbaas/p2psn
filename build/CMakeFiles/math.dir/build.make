@@ -46,112 +46,138 @@ include CMakeFiles/math.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/math.dir/flags.make
 
-CMakeFiles/math.dir/tests/test_task.o: CMakeFiles/math.dir/flags.make
-CMakeFiles/math.dir/tests/test_task.o: ../tests/test_task.cpp
+CMakeFiles/math.dir/modulu/mod.cpp.o: CMakeFiles/math.dir/flags.make
+CMakeFiles/math.dir/modulu/mod.cpp.o: ../modulu/mod.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/math.dir/tests/test_task.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/math.dir/tests/test_task.o -c /home/lee/projects/math/tests/test_task.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/math.dir/modulu/mod.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/math.dir/modulu/mod.cpp.o -c /home/lee/projects/math/modulu/mod.cpp
 
-CMakeFiles/math.dir/tests/test_task.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/math.dir/tests/test_task.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lee/projects/math/tests/test_task.cpp > CMakeFiles/math.dir/tests/test_task.i
+CMakeFiles/math.dir/modulu/mod.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/math.dir/modulu/mod.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lee/projects/math/modulu/mod.cpp > CMakeFiles/math.dir/modulu/mod.cpp.i
 
-CMakeFiles/math.dir/tests/test_task.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/math.dir/tests/test_task.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lee/projects/math/tests/test_task.cpp -o CMakeFiles/math.dir/tests/test_task.s
+CMakeFiles/math.dir/modulu/mod.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/math.dir/modulu/mod.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lee/projects/math/modulu/mod.cpp -o CMakeFiles/math.dir/modulu/mod.cpp.s
 
-CMakeFiles/math.dir/tests/test_task.o.requires:
-.PHONY : CMakeFiles/math.dir/tests/test_task.o.requires
+CMakeFiles/math.dir/modulu/mod.cpp.o.requires:
+.PHONY : CMakeFiles/math.dir/modulu/mod.cpp.o.requires
 
-CMakeFiles/math.dir/tests/test_task.o.provides: CMakeFiles/math.dir/tests/test_task.o.requires
-	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/tests/test_task.o.provides.build
-.PHONY : CMakeFiles/math.dir/tests/test_task.o.provides
+CMakeFiles/math.dir/modulu/mod.cpp.o.provides: CMakeFiles/math.dir/modulu/mod.cpp.o.requires
+	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/modulu/mod.cpp.o.provides.build
+.PHONY : CMakeFiles/math.dir/modulu/mod.cpp.o.provides
 
-CMakeFiles/math.dir/tests/test_task.o.provides.build: CMakeFiles/math.dir/tests/test_task.o
+CMakeFiles/math.dir/modulu/mod.cpp.o.provides.build: CMakeFiles/math.dir/modulu/mod.cpp.o
 
-CMakeFiles/math.dir/tests/full_polynomial_tests.o: CMakeFiles/math.dir/flags.make
-CMakeFiles/math.dir/tests/full_polynomial_tests.o: ../tests/full_polynomial_tests.cpp
+CMakeFiles/math.dir/tests/test_task.cpp.o: CMakeFiles/math.dir/flags.make
+CMakeFiles/math.dir/tests/test_task.cpp.o: ../tests/test_task.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles $(CMAKE_PROGRESS_2)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/math.dir/tests/full_polynomial_tests.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/math.dir/tests/full_polynomial_tests.o -c /home/lee/projects/math/tests/full_polynomial_tests.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/math.dir/tests/test_task.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/math.dir/tests/test_task.cpp.o -c /home/lee/projects/math/tests/test_task.cpp
 
-CMakeFiles/math.dir/tests/full_polynomial_tests.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/math.dir/tests/full_polynomial_tests.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lee/projects/math/tests/full_polynomial_tests.cpp > CMakeFiles/math.dir/tests/full_polynomial_tests.i
+CMakeFiles/math.dir/tests/test_task.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/math.dir/tests/test_task.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lee/projects/math/tests/test_task.cpp > CMakeFiles/math.dir/tests/test_task.cpp.i
 
-CMakeFiles/math.dir/tests/full_polynomial_tests.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/math.dir/tests/full_polynomial_tests.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lee/projects/math/tests/full_polynomial_tests.cpp -o CMakeFiles/math.dir/tests/full_polynomial_tests.s
+CMakeFiles/math.dir/tests/test_task.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/math.dir/tests/test_task.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lee/projects/math/tests/test_task.cpp -o CMakeFiles/math.dir/tests/test_task.cpp.s
 
-CMakeFiles/math.dir/tests/full_polynomial_tests.o.requires:
-.PHONY : CMakeFiles/math.dir/tests/full_polynomial_tests.o.requires
+CMakeFiles/math.dir/tests/test_task.cpp.o.requires:
+.PHONY : CMakeFiles/math.dir/tests/test_task.cpp.o.requires
 
-CMakeFiles/math.dir/tests/full_polynomial_tests.o.provides: CMakeFiles/math.dir/tests/full_polynomial_tests.o.requires
-	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/tests/full_polynomial_tests.o.provides.build
-.PHONY : CMakeFiles/math.dir/tests/full_polynomial_tests.o.provides
+CMakeFiles/math.dir/tests/test_task.cpp.o.provides: CMakeFiles/math.dir/tests/test_task.cpp.o.requires
+	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/tests/test_task.cpp.o.provides.build
+.PHONY : CMakeFiles/math.dir/tests/test_task.cpp.o.provides
 
-CMakeFiles/math.dir/tests/full_polynomial_tests.o.provides.build: CMakeFiles/math.dir/tests/full_polynomial_tests.o
+CMakeFiles/math.dir/tests/test_task.cpp.o.provides.build: CMakeFiles/math.dir/tests/test_task.cpp.o
 
-CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.o: CMakeFiles/math.dir/flags.make
-CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.o: ../polynomial/full_polynomial_stream_traits.cpp
+CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.o: CMakeFiles/math.dir/flags.make
+CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.o: ../tests/full_polynomial_tests.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles $(CMAKE_PROGRESS_3)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.o -c /home/lee/projects/math/polynomial/full_polynomial_stream_traits.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.o -c /home/lee/projects/math/tests/full_polynomial_tests.cpp
 
-CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lee/projects/math/polynomial/full_polynomial_stream_traits.cpp > CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.i
+CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lee/projects/math/tests/full_polynomial_tests.cpp > CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.i
 
-CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lee/projects/math/polynomial/full_polynomial_stream_traits.cpp -o CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.s
+CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lee/projects/math/tests/full_polynomial_tests.cpp -o CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.s
 
-CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.o.requires:
-.PHONY : CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.o.requires
+CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.o.requires:
+.PHONY : CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.o.requires
 
-CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.o.provides: CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.o.requires
-	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.o.provides.build
-.PHONY : CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.o.provides
+CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.o.provides: CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.o.requires
+	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.o.provides.build
+.PHONY : CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.o.provides
 
-CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.o.provides.build: CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.o
+CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.o.provides.build: CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.o
 
-CMakeFiles/math.dir/tests/main.o: CMakeFiles/math.dir/flags.make
-CMakeFiles/math.dir/tests/main.o: ../tests/main.cpp
+CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.o: CMakeFiles/math.dir/flags.make
+CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.o: ../polynomial/full_polynomial_stream_traits.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles $(CMAKE_PROGRESS_4)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/math.dir/tests/main.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/math.dir/tests/main.o -c /home/lee/projects/math/tests/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.o -c /home/lee/projects/math/polynomial/full_polynomial_stream_traits.cpp
 
-CMakeFiles/math.dir/tests/main.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/math.dir/tests/main.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lee/projects/math/tests/main.cpp > CMakeFiles/math.dir/tests/main.i
+CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lee/projects/math/polynomial/full_polynomial_stream_traits.cpp > CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.i
 
-CMakeFiles/math.dir/tests/main.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/math.dir/tests/main.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lee/projects/math/tests/main.cpp -o CMakeFiles/math.dir/tests/main.s
+CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lee/projects/math/polynomial/full_polynomial_stream_traits.cpp -o CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.s
 
-CMakeFiles/math.dir/tests/main.o.requires:
-.PHONY : CMakeFiles/math.dir/tests/main.o.requires
+CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.o.requires:
+.PHONY : CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.o.requires
 
-CMakeFiles/math.dir/tests/main.o.provides: CMakeFiles/math.dir/tests/main.o.requires
-	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/tests/main.o.provides.build
-.PHONY : CMakeFiles/math.dir/tests/main.o.provides
+CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.o.provides: CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.o.requires
+	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.o.provides.build
+.PHONY : CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.o.provides
 
-CMakeFiles/math.dir/tests/main.o.provides.build: CMakeFiles/math.dir/tests/main.o
+CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.o.provides.build: CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.o
+
+CMakeFiles/math.dir/main.cpp.o: CMakeFiles/math.dir/flags.make
+CMakeFiles/math.dir/main.cpp.o: ../main.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/math.dir/main.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/math.dir/main.cpp.o -c /home/lee/projects/math/main.cpp
+
+CMakeFiles/math.dir/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/math.dir/main.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lee/projects/math/main.cpp > CMakeFiles/math.dir/main.cpp.i
+
+CMakeFiles/math.dir/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/math.dir/main.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lee/projects/math/main.cpp -o CMakeFiles/math.dir/main.cpp.s
+
+CMakeFiles/math.dir/main.cpp.o.requires:
+.PHONY : CMakeFiles/math.dir/main.cpp.o.requires
+
+CMakeFiles/math.dir/main.cpp.o.provides: CMakeFiles/math.dir/main.cpp.o.requires
+	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/main.cpp.o.provides.build
+.PHONY : CMakeFiles/math.dir/main.cpp.o.provides
+
+CMakeFiles/math.dir/main.cpp.o.provides.build: CMakeFiles/math.dir/main.cpp.o
 
 # Object files for target math
 math_OBJECTS = \
-"CMakeFiles/math.dir/tests/test_task.o" \
-"CMakeFiles/math.dir/tests/full_polynomial_tests.o" \
-"CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.o" \
-"CMakeFiles/math.dir/tests/main.o"
+"CMakeFiles/math.dir/modulu/mod.cpp.o" \
+"CMakeFiles/math.dir/tests/test_task.cpp.o" \
+"CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.o" \
+"CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.o" \
+"CMakeFiles/math.dir/main.cpp.o"
 
 # External object files for target math
 math_EXTERNAL_OBJECTS =
 
-math: CMakeFiles/math.dir/tests/test_task.o
-math: CMakeFiles/math.dir/tests/full_polynomial_tests.o
-math: CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.o
-math: CMakeFiles/math.dir/tests/main.o
+math: CMakeFiles/math.dir/modulu/mod.cpp.o
+math: CMakeFiles/math.dir/tests/test_task.cpp.o
+math: CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.o
+math: CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.o
+math: CMakeFiles/math.dir/main.cpp.o
+math: libtests.a
 math: CMakeFiles/math.dir/build.make
 math: CMakeFiles/math.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable math"
@@ -161,10 +187,11 @@ math: CMakeFiles/math.dir/link.txt
 CMakeFiles/math.dir/build: math
 .PHONY : CMakeFiles/math.dir/build
 
-CMakeFiles/math.dir/requires: CMakeFiles/math.dir/tests/test_task.o.requires
-CMakeFiles/math.dir/requires: CMakeFiles/math.dir/tests/full_polynomial_tests.o.requires
-CMakeFiles/math.dir/requires: CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.o.requires
-CMakeFiles/math.dir/requires: CMakeFiles/math.dir/tests/main.o.requires
+CMakeFiles/math.dir/requires: CMakeFiles/math.dir/modulu/mod.cpp.o.requires
+CMakeFiles/math.dir/requires: CMakeFiles/math.dir/tests/test_task.cpp.o.requires
+CMakeFiles/math.dir/requires: CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.o.requires
+CMakeFiles/math.dir/requires: CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.o.requires
+CMakeFiles/math.dir/requires: CMakeFiles/math.dir/main.cpp.o.requires
 .PHONY : CMakeFiles/math.dir/requires
 
 CMakeFiles/math.dir/clean:

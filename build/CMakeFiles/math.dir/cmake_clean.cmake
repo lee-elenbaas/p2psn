@@ -1,8 +1,9 @@
 FILE(REMOVE_RECURSE
-  "CMakeFiles/math.dir/tests/test_task.o"
-  "CMakeFiles/math.dir/tests/full_polynomial_tests.o"
-  "CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.o"
-  "CMakeFiles/math.dir/tests/main.o"
+  "CMakeFiles/math.dir/modulu/mod.cpp.o"
+  "CMakeFiles/math.dir/tests/test_task.cpp.o"
+  "CMakeFiles/math.dir/tests/full_polynomial_tests.cpp.o"
+  "CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.cpp.o"
+  "CMakeFiles/math.dir/main.cpp.o"
   "math.pdb"
   "math"
 )

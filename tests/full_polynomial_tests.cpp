@@ -17,16 +17,21 @@
 */
 
 #include "full_polynomial_tests.h"
-#include "full_polynomial.h"
-#include "full_polynomial_stream_traits.h"
-  
-using lee::math::polynomial::full_polynomial;
+#include "../polynomial/full_polynomial.h"
+#include "../polynomial/full_polynomial_stream_traits.h"
 
-void lee::tests::math::polynomial::full_polynomial_ctr_test()
-{
+    std::string lee::tests::math::polynomial::full_polynomial_ctr_test::name() {
+      return "full_polynomial#ctor";
+    }
+
+bool lee::tests::math::polynomial::full_polynomial_ctr_test::operator()() {
+  using lee::math::polynomial::full_polynomial;
+  
     full_polynomial<int> p1{1,0,4}; // initialization list
     full_polynomial<int> p2(5); // scalar
     full_polynomial<int> p3 = 7; // scalar
     full_polynomial<int> p4; // zero
     full_polynomial<int> p5 = p1; // copy
+    
+    return true;
 }

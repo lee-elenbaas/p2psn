@@ -96,77 +96,150 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named math
+# Target rules for targets named mathTests
 
 # Build rule for target.
-math: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 math
-.PHONY : math
+mathTests: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 mathTests
+.PHONY : mathTests
 
 # fast build rule for target.
-math/fast:
-	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/build
-.PHONY : math/fast
+mathTests/fast:
+	$(MAKE) -f CMakeFiles/mathTests.dir/build.make CMakeFiles/mathTests.dir/build
+.PHONY : mathTests/fast
+
+#=============================================================================
+# Target rules for targets named tests
+
+# Build rule for target.
+tests: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tests
+.PHONY : tests
+
+# fast build rule for target.
+tests/fast:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/build
+.PHONY : tests/fast
+
+main.o: main.cpp.o
+.PHONY : main.o
 
 # target to build an object file
-polynomial/full_polynomial_stream_traits.o:
-	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.o
+main.cpp.o:
+	$(MAKE) -f CMakeFiles/mathTests.dir/build.make CMakeFiles/mathTests.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) -f CMakeFiles/mathTests.dir/build.make CMakeFiles/mathTests.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) -f CMakeFiles/mathTests.dir/build.make CMakeFiles/mathTests.dir/main.cpp.s
+.PHONY : main.cpp.s
+
+modulu/mod.o: modulu/mod.cpp.o
+.PHONY : modulu/mod.o
+
+# target to build an object file
+modulu/mod.cpp.o:
+	$(MAKE) -f CMakeFiles/mathTests.dir/build.make CMakeFiles/mathTests.dir/modulu/mod.cpp.o
+.PHONY : modulu/mod.cpp.o
+
+modulu/mod.i: modulu/mod.cpp.i
+.PHONY : modulu/mod.i
+
+# target to preprocess a source file
+modulu/mod.cpp.i:
+	$(MAKE) -f CMakeFiles/mathTests.dir/build.make CMakeFiles/mathTests.dir/modulu/mod.cpp.i
+.PHONY : modulu/mod.cpp.i
+
+modulu/mod.s: modulu/mod.cpp.s
+.PHONY : modulu/mod.s
+
+# target to generate assembly for a file
+modulu/mod.cpp.s:
+	$(MAKE) -f CMakeFiles/mathTests.dir/build.make CMakeFiles/mathTests.dir/modulu/mod.cpp.s
+.PHONY : modulu/mod.cpp.s
+
+polynomial/full_polynomial_stream_traits.o: polynomial/full_polynomial_stream_traits.cpp.o
 .PHONY : polynomial/full_polynomial_stream_traits.o
 
-# target to preprocess a source file
-polynomial/full_polynomial_stream_traits.i:
-	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.i
+# target to build an object file
+polynomial/full_polynomial_stream_traits.cpp.o:
+	$(MAKE) -f CMakeFiles/mathTests.dir/build.make CMakeFiles/mathTests.dir/polynomial/full_polynomial_stream_traits.cpp.o
+.PHONY : polynomial/full_polynomial_stream_traits.cpp.o
+
+polynomial/full_polynomial_stream_traits.i: polynomial/full_polynomial_stream_traits.cpp.i
 .PHONY : polynomial/full_polynomial_stream_traits.i
 
-# target to generate assembly for a file
-polynomial/full_polynomial_stream_traits.s:
-	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/polynomial/full_polynomial_stream_traits.s
+# target to preprocess a source file
+polynomial/full_polynomial_stream_traits.cpp.i:
+	$(MAKE) -f CMakeFiles/mathTests.dir/build.make CMakeFiles/mathTests.dir/polynomial/full_polynomial_stream_traits.cpp.i
+.PHONY : polynomial/full_polynomial_stream_traits.cpp.i
+
+polynomial/full_polynomial_stream_traits.s: polynomial/full_polynomial_stream_traits.cpp.s
 .PHONY : polynomial/full_polynomial_stream_traits.s
 
-# target to build an object file
-tests/full_polynomial_tests.o:
-	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/tests/full_polynomial_tests.o
+# target to generate assembly for a file
+polynomial/full_polynomial_stream_traits.cpp.s:
+	$(MAKE) -f CMakeFiles/mathTests.dir/build.make CMakeFiles/mathTests.dir/polynomial/full_polynomial_stream_traits.cpp.s
+.PHONY : polynomial/full_polynomial_stream_traits.cpp.s
+
+tests/full_polynomial_tests.o: tests/full_polynomial_tests.cpp.o
 .PHONY : tests/full_polynomial_tests.o
 
-# target to preprocess a source file
-tests/full_polynomial_tests.i:
-	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/tests/full_polynomial_tests.i
+# target to build an object file
+tests/full_polynomial_tests.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o
+.PHONY : tests/full_polynomial_tests.cpp.o
+
+tests/full_polynomial_tests.i: tests/full_polynomial_tests.cpp.i
 .PHONY : tests/full_polynomial_tests.i
 
-# target to generate assembly for a file
-tests/full_polynomial_tests.s:
-	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/tests/full_polynomial_tests.s
+# target to preprocess a source file
+tests/full_polynomial_tests.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.i
+.PHONY : tests/full_polynomial_tests.cpp.i
+
+tests/full_polynomial_tests.s: tests/full_polynomial_tests.cpp.s
 .PHONY : tests/full_polynomial_tests.s
 
-# target to build an object file
-tests/main.o:
-	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/tests/main.o
-.PHONY : tests/main.o
-
-# target to preprocess a source file
-tests/main.i:
-	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/tests/main.i
-.PHONY : tests/main.i
-
 # target to generate assembly for a file
-tests/main.s:
-	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/tests/main.s
-.PHONY : tests/main.s
+tests/full_polynomial_tests.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.s
+.PHONY : tests/full_polynomial_tests.cpp.s
 
-# target to build an object file
-tests/test_task.o:
-	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/tests/test_task.o
+tests/test_task.o: tests/test_task.cpp.o
 .PHONY : tests/test_task.o
 
-# target to preprocess a source file
-tests/test_task.i:
-	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/tests/test_task.i
+# target to build an object file
+tests/test_task.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/test_task.cpp.o
+.PHONY : tests/test_task.cpp.o
+
+tests/test_task.i: tests/test_task.cpp.i
 .PHONY : tests/test_task.i
 
-# target to generate assembly for a file
-tests/test_task.s:
-	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/tests/test_task.s
+# target to preprocess a source file
+tests/test_task.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/test_task.cpp.i
+.PHONY : tests/test_task.cpp.i
+
+tests/test_task.s: tests/test_task.cpp.s
 .PHONY : tests/test_task.s
+
+# target to generate assembly for a file
+tests/test_task.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/test_task.cpp.s
+.PHONY : tests/test_task.cpp.s
 
 # Help Target
 help:
@@ -175,17 +248,21 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
-	@echo "... math"
+	@echo "... mathTests"
 	@echo "... rebuild_cache"
+	@echo "... tests"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
+	@echo "... modulu/mod.o"
+	@echo "... modulu/mod.i"
+	@echo "... modulu/mod.s"
 	@echo "... polynomial/full_polynomial_stream_traits.o"
 	@echo "... polynomial/full_polynomial_stream_traits.i"
 	@echo "... polynomial/full_polynomial_stream_traits.s"
 	@echo "... tests/full_polynomial_tests.o"
 	@echo "... tests/full_polynomial_tests.i"
 	@echo "... tests/full_polynomial_tests.s"
-	@echo "... tests/main.o"
-	@echo "... tests/main.i"
-	@echo "... tests/main.s"
 	@echo "... tests/test_task.o"
 	@echo "... tests/test_task.i"
 	@echo "... tests/test_task.s"

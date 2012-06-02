@@ -167,6 +167,9 @@ math_BINARY_DIR:STATIC=/home/lee/projects/math/build
 //Value Computed by CMake
 math_SOURCE_DIR:STATIC=/home/lee/projects/math
 
+//Dependencies for target
+tests_LIB_DEPENDS:STATIC=
+
 
 ########################
 # INTERNAL cache entries
@@ -262,7 +265,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=3
+CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=4
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

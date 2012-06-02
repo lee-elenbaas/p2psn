@@ -1,6 +1,6 @@
 #include <iostream>
-#include "test_task.h"
-#include "full_polynomial_tests.h"
+#include "tests/test_task.h"
+#include "tests/full_polynomial_tests.h"
 
 int main(int argc, char **argv) {
     using namespace std;
@@ -9,7 +9,9 @@ int main(int argc, char **argv) {
         
     cout << "Math unit tests." << endl;
     
-    cout << test_task{"full_polynomial ctor", full_polynomial_ctr_test};
+    full_polynomial_ctr_test t1;
+    
+    cout << t1 << endl;
     
     return 0;
 }

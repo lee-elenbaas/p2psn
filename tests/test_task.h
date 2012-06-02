@@ -24,18 +24,19 @@
 #include <ostream>
 #include <chrono>
 #include <functional>
+#include <memory>
 
 namespace lee {
 namespace tests {
 
-class test_task
-{
+class test_task {
 public:
-  friend std::ostream& operator<< (std::ostream&, test_task&);
-private:
-  std::string name;
-  std::unary_function<void,void> tst;
+  virtual std::string name() = 0;
+  virtual bool operator()() = 0;
 };
+
+  
+std::ostream& operator<< (std::ostream&, test_task&);
 
 } /* namespace tests */
 } /* namespace lee */

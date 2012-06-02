@@ -20,12 +20,17 @@
 #ifndef FULL_POLYNOMIAL_TESTS_H
 #define FULL_POLYNOMIAL_TESTS_H
 
+#include "test_task.h"
+
 namespace lee {
 namespace tests {
 namespace math {
 namespace polynomial {
 
-  void full_polynomial_ctr_test();
+  struct full_polynomial_ctr_test : public lee::tests::test_task {
+    std::string name();
+    bool operator()();
+  };
 
 } /* namespace polynomial */
 } /* namespace math */

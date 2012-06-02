@@ -50,38 +50,73 @@ CMAKE_SOURCE_DIR = /home/lee/projects/math
 CMAKE_BINARY_DIR = /home/lee/projects/math/build
 
 #=============================================================================
-# Target rules for target CMakeFiles/math.dir
+# Target rules for target CMakeFiles/mathTests.dir
 
 # All Build rule for target.
-CMakeFiles/math.dir/all:
-	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/depend
-	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles  1 2 3 4
-	@echo "Built target math"
-.PHONY : CMakeFiles/math.dir/all
+CMakeFiles/mathTests.dir/all: CMakeFiles/tests.dir/all
+	$(MAKE) -f CMakeFiles/mathTests.dir/build.make CMakeFiles/mathTests.dir/depend
+	$(MAKE) -f CMakeFiles/mathTests.dir/build.make CMakeFiles/mathTests.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles  1 2 3
+	@echo "Built target mathTests"
+.PHONY : CMakeFiles/mathTests.dir/all
 
 # Include target in all.
-all: CMakeFiles/math.dir/all
+all: CMakeFiles/mathTests.dir/all
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/math.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lee/projects/math/build/CMakeFiles 4
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/math.dir/all
+CMakeFiles/mathTests.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lee/projects/math/build/CMakeFiles 5
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/mathTests.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lee/projects/math/build/CMakeFiles 0
-.PHONY : CMakeFiles/math.dir/rule
+.PHONY : CMakeFiles/mathTests.dir/rule
 
 # Convenience name for target.
-math: CMakeFiles/math.dir/rule
-.PHONY : math
+mathTests: CMakeFiles/mathTests.dir/rule
+.PHONY : mathTests
 
 # clean rule for target.
-CMakeFiles/math.dir/clean:
-	$(MAKE) -f CMakeFiles/math.dir/build.make CMakeFiles/math.dir/clean
-.PHONY : CMakeFiles/math.dir/clean
+CMakeFiles/mathTests.dir/clean:
+	$(MAKE) -f CMakeFiles/mathTests.dir/build.make CMakeFiles/mathTests.dir/clean
+.PHONY : CMakeFiles/mathTests.dir/clean
 
 # clean rule for target.
-clean: CMakeFiles/math.dir/clean
+clean: CMakeFiles/mathTests.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/tests.dir
+
+# All Build rule for target.
+CMakeFiles/tests.dir/all:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/depend
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles  4 5
+	@echo "Built target tests"
+.PHONY : CMakeFiles/tests.dir/all
+
+# Include target in all.
+all: CMakeFiles/tests.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/tests.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lee/projects/math/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/tests.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lee/projects/math/build/CMakeFiles 0
+.PHONY : CMakeFiles/tests.dir/rule
+
+# Convenience name for target.
+tests: CMakeFiles/tests.dir/rule
+.PHONY : tests
+
+# clean rule for target.
+CMakeFiles/tests.dir/clean:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/clean
+.PHONY : CMakeFiles/tests.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/tests.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -113,6 +148,21 @@ polynomial/clean:
 # Convenience name for "preinstall" pass in the directory.
 polynomial/preinstall:
 .PHONY : polynomial/preinstall
+
+#=============================================================================
+# Directory level rules for directory modulu
+
+# Convenience name for "all" pass in the directory.
+modulu/all:
+.PHONY : modulu/all
+
+# Convenience name for "clean" pass in the directory.
+modulu/clean:
+.PHONY : modulu/clean
+
+# Convenience name for "preinstall" pass in the directory.
+modulu/preinstall:
+.PHONY : modulu/preinstall
 
 #=============================================================================
 # Special targets to cleanup operation of make.

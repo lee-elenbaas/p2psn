@@ -17,27 +17,5 @@
 */
 
 
-#ifndef TEST_TASK_H
-#define TEST_TASK_H
+#include "mod.h"
 
-#include <string>
-#include <ostream>
-#include <chrono>
-#include <functional>
-
-namespace lee {
-namespace tests {
-
-class test_task
-{
-public:
-  friend std::ostream& operator<< (std::ostream&, test_task&);
-private:
-  std::string name;
-  std::unary_function<void,void> tst;
-};
-
-} /* namespace tests */
-} /* namespace lee */
-
-#endif // TEST_TASK_H

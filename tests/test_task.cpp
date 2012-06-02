@@ -18,22 +18,29 @@
 
 #include "test_task.h"
 
-  std::ostream& lee::tests::operator<< (std::ostream& os, test_task& tst) {
+std::ostream& operator<< (std::ostream& os, lee::tests::test_task& t){
     using namespace std::chrono;
     
-  os << tst.name << "...";
+  os << t.name() << "...";
   
   bool success = true;
   auto start = std::chrono::monotonic_clock::now();
-  auto end = start;
   
   try {
-     tst.tst();  
+    success = t();  
   }
   catch(...) {
-    os << std::current_exception();
+    success = false;
+//    auto ex = std::current_exception();
+    
+   // os << ex.what();
   }
-
-  std::chrono::milliseconds duration = end-start;
-  os << '(' << duration << ") " << (success?"Passed":"Failed") << std::endl;
+  
+  auto end = std::chrono::monotonic_clock::now();
+  
+  os 
+    //<< "(" << (end-start).time_since_epoch() << ") "
+    << (success?"Passed":"Failed");
+    
+   return os;
   }

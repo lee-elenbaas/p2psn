@@ -9,7 +9,9 @@ int main(int argc, char **argv) {
         
     cout << "Math unit tests." << endl;
     
-    cout << test_task({"full_polynomial ctor", full_polynomial_ctr_test});
+    full_polynomial_ctr_test t1;
+    
+    cout << t1 << endl;
     
     return 0;
 }
