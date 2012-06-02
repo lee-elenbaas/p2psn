@@ -169,6 +169,30 @@ modulu/mod.cpp.s:
 	$(MAKE) -f CMakeFiles/mathTests.dir/build.make CMakeFiles/mathTests.dir/modulu/mod.cpp.s
 .PHONY : modulu/mod.cpp.s
 
+modulu/mod_stream_traits.o: modulu/mod_stream_traits.cpp.o
+.PHONY : modulu/mod_stream_traits.o
+
+# target to build an object file
+modulu/mod_stream_traits.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/modulu/mod_stream_traits.cpp.o
+.PHONY : modulu/mod_stream_traits.cpp.o
+
+modulu/mod_stream_traits.i: modulu/mod_stream_traits.cpp.i
+.PHONY : modulu/mod_stream_traits.i
+
+# target to preprocess a source file
+modulu/mod_stream_traits.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/modulu/mod_stream_traits.cpp.i
+.PHONY : modulu/mod_stream_traits.cpp.i
+
+modulu/mod_stream_traits.s: modulu/mod_stream_traits.cpp.s
+.PHONY : modulu/mod_stream_traits.s
+
+# target to generate assembly for a file
+modulu/mod_stream_traits.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/modulu/mod_stream_traits.cpp.s
+.PHONY : modulu/mod_stream_traits.cpp.s
+
 polynomial/full_polynomial_stream_traits.o: polynomial/full_polynomial_stream_traits.cpp.o
 .PHONY : polynomial/full_polynomial_stream_traits.o
 
@@ -281,6 +305,9 @@ help:
 	@echo "... modulu/mod.o"
 	@echo "... modulu/mod.i"
 	@echo "... modulu/mod.s"
+	@echo "... modulu/mod_stream_traits.o"
+	@echo "... modulu/mod_stream_traits.i"
+	@echo "... modulu/mod_stream_traits.s"
 	@echo "... polynomial/full_polynomial_stream_traits.o"
 	@echo "... polynomial/full_polynomial_stream_traits.i"
 	@echo "... polynomial/full_polynomial_stream_traits.s"

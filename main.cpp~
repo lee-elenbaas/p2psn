@@ -1,6 +1,6 @@
 #include <iostream>
-#include "test_task.h"
-#include "full_polynomial_tests.h"
+#include "tests/test_task.h"
+#include "tests/full_polynomial_tests.h"
 
 int main(int argc, char **argv) {
     using namespace std;

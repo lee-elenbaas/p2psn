@@ -37,43 +37,43 @@ public:
   typedef T integer_type;
   
   // scalar construction
-  constexpr mod() : val() {}
-  constexpr mod(const T& v) : val(v) {}
-  constexpr mod(T&& v) : val(v) {}
+  constexpr mod() : _val() {}
+  constexpr mod(const T& v) : _val(v) {}
+  constexpr mod(T&& v) : _val(v) {}
   
   // copy & move - from any explicitly convirtible field type - but that uses the same modulu limit
   template<typename OT, OT m>
-  constexpr mod(const mod<OT,m>& o) : val((OT)o) { static_assert(n==m, "copy construction modulus from a different modulus"); } // copy constructor
+  constexpr mod(const mod<OT,m>& o) : _val((OT)o) { static_assert(n==m, "copy construction modulus from a different modulus"); } // copy constructor
   template<typename OT, OT m>
-  constexpr mod(mod<OT, m>&& o) : val(std::move((OT)o)) { static_assert(n==m, "move construction of modulus from a different modulus"); } // move constructor
+  constexpr mod(mod<OT, m>&& o) : _val(std::move((OT)o)) { static_assert(n==m, "move construction of modulus from a different modulus"); } // move constructor
   
   mod<T,n>& operator=(mod<T,n>& o) { 
-      val = o.val; 
+      _val = o.val; 
       return *this; 
   };
   mod<T,n>& operator=(mod<T,n>&& o) { 
-    val = std::move(o.val); 
+    _val = std::move(o._val); 
     return *this; 
   }
   
   // explicit conversion back to the integer type
-  explicit constexpr operator const T() { return val; }
+  explicit constexpr operator const T() { return _val; }
     
   // modulu assignment operations
   constexpr mod<T,n>& operator+=(const mod<T,n>& o) {
-    val = (val+o.val)%n;
+    _val = (_val+o.val)%n;
     return *this;
   }
   constexpr mod<T,n>& operator-=(const mod<T,n>& o) {
-    val = (n-o.val+val)%n;
+    _val = (n-o.val+_val)%n;
     return *this;
   }
   constexpr mod<T,n>& operator*=(const mod<T,n>& o) {
-    val = (val*o.val)%n;
+    _val = (_val*o.val)%n;
     return *this;
   }
 private:
-  T val;
+  T _val;
 };
 
 // modulu operations
