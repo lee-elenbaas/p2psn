@@ -217,6 +217,30 @@ tests/full_polynomial_tests.cpp.s:
 	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.s
 .PHONY : tests/full_polynomial_tests.cpp.s
 
+tests/mod_tests.o: tests/mod_tests.cpp.o
+.PHONY : tests/mod_tests.o
+
+# target to build an object file
+tests/mod_tests.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/mod_tests.cpp.o
+.PHONY : tests/mod_tests.cpp.o
+
+tests/mod_tests.i: tests/mod_tests.cpp.i
+.PHONY : tests/mod_tests.i
+
+# target to preprocess a source file
+tests/mod_tests.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/mod_tests.cpp.i
+.PHONY : tests/mod_tests.cpp.i
+
+tests/mod_tests.s: tests/mod_tests.cpp.s
+.PHONY : tests/mod_tests.s
+
+# target to generate assembly for a file
+tests/mod_tests.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/mod_tests.cpp.s
+.PHONY : tests/mod_tests.cpp.s
+
 tests/test_task.o: tests/test_task.cpp.o
 .PHONY : tests/test_task.o
 
@@ -263,6 +287,9 @@ help:
 	@echo "... tests/full_polynomial_tests.o"
 	@echo "... tests/full_polynomial_tests.i"
 	@echo "... tests/full_polynomial_tests.s"
+	@echo "... tests/mod_tests.o"
+	@echo "... tests/mod_tests.i"
+	@echo "... tests/mod_tests.s"
 	@echo "... tests/test_task.o"
 	@echo "... tests/test_task.i"
 	@echo "... tests/test_task.s"

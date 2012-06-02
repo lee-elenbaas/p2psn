@@ -6,7 +6,7 @@ add_subdirectory(tests)
 add_subdirectory(polynomial)
 add_subdirectory(modulu)
 
-add_library(tests tests/test_task.cpp tests/full_polynomial_tests.cpp)
+add_library(tests tests/test_task.cpp tests/mod_tests.cpp tests/full_polynomial_tests.cpp)
 add_executable(mathTests modulu/mod.cpp polynomial/full_polynomial_stream_traits.cpp main.cpp)
 
 link_directories(tests)

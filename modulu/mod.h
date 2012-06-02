@@ -37,24 +37,21 @@ public:
   typedef T integer_type;
   
   // scalar construction
-  constexpr mod(const T& v):val(v){}
-  constexpr mod(T&&v):val(v){}
+  constexpr mod() : val() {}
+  constexpr mod(const T& v) : val(v) {}
+  constexpr mod(T&& v) : val(v) {}
   
   // copy & move - from any explicitly convirtible field type - but that uses the same modulu limit
   template<typename OT, OT m>
-  constexpr mod(const mod<OT,m>& o) : val(o.val) { static_assert(n==m, "copy construction modulus from a different modulus"); } // copy constructor
+  constexpr mod(const mod<OT,m>& o) : val((OT)o) { static_assert(n==m, "copy construction modulus from a different modulus"); } // copy constructor
   template<typename OT, OT m>
-  constexpr mod(mod<OT, m>&& o) : val(std::move(o.val)) { static_assert(n==m, "move construction of modulus from a different modulus"); } // move constructor
+  constexpr mod(mod<OT, m>&& o) : val(std::move((OT)o)) { static_assert(n==m, "move construction of modulus from a different modulus"); } // move constructor
   
-  template<typename OT, OT m>
-  constexpr mod<T,n>& operator=(mod<OT,m>& o) { 
-      static_assert(n==m, "copy assignment of modulus from a differen modulus"); 
+  mod<T,n>& operator=(mod<T,n>& o) { 
       val = o.val; 
       return *this; 
   };
-  template<typename OT, OT m>
-  constexpr mod<T,n>& operator=(mod<OT,m>&& o) { 
-    static_assert(n==m, "move assignment of modulus from a different modulus");
+  mod<T,n>& operator=(mod<T,n>&& o) { 
     val = std::move(o.val); 
     return *this; 
   }
