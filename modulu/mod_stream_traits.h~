@@ -30,7 +30,13 @@ namespace modulu {
   class unsupported_mod_stream_traits_exception;
   
 enum class mod_format : long {
-  value_only,
+/*  value_only = 1,
+  modulu_only_short = 2,
+  modulu_only_long = 4,
+  modulu_only_clean = 8,
+  value_and_modulu_short = value_only & modulu_only_short,
+  value_and_modulu_long = value_only & modulu_only_long
+*/  value_only,
   modulu_only_short,
   modulu_only_long,
   modulu_only_clean,

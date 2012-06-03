@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/lee/projects/math/modulu/mod.h
+utility
+-
+
+/home/lee/projects/math/modulu/mod_stream_traits.cpp
+mod_stream_traits.h
+/home/lee/projects/math/modulu/mod_stream_traits.h
+
+/home/lee/projects/math/modulu/mod_stream_traits.h
+ostream
+-
+mod.h
+/home/lee/projects/math/modulu/mod.h
+
