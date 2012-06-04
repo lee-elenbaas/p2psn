@@ -38,14 +38,12 @@ enum class mod_format : long {
   value_and_modulu_long
 };
 
+std::ostream& operator<< (std::ostream&, mod_format);
+ 
 class mod_stream_traits {
   mod_stream_traits(mod_format f) : _format(f) { }
   
-  friend std::ostream& operator<< (std::ostream& os, const mod_stream_traits& f){
-  os.iword(mod_stream_traits::_xalloc) = (long)f._format;
-  
-  return os;
-}
+  friend inline std::ostream& operator<< (std::ostream&, mod_format);
 
   template<typename T, T n>
   friend std::ostream& operator<< (std::ostream& os, const mod<T, n>& m) {
@@ -65,7 +63,7 @@ class mod_stream_traits {
       case mod_format::value_and_modulu_long:
 	return os << (T)m << " (mod" << n << ')';
       default:
-	throw unsupported_mod_stream_traits_exception("unsupported mod format", f);
+	throw unsupported_mod_stream_traits_exception(f);
     }
   }
 private:
@@ -76,8 +74,9 @@ private:
 };
 
 class unsupported_mod_stream_traits_exception : public std::exception {
-  unsupported_mod_stream_traits_exception(const mod_stream_traits& s) : traits(s) { }
 public:
+  unsupported_mod_stream_traits_exception(const mod_stream_traits& s) : traits(s) { }
+
   const mod_stream_traits traits;
 };
 

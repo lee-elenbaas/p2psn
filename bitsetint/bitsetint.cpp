@@ -16,6 +16,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "mod_stream_traits.h"
 
-const int lee::math::modulu::mod_stream_traits::_xalloc = std::ios_base::xalloc();
+#include "bitsetint.h"
+

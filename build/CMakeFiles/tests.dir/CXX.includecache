@@ -6,17 +6,29 @@
 
 #IncludeRegexTransform: 
 
-/home/lee/projects/math/modulu/mod.h
-utility
+/home/lee/projects/math/tests/../bitsetint/bitsetint.h
+bitset
 -
 
-/home/lee/projects/math/modulu/mod_stream_traits.cpp
-mod_stream_traits.h
-/home/lee/projects/math/modulu/mod_stream_traits.h
+/home/lee/projects/math/tests/bitsetint_tests.cpp
+bitsetint_tests.h
+/home/lee/projects/math/tests/bitsetint_tests.h
+../bitsetint/bitsetint.h
+/home/lee/projects/math/tests/../bitsetint/bitsetint.h
 
-/home/lee/projects/math/modulu/mod_stream_traits.h
+/home/lee/projects/math/tests/bitsetint_tests.h
+test_task.h
+/home/lee/projects/math/tests/test_task.h
+
+/home/lee/projects/math/tests/test_task.h
+string
+-
 ostream
 -
-mod.h
-/home/lee/projects/math/modulu/mod.h
+chrono
+-
+functional
+-
+memory
+-
 

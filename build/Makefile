@@ -217,6 +217,30 @@ polynomial/full_polynomial_stream_traits.cpp.s:
 	$(MAKE) -f CMakeFiles/mathTests.dir/build.make CMakeFiles/mathTests.dir/polynomial/full_polynomial_stream_traits.cpp.s
 .PHONY : polynomial/full_polynomial_stream_traits.cpp.s
 
+tests/bitsetint_tests.o: tests/bitsetint_tests.cpp.o
+.PHONY : tests/bitsetint_tests.o
+
+# target to build an object file
+tests/bitsetint_tests.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o
+.PHONY : tests/bitsetint_tests.cpp.o
+
+tests/bitsetint_tests.i: tests/bitsetint_tests.cpp.i
+.PHONY : tests/bitsetint_tests.i
+
+# target to preprocess a source file
+tests/bitsetint_tests.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.i
+.PHONY : tests/bitsetint_tests.cpp.i
+
+tests/bitsetint_tests.s: tests/bitsetint_tests.cpp.s
+.PHONY : tests/bitsetint_tests.s
+
+# target to generate assembly for a file
+tests/bitsetint_tests.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.s
+.PHONY : tests/bitsetint_tests.cpp.s
+
 tests/full_polynomial_tests.o: tests/full_polynomial_tests.cpp.o
 .PHONY : tests/full_polynomial_tests.o
 
@@ -311,6 +335,9 @@ help:
 	@echo "... polynomial/full_polynomial_stream_traits.o"
 	@echo "... polynomial/full_polynomial_stream_traits.i"
 	@echo "... polynomial/full_polynomial_stream_traits.s"
+	@echo "... tests/bitsetint_tests.o"
+	@echo "... tests/bitsetint_tests.i"
+	@echo "... tests/bitsetint_tests.s"
 	@echo "... tests/full_polynomial_tests.o"
 	@echo "... tests/full_polynomial_tests.i"
 	@echo "... tests/full_polynomial_tests.s"

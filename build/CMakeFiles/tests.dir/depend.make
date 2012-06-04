@@ -5,6 +5,11 @@ CMakeFiles/tests.dir/modulu/mod_stream_traits.cpp.o: ../modulu/mod.h
 CMakeFiles/tests.dir/modulu/mod_stream_traits.cpp.o: ../modulu/mod_stream_traits.cpp
 CMakeFiles/tests.dir/modulu/mod_stream_traits.cpp.o: ../modulu/mod_stream_traits.h
 
+CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o: ../tests/../bitsetint/bitsetint.h
+CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o: ../tests/bitsetint_tests.cpp
+CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o: ../tests/bitsetint_tests.h
+CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o: ../tests/test_task.h
+
 CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o: ../tests/full_polynomial_tests.cpp
 CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o: ../tests/full_polynomial_tests.h
 CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o: ../tests/test_task.h

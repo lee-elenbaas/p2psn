@@ -18,4 +18,17 @@
 
 #include "mod_stream_traits.h"
 
-const int lee::math::modulu::mod_stream_traits::_xalloc = std::ios_base::xalloc();
+namespace lee {
+namespace math {
+namespace modulu {
+
+const int mod_stream_traits::_xalloc = std::ios_base::xalloc();
+
+std::ostream& operator<< (std::ostream& os, mod_format f){
+  os.iword(mod_stream_traits::_xalloc) = (long)f;
+  return os;
+}
+
+} /* namespace modulu */
+} /* namespace math */
+} /* namespace lee */

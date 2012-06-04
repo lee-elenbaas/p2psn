@@ -17,6 +17,9 @@
 */
 
 #include "mod_tests.h"
+
+#include <sstream>
+
 #include "../modulu/mod.h"
 #include "../modulu/mod_stream_traits.h"
 
@@ -53,12 +56,25 @@ std::string lee::tests::math::modulu::mod_stream_test::name()
 
 bool lee::tests::math::modulu::mod_stream_test::operator()()
 {
-  using lee::math::modulu::mod;
+  using namespace lee::math::modulu;
   
   mod<int,5> m1=3;
   mod<int,5> m2=4;
   mod<int,5> m3=-7;
 
-  //string_stream
-  return true;
+  std::stringstream s;
+  
+  s << m1;
+  
+  if (s.str() != "3 (5)")
+    return false;
+  
+  s.str() = "";
+  
+  s << mod_format::value_only << m2 << ' ' << m1;
+
+  if (s.str != "4 3")
+    return false;
+  
+return true;
 }

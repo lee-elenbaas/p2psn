@@ -16,6 +16,25 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "mod_stream_traits.h"
 
-const int lee::math::modulu::mod_stream_traits::_xalloc = std::ios_base::xalloc();
+#ifndef BITSETINT_TESTS_H
+#define BITSETINT_TESTS_H
+
+#include "test_task.h"
+
+namespace lee {
+namespace tests {
+namespace math {
+namespace bitsetint {
+
+  struct bitsetint_ctr_test : public lee::tests::test_task {
+    std::string name();
+    bool operator()();
+  };
+
+} /* namespace bitsetint */
+} /* namespace math */
+} /* namespace tests */
+} /* namespace lee */
+
+#endif // BITSETINT_TESTS_H

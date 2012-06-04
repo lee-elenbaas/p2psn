@@ -66,14 +66,14 @@ bool lee::tests::math::modulu::mod_stream_test::operator()()
   
   s << m1;
   
-  if (s.str != "3 (5)")
+  if (s.str() != "3 (5)")
     return false;
   
-  s.str = "";
+  s.str() = "";
   
   s << mod_format::value_only << m2 << ' ' << m1;
 
-  if (s.str != "4 3")
+  if (s.str() != "4 3")
     return false;
   
 return true;

@@ -30,13 +30,7 @@ namespace modulu {
   class unsupported_mod_stream_traits_exception;
   
 enum class mod_format : long {
-/*  value_only = 1,
-  modulu_only_short = 2,
-  modulu_only_long = 4,
-  modulu_only_clean = 8,
-  value_and_modulu_short = value_only & modulu_only_short,
-  value_and_modulu_long = value_only & modulu_only_long
-*/  value_only,
+  value_only,
   modulu_only_short,
   modulu_only_long,
   modulu_only_clean,
@@ -44,14 +38,12 @@ enum class mod_format : long {
   value_and_modulu_long
 };
 
+std::ostream& operator<< (std::ostream&, mod_format);
+ 
 class mod_stream_traits {
   mod_stream_traits(mod_format f) : _format(f) { }
   
-  friend std::ostream& operator<< (std::ostream& os, const mod_stream_traits& f){
-  os.iword(mod_stream_traits::_xalloc) = (long)f._format;
-  
-  return os;
-}
+  friend inline std::ostream& operator<< (std::ostream&, mod_format);
 
   template<typename T, T n>
   friend std::ostream& operator<< (std::ostream& os, const mod<T, n>& m) {
@@ -71,7 +63,7 @@ class mod_stream_traits {
       case mod_format::value_and_modulu_long:
 	return os << (T)m << " (mod" << n << ')';
       default:
-	throw unsupported_mod_stream_traits_exception("unsupported mod format", f);
+	throw unsupported_mod_stream_traits_exception(f);
     }
   }
 private:

@@ -8,6 +8,7 @@ SET(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 SET(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "../CMakeLists.txt"
+  "../bitsetint/CMakeLists.txt"
   "CMakeFiles/CMakeCCompiler.cmake"
   "CMakeFiles/CMakeCXXCompiler.cmake"
   "CMakeFiles/CMakeSystem.cmake"
@@ -41,6 +42,7 @@ SET(CMAKE_MAKEFILE_PRODUCTS
   "tests/CMakeFiles/CMakeDirectoryInformation.cmake"
   "polynomial/CMakeFiles/CMakeDirectoryInformation.cmake"
   "modulu/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "bitsetint/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:

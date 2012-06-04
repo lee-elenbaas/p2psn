@@ -1,4 +1,5 @@
 FILE(REMOVE_RECURSE
+  "CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o"
   "CMakeFiles/tests.dir/modulu/mod_stream_traits.cpp.o"
   "CMakeFiles/tests.dir/tests/test_task.cpp.o"
   "CMakeFiles/tests.dir/tests/mod_tests.cpp.o"

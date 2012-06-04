@@ -16,6 +16,23 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "mod_stream_traits.h"
 
-const int lee::math::modulu::mod_stream_traits::_xalloc = std::ios_base::xalloc();
+#include "bitsetint_tests.h"
+
+#include "../bitsetint/bitsetint.h"
+
+    std::string lee::tests::math::bitsetint::bitsetint_ctr_test::name() {
+      return "bitsetint#ctor";
+    }
+
+bool lee::tests::math::bitsetint::bitsetint_ctr_test::operator()() {
+  using lee::math::bitsetint::bitsetint;
+  
+    bitsetint<5> i1;
+    bitsetint<5> i2=5;
+    bitsetint<5> i3=i2;
+    
+    bitsetint<7> i4 = i1+i3;
+    
+    return true;
+}
