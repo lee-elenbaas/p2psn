@@ -107,6 +107,7 @@ constexpr bool sub<w, 0>(ubitsetint<w>& s, const ubitsetint<w>& o) { return sube
 template<size_t w>
 class bitsetint : private ubitsetint<w> {
 public:
+  // TODO: convertion operator from unsigned bitset to larger signed bit set
   // arithmetic operations
   constexpr ubitsetint<w>& operator+= (const bitsetint<w>& o) {
 	bool sameSign = (negative() == o.negative());
