@@ -31,6 +31,7 @@ namespace bitsetint {
   //   1.1. introduce suffix used for construction such values
   //   2. convertion operator from unsigned bitset to larger signed bit set
   //   3. need to deal with overflow on long constructor in case of very small bitset
+  //   4. introduce int status enum: overflow, underflow, invalid
   
 // signed integer of the given bitwidth
 template<size_t w>
