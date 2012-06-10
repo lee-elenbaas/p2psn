@@ -27,6 +27,47 @@ namespace lee {
 namespace math {
 namespace polynomial {
 
+template<typename F, size_t l>
+class polynomial {
+public:
+	// polynom construction
+	constexpr polynomial() : _coefficients({}) {} // when c++11 will be working completely: full_polynomial({}) {}
+	constexpr polynomial(std::initializer_list<F> coefficients) : _coefficients(coefficients) {}
+	
+	// destruction
+	~polynomial() = default;
+	
+	// copy
+	constexpr polynomial(const polynomial<F, l>& other) : _coefficients(other._coefficients) {}
+	polynomial<F, l>& operator=(const polynomial<F, l>& other) { _coefficients = other._coefficients; return *this; }
+	
+	// move
+	constexpr polynomial(polynomial<F, l>&& other) : _coefficients(std::move(other._coefficients)) {}
+	polynomial<F, l>&& operator=(polynomial<F, l>&& other) { _coefficients = std::move(other._coefficients); return *this; }
+	
+	// accessor
+	constexpr const std::array<const F, l> get_coefficients() const { return _coefficients; }
+	
+	// Scalar assignment
+	constexpr F operator() const (const F& scalar) { return eval_scalar<F, l, 0>(*this, scalar); }
+	template<size_t i>
+	friend constexpr F eval_scalar(const polynomial<F, l>& F, const F& scalar);
+private:
+	std::array<F, l> _coefficients;
+}
+
+template<typename F, size_t l1, size_t l2>
+constexpr auto operator+(const polynomial<F, l1>& lhs, const polynomial<F, l2>& rhs) -> polynomial<F, std::max(l1, l2)> {
+	return polynomial<F, std::max(l1, l2)> (lhs._coefficients+rhs._coefficients);
+}
+
+template<typename F, size_t l, size_t i>
+F eval_scalar(const polynomial<F, l>& p, const F& scalar) {
+	return std::get<l>(p._coefficients)+scalar*eval_scalar<F,l,i+1>(f,scalar); // calculation using the representation: ax^2+bx+c=c+x(b+x(a+x*0))
+}
+template<typename F, size_t l>
+F eval_scalar<F,l,l+1>() { return F(); }
+
 template<typename F>
 // F should have field semantics: supports operators + * and has zero in the form F()
 class full_polynomial {
