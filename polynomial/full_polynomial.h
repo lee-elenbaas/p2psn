@@ -16,6 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+// TODO: convert the work to use a tuple of n F's
 
 #ifndef FULL_POLYNOMIAL_H
 #define FULL_POLYNOMIAL_H
@@ -52,14 +53,29 @@ public:
 	constexpr const std::vector<const F> get_coefficients() const { return _coefficients; }
 	
 	// Scalar assignment
-	constexpr F operator()(const F& scalar) { return eval(scalar, 0); }
+	constexpr F operator()(const F& scalar) { return eval_scalar(scalar, 0); }
+
+	// math operations
+	constexpr full_polynomial<F>& operator+=(const full_polynomial<F>& o) { return add_poly(o, 0); }
+	full_polynomial<F>& operator-=(const full_polynomial<F>& o) {
+		for (int i=min(_coefficients.size(), o._coefficients.size();i>=0;--i)
+			_coefficients[i] -= o._coefficients[i];
+		for (int i=_coefficients.size();i<o._coefficients.size();++i)
+			_coefficients.push_back(o._coefficients[i]);
+	}
 private:
 	std::vector<F> _coefficients;
 	
-	constexpr F eval(const F& scalar, const int level) {
-	  return (level >= _coefficients.size())?F():_coefficients[level]+scalar*eval(scalar, level+1);
+	constexpr F eval_scalar(const F& scalar, const int level) {
+	  return (level >= _coefficients.size())?F():_coefficients[level]+scalar*eval_scalar(scalar, level+1);
+	}
+	constexpr full_polynomial<F>& add_poly(const full_polynomial<F>& o, const int level) {
+	  return (level >= o._coefficients.size())? *this : std::pair<full_polynomial<F>&, F>(_coeficients[level] += o._coefficients[i], add_poly(o, level+1)).second;
 	}
 };
+
+full_polynomial<F> operator+(const full_polynomial<F>& lhs, const full_polynomial<F>& rhs) { return full_polynomial<F>(lhs)+=rhs; }
+full_polynomial<F> operator-(const full_polynomial<F>& lhs, const full_polynomial<F>& rhs) { return full_polynomial<F>(lhs)+=rhs; }
 
 } /* namespace polynomial */
 } /* namespace math */
