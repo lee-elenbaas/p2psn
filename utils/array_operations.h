@@ -17,26 +17,15 @@
 */
 
 
-#ifndef BITSETINT_H
-#define BITSETINT_H
-
-#include <bitset>
+#ifndef ARRAY_OPERATIONS_H
+#define ARRAY_OPERATIONS_H
 
 namespace lee {
-namespace math {
-namespace bitsetint {
-  
-  template<size_t w>
-  class bitsetint;
-  
-  template<size_t w>
-  class ubitsetint;
-  
-namespace __implementation {
-  
-} /* namespace __implementation */
-} /* namespace bitsetint */
-} /* namespace math */
+  namespace utils {
+
+    template<typename Collection, typename Function>
+    Collection& 
+  } /* namespace utils */
 } /* namespace lee */
 
-#endif // BITWIDTHINT_H
+#endif // ARRAY_STATE_H

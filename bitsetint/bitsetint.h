@@ -33,6 +33,12 @@ namespace bitsetint {
   //   3. need to deal with overflow on long constructor in case of very small bitset
   //   4. introduce int status enum: overflow, underflow, invalid
   
+  // perform the * and assign,ent operations using matrices:
+  // 10110 * 10010 =	000000000 + = 110001100
+  //			000101100
+  //			000000000
+  //			000000000
+  //			101100000
 // signed integer of the given bitwidth
 template<size_t w>
 class bitsetint;
@@ -95,7 +101,11 @@ public:
   ubitsetint<w>& operator-= (const ubitsetint<w>& o) {
     return (*this += -o);
   }
-
+  
+  constexpr
+  ubitsetint<w>& operator*=(const ubitsetint<w>& o) {
+      return (*this = (*this * o));
+  }
   // bit operators
   constexpr
   ubitsetint<w> operator~ () const {
@@ -106,7 +116,10 @@ public:
   ubitsetint<w> operator&(const ubitsetint<w>& lhs, const ubitsetint<w>& rhs)
   // bit accessing
   constexpr
-  bool bit (size_t i) const { return _var[i]; }
+  bool bit(size_t i) const { return _var[i]; }
+  template<size_t i>
+  constexpr
+  bool bit() const { return get<i>(_var); }
   
   // carry handling
   constexpr 
@@ -136,6 +149,14 @@ constexpr bool add<w, 0>(ubitsetint<w>& s, const ubitsetint<w>& o) { return adde
 
 template<size_t w>
 constexpr ubitsetint<w> operator+(const ubitsetint<w>& lhs, const ubitsetint<w>& rhs) { return ubitsetint<w>(lhs) += rhs; }
+
+template<size_t w, size_t i>
+constexpr ubitsetint<w> mul(ubitsetint<w>& res, const ubitsetint<w>& zero, const ubitsetint<w>& lhs, const ubitsetint<w>& rhs) { return ((res += rhs.bit<i>()?(lhs << i):zero) += mul<i-1>(res, zero, lhs, rhs); }
+template<size_t w>
+constexpr ubitsetint<w> mul<-1>(ubitsetint<w>& res, const ubitsetint<w>& zero, const ubitsetint<w>& lhs, const ubitsetint<w>& rhs) { return zero; }
+
+template<size_t w>
+constexpr ubitsetint<w> operator*(const ubitsetint<w>& lhs, const ubitsetint<w>& rhs) { return mul<w>(ubitsetint<w>(), ubitsetint<w>(), lhs,rhs); }
 
 template<size_t w>
 class bitsetint : private ubitsetint<w> {

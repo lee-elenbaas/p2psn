@@ -12,3 +12,5 @@ add_executable(mathTests modulu/mod.cpp polynomial/full_polynomial_stream_traits
 
 link_directories(tests)
 target_link_libraries(mathTests tests)
+
+add_subdirectory(utils)
