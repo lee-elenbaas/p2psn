@@ -52,18 +52,22 @@ namespace lee {
     constexpr
     auto apply_carry(const Function&, const _Carry&, const std::tuple<_Head, _Tail>&);
 
-    temlate<typename Function, typename _Result, typename _Carry, typename... _Tail>
-    constexpr
-    auto _apply_carry_imp_2(const Function& f, _Result& res, const std::pair<std::tuple<_Tail>,_Carry>& t) -> decltype(std::make_pair(std::tuple_cat(std::make_tuple(res), t.first), t.second))
-    {
-      return std::make_pair(std::tuple_cat(std::make_tuple(res), t.first), t.second);
-    }
-    temlate<typename Function, typename _Result, typename _Carry, typename... _Tail>
-    constexpr
-    auto _apply_carry_imp_1(const Function& f, std::pair<_result,_Carry>&& res, const std::tuple<_Tail>& t) -> decltype(_apply_carry_imp_2(f, res.first, apply_carry(f, res.second, r.tail())))
-    {
-      return _apply_carry_imp_2(f, res.first, apply_carry(f, res.second, r.tail()));
-    }
+	namespace {
+		temlate<typename Function, typename _Result, typename _Carry, typename... _Tail>
+		constexpr
+		auto _apply_carry_imp_2(const Function& f, _Result& res, const std::pair<std::tuple<_Tail>,_Carry>& t) -> decltype(std::make_pair(std::tuple_cat(std::make_tuple(res), t.first), t.second))
+		{
+		  return std::make_pair(std::tuple_cat(std::make_tuple(res), t.first), t.second);
+		}
+		
+		temlate<typename Function, typename _Result, typename _Carry, typename... _Tail>
+		constexpr
+		auto _apply_carry_imp_1(const Function& f, std::pair<_result,_Carry>&& res, const std::tuple<_Tail>& t) -> decltype(_apply_carry_imp_2(f, res.first, apply_carry(f, res.second, r.tail())))
+		{
+		  return _apply_carry_imp_2(f, res.first, apply_carry(f, res.second, r.tail()));
+		}
+	}
+	
     temlate<typename Function, typename _Carry, typename _Head, typename... _Tail>
     constexpr
     auto apply_carry(const Function& f, const _Carry& c, const std::tuple<_Head, _Tail>& t) -> decltype(_apply_carry_imp_1(f, f(t.head(), c), t.tail()))
