@@ -17,29 +17,22 @@
 */
 
 
-#ifndef MOD_TESTS_H
-#define MOD_TESTS_H
+#ifndef TUPLE_OPERATIONS_TEST_H
+#define TUPLE_OPERATIONS_TEST_H
 
-#include "test_task.h"
+#include "../test_task.h"
 
 namespace lee {
 namespace tests {
-namespace math {
-namespace modulu {
+namespace utils {
 
-  struct mod_ctr_test : public lee::tests::test_task {
+  struct tuple_operations_test : public lee::tests::test_task {
     std::string name();
     bool operator()();
   };
 
-  struct mod_stream_test : public lee::tests::test_task {
-    std::string name();
-    bool operator()();
-  };
-
-  } /* namespace modulu */
-} /* namespace math */
+} /* namespace utils */
 } /* namespace tests */
 } /* namespace lee */
 
-#endif // MOD_TESTS_H
+#endif // TUPLE_OPERATIONS_TEST_H

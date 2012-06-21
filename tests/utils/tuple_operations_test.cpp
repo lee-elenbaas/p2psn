@@ -17,22 +17,37 @@
 */
 
 
-#include "bitsetint_tests.h"
+#include "tuple_operations_test.h"
+#include <string>
+#include "../../utils/tuple_operations.h"
 
-#include "../bitsetint/bitsetint.h"
-
-    std::string lee::tests::math::bitsetint::bitsetint_ctr_test::name() {
-      return "bitsetint#ctor";
+    std::string lee::tests::utils::tuple_operations_test::name() {
+      return "tuple_operations#tests";
     }
 
-bool lee::tests::math::bitsetint::bitsetint_ctr_test::operator()() {
-  using lee::math::bitsetint::bitsetint;
+    namespace {
+  using std::string;
   
-    bitsetint<5> i1;
-    bitsetint<5> i2=5;
-    bitsetint<5> i3=i2;
+struct type_name {
+  string operator() (int) { return "int"; }
+  string operator() (float) { return "float"; }
+  string operator() (string) { return "string"; }
+};
+    }
     
-    bitsetint<7> i4 = i1+i3;
-    
-    return true;
+bool lee::tests::utils::tuple_operations_test::operator()() {
+  using namespace lee::utils;
+  using namespace std;
+  
+  auto t1 = make_tuple(1,1.5,"hellp");
+  auto t1r = apply_parallel(type_name(), t1);
+  
+  if (get<0>(t1r) != "int")
+    return false;
+  if (get<1>(t1r) != "float")
+    return false;
+  if (get<2>(t1r) != "string")
+    return false;
+  
+  return true;
 }
