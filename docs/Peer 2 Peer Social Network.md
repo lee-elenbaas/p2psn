@@ -5,13 +5,12 @@ Use Cases:
 ----------
 
 Normal Installation on a single machine:
+
 1. User downloads a p2psn installation and installs on his machine.
-a. User gets 2 things installed on his machine: 
-i. A functioning node, 
-ii. and a web interface to that node.
-b. User uses the web interface to set up some basic administration configurations.
-c. User uses the web interface to set up his personal profile.
-d. User uses the web interface to start getting social using his profile.
+User gets 2 things installed on his machine: A functioning node, and a web interface to that node.
+2. User uses the web interface to set up some basic administration configurations.
+3. User uses the web interface to set up his personal profile.
+4. User uses the web interface to start getting social using his profile.
 
 Synced Installation on a new machine:
 1. User downloads a p2psn installation and installs on his machine.
