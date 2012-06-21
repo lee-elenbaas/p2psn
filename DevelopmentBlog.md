@@ -1,6 +1,13 @@
 Development Blog
 ----------------
 
+2012-06-21
+
+I been busy learning C++11 as the basis for this project.
+And finally got myself a few functions that i think should work well. So now i need to finish the testing framework around it.
+
+I am also attempting to get a friend into this project, i am missing somone to talk to about this.
+
 2012-06-05
 
 Ok, I started a few days after i started this repository.
