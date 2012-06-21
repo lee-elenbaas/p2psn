@@ -15,6 +15,11 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "../modulu/CMakeLists.txt"
   "../polynomial/CMakeLists.txt"
   "../tests/CMakeLists.txt"
+  "../tests/bitsetint/CMakeLists.txt"
+  "../tests/modulu/CMakeLists.txt"
+  "../tests/polynomial/CMakeLists.txt"
+  "../tests/utils/CMakeLists.txt"
+  "../utils/CMakeLists.txt"
   "/usr/share/cmake-2.8/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-2.8/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake-2.8/Modules/CMakeCommonLanguageInclude.cmake"
@@ -40,9 +45,14 @@ SET(CMAKE_MAKEFILE_OUTPUTS
 SET(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "tests/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "tests/utils/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "tests/bitsetint/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "tests/modulu/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "tests/polynomial/CMakeFiles/CMakeDirectoryInformation.cmake"
   "polynomial/CMakeFiles/CMakeDirectoryInformation.cmake"
   "modulu/CMakeFiles/CMakeDirectoryInformation.cmake"
   "bitsetint/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "utils/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:

@@ -17,15 +17,22 @@
 */
 
 
-#ifndef ARRAY_OPERATIONS_H
-#define ARRAY_OPERATIONS_H
+#include "bitsetint_tests.h"
 
-namespace lee {
-  namespace utils {
+#include "../../bitsetint/bitsetint.h"
 
-    template<typename Collection, typename Function>
-    Collection& 
-  } /* namespace utils */
-} /* namespace lee */
+    std::string lee::tests::math::bitsetint::bitsetint_ctr_test::name() {
+      return "bitsetint#ctor";
+    }
 
-#endif // ARRAY_STATE_H
+bool lee::tests::math::bitsetint::bitsetint_ctr_test::operator()() {
+  using lee::math::bitsetint::bitsetint;
+  
+    bitsetint<5> i1;
+    bitsetint<5> i2=5;
+    bitsetint<5> i3=i2;
+    
+    bitsetint<7> i4 = i1+i3;
+    
+    return true;
+}

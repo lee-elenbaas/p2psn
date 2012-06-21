@@ -5,21 +5,28 @@ CMakeFiles/tests.dir/modulu/mod_stream_traits.cpp.o: ../modulu/mod.h
 CMakeFiles/tests.dir/modulu/mod_stream_traits.cpp.o: ../modulu/mod_stream_traits.cpp
 CMakeFiles/tests.dir/modulu/mod_stream_traits.cpp.o: ../modulu/mod_stream_traits.h
 
-CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o: ../tests/../bitsetint/bitsetint.h
-CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o: ../tests/bitsetint_tests.cpp
-CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o: ../tests/bitsetint_tests.h
-CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o: ../tests/test_task.h
+CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.o: ../tests/bitsetint/../../bitsetint/bitsetint.h
+CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.o: ../tests/bitsetint/../test_task.h
+CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.o: ../tests/bitsetint/bitsetint_tests.cpp
+CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.o: ../tests/bitsetint/bitsetint_tests.h
 
-CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o: ../tests/full_polynomial_tests.cpp
-CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o: ../tests/full_polynomial_tests.h
-CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o: ../tests/test_task.h
+CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o: ../tests/modulu/../../modulu/mod.h
+CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o: ../tests/modulu/../../modulu/mod_stream_traits.h
+CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o: ../tests/modulu/../test_task.h
+CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o: ../tests/modulu/mod_tests.cpp
+CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o: ../tests/modulu/mod_tests.h
 
-CMakeFiles/tests.dir/tests/mod_tests.cpp.o: ../tests/../modulu/mod.h
-CMakeFiles/tests.dir/tests/mod_tests.cpp.o: ../tests/../modulu/mod_stream_traits.h
-CMakeFiles/tests.dir/tests/mod_tests.cpp.o: ../tests/mod_tests.cpp
-CMakeFiles/tests.dir/tests/mod_tests.cpp.o: ../tests/mod_tests.h
-CMakeFiles/tests.dir/tests/mod_tests.cpp.o: ../tests/test_task.h
+CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o: ../tests/polynomial/../../polynomial/full_polynomial.h
+CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o: ../tests/polynomial/../../polynomial/full_polynomial_stream_traits.h
+CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o: ../tests/polynomial/../test_task.h
+CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o: ../tests/polynomial/full_polynomial_tests.cpp
+CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o: ../tests/polynomial/full_polynomial_tests.h
 
 CMakeFiles/tests.dir/tests/test_task.cpp.o: ../tests/test_task.cpp
 CMakeFiles/tests.dir/tests/test_task.cpp.o: ../tests/test_task.h
+
+CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.o: ../tests/utils/../../utils/tuple_operations.h
+CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.o: ../tests/utils/../test_task.h
+CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.o: ../tests/utils/tuple_operations_test.cpp
+CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.o: ../tests/utils/tuple_operations_test.h
 

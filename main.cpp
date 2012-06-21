@@ -1,8 +1,8 @@
 #include <iostream>
 #include "tests/test_task.h"
-#include "tests/full_polynomial_tests.h"
-#include "tests/mod_tests.h"
-#include "tests/bitsetint_tests.h"
+#include "tests/polynomial/full_polynomial_tests.h"
+#include "tests/modulu/mod_tests.h"
+#include "tests/bitsetint/bitsetint_tests.h"
 
 int main(int argc, char **argv) {
     using namespace std;

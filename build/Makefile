@@ -217,77 +217,77 @@ polynomial/full_polynomial_stream_traits.cpp.s:
 	$(MAKE) -f CMakeFiles/mathTests.dir/build.make CMakeFiles/mathTests.dir/polynomial/full_polynomial_stream_traits.cpp.s
 .PHONY : polynomial/full_polynomial_stream_traits.cpp.s
 
-tests/bitsetint_tests.o: tests/bitsetint_tests.cpp.o
-.PHONY : tests/bitsetint_tests.o
+tests/bitsetint/bitsetint_tests.o: tests/bitsetint/bitsetint_tests.cpp.o
+.PHONY : tests/bitsetint/bitsetint_tests.o
 
 # target to build an object file
-tests/bitsetint_tests.cpp.o:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o
-.PHONY : tests/bitsetint_tests.cpp.o
+tests/bitsetint/bitsetint_tests.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.o
+.PHONY : tests/bitsetint/bitsetint_tests.cpp.o
 
-tests/bitsetint_tests.i: tests/bitsetint_tests.cpp.i
-.PHONY : tests/bitsetint_tests.i
+tests/bitsetint/bitsetint_tests.i: tests/bitsetint/bitsetint_tests.cpp.i
+.PHONY : tests/bitsetint/bitsetint_tests.i
 
 # target to preprocess a source file
-tests/bitsetint_tests.cpp.i:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.i
-.PHONY : tests/bitsetint_tests.cpp.i
+tests/bitsetint/bitsetint_tests.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.i
+.PHONY : tests/bitsetint/bitsetint_tests.cpp.i
 
-tests/bitsetint_tests.s: tests/bitsetint_tests.cpp.s
-.PHONY : tests/bitsetint_tests.s
+tests/bitsetint/bitsetint_tests.s: tests/bitsetint/bitsetint_tests.cpp.s
+.PHONY : tests/bitsetint/bitsetint_tests.s
 
 # target to generate assembly for a file
-tests/bitsetint_tests.cpp.s:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.s
-.PHONY : tests/bitsetint_tests.cpp.s
+tests/bitsetint/bitsetint_tests.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.s
+.PHONY : tests/bitsetint/bitsetint_tests.cpp.s
 
-tests/full_polynomial_tests.o: tests/full_polynomial_tests.cpp.o
-.PHONY : tests/full_polynomial_tests.o
+tests/modulu/mod_tests.o: tests/modulu/mod_tests.cpp.o
+.PHONY : tests/modulu/mod_tests.o
 
 # target to build an object file
-tests/full_polynomial_tests.cpp.o:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o
-.PHONY : tests/full_polynomial_tests.cpp.o
+tests/modulu/mod_tests.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o
+.PHONY : tests/modulu/mod_tests.cpp.o
 
-tests/full_polynomial_tests.i: tests/full_polynomial_tests.cpp.i
-.PHONY : tests/full_polynomial_tests.i
+tests/modulu/mod_tests.i: tests/modulu/mod_tests.cpp.i
+.PHONY : tests/modulu/mod_tests.i
 
 # target to preprocess a source file
-tests/full_polynomial_tests.cpp.i:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.i
-.PHONY : tests/full_polynomial_tests.cpp.i
+tests/modulu/mod_tests.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.i
+.PHONY : tests/modulu/mod_tests.cpp.i
 
-tests/full_polynomial_tests.s: tests/full_polynomial_tests.cpp.s
-.PHONY : tests/full_polynomial_tests.s
+tests/modulu/mod_tests.s: tests/modulu/mod_tests.cpp.s
+.PHONY : tests/modulu/mod_tests.s
 
 # target to generate assembly for a file
-tests/full_polynomial_tests.cpp.s:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.s
-.PHONY : tests/full_polynomial_tests.cpp.s
+tests/modulu/mod_tests.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.s
+.PHONY : tests/modulu/mod_tests.cpp.s
 
-tests/mod_tests.o: tests/mod_tests.cpp.o
-.PHONY : tests/mod_tests.o
+tests/polynomial/full_polynomial_tests.o: tests/polynomial/full_polynomial_tests.cpp.o
+.PHONY : tests/polynomial/full_polynomial_tests.o
 
 # target to build an object file
-tests/mod_tests.cpp.o:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/mod_tests.cpp.o
-.PHONY : tests/mod_tests.cpp.o
+tests/polynomial/full_polynomial_tests.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o
+.PHONY : tests/polynomial/full_polynomial_tests.cpp.o
 
-tests/mod_tests.i: tests/mod_tests.cpp.i
-.PHONY : tests/mod_tests.i
+tests/polynomial/full_polynomial_tests.i: tests/polynomial/full_polynomial_tests.cpp.i
+.PHONY : tests/polynomial/full_polynomial_tests.i
 
 # target to preprocess a source file
-tests/mod_tests.cpp.i:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/mod_tests.cpp.i
-.PHONY : tests/mod_tests.cpp.i
+tests/polynomial/full_polynomial_tests.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.i
+.PHONY : tests/polynomial/full_polynomial_tests.cpp.i
 
-tests/mod_tests.s: tests/mod_tests.cpp.s
-.PHONY : tests/mod_tests.s
+tests/polynomial/full_polynomial_tests.s: tests/polynomial/full_polynomial_tests.cpp.s
+.PHONY : tests/polynomial/full_polynomial_tests.s
 
 # target to generate assembly for a file
-tests/mod_tests.cpp.s:
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/mod_tests.cpp.s
-.PHONY : tests/mod_tests.cpp.s
+tests/polynomial/full_polynomial_tests.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.s
+.PHONY : tests/polynomial/full_polynomial_tests.cpp.s
 
 tests/test_task.o: tests/test_task.cpp.o
 .PHONY : tests/test_task.o
@@ -313,6 +313,30 @@ tests/test_task.cpp.s:
 	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/test_task.cpp.s
 .PHONY : tests/test_task.cpp.s
 
+tests/utils/tuple_operations_test.o: tests/utils/tuple_operations_test.cpp.o
+.PHONY : tests/utils/tuple_operations_test.o
+
+# target to build an object file
+tests/utils/tuple_operations_test.cpp.o:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.o
+.PHONY : tests/utils/tuple_operations_test.cpp.o
+
+tests/utils/tuple_operations_test.i: tests/utils/tuple_operations_test.cpp.i
+.PHONY : tests/utils/tuple_operations_test.i
+
+# target to preprocess a source file
+tests/utils/tuple_operations_test.cpp.i:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.i
+.PHONY : tests/utils/tuple_operations_test.cpp.i
+
+tests/utils/tuple_operations_test.s: tests/utils/tuple_operations_test.cpp.s
+.PHONY : tests/utils/tuple_operations_test.s
+
+# target to generate assembly for a file
+tests/utils/tuple_operations_test.cpp.s:
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.s
+.PHONY : tests/utils/tuple_operations_test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -335,18 +359,21 @@ help:
 	@echo "... polynomial/full_polynomial_stream_traits.o"
 	@echo "... polynomial/full_polynomial_stream_traits.i"
 	@echo "... polynomial/full_polynomial_stream_traits.s"
-	@echo "... tests/bitsetint_tests.o"
-	@echo "... tests/bitsetint_tests.i"
-	@echo "... tests/bitsetint_tests.s"
-	@echo "... tests/full_polynomial_tests.o"
-	@echo "... tests/full_polynomial_tests.i"
-	@echo "... tests/full_polynomial_tests.s"
-	@echo "... tests/mod_tests.o"
-	@echo "... tests/mod_tests.i"
-	@echo "... tests/mod_tests.s"
+	@echo "... tests/bitsetint/bitsetint_tests.o"
+	@echo "... tests/bitsetint/bitsetint_tests.i"
+	@echo "... tests/bitsetint/bitsetint_tests.s"
+	@echo "... tests/modulu/mod_tests.o"
+	@echo "... tests/modulu/mod_tests.i"
+	@echo "... tests/modulu/mod_tests.s"
+	@echo "... tests/polynomial/full_polynomial_tests.o"
+	@echo "... tests/polynomial/full_polynomial_tests.i"
+	@echo "... tests/polynomial/full_polynomial_tests.s"
 	@echo "... tests/test_task.o"
 	@echo "... tests/test_task.i"
 	@echo "... tests/test_task.s"
+	@echo "... tests/utils/tuple_operations_test.o"
+	@echo "... tests/utils/tuple_operations_test.i"
+	@echo "... tests/utils/tuple_operations_test.s"
 .PHONY : help
 
 

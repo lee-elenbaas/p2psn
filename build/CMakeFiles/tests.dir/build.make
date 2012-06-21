@@ -46,32 +46,55 @@ include CMakeFiles/tests.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/tests.dir/flags.make
 
-CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o: CMakeFiles/tests.dir/flags.make
-CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o: ../tests/bitsetint_tests.cpp
+CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.o: CMakeFiles/tests.dir/flags.make
+CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.o: ../tests/utils/tuple_operations_test.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o -c /home/lee/projects/math/tests/bitsetint_tests.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.o -c /home/lee/projects/math/tests/utils/tuple_operations_test.cpp
 
-CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lee/projects/math/tests/bitsetint_tests.cpp > CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.i
+CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lee/projects/math/tests/utils/tuple_operations_test.cpp > CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.i
 
-CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lee/projects/math/tests/bitsetint_tests.cpp -o CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.s
+CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lee/projects/math/tests/utils/tuple_operations_test.cpp -o CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.s
 
-CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o.requires:
-.PHONY : CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o.requires
+CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.o.requires:
+.PHONY : CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.o.requires
 
-CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o.provides: CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o.requires
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o.provides.build
-.PHONY : CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o.provides
+CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.o.provides: CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.o.requires
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.o.provides.build
+.PHONY : CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.o.provides
 
-CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o.provides.build: CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o
+CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.o.provides.build: CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.o
+
+CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.o: CMakeFiles/tests.dir/flags.make
+CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.o: ../tests/bitsetint/bitsetint_tests.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.o -c /home/lee/projects/math/tests/bitsetint/bitsetint_tests.cpp
+
+CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lee/projects/math/tests/bitsetint/bitsetint_tests.cpp > CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.i
+
+CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lee/projects/math/tests/bitsetint/bitsetint_tests.cpp -o CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.s
+
+CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.o.requires:
+.PHONY : CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.o.requires
+
+CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.o.provides: CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.o.requires
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.o.provides.build
+.PHONY : CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.o.provides
+
+CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.o.provides.build: CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.o
 
 CMakeFiles/tests.dir/modulu/mod_stream_traits.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/modulu/mod_stream_traits.cpp.o: ../modulu/mod_stream_traits.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/tests.dir/modulu/mod_stream_traits.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/tests.dir/modulu/mod_stream_traits.cpp.o -c /home/lee/projects/math/modulu/mod_stream_traits.cpp
 
@@ -94,7 +117,7 @@ CMakeFiles/tests.dir/modulu/mod_stream_traits.cpp.o.provides.build: CMakeFiles/t
 
 CMakeFiles/tests.dir/tests/test_task.cpp.o: CMakeFiles/tests.dir/flags.make
 CMakeFiles/tests.dir/tests/test_task.cpp.o: ../tests/test_task.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/tests.dir/tests/test_task.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/tests.dir/tests/test_task.cpp.o -c /home/lee/projects/math/tests/test_task.cpp
 
@@ -115,68 +138,70 @@ CMakeFiles/tests.dir/tests/test_task.cpp.o.provides: CMakeFiles/tests.dir/tests/
 
 CMakeFiles/tests.dir/tests/test_task.cpp.o.provides.build: CMakeFiles/tests.dir/tests/test_task.cpp.o
 
-CMakeFiles/tests.dir/tests/mod_tests.cpp.o: CMakeFiles/tests.dir/flags.make
-CMakeFiles/tests.dir/tests/mod_tests.cpp.o: ../tests/mod_tests.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles $(CMAKE_PROGRESS_4)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/tests.dir/tests/mod_tests.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/tests.dir/tests/mod_tests.cpp.o -c /home/lee/projects/math/tests/mod_tests.cpp
-
-CMakeFiles/tests.dir/tests/mod_tests.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tests.dir/tests/mod_tests.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lee/projects/math/tests/mod_tests.cpp > CMakeFiles/tests.dir/tests/mod_tests.cpp.i
-
-CMakeFiles/tests.dir/tests/mod_tests.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests.dir/tests/mod_tests.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lee/projects/math/tests/mod_tests.cpp -o CMakeFiles/tests.dir/tests/mod_tests.cpp.s
-
-CMakeFiles/tests.dir/tests/mod_tests.cpp.o.requires:
-.PHONY : CMakeFiles/tests.dir/tests/mod_tests.cpp.o.requires
-
-CMakeFiles/tests.dir/tests/mod_tests.cpp.o.provides: CMakeFiles/tests.dir/tests/mod_tests.cpp.o.requires
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/mod_tests.cpp.o.provides.build
-.PHONY : CMakeFiles/tests.dir/tests/mod_tests.cpp.o.provides
-
-CMakeFiles/tests.dir/tests/mod_tests.cpp.o.provides.build: CMakeFiles/tests.dir/tests/mod_tests.cpp.o
-
-CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o: CMakeFiles/tests.dir/flags.make
-CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o: ../tests/full_polynomial_tests.cpp
+CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o: CMakeFiles/tests.dir/flags.make
+CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o: ../tests/modulu/mod_tests.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles $(CMAKE_PROGRESS_5)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o -c /home/lee/projects/math/tests/full_polynomial_tests.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o -c /home/lee/projects/math/tests/modulu/mod_tests.cpp
 
-CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lee/projects/math/tests/full_polynomial_tests.cpp > CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.i
+CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lee/projects/math/tests/modulu/mod_tests.cpp > CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.i
 
-CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lee/projects/math/tests/full_polynomial_tests.cpp -o CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.s
+CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lee/projects/math/tests/modulu/mod_tests.cpp -o CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.s
 
-CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o.requires:
-.PHONY : CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o.requires
+CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o.requires:
+.PHONY : CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o.requires
 
-CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o.provides: CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o.requires
-	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o.provides.build
-.PHONY : CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o.provides
+CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o.provides: CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o.requires
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o.provides.build
+.PHONY : CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o.provides
 
-CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o.provides.build: CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o
+CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o.provides.build: CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o
+
+CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o: CMakeFiles/tests.dir/flags.make
+CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o: ../tests/polynomial/full_polynomial_tests.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/lee/projects/math/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o -c /home/lee/projects/math/tests/polynomial/full_polynomial_tests.cpp
+
+CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/lee/projects/math/tests/polynomial/full_polynomial_tests.cpp > CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.i
+
+CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/lee/projects/math/tests/polynomial/full_polynomial_tests.cpp -o CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.s
+
+CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o.requires:
+.PHONY : CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o.requires
+
+CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o.provides: CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o.requires
+	$(MAKE) -f CMakeFiles/tests.dir/build.make CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o.provides.build
+.PHONY : CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o.provides
+
+CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o.provides.build: CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o
 
 # Object files for target tests
 tests_OBJECTS = \
-"CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o" \
+"CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.o" \
+"CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.o" \
 "CMakeFiles/tests.dir/modulu/mod_stream_traits.cpp.o" \
 "CMakeFiles/tests.dir/tests/test_task.cpp.o" \
-"CMakeFiles/tests.dir/tests/mod_tests.cpp.o" \
-"CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o"
+"CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o" \
+"CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o"
 
 # External object files for target tests
 tests_EXTERNAL_OBJECTS =
 
-libtests.a: CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o
+libtests.a: CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.o
+libtests.a: CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.o
 libtests.a: CMakeFiles/tests.dir/modulu/mod_stream_traits.cpp.o
 libtests.a: CMakeFiles/tests.dir/tests/test_task.cpp.o
-libtests.a: CMakeFiles/tests.dir/tests/mod_tests.cpp.o
-libtests.a: CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o
+libtests.a: CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o
+libtests.a: CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o
 libtests.a: CMakeFiles/tests.dir/build.make
 libtests.a: CMakeFiles/tests.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library libtests.a"
@@ -187,11 +212,12 @@ libtests.a: CMakeFiles/tests.dir/link.txt
 CMakeFiles/tests.dir/build: libtests.a
 .PHONY : CMakeFiles/tests.dir/build
 
-CMakeFiles/tests.dir/requires: CMakeFiles/tests.dir/tests/bitsetint_tests.cpp.o.requires
+CMakeFiles/tests.dir/requires: CMakeFiles/tests.dir/tests/utils/tuple_operations_test.cpp.o.requires
+CMakeFiles/tests.dir/requires: CMakeFiles/tests.dir/tests/bitsetint/bitsetint_tests.cpp.o.requires
 CMakeFiles/tests.dir/requires: CMakeFiles/tests.dir/modulu/mod_stream_traits.cpp.o.requires
 CMakeFiles/tests.dir/requires: CMakeFiles/tests.dir/tests/test_task.cpp.o.requires
-CMakeFiles/tests.dir/requires: CMakeFiles/tests.dir/tests/mod_tests.cpp.o.requires
-CMakeFiles/tests.dir/requires: CMakeFiles/tests.dir/tests/full_polynomial_tests.cpp.o.requires
+CMakeFiles/tests.dir/requires: CMakeFiles/tests.dir/tests/modulu/mod_tests.cpp.o.requires
+CMakeFiles/tests.dir/requires: CMakeFiles/tests.dir/tests/polynomial/full_polynomial_tests.cpp.o.requires
 .PHONY : CMakeFiles/tests.dir/requires
 
 CMakeFiles/tests.dir/clean:
