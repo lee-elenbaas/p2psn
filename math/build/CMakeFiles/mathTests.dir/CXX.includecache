@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/lee/projects/math/main.cpp
+iostream
+-
+tests/test_task.h
+/home/lee/projects/math/tests/test_task.h
+tests/full_polynomial_tests.h
+/home/lee/projects/math/tests/full_polynomial_tests.h
+tests/mod_tests.h
+/home/lee/projects/math/tests/mod_tests.h
+
+/home/lee/projects/math/modulu/mod.cpp
+mod.h
+/home/lee/projects/math/modulu/mod.h
+
+/home/lee/projects/math/modulu/mod.h
+utility
+-
+
+/home/lee/projects/math/tests/full_polynomial_tests.h
+test_task.h
+/home/lee/projects/math/tests/test_task.h
+
+/home/lee/projects/math/tests/mod_tests.h
+test_task.h
+/home/lee/projects/math/tests/test_task.h
+
+/home/lee/projects/math/tests/test_task.h
+string
+-
+ostream
+-
+chrono
+-
+functional
+-
+memory
+-
+

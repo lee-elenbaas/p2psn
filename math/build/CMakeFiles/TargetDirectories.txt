@@ -1,0 +1,2 @@
+/home/lee/projects/math/build/CMakeFiles/mathTests.dir
+/home/lee/projects/math/build/CMakeFiles/tests.dir

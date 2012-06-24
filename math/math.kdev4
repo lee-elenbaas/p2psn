@@ -1,0 +1,4 @@
+[Project]
+Name=math
+Manager=KDevCMakeManager
+VersionControl=kdevgit
