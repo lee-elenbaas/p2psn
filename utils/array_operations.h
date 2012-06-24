@@ -26,14 +26,14 @@ namespace lee {
   namespace utils {
 
     // Apply the given function object to every element in the array
-    // const Function& f - is the function object that should have an operator() defined for every type in the tuple, each should return a value
-    // const std::array<...> a the tuple to perform the operations on
+    // const Function& f	- is the function object that should have an operator() defined for every type in the tuple, each should return a value
+    // const std::array<_Element, sw> a	- The array to perform the operations on
     // returns an array of all the results of activating the function on the array elements
     template<typename Function, typename _Element, size_t w>
     constexpr
     auto apply_parallel(const Function& f, const std::array<_Elements, w>& a) -> std::array<decltype(f(get<0>(a))), w>
     {
-      return std::apply_parallel<0, w>(f, a, std::array<decltype(f(get<0>(a))), w>());
+      return apply_parallel<0, w, 0>(f, a, std::array<decltype(f(get<0>(a))), w>());
     }
 
     // Apply the given function object to every element in the array
@@ -58,6 +58,33 @@ namespace lee {
       return r;
     }
 
+    // Apply the given function object to every element in the array
+    // const Function& f - is the function object that should have an operator() defined for every type in the tuple, each should return a value
+    // const std::array<_Element, sw> a	- The array to perform the operations on its elements.
+    // returns an array of all the results of activating the function on the array elements
+    template<typename Function, typename _Element, size_t w>
+    auto apply_forward(const Function& f, const std::array<_Elements, w>& a) -> std::array<decltype(f(get<0>(a))), w>
+    {
+      return apply_forward(f, a, 0, w, 0, std::array<decltype(f(get<0>(a))), w>());
+    }
+
+    // Apply the given function object to every element in the array
+    // const Function& f - is the function object that should have an operator() defined for every type in the tuple, each should return a value
+    // const std::array<_Element, sw> a	- The array to perform the operations on its elements.
+	// const std::array<_Result, tw> r	- The array to store the results into.
+	// size_t sb	- the index to start passing over the elements from
+	// size_t se	- the index past the last element to go over
+	// size_t tb	- the index to to place the result of the first element on in the result array
+    // returns an array of all the results of activating the function on the array elements
+    template<typename Function, typename _Element, size_t sw, typename _Result, size_t tw>
+    std::array<_Result, tw> apply_forward(const Function& f, const std::array<_Elements, sw>& a, size_t sb, size_t se, size_t, tb, std::array<_Result, tw>& r)
+    {
+	  for(;sb < se;++sb,++tb)
+		r[tb]=f(a[sb]);
+		
+      return apply_forward(f, a, 0, w, 0, std::array<decltype(f(get<0>(a))), w>());
+    }
+	
   } /* namespace utils */
 } /* namespace lee */
 
