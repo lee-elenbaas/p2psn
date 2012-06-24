@@ -1,6 +1,10 @@
 Development Blog
 ----------------
 
+2012-06-24
+
+I feel slightly better with C++11 now. I am still far from being able to use it fluently, but i decided it is time to start orgenizing the CppCMS project - a simple hellow world is enough for now.
+
 2012-06-21
 
 I been busy learning C++11 as the basis for this project.
