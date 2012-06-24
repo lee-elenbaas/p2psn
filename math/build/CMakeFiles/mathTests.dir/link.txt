@@ -1,1 +1,0 @@
-/usr/bin/c++   -std=c++0x    CMakeFiles/mathTests.dir/modulu/mod.cpp.o CMakeFiles/mathTests.dir/polynomial/full_polynomial_stream_traits.cpp.o CMakeFiles/mathTests.dir/main.cpp.o  -o mathTests -rdynamic libtests.a 
