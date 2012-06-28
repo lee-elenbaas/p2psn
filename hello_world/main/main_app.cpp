@@ -2,17 +2,20 @@
 #include <cppcms/applications_pool.h>
 #include <cppcms/service.h>
 #include <cppcms/http_response.h>
+#include <cppcms/url_dispatcher.h>
 #include <iostream>
 
-class my_hello_world : public cppcms::application {
+#include "content.h"
+
+class main_app : public cppcms::application {
 public:
-    my_hello_world(cppcms::service &srv) :
+    main_app(cppcms::service &srv) :
         cppcms::application(srv) 
     {
-        dispatcher().assign("",&myapp::intro,this);
+        dispatcher().assign("",&main_app::intro,this);
         mapper().assign("");
 
-        dispatcher().assign("/about",&myapp::about,this);
+        dispatcher().assign("/about",&main_app::about,this);
         mapper().assign("about","/about");
 
         mapper().root("/node");
@@ -28,7 +31,7 @@ public:
 
         render("page",c);
     }
-    void intro()
+    void about()
     {
         content::page c;
 
@@ -46,7 +49,7 @@ int main(int argc,char ** argv)
 {
     try {
         cppcms::service srv(argc,argv);
-        srv.applications_pool().mount(cppcms::applications_factory<my_hello_world>());
+        srv.applications_pool().mount(cppcms::applications_factory<main_app>());
         srv.run();
     }
     catch(std::exception const &e) {
