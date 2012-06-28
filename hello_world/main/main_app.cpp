@@ -9,19 +9,38 @@ public:
     my_hello_world(cppcms::service &srv) :
         cppcms::application(srv) 
     {
-    }
-    virtual void main(std::string url);
-};
+        dispatcher().assign("",&myapp::intro,this);
+        mapper().assign("");
 
-void my_hello_world::main(std::string /*url*/)
-{
-    response().out()<<
-        "<html>\n"
-        "<body>\n"
-        "  <h1>Hello World</h1>\n"
-        "</body>\n"
-        "</html>\n";
-}
+        dispatcher().assign("/about",&myapp::about,this);
+        mapper().assign("about","/about");
+
+        mapper().root("/node");
+    }
+    void intro()
+    {
+        content::page c;
+
+        init(c);
+        c.page_title = "Node";
+
+        // c.page - fill in content
+
+        render("page",c);
+    }
+    void intro()
+    {
+        content::page c;
+
+        init(c);
+        c.page_title = "About";
+
+        render("about",c);
+    }
+    void init(content::master& c) {
+        c.title = "P2Psn";
+    }
+};
 
 int main(int argc,char ** argv)
 {
