@@ -19,5 +19,5 @@ build/main_skin.cpp: $(MAIN_SKIN)
 	cppcms_tmpl_cc $(MAIN_SKIN) -o build/main_skin.cpp
 
 clean:
-	rm -fr node node.exe cppcms_rundir build/*
+	rm -fr node node.exe cppcms_rundir build/* *~ main/*~ api/*~
 

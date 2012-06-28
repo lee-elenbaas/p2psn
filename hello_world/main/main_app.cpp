@@ -15,7 +15,7 @@ main_app::main_app(cppcms::service &srv) :
     dispatcher().assign("/about",&main_app::about,this);
     mapper().assign("about","/about");
 
-    mapper().root("");
+    mapper().root("/node");
 }
 
 void main_app::intro()

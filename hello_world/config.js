@@ -9,8 +9,7 @@
 			{ "regex" : "/node(/.*)?", "pattern" : "$0" },
 			{ "regex" : "/media(/.*)?", "pattern" : "$0" },
 			{ "regex" : "/favicon\\.ico", "pattern" : "$0" },
-			{ "regex" : "^/?\\??.*$", "pattern" : "/node" },
-			{ "regex" : ".*", "pattern" : "/node$0" }
+			{ "regex" : ".*", "pattern" : "/node" }
 		]
 	}
 }
