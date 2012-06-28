@@ -1,10 +1,9 @@
 LIBS=-lcppcms -lbooster
 
+all: node
 
-all: hello
-
-hello: hello.cpp
-	$(CXX) -O2 -Wall -g hello.cpp -o hello ${LIBS}
+node: main/main_app.cpp
+	$(CXX) -O2 -Wall -g main/main_app.cpp -o node ${LIBS}
 
 clean:
-	rm -fr hello hello.exe cppcms_rundir
+	rm -fr node node.exe cppcms_rundir
