@@ -11,6 +11,9 @@
 			{ "regex" : "/favicon\\.ico", "pattern" : "$0" },
 			{ "regex" : ".*", "pattern" : "/node" }
 		]
-	}
+	},
+	"localization" {  
+		"locales" : [ "en_US.UTF-8" ]  
+	}  
 }
 

@@ -1,5 +1,5 @@
-#ifndef CONTENT_H
-#define CONTENT_H
+#ifndef __CONTENT_H
+#define __CONTENT_H
 
 #include <cppcms/view.h>
 #include <string>
@@ -14,6 +14,6 @@ namespace content  {
 }
 
 
-#endif
+#endif // __CONTENT_H
 // vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 
