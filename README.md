@@ -64,7 +64,15 @@ At the same time each node is intended to run on a normal home PC with its limit
 Development Blog
 ----------------
 
-2012-05-30
+2012-07-02
+
+I been thinking about packing the p2psn application. 
+Building it properly for *nix systems will mean that it will not compile for windows, or that my code needs to be polluted with #ifdef branches. So in the end i decided that at this point in the life of the project, i will build it only for *nix systems, with cygwin support, and just open myself issues and place TODO comments where i think windows incompatibility is creeping in.
+The same issue is raised for the client interface. I wanted to use HTML5 technologies - sadly the subset of HTML5 supported by each browser is not the same at this point in time. So I decided to build for one browser only, and then find the solutions for the other browsers later on in the life of this project. Again issues and TODO comments will be placed where i think incompabilities are expected. The browser i selected right now is firefox.
+
+The next question is what web-server to be using: The choice was made easy this time, and i selected to go with the internal CppCMS web server. Although it is for debugging, has bad performance compared to others, it has the advantages of being bundled with the application, with all its configuration sites comfortably with the rest of my configuration. I will need guids for how to set up the application on other web servers once it is done.
+
+2012-06-30
 
 In the past week i managed to reorgenize the repository a bit. And get myself to a working application based on the CppCMS tutorial applications and the documentation. Nothing is actuall being done yet - but the main framework is begining to unravel for me.
 
