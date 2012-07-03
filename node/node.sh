@@ -1,4 +1,4 @@
 #!/bin/sh
 
-./node -c config.js
+./run/node -c config.js
 
