@@ -1,3 +1,3 @@
 @echo off
-run\node.exe -c config.js
+run\noded.exe -c run\config.js
 
