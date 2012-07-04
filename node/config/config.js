@@ -12,7 +12,7 @@
 			{ "regex" : ".*", "pattern" : "/node" }
 		]
 	},
-	"localization" {  
+	"localization" : {  
 		"locales" : [ "en_US.UTF-8" ]  
 	}  
 }

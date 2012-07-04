@@ -1,31 +1,36 @@
 
-#ifndef __SIGNAL_HANDLERS_H
-#define __SIGNAL_HANDLERS_H
+#ifndef __SIGNAL_HANDLER_H
+#define __SIGNAL_HANDLER_H
 
+#include <cppcms/service.h>
 #include <signal.h> // TODO I#6: handle win 32 compilation issues
 #include <stdexcept>
+
+namespace p2psn {
+namespace main {
+namespace signal {
+
+cppcms::service* srv();
+void set_srv(cppcms::service*);
+
+bool sigterm();
+void set_sigterm(bool);
+
+bool sigint();
+void set_sigint(bool);
+
+bool sighup();
+void set_sighup(bool);
 
 class signal_setup_exception : public std::runtime_error {
 public:
 	signal_setup_exception(const std::string& message) : std::runtime_error(message) {}
 };
 
-class signal_handler {
-public:
-	signal_handler(sppcms::service& srv, int signal) throw (signal_setup_exception);
-	~signal_handler() = default; // no need to handle signal removal
+void setup_signal_handlers() throw (signal_setup_exception);
 
-	bool recieved() const { return _signal_recieved; }
-	void reset_recieved() { _signal_recieved = false; }
-	void set_recieved(bool _recieved) { _signal_recieved = recieved; }
-	
-	void set_srv(cppcms::service* srv) { _srv = srv; }
-private:
-	cppcms::service* _srv = nullptr;
-	int _signal;
-	bool _signal_recieved = false;
+} // namespace signal
+} // namespace main
+} // namespace p2psn
 
-	void handler(int);
-};
-
-#endif // __SIGNAL_HANDLERS_H
+#endif // __SIGNAL_HANDLER_H

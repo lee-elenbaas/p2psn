@@ -1,20 +1,68 @@
 
-#include "signal_handlers.h"
+#include "signal_handler.h"
 
 // TODO I#6: need to handle win32 case using #ifdef
-#include <errono.h>
+#include <errno.h>
 
-signal_handler::signal_handler(int sig) throw (signal_setup_exception)
-	: _signal(sig)
-{
-	if (SIG_ERR == signal(sig, signal_handler::handler))
-		throw signal_exception("Error setting up signal handler");
+namespace p2psn {
+namespace main {
+namespace signal {
+
+namespace {
+	cppcms::service* _srv = nullptr;
+	bool _sigterm = false;
+	bool _sigint = false;
+	bool _sighup = false;
+
+	void sigterm_handler(int) {
+		_sigterm = true;
+
+		if (_srv != nullptr)
+			_srv->shutdown();
+	}
+
+	void sigint_handler(int) {
+		_sigint = true;
+
+		if (_srv != nullptr)
+			_srv->shutdown();
+	}
+
+	void sighup_handler(int) {
+		_sighup = true;
+
+		if (_srv != nullptr)
+			_srv->shutdown();
+	}
 }
 
-void signal_handler::handler(int)
-{
-	_signal_recieved = true;
-	
-	if (nullptr != _srv)
-		_srv->shutdown();
+cppcms::service* srv() { return _srv; }
+void set_srv(cppcms::service* srv) { _srv = srv; }
+
+bool sigterm() { return _sigterm; }
+void set_sigterm(bool sigterm) { _sigterm = sigterm; }
+
+bool sigint() { return _sigint; }
+void set_sigint(bool sigint) { _sigint = sigint; }
+
+bool sighup() { return _sighup; }
+void set_sighup(bool sighup) { _sighup = sighup; }
+
+void setup_signal_handlers() throw (signal_setup_exception) {
+	// Terminate signal
+	if (SIG_ERR == ::signal(SIGTERM, sigterm_handler))
+		throw signal_setup_exception("Error setting up signal handler: SIGTERM");
+
+	// Ctrl-C in console
+	if (SIG_ERR == ::signal(SIGINT, sigint_handler))
+		throw signal_setup_exception("Error setting up signal handler: SIGINT");
+
+	// Reload configuration
+	if (SIG_ERR == ::signal(SIGHUP, sighup_handler))
+		throw signal_setup_exception("Error setting up signal handler: SIGHUP");
 }
+
+} // namespace signal
+} // namespace main
+} // namespace p2psn
+
