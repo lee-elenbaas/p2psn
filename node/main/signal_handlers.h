@@ -2,6 +2,7 @@
 #ifndef __SIGNAL_HANDLERS_H
 #define __SIGNAL_HANDLERS_H
 
+#include <signal.h> // TODO I#6: handle win 32 compilation issues
 #include <stdexcept>
 
 class signal_setup_exception : public std::runtime_error {
@@ -12,16 +13,17 @@ public:
 class signal_handler {
 public:
 	signal_handler(sppcms::service& srv, int signal) throw (signal_setup_exception);
-	~signal_handler();
+	~signal_handler() = default; // no need to handle signal removal
 
-	bool signal_recieved() const { return _signal_recieved; }
-	void reset_signal() { _signal_recieved = false; }
+	bool recieved() const { return _signal_recieved; }
+	void reset_recieved() { _signal_recieved = false; }
+	void set_recieved(bool _recieved) { _signal_recieved = recieved; }
 private:
 	cppcms::service& _srv;
 	int _signal;
 	bool _signal_recieved = false;
 
-	void handler();
+	void handler(int);
 };
 
 #endif // __SIGNAL_HANDLERS_H
