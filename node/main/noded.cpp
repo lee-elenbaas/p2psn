@@ -6,16 +6,20 @@
 int main(int argc,char ** argv)
 {
     try {
-        cppcms::service srv(argc,argv);
-		
-		signal_handler sigterm(srv, SIGTERM);
-		signal_handler sighup(srv, SIGHUP);
-        srv.applications_pool().mount(cppcms::applications_factory<main_app>());
+		signal_handler sigterm(SIGTERM);
+		signal_handler sighup(SIGHUP);
 		
 		sighup.set_recieved(true);
 		
 		while (sighup.recieved()) {
 			sighup.clear_recieved();
+			
+			cppcms::service srv(argc,argv);
+			
+			sigterm.set_srv(&srv);
+			sighup.set_srv(&srv);
+
+			srv.applications_pool().mount(cppcms::applications_factory<main_app>());
 			srv.run();
 		}
     }

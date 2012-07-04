@@ -18,8 +18,10 @@ public:
 	bool recieved() const { return _signal_recieved; }
 	void reset_recieved() { _signal_recieved = false; }
 	void set_recieved(bool _recieved) { _signal_recieved = recieved; }
+	
+	void set_srv(cppcms::service* srv) { _srv = srv; }
 private:
-	cppcms::service& _srv;
+	cppcms::service* _srv = nullptr;
 	int _signal;
 	bool _signal_recieved = false;
 
