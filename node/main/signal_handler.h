@@ -11,16 +11,16 @@ namespace main {
 namespace signal {
 
 cppcms::service* srv();
-void set_srv(cppcms::service*);
+void srv(cppcms::service*);
 
 bool sigterm();
-void set_sigterm(bool);
+void sigterm(bool);
 
 bool sigint();
-void set_sigint(bool);
+void sigint(bool);
 
 bool sighup();
-void set_sighup(bool);
+void sighup(bool);
 
 class signal_setup_exception : public std::runtime_error {
 public:

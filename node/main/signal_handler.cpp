@@ -9,44 +9,44 @@ namespace main {
 namespace signal {
 
 namespace {
-	cppcms::service* _srv = nullptr;
-	bool _sigterm = false;
-	bool _sigint = false;
-	bool _sighup = false;
+	cppcms::service* srv_ = nullptr;
+	bool sigterm_ = false;
+	bool sigint_ = false;
+	bool sighup_ = false;
 
 	void sigterm_handler(int) {
-		_sigterm = true;
+		sigterm_ = true;
 
-		if (_srv != nullptr)
-			_srv->shutdown();
+		if (srv_ != nullptr)
+			srv_->shutdown();
 	}
 
 	void sigint_handler(int) {
-		_sigint = true;
+		sigint = true;
 
-		if (_srv != nullptr)
-			_srv->shutdown();
+		if (srv_ != nullptr)
+			srv_->shutdown();
 	}
 
 	void sighup_handler(int) {
-		_sighup = true;
+		sighup_ = true;
 
-		if (_srv != nullptr)
-			_srv->shutdown();
+		if (srv_ != nullptr)
+			srv_->shutdown();
 	}
 }
 
-cppcms::service* srv() { return _srv; }
-void set_srv(cppcms::service* srv) { _srv = srv; }
+cppcms::service* srv() { return srv_; }
+void srv(cppcms::service* srv) { srv_ = srv; }
 
-bool sigterm() { return _sigterm; }
-void set_sigterm(bool sigterm) { _sigterm = sigterm; }
+bool sigterm() { return sigterm_; }
+void sigterm(bool sigterm) { sigterm_ = sigterm; }
 
-bool sigint() { return _sigint; }
-void set_sigint(bool sigint) { _sigint = sigint; }
+bool sigint() { return sigint_; }
+void sigint(bool sigint) { sigint_ = sigint; }
 
-bool sighup() { return _sighup; }
-void set_sighup(bool sighup) { _sighup = sighup; }
+bool sighup() { return sighup_; }
+void sighup(bool sighup) { sighup_ = sighup; }
 
 void setup_signal_handlers() throw (signal_setup_exception) {
 	// Terminate signal

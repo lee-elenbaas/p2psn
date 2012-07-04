@@ -10,25 +10,25 @@ int main(int argc,char ** argv)
     try {
 		signal::setup_signal_handlers();
 		
-		signal::set_sighup(true);
+		signal::sighup(true);
 		
 		while (signal::sighup()) {
-			signal::set_sighup(false);
+			signal::sighup(false);
 			
 			cppcms::service srv(argc,argv);
 			
-			signal::set_srv(&srv);
+			signal::srv(&srv);
 
 			srv.applications_pool().mount(cppcms::applications_factory<main_app>());
 			srv.run();
 
-            signal::set_srv(nullptr);
+            signal::srv(nullptr);
 		}
 
         return 0;
     }
     catch(std::exception const &e) {
-        signal::set_srv(nullptr);
+        signal::srv(nullptr);
 
         std::cerr<<e.what()<<std::endl;
         
@@ -36,4 +36,4 @@ int main(int argc,char ** argv)
     }
 }
 
-// vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
+// vim: tabstop=8 shiftwidth=8 softtabstop=8

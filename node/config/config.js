@@ -14,6 +14,11 @@
 	},
 	"localization" : {  
 		"locales" : [ "en_US.UTF-8" ]  
-	}  
+	},
+	"config_noded" : {
+		"admin" : [
+			{ "user" : "admin", "password" : "admin" }
+		]
+	}
 }
 
