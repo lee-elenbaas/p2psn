@@ -1,0 +1,11 @@
+<% skin myskin %>
+<% view login uses content::login_page extends page %>
+
+<% template page_content() %>
+<form method="post" action="">
+<% csrf %>
+<% form as_p login_info %>
+</form>
+<% end template %> 
+<% end view %>
+<% end skin %>

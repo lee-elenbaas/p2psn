@@ -15,6 +15,9 @@ main_app::main_app(cppcms::service &srv) :
     dispatcher().assign("/about",&main_app::about,this);
     mapper().assign("about","/about");
 
+    dispatcher().assign("/about",&main_app::login,this);
+    mapper().assign("login","/login");
+
     mapper().root("/node");
 }
 
@@ -38,6 +41,27 @@ void main_app::about()
     c.page_title = "About";
 
     render("about",c);
+}
+
+void main_app::login()
+{
+    content::login_page c;
+
+    if (request().request_method() == "POST") {
+        c.login_info.load(context());
+
+        if (c.info.validate()) {
+            session()["user"]=c.login_info.user_name;
+        }
+        else {
+            session().erase("user");
+        }
+    }
+
+    init(c);
+    c.page_title = "Login";
+
+    render("login",c);
 }
 
 // vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

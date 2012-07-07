@@ -12,6 +12,7 @@ public:
     void init(content::master& c);
     void intro();
     void about();
+    void login();
 };
 
 int main(int argc,char ** argv);
