@@ -33,6 +33,12 @@ main - The main node app will simply provide links to the apps below it, and dis
 The the web_client application will communicate with the node web application using json_rpc - either from the server, or from the js on the client side.
 The api node implementation will use email as the platform for offline communication between nodes, and json-rpc for online communication between nodes and node to clients.
 
+Web Client
+----------
+Since the web client is supposed to work in exactly the same way as other UI elements will connect to the node. The interface will use static HTML and JS files delived from the CppCMS server that will communicate using json-rpc with the node_api CppCMS application.
+The client can work offline as well - and not just served from the CppCMS.
+The only thing that will be dynamic in this client is a default connection information (ip address and port) used to connect to the node_api, in order to allow a user to change those for himself easily. This default connection information will be a static file that will be generated when a new settings is saved by the node_confif app.
+
 Technology
 ----------
 The focus of this project is about the network of nodes. As a result the implementation language is less important then the protocol that will be used between the nodes.
@@ -63,6 +69,15 @@ At the same time each node is intended to run on a normal home PC with its limit
 
 Development Blog
 ----------------
+
+2012-07-10
+
+I had a long talk a few days ago with a friend about the futility of this project. Very unpleasent, but i can't say his points are not not valid. Nevertheless I still feel that working on this project equals doing something to change the world we live in, rather then letting it fester on its own.
+
+I had some thoughts about the logo for this project. The main idea is a mesh of poeple holding hands. The best idea for showing this is a star with the points being people and the lines hands those people are holding to each other. I wanted to see if i can get the help of a family member in making this idea for a logo a reality, and i will ask about it in the next few days.
+
+Some thoughts about the working of other services with p2psn. In order to allow login to other sites using p2psn authentication, and allow accesss to the friends list or online communication infrastructure from p2psn in other websites, all the p2psn services needs to be accessible in the exact same way on every machine it is installed on. This means a static port, or a way to discover the ip, port & protocol used to access the p2psn api.
+Since by design the ip address of the p2psn installation can be different on different home networks, there must be a way to rediscover the exact api url. I think that the best way to do that is by using a browser stored value that will be set after every successfull login to the web client. Then this value will be accessible to all external applications that will use the same browser.
 
 2012-07-02
 
