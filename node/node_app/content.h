@@ -20,11 +20,11 @@ namespace content  {
 
         login_form();
         virtual bool validate();
-    }
+    };
 
     struct login_page : public page {
         login_form login_info;
-    }
+    };
 }
 
 

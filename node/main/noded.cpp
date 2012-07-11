@@ -5,9 +5,9 @@
 
 int main(int argc,char ** argv)
 {
-    using namespace p2psn::main;
+	using namespace p2psn::main;
 
-    try {
+	try {
 		signal::setup_signal_handlers();
 		
 		signal::sighup(true);
@@ -22,18 +22,18 @@ int main(int argc,char ** argv)
 			srv.applications_pool().mount(cppcms::applications_factory<main_app>());
 			srv.run();
 
-            signal::srv(nullptr);
+			signal::srv(nullptr);
 		}
 
-        return 0;
-    }
-    catch(std::exception const &e) {
-        signal::srv(nullptr);
+		return 0;
+	}
+	catch(std::exception const &e) {
+		signal::srv(nullptr);
 
-        std::cerr<<e.what()<<std::endl;
+		std::cerr<<e.what()<<std::endl;
         
-        return -1;
-    }
+		return -1;
+	}
 }
 
 // vim: tabstop=8 shiftwidth=8 softtabstop=8

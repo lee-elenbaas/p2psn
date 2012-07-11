@@ -9,7 +9,7 @@ void main_app::init(content::master& c) {
 main_app::main_app(cppcms::service &srv) :
     cppcms::application(srv) 
 {
-    dispatcher().assign("",&main_app::home,this);
+    dispatcher().assign("",&main_app::info,this);
     mapper().assign("");
 
     dispatcher().assign("/about",&main_app::about,this);
@@ -21,7 +21,7 @@ main_app::main_app(cppcms::service &srv) :
     mapper().root("/node");
 }
 
-void main_app::home()
+void main_app::info()
 {
     content::page c;
 
@@ -30,7 +30,7 @@ void main_app::home()
 
     // c.page - fill in content
 
-    render("home",c);
+    render("info",c);
 }
 
 void main_app::about()
@@ -50,12 +50,10 @@ void main_app::login()
     if (request().request_method() == "POST") {
         c.login_info.load(context());
 
-        if (c.info.validate()) {
-            session()["user"]=c.login_info.user_name;
-        }
-        else {
-            session().erase("user");
-        }
+//        if (c.login_info.validate()) 
+//            session()["user"] = c.login_info.user_name.value();
+//        else 
+//            session().erase("user");
     }
 
     init(c);

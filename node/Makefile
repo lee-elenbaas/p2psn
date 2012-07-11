@@ -15,9 +15,16 @@ NODE_APP_CPP=node_app/main_app.cpp node_app/content.cpp
 NODE_API_HEADERS=node_api/node_api.h
 NODE_API_CPP=node_api/node_api.cpp
 
-all: run/noded run/config.js
+all: separator run/noded run/config.js
 
-.PHONY: all
+.PHONY: all, separator, clean
+
+separator:
+	echo
+	echo
+	echo
+	echo Running make all on p2psn
+	echo
 
 run/noded: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_APP_HEADERS) $(NODE_APP_CONTENT) $(NODE_APP_CPP) $(NODE_API_HEADERS) $(NODE_API_CPP) $(NODE_APP_GENERATED)
 	$(CXX) -O2 -Wall -std=c++0x -g $(MAIN_CPP) $(NODE_APP_CPP) $(NODE_API_CPP) $(NODE_APP_GENERATED) -o run/noded ${LIBS}

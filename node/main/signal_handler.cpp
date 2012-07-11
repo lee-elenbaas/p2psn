@@ -22,7 +22,7 @@ namespace {
 	}
 
 	void sigint_handler(int) {
-		sigint = true;
+		sigint_ = true;
 
 		if (srv_ != nullptr)
 			srv_->shutdown();

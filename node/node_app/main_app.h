@@ -10,7 +10,7 @@ class main_app : public cppcms::application {
 public:
     main_app(cppcms::service &srv);
     void init(content::master& c);
-    void intro();
+    void info();
     void about();
     void login();
 };
