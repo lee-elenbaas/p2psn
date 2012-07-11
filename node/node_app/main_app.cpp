@@ -2,6 +2,8 @@
 
 #include <cppcms/url_dispatcher.h>
 
+using namespace p2psn::node_app;
+
 void main_app::init(content::master& c) {
     c.title = "P2Psn";
 	c.is_guest = !session().is_set("user");

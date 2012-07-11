@@ -3,9 +3,13 @@
 #include <cppcms/url_dispatcher.h>
 #include "signal_handler.h"
 
+/**
+ * Main C++ application function
+ */
 int main(int argc,char ** argv)
 {
 	using namespace p2psn::main;
+	using namespace p2psn::node_app;
 
 	try {
 		signal::setup_signal_handlers();

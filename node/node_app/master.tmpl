@@ -1,17 +1,21 @@
 <% c++ #include "../node_app/content.h" %>
-<% skin myskin %>
+<% c++ using namespace p2psn::node_app; %>
+<% skin ptp2n_node_app_skin %>
 <% view master uses content::master %>
 
 <% template title() %>
 	<%= title %>
 <% end template %>
+
 <% template page_content() %>
 	Override  Me
 <% end template %>
+
 <% template menu_content() %>
 <li><a href='<% url "/" %>'>Info</a></li>
 <li><a href='<% url "/about" %>'>About</a></li>
 <% end template %>
+
 <% template menu() %>
 <div id="navigation">
 <ul>
@@ -25,6 +29,7 @@
 </ul>
 </div>
 <% end template %>
+
 <% template messages() %>
 <% foreach msg in user_messages %>
 <div id="messages">
@@ -36,6 +41,7 @@
 </div>
 <% end %>
 <% end template %>
+
 <% template render() %>
 <html>
 <head>
@@ -52,5 +58,6 @@
 </body>
 </html>
 <% end template %> 
+
 <% end view %>
 <% end skin %>

@@ -6,21 +6,48 @@
 
 #include "content.h"
 
-class main_app : public cppcms::application {
-public:
-    main_app(cppcms::service &);
+namespace p2psn {
+    namespace node_app {
+
+        /**
+         * CppCMS Web interface for accessing the node configuration.
+         */
+        class main_app : public cppcms::application {
+        public:
+            /**
+             * Construct the app on the given cppcms service
+             */
+            main_app(cppcms::service &);
 	
-    void home();
+            /**
+             * The initial page
+             */
+            void home();
+            /**
+             * The about page
+             */
+            void about();
+            /**
+             * The login form page
+             */
+            void login();
+            /**
+             * The logout operation
+             */
+            void logout();
+        private:
+            /**
+             * Shared inialization of page content
+             */
+            void init(content::master&);
+            /**
+             * The shared initial page
+             */
+            void home(content::page&);
+        };
 
-    void about();
-    void login();
-    void logout();
-private:
-    void init(content::master&);
-    void home(content::page&);
-};
-
-int main(int argc,char ** argv);
+    } // namespace node_app
+} // namespace p2psn
 
 #endif // __MAIN_APP_H
 // vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
