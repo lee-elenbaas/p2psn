@@ -10,7 +10,7 @@ void main_app::init(content::master& c) {
 main_app::main_app(cppcms::service &srv) :
     cppcms::application(srv) 
 {
-    dispatcher().assign("",&main_app::info,this);
+    dispatcher().assign("",&main_app::home,this);
     mapper().assign("");
 
     dispatcher().assign("/about",&main_app::about,this);
@@ -25,7 +25,7 @@ main_app::main_app(cppcms::service &srv) :
     mapper().root("/node");
 }
 
-void main_app::info()
+void main_app::home()
 {
     content::page c;
 
@@ -46,7 +46,7 @@ void main_app::logout()
     home(c);
 }
 
-void main_app::home(content::page c)
+void main_app::home(content::page& c)
 {
     c.page_title = "Info";
 
@@ -54,8 +54,6 @@ void main_app::home(content::page c)
 
     render("info",c);
 }
-
-void main_app::home()
 
 void main_app::about()
 {

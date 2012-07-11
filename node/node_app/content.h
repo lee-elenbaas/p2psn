@@ -10,7 +10,7 @@ namespace content  {
 	struct message {
 		std::string message;
 		std::string css;
-	}
+	};
 	
     struct master : public cppcms::base_content {
 	public:

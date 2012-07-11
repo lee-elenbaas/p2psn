@@ -11,6 +11,7 @@ public:
     main_app(cppcms::service &);
 	
     void home();
+
     void about();
     void login();
     void logout();
