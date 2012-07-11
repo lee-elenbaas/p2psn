@@ -8,11 +8,15 @@
 
 class main_app : public cppcms::application {
 public:
-    main_app(cppcms::service &srv);
-    void init(content::master& c);
-    void info();
+    main_app(cppcms::service &);
+	
+    void home();
     void about();
     void login();
+    void logout();
+private:
+    void init(content::master&);
+    void home(content::page&);
 };
 
 int main(int argc,char ** argv);

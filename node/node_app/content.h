@@ -4,10 +4,21 @@
 #include <cppcms/view.h>
 #include <cppcms/form.h>
 #include <string>
+#include <array>
 
 namespace content  {
+	struct message {
+		std::string message;
+		std::string css;
+	}
+	
     struct master : public cppcms::base_content {
+	public:
         std::string title;
+		bool is_guest;
+		std::vector<message> user_messages;
+		
+		void add_message(std::string, std::string);
     };
 
     struct page : public master {

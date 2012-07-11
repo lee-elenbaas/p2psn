@@ -2,8 +2,41 @@
 <% skin myskin %>
 <% view master uses content::master %>
 
-<% template title() %><%= title %><% end %>
-<% template page_content() %>Override  Me<% end %>
+<% template title() %>
+	<%= title %>
+<% end template %>
+<% template page_content() %>
+	Override  Me
+<% end template %>
+<% template menu_content() %>
+<li><a href='<% url "/" %>'>Info</a></li>
+<li><a href='<% url "/about" %>'>About</a></li>
+<% end template %>
+<% template menu() %>
+<div id="navigation">
+<ul>
+<% include menu_content() %>
+<% if is_guest %>
+<li><a href='<% url "/login" %>'>Login</a></li>
+<% else %>
+<li><a href='<% url "/admin" %>'>Admin</a></li>
+<li><a href='<% url "/logout" %>'>Logout</a></li>
+<% end %>
+</ul>
+</div>
+<% end template %>
+<% template messages() %>
+<% if user_messages is not empty %>
+<% foreach msg in user_messages %>
+<div id="messages">
+<ul>
+<% item %>
+<li class="<%= msg.css %>"><%= msg.message %></li>
+<% end %>
+</ul>
+</div>
+<% end %>
+<% end template %>
 <% template render() %>
 <html>
 <head>
@@ -11,21 +44,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body>
+<% include menu() %>
 <h1><% include title() %></h1>
-<div id="navigation">
-<ul>
-<li><a href='<% url "/" %>'>Info</a></li>
-<li><a href='<% url "/about" %>'>About</a></li>
-< % if (!session().is_set("user")) % >
-<li><a href='<% url "/login" %>'>Login</a></li>
-< % else % >
-<li><a href='<% url "/login" %>'>Logout</a></li>
-< % end % >
-</ul>
-</div>
 <div id="content">
 <% include page_content() %>
 </div>
+<% include messages() %>
 </body>
 </html>
 <% end template %> 

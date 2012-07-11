@@ -1,7 +1,14 @@
 
 #include "content.h"
 
-content::login_form::login_form() {
+using namespace std;
+using namespace content;
+
+void master::add_message(string message, string css) {
+	user_messages.push_back({ message, css });
+}
+
+login_form::login_form() {
     user_name.message("User name");
     user_password.message("Password");
 

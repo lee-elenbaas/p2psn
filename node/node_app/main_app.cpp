@@ -4,6 +4,7 @@
 
 void main_app::init(content::master& c) {
     c.title = "P2Psn";
+	c.is_guest = !session().is_set("user");
 }
 
 main_app::main_app(cppcms::service &srv) :
@@ -18,6 +19,9 @@ main_app::main_app(cppcms::service &srv) :
     dispatcher().assign("/about",&main_app::login,this);
     mapper().assign("login","/login");
 
+    dispatcher().assign("/about",&main_app::logout,this);
+    mapper().assign("logout","/logout");
+
     mapper().root("/node");
 }
 
@@ -26,12 +30,32 @@ void main_app::info()
     content::page c;
 
     init(c);
+
+	home(c);
+}
+
+void main_app::logout()
+{
+    content::page c;
+
+    init(c);
+
+	session().erase("user");
+	c.add_message("User logged out","confirm");
+
+    home(c);
+}
+
+void main_app::home(content::page c)
+{
     c.page_title = "Info";
 
     // c.page - fill in content
 
     render("info",c);
 }
+
+void main_app::home()
 
 void main_app::about()
 {
