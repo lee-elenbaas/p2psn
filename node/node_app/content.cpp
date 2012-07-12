@@ -17,9 +17,11 @@ void master::add_message(string message /**< The message text */, string css /**
 login_form::login_form() {
     user_name.message("User name");
     user_password.message("Password");
-
+    submit.value("Login");
+        
     add(user_name);
     add(user_password);
+    add(submit);
 
     user_name.non_empty();
     user_password.non_empty();

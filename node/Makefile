@@ -16,15 +16,15 @@ NODE_APP_CPP=node_app/main_app.cpp node_app/content.cpp
 NODE_API_HEADERS=node_api/node_api.h
 NODE_API_CPP=node_api/node_api.cpp
 
-all: separator run/noded run/config.js documentation
+all: separator run/noded run/config.js documentation run
 
-.PHONY: all, separator, clean, documentation
+.PHONY: all, separator, clean, documentation, run
 
 separator:
 	@echo
 	@echo
-	@echo
 	@echo Running make all on p2psn
+	@echo
 	@echo
 
 documentation: docs/html/index.html
@@ -43,4 +43,7 @@ $(NODE_APP_GENERATED): $(NODE_APP_SKIN)
 
 clean:
 	rm -fr run/* cppcms_rundir build/* docs/* *~ main/*~ node_app/*~ node_api/*~ consif/*~
+
+run:
+	./noded
 

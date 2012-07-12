@@ -18,10 +18,10 @@ main_app::main_app(cppcms::service &srv) :
     dispatcher().assign("/about",&main_app::about,this);
     mapper().assign("about","/about");
 
-    dispatcher().assign("/about",&main_app::login,this);
+    dispatcher().assign("/login",&main_app::login,this);
     mapper().assign("login","/login");
 
-    dispatcher().assign("/about",&main_app::logout,this);
+    dispatcher().assign("/logout",&main_app::logout,this);
     mapper().assign("logout","/logout");
 
     mapper().root("/node");

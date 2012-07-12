@@ -51,6 +51,7 @@ namespace p2psn {
             struct login_form : public cppcms::form {
                 cppcms::widgets::text user_name;
                 cppcms::widgets::password user_password;
+                cppcms::widgets::submit submit;
 
                 login_form();
                 virtual bool validate();
