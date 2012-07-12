@@ -5,14 +5,14 @@
 using namespace p2psn::node_app;
 
 void main_app::init(content::master& c) {
-    c.title = "P2Psn";
-	c.is_guest = !session().is_set("user");
+    if (session().is_set("user"))
+	    c.user_name = session()["user"];
 }
 
 main_app::main_app(cppcms::service &srv) :
     cppcms::application(srv) 
 {
-    dispatcher().assign("",&main_app::home,this);
+    dispatcher().assign("",&main_app::info,this);
     mapper().assign("");
 
     dispatcher().assign("/about",&main_app::about,this);
@@ -27,32 +27,29 @@ main_app::main_app(cppcms::service &srv) :
     mapper().root("/node");
 }
 
-void main_app::home()
+void main_app::info()
 {
     content::page c;
 
-    init(c);
-
-	home(c);
+	info(c);
 }
 
 void main_app::logout()
 {
     content::page c;
 
-    init(c);
-
 	session().erase("user");
+    session().clear();
+
 	c.add_message("User logged out","confirm");
 
-    home(c);
+    info(c);
 }
 
-void main_app::home(content::page& c)
+void main_app::info(content::page& c)
 {
-    c.page_title = "Info";
-
-    // c.page - fill in content
+    c.title = "Info";
+    init(c);
 
     render("info",c);
 }
@@ -62,7 +59,7 @@ void main_app::about()
     content::page c;
 
     init(c);
-    c.page_title = "About";
+    c.title = "About";
 
     render("about",c);
 }

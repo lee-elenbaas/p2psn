@@ -34,7 +34,7 @@ bool content::login_form::validate() {
         return false;
 
     /// Validate login for matching user/pass combination in the settings
-//    settings().
+    //settings()
     return true;
 }
 

@@ -22,7 +22,7 @@ namespace p2psn {
             /**
              * The initial page
              */
-            void home();
+            void info();
             /**
              * The about page
              */
@@ -43,7 +43,7 @@ namespace p2psn {
             /**
              * The shared initial page
              */
-            void home(content::page&);
+            void info(content::page&);
         };
 
     } // namespace node_app

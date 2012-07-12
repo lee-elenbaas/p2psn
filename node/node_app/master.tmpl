@@ -1,5 +1,6 @@
 <% c++ #include "../node_app/content.h" %>
 <% c++ using namespace p2psn::node_app; %>
+<% xhtml %>
 <% skin ptp2n_node_app_skin %>
 <% view master uses content::master %>
 
@@ -8,7 +9,7 @@
 <% end template %>
 
 <% template page_content() %>
-	Override  Me
+<% c++ /* Override  Me */ %>
 <% end template %>
 
 <% template menu_content() %>
@@ -42,7 +43,8 @@
 <% end %>
 <% end template %>
 
-<% template render() %>
+<% template header() %>
+<!DOCTYPE html>
 <html>
 <head>
     <title><% include title() %></title>
@@ -51,12 +53,21 @@
 <body>
 <% include menu() %>
 <h1><% include title() %></h1>
-<div id="content">
-<% include page_content() %>
-</div>
+<% include breadcrumbs() %>
+<% end template %>
+
+<% template footer() %>
 <% include messages() %>
 </body>
 </html>
+<% end template %>
+
+<% template render() %>
+<% include header() %>
+<div id="content">
+<% include page_content() %>
+</div>
+<% include footer() %>
 <% end template %> 
 
 <% end view %>

@@ -1,8 +1,8 @@
 <% skin ptp2n_node_app_skin %>
-<% view login uses content::login_page extends page %>
+<% view login uses content::login_page extends master %>
 
 <% template page_content() %>
-<form method="post" action="">
+<form method="post" action="<% url "/login" %>">
 <% csrf %>
 <% form as_p login_info %>
 </form>

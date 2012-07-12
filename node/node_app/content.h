@@ -45,7 +45,7 @@ namespace p2psn {
             };
 
             struct page : public master {
-                std::string page_title, page_content;
+                std::string page_content;
             };
 
             struct login_form : public cppcms::form {
