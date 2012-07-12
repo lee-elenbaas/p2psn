@@ -8,6 +8,7 @@
 
 #include <cppcms/view.h>
 #include <cppcms/form.h>
+#include <cppcms/json.h>
 #include <string>
 #include <array>
 
@@ -53,12 +54,16 @@ namespace p2psn {
                 cppcms::widgets::password user_password;
                 cppcms::widgets::submit submit;
 
-                login_form();
+                login_form(cppcms::json::array);
                 virtual bool validate();
+            private:
+                cppcms::json::array admin_users_;
             };
 
             struct login_page : public page {
                 login_form login_info;
+
+                login_page(cppcms::json::array);
             };
 
         } // namespace content

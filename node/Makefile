@@ -16,7 +16,11 @@ NODE_APP_CPP=node_app/main_app.cpp node_app/content.cpp
 NODE_API_HEADERS=node_api/node_api.h
 NODE_API_CPP=node_api/node_api.cpp
 
-all: separator run/noded run/config.js documentation run
+#Shared utils
+UTILS_HEADERS=utils/crypto.h
+UTILS_CPP=utils/crypto.cpp
+
+all: separator run/noded run/config.js run
 
 .PHONY: all, separator, clean, documentation, run
 
@@ -29,11 +33,11 @@ separator:
 
 documentation: docs/html/index.html
 
-docs/html/index.html: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_APP_HEADERS) $(NODE_APP_CONTENT) $(NODE_APP_CPP) $(NODE_API_HEADERS) $(NODE_API_CPP) $(NODE_APP_SKIN)
+docs/html/index.html: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_APP_HEADERS) $(NODE_APP_CONTENT) $(NODE_APP_CPP) $(NODE_API_HEADERS) $(NODE_API_CPP) $(UTILS_HEADERS) $(UTILS_CPP) $(NODE_APP_SKIN)
 	doxygen Doxyfile
 
-run/noded: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_APP_HEADERS) $(NODE_APP_CONTENT) $(NODE_APP_CPP) $(NODE_API_HEADERS) $(NODE_API_CPP) $(NODE_APP_GENERATED)
-	$(CXX) $(OPTIONS) $(MAIN_CPP) $(NODE_APP_CPP) $(NODE_API_CPP) $(NODE_APP_GENERATED) -o run/noded ${LIBS}
+run/noded: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_APP_HEADERS) $(NODE_APP_CONTENT) $(NODE_APP_CPP) $(NODE_API_HEADERS) $(NODE_API_CPP) $(UTILS_HEADERS) $(UTILS_CPP) $(NODE_APP_GENERATED)
+	$(CXX) $(OPTIONS) $(MAIN_CPP) $(NODE_APP_CPP) $(NODE_API_CPP) $(UTILS_CPP) $(NODE_APP_GENERATED) -o run/noded ${LIBS}
 
 run/config.js: config/config.js
 	cp config/config.js run/config.js

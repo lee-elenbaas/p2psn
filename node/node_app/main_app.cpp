@@ -66,15 +66,13 @@ void main_app::about()
 
 void main_app::login()
 {
-    content::login_page c;
+    content::login_page c(settings()["config_noded"]["admin"].array());
 
     if (request().request_method() == "POST") {
         c.login_info.load(context());
 
-//        if (c.login_info.validate()) 
-//            session()["user"] = c.login_info.user_name.value();
-//        else 
-//            session().erase("user");
+        if (c.login_info.validate()) 
+            session()["user"] = c.login_info.user_name.value();
     }
 
     init(c);
