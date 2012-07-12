@@ -28,7 +28,7 @@ login_form::login_form() {
 /**
  * validate the login form
  */
-bool content::login_form::validate() {
+bool login_form::validate() {
     /// Validate form for being filled completely
     if (!form::validate())
         return false;

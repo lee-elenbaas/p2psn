@@ -21,11 +21,11 @@ all: separator run/noded run/config.js documentation
 .PHONY: all, separator, clean, documentation
 
 separator:
-	echo
-	echo
-	echo
-	echo Running make all on p2psn
-	echo
+	@echo
+	@echo
+	@echo
+	@echo Running make all on p2psn
+	@echo
 
 documentation: docs/html/index.html
 

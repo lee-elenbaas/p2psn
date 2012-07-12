@@ -9,7 +9,6 @@
 <% end template %>
 
 <% template page_content() %>
-<% c++ /* Override  Me */ %>
 <% end template %>
 
 <% template menu_content() %>
@@ -17,11 +16,14 @@
 <li><a href='<% url "/about" %>'>About</a></li>
 <% end template %>
 
+<% template breadcrumbs() %>
+<% end template %>
+
 <% template menu() %>
 <div id="navigation">
 <ul>
 <% include menu_content() %>
-<% if is_guest %>
+<% if empty user_name %>
 <li><a href='<% url "/login" %>'>Login</a></li>
 <% else %>
 <li><a href='<% url "/admin" %>'>Admin</a></li>
@@ -36,7 +38,7 @@
 <div id="messages">
 <ul>
 <% item %>
-<li class="<%= msg.css %>"><%= msg.message %></li>
+<li class="<%= msg.second %>"><%= msg.first %></li>
 <% end %>
 </ul>
 </div>

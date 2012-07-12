@@ -78,7 +78,7 @@ void main_app::login()
     }
 
     init(c);
-    c.page_title = "Login";
+    c.title = "Login";
 
     render("login",c);
 }
