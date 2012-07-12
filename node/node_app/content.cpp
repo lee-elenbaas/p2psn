@@ -51,7 +51,7 @@ bool login_form::validate() {
 
         // validate user password
         if (!user["password"].is_undefined() && (user["password"].str() != user_password.value()))
-            return false;
+            break;
 
         // TODO: handle password signatures instead of open passwords
 //        if (!user["password_hmac"].is_undefined()) {
@@ -61,6 +61,7 @@ bool login_form::validate() {
         return true;
     }
 
+    user_name.valid(false);
     return false;
 }
 
