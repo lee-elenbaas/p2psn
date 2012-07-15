@@ -22,6 +22,11 @@ namespace p2psn {
             /**
              * The initial page
              */
+			void home();
+			
+			/**
+			 * noded information page
+			 */
             void info();
             /**
              * The about page
@@ -40,10 +45,6 @@ namespace p2psn {
              * Shared inialization of page content
              */
             void init(content::master&);
-            /**
-             * The shared initial page
-             */
-            void info(content::page&);
         };
 
     } // namespace node_app

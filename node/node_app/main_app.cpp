@@ -12,8 +12,11 @@ void main_app::init(content::master& c) {
 main_app::main_app(cppcms::service &srv) :
     cppcms::application(srv) 
 {
-    dispatcher().assign("",&main_app::info,this);
+    dispatcher().assign("",&main_app::home,this);
     mapper().assign("");
+
+    dispatcher().assign("/info",&main_app::info,this);
+    mapper().assign("info","/info");
 
     dispatcher().assign("/about",&main_app::about,this);
     mapper().assign("about","/about");
@@ -30,31 +33,27 @@ main_app::main_app(cppcms::service &srv) :
     mapper().root("/node");
 }
 
+void main_app::home()
+{
+	response().set_redirect_header(url("/info"));
+}
+
 void main_app::info()
 {
     content::page c;
 
-	info(c);
+    c.title = "Info";
+    init(c);
+
+    render("info",c);
 }
 
 void main_app::logout()
 {
     content::page c;
 
-	session().erase("user");
     session().clear();
-
-	c.add_message("User logged out","confirm");
-
-    info(c);
-}
-
-void main_app::info(content::page& c)
-{
-    c.title = "Info";
-    init(c);
-
-    render("info",c);
+	response().set_redirect_header(url("/info"));
 }
 
 void main_app::about()
