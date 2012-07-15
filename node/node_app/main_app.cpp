@@ -24,6 +24,9 @@ main_app::main_app(cppcms::service &srv) :
     dispatcher().assign("/logout",&main_app::logout,this);
     mapper().assign("logout","/logout");
 
+    dispatcher().assign("/admin",&main_app::admin,this);
+    mapper().assign("admin","/admin");
+
     mapper().root("/node");
 }
 
@@ -71,14 +74,20 @@ void main_app::login()
     if (request().request_method() == "POST") {
         c.login_info.load(context());
 
-        if (c.login_info.validate()) 
+        if (c.login_info.validate()) { 
+			session().clear();
             session()["user"] = c.login_info.user_name.value();
+			response().set_redirect_header(url("/admin"));
+		}
     }
+	else {
+		session()["form"] = "login";
 
-    init(c);
-    c.title = "Login";
+		init(c);
+		c.title = "Login";
 
-    render("login",c);
+		render("login",c);
+	}
 }
 
 // vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
