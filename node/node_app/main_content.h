@@ -3,8 +3,8 @@
  *
  * The content types used by the node_app to pass values into its skin for rendering the result HTML pages.
  */
-#ifndef __CONTENT_H
-#define __CONTENT_H
+#ifndef __MAIN_CONTENT_H
+#define __MAIN_CONTENT_H
 
 #include <cppcms/view.h>
 #include <cppcms/form.h>
@@ -70,6 +70,6 @@ namespace p2psn {
     } // namespace node_app
 } // namespace p2psn
 
-#endif // __CONTENT_H
+#endif // __MAIN_CONTENT_H
 // vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 

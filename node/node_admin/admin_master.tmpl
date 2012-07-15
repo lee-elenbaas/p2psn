@@ -1,7 +1,7 @@
-<% c++ #include "../node_app/content.h" %>
-<% c++ using namespace p2psn::node_app; %>
+<% c++ #include "../admin_app/admin_content.h" %>
+<% c++ using namespace p2psn::node_admin; %>
 <% xhtml %>
-<% skin ptp2n_node_app_skin %>
+<% skin ptp2n_node_admin_skin %>
 <% view master uses content::master %>
 
 <% template title() %>
@@ -12,8 +12,8 @@
 <% end template %>
 
 <% template menu_content() %>
-<li><a href='<% url "/" %>'>Info</a></li>
-<li><a href='<% url "/about" %>'>About</a></li>
+<li><a href='<% url "../" %>'>Info</a></li>
+<li><a href='<% url "../about" %>'>About</a></li>
 <% end template %>
 
 <% template breadcrumbs() %>
@@ -23,12 +23,8 @@
 <div id="navigation">
 <ul>
 <% include menu_content() %>
-<% if empty user_name %>
-<li><a href='<% url "/login" %>'>Login</a></li>
-<% else %>
-<li><a href='<% url "/admin" %>'>Admin</a></li>
-<li><a href='<% url "/logout" %>'>Logout</a></li>
-<% end %>
+<li><a href='<% url "/" %>'>Admin</a></li>
+<li><a href='<% url "../logout" %>'>Logout</a></li>
 </ul>
 </div>
 <% end template %>
@@ -74,3 +70,4 @@
 
 <% end view %>
 <% end skin %>
+
