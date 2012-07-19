@@ -51,9 +51,10 @@ The reason behind this choice of tools is simply this: this is a pet project of 
 
 The offline communication between nodes will be based on a time proven offline protocol: email. The specifics of how the email will be used is not clear to me yet. (The posibilities are: email client add on that communicates with the node using its json-rpc api. Direct pop3/imap and smtp use.
 
-The node database will be SQLite using the CppDB library - this is a very lightweight database that has the folowing advantages: using this library it can be easily replaces by a larger database solution like postgresql. It is very light in its demands. It provides most of the necesary functionality and the rest can be wrapped rather easily. And lastly, i never worked with it, so i have something new to learn.
-The node database might move to a different db architecture: firebird embeded database server with a firebird file
-Firebird offers some features i was lacking in SQLite, and those will make my life a lot easier. The question now is whether i should stick to CppDB and use odbc to connect to firebird, move over to ibpp as a client for db (and thuse marry my app to firebird) or provide a firebird backend to CppDB and continue to use that - thus allowing myself to switch to something else later down the road.
+The node database will be contacted through the CppDB library. The default will be a Firebird embedded server that access a file next to the executable. For that i will implement a firebird backend of CppDB using ibpp library.
+
+OpenID support will allow attaching multiple OpenID authentications to every user - and that authentication will be used as a way to login for that user (an opneId will only be allowed to be associated with one user on the same node.) 
+The openID support wull use the library libopkele
 
 Licensing
 ---------
