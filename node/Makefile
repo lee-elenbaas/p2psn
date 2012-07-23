@@ -12,13 +12,6 @@ NODE_APP_CONTENT=node_app/main_content.h
 NODE_APP_HEADERS=node_app/main_app.h 
 NODE_APP_CPP=node_app/main_app.cpp node_app/main_content.cpp
 
-#Node admin CppCMS app
-NODE_ADMIN_SKIN=node_admin/admin_master.tmpl node_admin/menu.tmpl
-NODE_ADMIN_GENERATED=build/ptp2n_node_admin_skin.cpp
-NODE_ADMIN_CONTENT=node_admin/admin_content.h
-NODE_ADMIN_HEADERS=node_admin/admin_app.h 
-NODE_ADMIN_CPP=node_admin/admin_app.cpp node_admin/admin_content.cpp
-
 #JSON-RPC Node API CppCMS application
 NODE_API_HEADERS=node_api/node_api.h
 NODE_API_CPP=node_api/node_api.cpp
@@ -40,11 +33,11 @@ separator:
 
 documentation: docs/html/index.html
 
-docs/html/index.html: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_APP_HEADERS) $(NODE_APP_CONTENT) $(NODE_APP_CPP) $(NODE_ADMIN_HEADERS) $(NODE_ADMIN_CONTENT) $(NODE_ADMIN_CPP) $(NODE_API_HEADERS) $(NODE_API_CPP) $(UTILS_HEADERS) $(UTILS_CPP) $(NODE_APP_SKIN)
+docs/html/index.html: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_APP_HEADERS) $(NODE_APP_CONTENT) $(NODE_APP_CPP) $(NODE_API_HEADERS) $(NODE_API_CPP) $(UTILS_HEADERS) $(UTILS_CPP) $(NODE_APP_SKIN)
 	doxygen Doxyfile
 
-run/noded: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_APP_HEADERS) $(NODE_APP_CONTENT) $(NODE_APP_CPP) $(NODE_ADMIN_HEADERS) $(NODE_ADMIN_CONTENT) $(NODE_ADMIN_CPP) $(NODE_API_HEADERS) $(NODE_API_CPP) $(UTILS_HEADERS) $(UTILS_CPP) $(NODE_APP_GENERATED) $(NODE_ADMIN_GENERATED)
-	$(CXX) $(OPTIONS) $(MAIN_CPP) $(NODE_APP_CPP) $(NODE_API_CPP) $(NODE_ADMIN_CPP) $(NODE_API_CPP) $(UTILS_CPP) $(NODE_APP_GENERATED) $(NODE_ADMIN_GENERATED) -o run/noded ${LIBS}
+run/noded: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_APP_HEADERS) $(NODE_APP_CONTENT) $(NODE_APP_CPP) $(NODE_API_HEADERS) $(NODE_API_CPP) $(UTILS_HEADERS) $(UTILS_CPP) $(NODE_APP_GENERATED)
+	$(CXX) $(OPTIONS) $(MAIN_CPP) $(NODE_APP_CPP) $(NODE_API_CPP) $(NODE_API_CPP) $(UTILS_CPP) $(NODE_APP_GENERATED) -o run/noded ${LIBS}
 
 run/config.js: config/config.js
 	cp config/config.js run/config.js
@@ -52,11 +45,8 @@ run/config.js: config/config.js
 $(NODE_APP_GENERATED): $(NODE_APP_SKIN)
 	cppcms_tmpl_cc $(NODE_APP_SKIN) -o $(NODE_APP_GENERATED)
 	
-$(NODE_ADMIN_GENERATED): $(NODE_ADMIN_SKIN)
-	cppcms_tmpl_cc $(NODE_ADMIN_SKIN) -o $(NODE_ADMIN_GENERATED)
-
 clean:
-	rm -fr run/* cppcms_rundir build/* docs/* *~ main/*~ node_app/*~ node_admin/*~ node_api/*~ consif/*~
+	rm -fr run/* cppcms_rundir build/* docs/* *~ main/*~ node_app/*~ node_api/*~ consif/*~
 
 run:
 	./noded
