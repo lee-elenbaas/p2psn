@@ -17,9 +17,14 @@ namespace p2psn {
         namespace content  {
 
             /**
+             * introduce the std::string as string into this namespace - it is used as primitive a lot, so worth the introduction
+             */
+            using std::string;
+
+            /**
              * Collection of messages to display to the user.
              */	
-            typedef std::vector<std::pair<std::string, std::string>> messages_list;
+            typedef std::vector<std::pair<string, string>> messages_list;
 
             /**
              * Content data shared by all pages
@@ -29,11 +34,11 @@ namespace p2psn {
                 /** 
                  *Rendered page title 
                  */
-                std::string title; 
+                string title; 
                 /**
                  * Currently logged in user
                  */ 
-		        std::string user_name;
+		        string user_name;
                 /**
                  * Messages to render to the user
                  */
@@ -42,11 +47,16 @@ namespace p2psn {
                 /**
                  * Add message to display to the user.
                  */
-		        void add_message(std::string, std::string);
+		        void add_message(string, string);
+            };
+
+            struct info : public master {
+                double port;
+                string host;
             };
 
             struct page : public master {
-                std::string page_content;
+                string page_content;
             };
 
             struct login_form : public cppcms::form {

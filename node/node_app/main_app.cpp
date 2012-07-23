@@ -40,10 +40,12 @@ void main_app::home()
 
 void main_app::info()
 {
-    content::page c;
+    content::info c;
 
-    c.title = "Info";
     init(c);
+    c.title = "Info";
+    c.port = settings()["service"]["port"].number();
+    c.host = "localhost"; // TODO: make host discovery from OS or CppCMS lib
 
     render("info",c);
 }

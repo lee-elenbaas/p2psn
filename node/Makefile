@@ -6,7 +6,7 @@ MAIN_HEADERS=main/signal_handler.h
 MAIN_CPP=main/noded.cpp main/signal_handler.cpp
 
 #Main node CppCMS application
-NODE_APP_SKIN=node_app/main_master.tmpl node_app/page.tmpl node_app/info.tmpl node_app/about.tmpl node_app/login.tmpl
+NODE_APP_SKIN=node_app/main_master.tmpl node_app/info.tmpl node_app/about.tmpl node_app/login.tmpl
 NODE_APP_GENERATED=build/ptp2n_node_app_skin.cpp
 NODE_APP_CONTENT=node_app/main_content.h
 NODE_APP_HEADERS=node_app/main_app.h 
