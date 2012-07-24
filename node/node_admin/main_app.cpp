@@ -7,7 +7,7 @@
 using namespace p2psn::node_app;
 
 main_app::main_app(cppcms::service &srv) 
-    : cppcms::application(srv) 
+    : base_app(srv) 
 {
     attach(new p2psn::api::node_api(srv), "api", "/api{1}", "/api(/(.*))?", 1);
     attach(new admin_app(srv), "admin", "/admin{1}", "/admin(/(.*))?", 1);
@@ -119,11 +119,6 @@ bool main_app::validate_user(content::login_form& l)
     l.user_name.valid(false);
     l.user_password.valid(false);
     return false;
-}
-
-void main_app::init(content::master& c) {
-    if (session().is_set("user"))
-	    c.user_name = session()["user"];
 }
 
 // vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

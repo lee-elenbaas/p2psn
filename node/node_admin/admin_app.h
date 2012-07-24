@@ -1,9 +1,7 @@
 #ifndef __P2PSN_ADMIN_APP_H
 #define __P2PSN_ADMIN_APP_H
 
-#include <cppcms/application.h>
-#include <cppcms/service.h>
-
+#include "base_app.h"
 #include "content.h"
 
 namespace p2psn {
@@ -12,7 +10,7 @@ namespace p2psn {
         /**
          * CppCMS Web interface for accessing the node configuration.
          */
-        class admin_app : public cppcms::application {
+        class admin_app : public base_app {
         public:
             /**
              * Construct the app on the given cppcms service
@@ -32,16 +30,11 @@ namespace p2psn {
             /**
              * Manage admin users
              */
-            void admin_users();
+            void users();
             /**
              * Manage server
              */
-            void admin_server();
-        private:
-            /**
-             * Shared inialization of page content
-             */
-            void init(content::master&);
+            void server();
         };
 
     } // namespace node_app
