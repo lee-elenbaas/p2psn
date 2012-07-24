@@ -1,5 +1,5 @@
-#ifndef __MAIN_APP_H
-#define __MAIN_APP_H
+#ifndef __P2PSN_MAIN_APP_H
+#define __P2PSN_MAIN_APP_H
 
 #include <cppcms/application.h>
 #include <cppcms/service.h>
@@ -40,6 +40,18 @@ namespace p2psn {
              * The logout operation
              */
             void logout();
+            /**
+             * The admin menu
+             */
+            void admin();
+            /**
+             * Manage admin users
+             */
+            void admin_users();
+            /**
+             * Manage server
+             */
+            void admin_server();
         private:
             /**
              * Shared inialization of page content
@@ -48,11 +60,11 @@ namespace p2psn {
             /**
              * validate login user
              */
-            validate_user(login_form&);
+            bool validate_user(content::login_form&);
         };
 
     } // namespace node_app
 } // namespace p2psn
 
-#endif // __MAIN_APP_H
+#endif // __P2PSN_MAIN_APP_H
 // vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

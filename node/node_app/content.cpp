@@ -1,5 +1,5 @@
 
-#include "main_content.h"
+#include "content.h"
 #include "../utils/crypto.h"
 
 using namespace std;

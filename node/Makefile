@@ -37,7 +37,7 @@ docs/html/index.html: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_APP_HEADERS) $(NODE_APP
 	doxygen Doxyfile
 
 run/noded: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_APP_HEADERS) $(NODE_APP_CONTENT) $(NODE_APP_CPP) $(NODE_API_HEADERS) $(NODE_API_CPP) $(UTILS_HEADERS) $(UTILS_CPP) $(NODE_APP_GENERATED)
-	$(CXX) $(OPTIONS) $(MAIN_CPP) $(NODE_APP_CPP) $(NODE_API_CPP) $(NODE_API_CPP) $(UTILS_CPP) $(NODE_APP_GENERATED) -o run/noded ${LIBS}
+	$(CXX) $(OPTIONS) $(MAIN_CPP) $(NODE_APP_CPP) $(NODE_API_CPP) $(UTILS_CPP) $(NODE_APP_GENERATED) -o run/noded ${LIBS}
 
 run/config.js: config/config.js
 	cp config/config.js run/config.js

@@ -1,11 +1,14 @@
 #include "node_api.h"
 
-json_service :: json_service(cppcms::service &srv) : cppcms::rpc::json_rpc_server(srv)
+using namespace std;
+using namespace p2psn::api;
+
+node_api::node_api(cppcms::service& srv) : cppcms::rpc::json_rpc_server(srv)
 {
-	bind("echo",cppcms::rpc::json_method(&json_service::echo,this),method_role);
+	bind("echo",cppcms::rpc::json_method(&node_api::echo,this),method_role);
 }
 
-void json_service:: echo(std::string message)
+void node_api::echo(const string& message)
 {
 	return_result(message);
 }

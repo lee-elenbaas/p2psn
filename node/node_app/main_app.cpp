@@ -1,6 +1,7 @@
 #include "main_app.h"
 
 #include <cppcms/url_dispatcher.h>
+#include "../node_api/node_api.h"
 
 using namespace p2psn::node_app;
 
@@ -9,9 +10,11 @@ void main_app::init(content::master& c) {
 	    c.user_name = session()["user"];
 }
 
-main_app::main_app(cppcms::service &srv) :
-    cppcms::application(srv) 
+main_app::main_app(cppcms::service &srv) 
+    : cppcms::application(srv) 
 {
+    attach(new p2psn::api::node_api(srv), "api", "/api{1}", "/api(/(.*))?", 1);
+
     dispatcher().assign("",&main_app::home,this);
     mapper().assign("");
 
@@ -29,6 +32,12 @@ main_app::main_app(cppcms::service &srv) :
 
     dispatcher().assign("/admin",&main_app::admin,this);
     mapper().assign("admin","/admin");
+
+    dispatcher().assign("/admin/users",&main_app::admin_users,this);
+    mapper().assign("admin/users","/admin/users");
+
+    dispatcher().assign("/admin/server",&main_app::admin_server,this);
+    mapper().assign("admin/server","/admin/server");
 
     mapper().root("/node");
 }
@@ -60,10 +69,38 @@ void main_app::about()
     render("about",c);
 }
 
+void main_app::admin()
+{
+    content::master c;
+
+    init(c);
+    c.title = "Admin";
+
+    render("admin",c);
+}
+
+void main_app::admin_users()
+{
+    content::master c;
+
+    init(c);
+    c.title = "Admin";
+
+    render("admin",c);
+}
+
+void main_app::admin_server()
+{
+    content::master c;
+
+    init(c);
+    c.title = "Admin";
+
+    render("admin",c);
+}
+
 void main_app::logout()
 {
-    content::page c;
-
     session().clear();
 	response().set_redirect_header(url("/info"));
 }
@@ -92,7 +129,7 @@ void main_app::login()
 	render("login",c);
 }
 
-bool main_app::validate_user(login_form& l)
+bool main_app::validate_user(content::login_form& l)
 {
     /// Validate login for matching user/pass combination in the settings
     for (auto user : settings()["config_noded"]["admin"].array()) {
