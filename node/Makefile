@@ -6,11 +6,11 @@ MAIN_HEADERS=main/signal_handler.h
 MAIN_CPP=main/noded.cpp main/signal_handler.cpp
 
 #Main node CppCMS application
-NODE_APP_SKIN=node_app/master.tmpl node_app/info.tmpl node_app/about.tmpl node_app/login.tmpl
-NODE_APP_GENERATED=build/ptp2n_node_app_skin.cpp
-NODE_APP_CONTENT=node_app/content.h
-NODE_APP_HEADERS=node_app/main_app.h 
-NODE_APP_CPP=node_app/main_app.cpp node_app/content.cpp
+NODE_APP_SKIN=node_admin/master.tmpl node_admin/info.tmpl node_admin/about.tmpl node_admin/login.tmpl node_admin/admin.tmpl
+NODE_APP_GENERATED=build/ptp2n_node_admin_skin.cpp
+NODE_APP_CONTENT=node_admin/content.h
+NODE_APP_HEADERS=node_admin/main_app.h 
+NODE_APP_CPP=node_admin/main_app.cpp node_admin/content.cpp
 
 #JSON-RPC Node API CppCMS application
 NODE_API_HEADERS=node_api/node_api.h
@@ -20,7 +20,7 @@ NODE_API_CPP=node_api/node_api.cpp
 UTILS_HEADERS=utils/crypto.h
 UTILS_CPP=utils/crypto.cpp
 
-all: separator run/noded run/config.js run
+all: separator run
 
 .PHONY: all, separator, clean, documentation, run
 
@@ -46,8 +46,8 @@ $(NODE_APP_GENERATED): $(NODE_APP_SKIN)
 	cppcms_tmpl_cc $(NODE_APP_SKIN) -o $(NODE_APP_GENERATED)
 	
 clean:
-	rm -fr run/* cppcms_rundir build/* docs/* *~ main/*~ node_app/*~ node_api/*~ consif/*~
+	rm -fr run/* cppcms_rundir build/* docs/* *~ main/*~ node_admin/*~ node_api/*~ consif/*~
 
-run:
+run: run/noded run/config.js
 	./noded
 

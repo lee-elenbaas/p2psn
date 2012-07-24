@@ -5,11 +5,6 @@
 
 using namespace p2psn::node_app;
 
-void main_app::init(content::master& c) {
-    if (session().is_set("user"))
-	    c.user_name = session()["user"];
-}
-
 main_app::main_app(cppcms::service &srv) 
     : cppcms::application(srv) 
 {
@@ -34,10 +29,10 @@ main_app::main_app(cppcms::service &srv)
     mapper().assign("admin","/admin");
 
     dispatcher().assign("/admin/users",&main_app::admin_users,this);
-    mapper().assign("admin/users","/admin/users");
+    mapper().assign("admin_users","/admin/users");
 
     dispatcher().assign("/admin/server",&main_app::admin_server,this);
-    mapper().assign("admin/server","/admin/server");
+    mapper().assign("admin_server","/admin/server");
 
     mapper().root("/node");
 }
@@ -71,6 +66,9 @@ void main_app::about()
 
 void main_app::admin()
 {
+    if (!ensure_admin_user())
+        return;
+
     content::master c;
 
     init(c);
@@ -81,20 +79,26 @@ void main_app::admin()
 
 void main_app::admin_users()
 {
+    if (!ensure_admin_user())
+        return;
+
     content::master c;
 
     init(c);
-    c.title = "Admin";
+    c.title = "Admin Users";
 
     render("admin",c);
 }
 
 void main_app::admin_server()
 {
+    if (!ensure_admin_user())
+        return;
+
     content::master c;
 
     init(c);
-    c.title = "Admin";
+    c.title = "Admin Server";
 
     render("admin",c);
 }
@@ -116,7 +120,15 @@ void main_app::login()
 			session().reset_session();
             session().erase("prelogin");
             session()["user"] = c.login_info.user_name.value();
-			response().set_redirect_header(url("/admin"));
+
+            if (session().is_set("url_after_login")) {
+                response().set_redirect_header(session()["url_after_login"]);
+                session().erase("url_after_login");
+            }
+            else {
+    			response().set_redirect_header(url("/admin"));
+            }
+
             return;
 		}
     }
@@ -153,6 +165,20 @@ bool main_app::validate_user(content::login_form& l)
     l.user_name.valid(false);
     l.user_password.valid(false);
     return false;
+}
+
+bool main_app::ensure_admin_user()
+{
+    if (session().is_set("user"))
+        return true;
+
+    session()["url_after_login"] = request().query_string();
+    return false;
+}
+
+void main_app::init(content::master& c) {
+    if (session().is_set("user"))
+	    c.user_name = session()["user"];
 }
 
 // vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

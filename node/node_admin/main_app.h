@@ -61,6 +61,10 @@ namespace p2psn {
              * validate login user
              */
             bool validate_user(content::login_form&);
+            /**
+             * check that user is an admin user
+             */
+            bool ensure_admin_user();
         };
 
     } // namespace node_app
