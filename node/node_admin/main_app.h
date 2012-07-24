@@ -2,7 +2,7 @@
 #define __P2PSN_MAIN_APP_H
 
 #include "base_app.h"
-#include "content.h"
+#include "main_content.h"
 
 namespace p2psn {
     namespace node_app {

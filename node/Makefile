@@ -8,9 +8,9 @@ MAIN_CPP=main/noded.cpp main/signal_handler.cpp
 #Main node CppCMS application
 NODE_APP_SKIN=node_admin/master.tmpl node_admin/info.tmpl node_admin/about.tmpl node_admin/login.tmpl node_admin/admin.tmpl
 NODE_APP_GENERATED=build/ptp2n_node_admin_skin.cpp
-NODE_APP_CONTENT=node_admin/content.h
+NODE_APP_CONTENT=node_admin/base_content.h node_admin/main_content.h
 NODE_APP_HEADERS=node_admin/base_app.h node_admin/main_app.h node_admin/admin_app.h
-NODE_APP_CPP=node_admin/base_app.cpp node_admin/main_app.cpp node_admin/content.cpp node_admin/admin_app.cpp
+NODE_APP_CPP=node_admin/base_app.cpp node_admin/main_app.cpp node_admin/admin_app.cpp node_admin/base_content.cpp node_admin/main_content.cpp
 
 #JSON-RPC Node API CppCMS application
 NODE_API_HEADERS=node_api/node_api.h
