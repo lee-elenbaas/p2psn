@@ -2,6 +2,7 @@
 
 #include <cppcms/url_dispatcher.h>
 #include "../node_api/node_api.h"
+#include "admin_app.h"
 
 using namespace p2psn::node_app;
 
@@ -9,6 +10,7 @@ main_app::main_app(cppcms::service &srv)
     : cppcms::application(srv) 
 {
     attach(new p2psn::api::node_api(srv), "api", "/api{1}", "/api(/(.*))?", 1);
+    attach(new admin_app(srv), "admin", "/admin{1}", "/admin(/(.*))?", 1);
 
     dispatcher().assign("",&main_app::home,this);
     mapper().assign("");
@@ -24,15 +26,6 @@ main_app::main_app(cppcms::service &srv)
 
     dispatcher().assign("/login",&main_app::login,this);
     mapper().assign("login","/login");
-
-    dispatcher().assign("/admin",&main_app::admin,this);
-    mapper().assign("admin","/admin");
-
-    dispatcher().assign("/admin/users",&main_app::admin_users,this);
-    mapper().assign("admin_users","/admin/users");
-
-    dispatcher().assign("/admin/server",&main_app::admin_server,this);
-    mapper().assign("admin_server","/admin/server");
 
     mapper().root("/node");
 }
@@ -64,45 +57,6 @@ void main_app::about()
     render("about",c);
 }
 
-void main_app::admin()
-{
-    if (!ensure_admin_user())
-        return;
-
-    content::master c;
-
-    init(c);
-    c.title = "Admin";
-
-    render("admin",c);
-}
-
-void main_app::admin_users()
-{
-    if (!ensure_admin_user())
-        return;
-
-    content::master c;
-
-    init(c);
-    c.title = "Admin Users";
-
-    render("admin",c);
-}
-
-void main_app::admin_server()
-{
-    if (!ensure_admin_user())
-        return;
-
-    content::master c;
-
-    init(c);
-    c.title = "Admin Server";
-
-    render("admin",c);
-}
-
 void main_app::logout()
 {
     session().clear();
@@ -122,7 +76,7 @@ void main_app::login()
             session()["user"] = c.login_info.user_name.value();
 
             if (session().is_set("url_after_login")) {
-                response().set_redirect_header(session()["url_after_login"]);
+                response().set_redirect_header(url(session()["url_after_login"]));
                 session().erase("url_after_login");
             }
             else {
@@ -164,15 +118,6 @@ bool main_app::validate_user(content::login_form& l)
 
     l.user_name.valid(false);
     l.user_password.valid(false);
-    return false;
-}
-
-bool main_app::ensure_admin_user()
-{
-    if (session().is_set("user"))
-        return true;
-
-    session()["url_after_login"] = request().query_string();
     return false;
 }
 
