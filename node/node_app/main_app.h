@@ -45,6 +45,10 @@ namespace p2psn {
              * Shared inialization of page content
              */
             void init(content::master&);
+            /**
+             * validate login user
+             */
+            validate_user(login_form&);
         };
 
     } // namespace node_app

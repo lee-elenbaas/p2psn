@@ -21,11 +21,11 @@ main_app::main_app(cppcms::service &srv) :
     dispatcher().assign("/about",&main_app::about,this);
     mapper().assign("about","/about");
 
-    dispatcher().assign("/login",&main_app::login,this);
-    mapper().assign("login","/login");
-
     dispatcher().assign("/logout",&main_app::logout,this);
     mapper().assign("logout","/logout");
+
+    dispatcher().assign("/login",&main_app::login,this);
+    mapper().assign("login","/login");
 
     dispatcher().assign("/admin",&main_app::admin,this);
     mapper().assign("admin","/admin");
@@ -50,6 +50,16 @@ void main_app::info()
     render("info",c);
 }
 
+void main_app::about()
+{
+    content::master c;
+
+    init(c);
+    c.title = "About";
+
+    render("about",c);
+}
+
 void main_app::logout()
 {
     content::page c;
@@ -58,37 +68,54 @@ void main_app::logout()
 	response().set_redirect_header(url("/info"));
 }
 
-void main_app::about()
-{
-    content::page c;
-
-    init(c);
-    c.title = "About";
-
-    render("about",c);
-}
-
 void main_app::login()
 {
-    content::login_page c(settings()["config_noded"]["admin"].array());
+    content::login_page c;
 
-    if (request().request_method() == "POST") {
+    if (request().request_method() == "POST" && session().is_set("prelogin")) {
         c.login_info.load(context());
 
-        if (c.login_info.validate()) { 
-			session().clear();
+        if (c.login_info.validate() && validate_user(c.login_info)) { 
+			session().reset_session();
+            session().erase("prelogin");
             session()["user"] = c.login_info.user_name.value();
 			response().set_redirect_header(url("/admin"));
+            return;
 		}
     }
-	else {
-		session()["form"] = "login";
 
-		init(c);
-		c.title = "Login";
+	session()["prelogin"] = "prelogin";
 
-		render("login",c);
-	}
+	init(c);
+	c.title = "Login";
+
+	render("login",c);
+}
+
+bool main_app::validate_user(login_form& l)
+{
+    /// Validate login for matching user/pass combination in the settings
+    for (auto user : settings()["config_noded"]["admin"].array()) {
+        if (user["user"].str() != l.user_name.value())
+            continue;
+
+        // validate user password
+        if (!user["password"].is_undefined() && (user["password"].str() != l.user_password.value())) {
+            
+            return true;
+        }
+
+        // TODO: handle password signatures instead of open passwords
+//        if (!user["password_hmac"].is_undefined()) {
+//                        
+//        }
+
+        return true;
+    }
+
+    l.user_name.valid(false);
+    l.user_password.valid(false);
+    return false;
 }
 
 // vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

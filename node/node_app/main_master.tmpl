@@ -11,18 +11,14 @@
 <% template page_content() %>
 <% end template %>
 
-<% template menu_content() %>
-<li><a href='<% url "/" %>'>Info</a></li>
-<li><a href='<% url "/about" %>'>About</a></li>
-<% end template %>
-
 <% template breadcrumbs() %>
 <% end template %>
 
 <% template menu() %>
 <div id="navigation">
 <ul>
-<% include menu_content() %>
+<li><a href='<% url "/" %>'>Info</a></li>
+<li><a href='<% url "/about" %>'>About</a></li>
 <% if empty user_name %>
 <li><a href='<% url "/login" %>'>Login</a></li>
 <% else %>
@@ -74,3 +70,4 @@
 
 <% end view %>
 <% end skin %>
+

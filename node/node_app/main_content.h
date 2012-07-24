@@ -55,25 +55,16 @@ namespace p2psn {
                 string host;
             };
 
-            struct page : public master {
-                string page_content;
-            };
-
             struct login_form : public cppcms::form {
                 cppcms::widgets::text user_name;
                 cppcms::widgets::password user_password;
                 cppcms::widgets::submit submit;
 
-                login_form(cppcms::json::array);
-                virtual bool validate();
-            private:
-                cppcms::json::array admin_users_;
+                login_form();
             };
 
-            struct login_page : public page {
+            struct login_page : public master {
                 login_form login_info;
-
-                login_page(cppcms::json::array);
             };
 
         } // namespace content
