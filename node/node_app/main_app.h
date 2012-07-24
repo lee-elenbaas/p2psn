@@ -4,7 +4,7 @@
 #include <cppcms/application.h>
 #include <cppcms/service.h>
 
-#include "main_content.h"
+#include "content.h"
 
 namespace p2psn {
     namespace node_app {
