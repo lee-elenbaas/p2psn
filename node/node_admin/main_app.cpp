@@ -5,7 +5,7 @@
 #include "admin_app.h"
 #include "../utils/crypto.h"
 
-using namespace p2psn::node_app;
+using namespace p2psn::node_admin;
 
 main_app::main_app(cppcms::service &srv) 
     : base_app(srv) 

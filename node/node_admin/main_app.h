@@ -5,7 +5,7 @@
 #include "main_content.h"
 
 namespace p2psn {
-    namespace node_app {
+    namespace node_admin {
 
         /**
          * CppCMS Web interface for accessing the node configuration.
@@ -57,7 +57,7 @@ namespace p2psn {
             bool validate_user(content::login_form&);
         };
 
-    } // namespace node_app
+    } // namespace node_admin
 } // namespace p2psn
 
 #endif // __P2PSN_MAIN_APP_H

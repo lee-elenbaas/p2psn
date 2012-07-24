@@ -9,7 +9,7 @@
 int main(int argc,char ** argv)
 {
 	using namespace p2psn::main;
-	using namespace p2psn::node_app;
+	using namespace p2psn::node_admin;
 
 	try {
 		signal::setup_signal_handlers();

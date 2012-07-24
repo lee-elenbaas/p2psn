@@ -2,7 +2,7 @@
 #include "main_content.h"
 
 using namespace std;
-using namespace p2psn::node_app::content;
+using namespace p2psn::node_admin::content;
 
 /**
  * Initial the login form

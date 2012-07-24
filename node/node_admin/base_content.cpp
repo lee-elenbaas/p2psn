@@ -2,7 +2,7 @@
 #include "base_content.h"
 
 using namespace std;
-using namespace p2psn::node_app::content;
+using namespace p2psn::node_admin::content;
 
 /**
  * Add an additional message to display to the user on the next rendered page.

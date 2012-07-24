@@ -1,6 +1,6 @@
 #include "base_app.h"
 
-using namespace p2psn::node_app;
+using namespace p2psn::node_admin;
 
 base_app::base_app(cppcms::service &srv) 
     : cppcms::application(srv) 

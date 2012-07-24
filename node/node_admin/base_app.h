@@ -7,7 +7,7 @@
 #include "base_content.h"
 
 namespace p2psn {
-    namespace node_app {
+    namespace node_admin {
 
         /**
          * CppCMS Web interface for accessing the node configuration.
@@ -25,7 +25,7 @@ namespace p2psn {
             void init(content::master&);
         };
 
-    } // namespace node_app
+    } // namespace node_admin
 } // namespace p2psn
 
 #endif // __P2PSN_BASE_APP_H

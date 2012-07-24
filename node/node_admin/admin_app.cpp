@@ -2,7 +2,7 @@
 
 #include <cppcms/url_dispatcher.h>
 
-using namespace p2psn::node_app;
+using namespace p2psn::node_admin;
 
 admin_app::admin_app(cppcms::service &srv) 
     : base_app(srv) 

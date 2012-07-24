@@ -1,7 +1,7 @@
 /**
- * Content declarations for communication between the node_app and its skin.
+ * Content declarations for communication between the node_admin and its skin.
  *
- * The content types used by the node_app to pass values into its skin for rendering the result HTML pages.
+ * The content types used by the node_admin to pass values into its skin for rendering the result HTML pages.
  */
 #ifndef __P2PSN_MAIN_CONTENT_H
 #define __P2PSN_MAIN_CONTENT_H
@@ -9,7 +9,7 @@
 #include "base_content.h"
 
 namespace p2psn {
-    namespace node_app {
+    namespace node_admin {
         namespace content  {
 
             struct info : public master {
@@ -30,7 +30,7 @@ namespace p2psn {
             };
 
         } // namespace content
-    } // namespace node_app
+    } // namespace node_admin
 } // namespace p2psn
 
 #endif // __P2PSN_MAIN_CONTENT_H
