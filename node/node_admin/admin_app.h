@@ -2,7 +2,7 @@
 #define __P2PSN_ADMIN_APP_H
 
 #include "base_app.h"
-//#include "admin_content.h"
+#include "admin_content.h"
 
 namespace p2psn {
     namespace node_admin {
@@ -25,16 +25,19 @@ namespace p2psn {
             /**
              * The admin menu
              */
-			void home();
+			void admin();
 
             /**
              * Manage admin users
              */
-            void users();
+            void admin_users();
             /**
              * Manage server
              */
-            void server();
+            void admin_server();
+        private:
+            cppcms::json::value new_config();
+            void new_config(const cppcms::json::value&);
         };
 
     } // namespace node_admin

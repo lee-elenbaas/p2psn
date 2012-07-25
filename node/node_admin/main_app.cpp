@@ -68,6 +68,8 @@ void main_app::login()
 {
     content::login_page c;
 
+    c.user_messages.push_back({ session()["url_after_login"], "" });
+
     if (request().request_method() == "POST" && session().is_set("prelogin")) {
         c.login_info.load(context());
 

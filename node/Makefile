@@ -6,10 +6,10 @@ MAIN_HEADERS=main/signal_handler.h
 MAIN_CPP=main/noded.cpp main/signal_handler.cpp
 
 #Main node CppCMS application
-NODE_ADMIN_SKIN=node_admin/master.tmpl node_admin/info.tmpl node_admin/about.tmpl node_admin/login.tmpl node_admin/admin.tmpl
+NODE_ADMIN_SKIN=node_admin/master.tmpl node_admin/info.tmpl node_admin/about.tmpl node_admin/login.tmpl node_admin/admin.tmpl node_admin/admin_users.tmpl
 NODE_ADMIN_GENERATED=build/ptp2n_NODE_ADMIN_skin.cpp
-NODE_ADMIN_CONTENT=node_admin/base_content.h node_admin/main_content.h
-NODE_ADMIN_HEADERS=node_admin/base_app.h node_admin/main_app.h node_admin/admin_app.h
+NODE_ADMIN_CONTENT=node_admin/base_content.h node_admin/main_content.h node_admin/admin_content.h
+NODE_ADMIN_HEADERS=node_admin/base_app.h node_admin/main_app.h node_admin/admin_app.h node_admin/admin_content.cpp
 NODE_ADMIN_CPP=node_admin/base_app.cpp node_admin/main_app.cpp node_admin/admin_app.cpp node_admin/base_content.cpp node_admin/main_content.cpp
 
 #JSON-RPC Node API CppCMS application
@@ -46,7 +46,7 @@ $(NODE_ADMIN_GENERATED): $(NODE_ADMIN_SKIN)
 	cppcms_tmpl_cc $(NODE_ADMIN_SKIN) -o $(NODE_ADMIN_GENERATED)
 	
 clean:
-	rm -fr run/* cppcms_rundir build/* docs/* *~ main/*~ node_admin/*~ node_api/*~ consif/*~
+	rm -fr run/* cppcms_rundir build/* docs/* *~ main/*~ node_admin/*~ node_api/*~ utils/*~ config/*~
 
 run: run/noded run/config.js
 	./noded
