@@ -8,6 +8,7 @@
 	<tr>
 		<th>Name</th>
 		<th>Password</th>
+		<th>&nbsp;</th>
 	</tr>
 	</thead>
 <% foreach user in users %>
@@ -16,6 +17,11 @@
 <tr>
 	<td><%= user.name %></td>
 	<td><%= user.password %></td>
+	<td><form method="post" action="<% url "/admin/users" %>">
+	<% csrf %>
+	<input type="hidden" name="delete_name" value="<%= user.name %>" />	
+	<input type="submit" value="delete" />
+	</form></td>
 </tr>
 <% end %>
 </tbody>
