@@ -35,7 +35,8 @@
 	    },  
 	"config_noded" : {
 		"admin" : [
-			{ "user" : "admin", "password" : "admin" }
+			{ "user" : "admin", "password" : "admin" },
+			{ "user" : "lior", "password" : "lior" },
 		]
 	}
 }

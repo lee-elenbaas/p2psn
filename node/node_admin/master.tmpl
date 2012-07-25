@@ -14,13 +14,13 @@
 <% template menu() %>
 <div id="navigation">
 <ul>
-<li><a href='<% url "/" %>'>Info</a></li>
-<li><a href='<% url "/about" %>'>About</a></li>
+<li><a href="<% url "/info" %>">Info</a></li>
+<li><a href="<% url "/about" %>">About</a></li>
 <% if empty user_name %>
-<li><a href='<% url "/login" %>'>Login</a></li>
+<li><a href="<% url "/login" %>">Login</a></li>
 <% else %>
-<li><a href='<% url "/admin" %>'>Admin</a></li>
-<li><a href='<% url "/logout" %>'>Logout</a></li>
+<li><a href="<% url "/admin" %>">Admin</a></li>
+<li><a href="<% url "/logout" %>">Logout</a></li>
 <% end %>
 </ul>
 </div>
@@ -38,6 +38,16 @@
 <% end %>
 <% end template %>
 
+<% template identity() %>
+<p id="identity">
+<% if empty user_name %>
+guest
+<% else %>
+Welcome <%= user_name %>
+<% end %>
+</p>
+<% end template %>
+
 <% template header() %>
 <!DOCTYPE html>
 <html>
@@ -47,6 +57,7 @@
 </head>
 <body>
 <% include menu() %>
+<% include identity() %>
 <h1><% include title() %></h1>
 <% end template %>
 

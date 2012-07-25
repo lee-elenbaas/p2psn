@@ -38,18 +38,6 @@ namespace p2psn {
              * The logout operation
              */
             void logout();
-            /**
-             * The admin menu
-             */
-            void admin();
-            /**
-             * Manage admin users
-             */
-            void admin_users();
-            /**
-             * Manage server
-             */
-            void admin_server();
         private:
             /**
              * validate login user
