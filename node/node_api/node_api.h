@@ -12,6 +12,7 @@ namespace p2psn {
             node_api(cppcms::service&);
 
             void echo(const std::string&);
+            void version();
         };
 
     } // namespace api

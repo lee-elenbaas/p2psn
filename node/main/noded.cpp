@@ -1,4 +1,4 @@
-#include "../node_admin/root_app.h"
+#include "../node_root/root_app.h"
 #include <cppcms/applications_pool.h>
 #include <cppcms/url_dispatcher.h>
 #include "signal_handler.h"

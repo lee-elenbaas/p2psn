@@ -2,7 +2,7 @@
 
 #include <cppcms/url_dispatcher.h>
 #include "../node_api/node_api.h"
-#include "admin_app.h"
+#include "../node_admin/admin_app.h"
 #include "../utils/crypto.h"
 
 using namespace p2psn::node_admin;

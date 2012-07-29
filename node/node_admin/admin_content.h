@@ -6,7 +6,7 @@
 #ifndef __P2PSN_ADMIN_CONTENT_H
 #define __P2PSN_ADMIN_CONTENT_H
 
-#include "base_content.h"
+#include "../node_shared/base_content.h"
 
 namespace p2psn {
     namespace node_admin {

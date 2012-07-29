@@ -1,7 +1,7 @@
 #include "admin_app.h"
 
 #include <cppcms/url_dispatcher.h>
-#include "main_app.h"
+#include "../node_guest/main_app.h"
 
 using namespace p2psn::node_admin;
 using std::string;

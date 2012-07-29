@@ -1,7 +1,7 @@
 #ifndef __P2PSN_MAIN_APP_H
 #define __P2PSN_MAIN_APP_H
 
-#include "base_app.h"
+#include "../node_shared/base_app.h"
 #include "main_content.h"
 
 namespace p2psn {
