@@ -16,7 +16,7 @@ main_app::main_app(cppcms::service &srv)
     dispatcher().assign("",&main_app::home,this);
     mapper().assign("");
 
-    dispatcher().assign("/info",&main_app::info,this);
+    dispatcher().assign("/info/",&main_app::info,this);
     mapper().assign("info","/info");
 
     dispatcher().assign("/about",&main_app::about,this);
@@ -27,8 +27,6 @@ main_app::main_app(cppcms::service &srv)
 
     dispatcher().assign("/login",&main_app::login,this);
     mapper().assign("login","/login");
-
-    mapper().root("/node");
 }
 
 void main_app::home()

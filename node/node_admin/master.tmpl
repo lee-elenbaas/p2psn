@@ -14,13 +14,13 @@
 <% template menu() %>
 <div id="navigation">
 <ul>
-<li><a href="<% url "/info" %>">Info</a></li>
-<li><a href="<% url "/about" %>">About</a></li>
+<li><a href="<% url "/info" %>"><% gt "Info" %></a></li>
+<li><a href="<% url "/about" %>"><% gt "About" %></a></li>
 <% if empty user_name %>
-<li><a href="<% url "/login" %>">Login</a></li>
+<li><a href="<% url "/login" %>"><% gt "Login" %></a></li>
 <% else %>
-<li><a href="<% url "/admin" %>">Admin</a></li>
-<li><a href="<% url "/logout" %>">Logout</a></li>
+<li><a href="<% url "/admin" %>"><% gt "Admin" %></a></li>
+<li><a href="<% url "/logout" %>"><% gt "Logout" %></a></li>
 <% end %>
 </ul>
 </div>
@@ -41,9 +41,9 @@
 <% template identity() %>
 <p id="identity">
 <% if empty user_name %>
-guest
+<% gt "guest" %>
 <% else %>
-Welcome <%= user_name %>
+<% gt "Welcome" %> <%= user_name %>
 <% end %>
 </p>
 <% end template %>
@@ -55,7 +55,11 @@ Welcome <%= user_name %>
     <title><% include title() %></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
-<body>
+<% if rtl %>  
+<body dir="rtl">  
+<% else %>  
+<body>  
+<% end %>
 <% include menu() %>
 <% include identity() %>
 <h1><% include title() %></h1>
