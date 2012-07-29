@@ -17,8 +17,31 @@ namespace p2psn {
                 string password;
             };
 
+            class enum admin_users_state {
+                view,
+                new_user,
+                edit_user
+            };
+            
+            class existing_user_form : public cppcms::form {
+                cppcms::widgets::hidden user_name;
+                cppcms::widgets::password user_password;
+                cppcms::widgets::submit submit;
+                
+                existing_user_form();
+            };
+
+            class new_user_form : public cppcms::form {
+                cppcms::widgets::text user_name;
+                cppcms::widgets::password user_password;
+                cppcms::widgets::submit submit;
+                
+                new_user_form();
+            };
+
             struct admin_users : public master {
-                std::vector<user> users;
+                admin_users_state state;
+                std::vector<user> existing_users;
             };
 
         } // namespace content

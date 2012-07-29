@@ -3,6 +3,11 @@
 <% view admin_users uses content::admin_users extends master %>
 
 <% template page_content() %>
+<% include existing_users() %>
+<% end template %>
+
+<% template existing_users() %>
+<h2>Existing Users</h2>
 <table>
 	<thead>
 	<tr>
@@ -17,11 +22,21 @@
 <tr>
 	<td><%= user.name %></td>
 	<td><%= user.password %></td>
-	<td><form method="post" action="<% url "/admin/users" %>">
-	<% csrf %>
-	<input type="hidden" name="delete_name" value="<%= user.name %>" />	
-	<input type="submit" value="delete" />
-	</form></td>
+	<td>
+		<form method="post" action="<% url "/admin/users" %>">
+		<% csrf %>
+		<input type="hidden" name="user_name" value="<%= user.name %>" />	
+		<input type="hidden" name="action" value="delete" />
+		<input type="submit" value="Delete" />
+		</form>
+		<form method="post" action="<% url "/admin/users" %>">
+		<% csrf %>
+		<input type="hidden" name="delete_name" value="<%= user.name %>" />	
+		<input type="hidden" name="user_name" value="<%= user.name %>" />	
+		<input type="hidden" name="action" value="edit" />
+		<input type="submit" value="Edit" />
+		</form>
+	</td>
 </tr>
 <% end %>
 </tbody>

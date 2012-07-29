@@ -73,6 +73,15 @@ At the same time each node is intended to run on a normal home PC with its limit
 Development Blog
 ----------------
 
+2012-07-28
+
+I have been reading about all sort of deelopment frameworks, and i am questioning my decision to go CppCMS. 
+The one i liked best is www.meteor.com, a javascript only framework that work on client and server at the same time, with automatic synchronization between the server and all clients.
+Actually this looks like a very very good solution for the node clients: the objects are the json objects exposed as the data, while the display layer are the javascript layouts.
+the only problem is that the used layouts depends on the client app type and the approved layouts by the user. this can be overcome by properly quering the layout db. 
+The real problem with the meteor solution is packaging. meteor requires a node.js server with mongodb - this means that the end installation is not a single executable like in cppcms, instead it needs a whole installation process. for development it will be ok, but for a finished product it is out of the question for me. 
+So in the end i have stayed with my original decision of cppcms.
+
 2012-07-10
 
 I had a long talk a few days ago with a friend about the futility of this project. Very unpleasent, but i can't say his points are not not valid. Nevertheless I still feel that working on this project equals doing something to change the world we live in, rather then letting it fester on its own.

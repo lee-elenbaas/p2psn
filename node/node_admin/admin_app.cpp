@@ -59,11 +59,16 @@ void admin_app::admin_users()
 
     init(c);
     c.title = "Admin Users";
+    c.state = content::admin_users_state::view;
 
     auto nc = new_config();
 
     for (auto user : nc["config_noded"]["admin"].array())
         c.users.push_back({ user["user"].str(), user["password"].str() });
+
+    if (request().request_method() == "POST") {
+        
+    }
 
     render("admin_users",c);
 }
