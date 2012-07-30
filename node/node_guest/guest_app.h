@@ -10,12 +10,12 @@ namespace p2psn {
         /**
          * CppCMS Web interface for accessing the node configuration.
          */
-        class main_app : public base_app {
+        class guest_app : public base_app {
         public:
             /**
              * Construct the app on the given cppcms service
              */
-            main_app(cppcms::service &);
+            guest_app(cppcms::service &);
 	
             /**
              * The initial page

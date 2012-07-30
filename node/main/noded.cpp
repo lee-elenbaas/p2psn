@@ -1,7 +1,7 @@
-#include "../node_root/root_app.h"
+#include "../node_guest/guest_app.h"
 #include <cppcms/applications_pool.h>
 #include <cppcms/url_dispatcher.h>
-#include "signal_handler.h"
+#include "../main/signal_handler.h"
 
 /**
  * Main C++ application function
@@ -23,7 +23,7 @@ int main(int argc,char ** argv)
 			
 			signal::srv(&srv);
 
-			srv.applications_pool().mount(cppcms::applications_factory<root_app>());
+			srv.applications_pool().mount(cppcms::applications_factory<guest_app>());
 			srv.run();
 
 			signal::srv(nullptr);

@@ -1,4 +1,4 @@
-#include "main_app.h"
+#include "../node_guest/guest_app.h"
 
 #include <cppcms/url_dispatcher.h>
 #include "../node_api/node_api.h"
@@ -7,34 +7,34 @@
 
 using namespace p2psn::node_admin;
 
-main_app::main_app(cppcms::service &srv) 
+guest_app::guest_app(cppcms::service &srv) 
     : base_app(srv) 
 {
     attach(new p2psn::api::node_api(srv), "api", "/api{1}", "/api(/(.*))?", 1);
     attach(new admin_app(srv), "admin", "/admin{1}", "/admin(/(.*))?", 1);
 
-    dispatcher().assign("",&main_app::home,this);
+    dispatcher().assign("",&guest_app::home,this);
     mapper().assign("");
 
-    dispatcher().assign("/info/",&main_app::info,this);
+    dispatcher().assign("/info/",&guest_app::info,this);
     mapper().assign("info","/info");
 
-    dispatcher().assign("/about",&main_app::about,this);
+    dispatcher().assign("/about",&guest_app::about,this);
     mapper().assign("about","/about");
 
-    dispatcher().assign("/logout",&main_app::logout,this);
+    dispatcher().assign("/logout",&guest_app::logout,this);
     mapper().assign("logout","/logout");
 
-    dispatcher().assign("/login",&main_app::login,this);
+    dispatcher().assign("/login",&guest_app::login,this);
     mapper().assign("login","/login");
 }
 
-void main_app::home()
+void guest_app::home()
 {
 	response().set_redirect_header(url("/info"));
 }
 
-void main_app::info()
+void guest_app::info()
 {
     content::info c;
 
@@ -46,7 +46,7 @@ void main_app::info()
     render("info",c);
 }
 
-void main_app::about()
+void guest_app::about()
 {
     content::master c;
 
@@ -56,13 +56,13 @@ void main_app::about()
     render("about",c);
 }
 
-void main_app::logout()
+void guest_app::logout()
 {
     session().clear();
 	response().set_redirect_header(url("/info"));
 }
 
-void main_app::login()
+void guest_app::login()
 {
     content::login_page c;
 
@@ -93,7 +93,7 @@ void main_app::login()
 	render("login",c);
 }
 
-bool main_app::validate_user(content::login_form& l)
+bool guest_app::validate_user(content::login_form& l)
 {
     /// Validate login for matching user/pass combination in the settings
     for (auto user : settings()["config_noded"]["admin"].array()) {

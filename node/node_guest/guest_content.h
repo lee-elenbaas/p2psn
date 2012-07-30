@@ -3,8 +3,8 @@
  *
  * The content types used by the node_admin to pass values into its skin for rendering the result HTML pages.
  */
-#ifndef __P2PSN_MAIN_CONTENT_H
-#define __P2PSN_MAIN_CONTENT_H
+#ifndef __P2PSN_GUEST_CONTENT_H
+#define __P2PSN_GUEST_CONTENT_H
 
 #include "../node_shared/base_content.h"
 
@@ -33,7 +33,7 @@ namespace p2psn {
     } // namespace node_admin
 } // namespace p2psn
 
-#endif // __P2PSN_MAIN_CONTENT_H
+#endif // __P2PSN_GUEST_CONTENT_H
 
 // vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
 
