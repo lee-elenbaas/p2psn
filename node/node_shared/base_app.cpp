@@ -1,4 +1,6 @@
-#include "base_app.h"
+#include "../node_shared/base_app.h"
+
+#include "../utils/locale_matching.h"
 
 using namespace p2psn::node_admin;
 using std::string;
@@ -12,9 +14,8 @@ void base_app::main(string url) {
 	// filter connections based on allowed IPs
 	
 	// set locale based on user prefrences
+	context().locale(p2psn::utils::best_match_locale(request().http_accept_language(), request().http_accept_encoding(), settings().get<Array>("localization.locales")));
 	
-	// set local based on user session
-
 	cppcms::application::main(url);
 }
 
