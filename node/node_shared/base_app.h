@@ -18,6 +18,11 @@ namespace p2psn {
              * Construct the app on the given cppcms service
              */
             base_app(cppcms::service &);
+    
+            /**
+             * handle all incoming requests
+             */	
+            virtual void main(std::string);
         protected:
             /**
              * Shared inialization of page content
