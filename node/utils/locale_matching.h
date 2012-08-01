@@ -6,6 +6,10 @@
 #ifndef __LOCALE_MATCHING_H
 #define __LOCALE_MATCHING_H
 
+#include <string>
+#include <booster/locale.h>
+#include <cppcms/json.h>
+
 namespace p2psn {
 	namespace utils {
 

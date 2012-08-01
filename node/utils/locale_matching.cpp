@@ -1,6 +1,7 @@
 
 #include "locale_matching.h"
-#include <booster/regex.h>
+
+#include "regex_utils.h"
 #include <vector>
 #include <clib>
 
@@ -14,7 +15,8 @@ namespace {
 	regex any_encoding("^$|\\*");
 	regex any_encoding("^$|\\*");
 
-	regex qvalue_priority_separator(";q=");
+	const string qvalue_priority_separator_str = "\\w*;\\w*q\\w*=\\w*";
+	regex qvalue_priority_separator(qvalue_priority_separator_str);
 
 	struct qvalue {
 		string value;
@@ -27,7 +29,7 @@ namespace {
 				auto match = priority_match[0];
 
 				value = match.prefix();
-				priority = atof(match.suffix);
+				priority = atof(match.suffix());
 			}
 			else { // no priority value specified - assume default 1
 				value = val;
@@ -38,7 +40,7 @@ namespace {
 
 	bool operator< (const qvalue& rhs, const qvalue& lhs) { return rhs.priority < lhs.priority; }
 
-	regex qvalue_regex("([^ ]*)(;q=([01](\\.[0-9]+)?))");
+	regex qvalue_regex("([^ ]*)("+qvalue_priority_separator_str+"([01](\\.[0-9]+)?))");
 
 	list<qvalue> get_qvalue_list(std::string value)
 	{
