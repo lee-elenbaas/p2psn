@@ -13,7 +13,7 @@
 namespace p2psn {
 	namespace utils {
 
-		std::string best_match_locale(const std::string& requested_languages, const std::string& accepted_encoding, const cppcms::json::array& supported_locales);
+		std::string best_match_locale(const std::string& requested_languages, const std::string& accepted_encoding, const cppcms::json::value& supported_locales);
 
 	} // namespace utils
 } // namespace p2psn

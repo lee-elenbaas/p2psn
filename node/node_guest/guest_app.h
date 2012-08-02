@@ -2,7 +2,7 @@
 #define __P2PSN_MAIN_APP_H
 
 #include "../node_shared/base_app.h"
-#include "main_content.h"
+#include "../node_guest/guest_content.h"
 
 namespace p2psn {
     namespace node_admin {

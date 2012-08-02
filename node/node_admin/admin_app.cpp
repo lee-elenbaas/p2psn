@@ -64,7 +64,7 @@ void admin_app::admin_users()
     auto nc = new_config();
 
     for (auto user : nc["config_noded"]["admin"].array())
-        c.users.push_back({ user["user"].str(), user["password"].str() });
+        c.existing_users.push_back({ user["user"].str(), user["password"].str() });
 
     if (request().request_method() == "POST") {
         

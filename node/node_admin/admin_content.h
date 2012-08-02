@@ -17,7 +17,7 @@ namespace p2psn {
                 string password;
             };
 
-            class enum admin_users_state {
+            enum class admin_users_state {
                 view,
                 new_user,
                 edit_user

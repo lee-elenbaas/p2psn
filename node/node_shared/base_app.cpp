@@ -14,7 +14,7 @@ void base_app::main(string url) {
 	// filter connections based on allowed IPs
 	
 	// set locale based on user prefrences
-	context().locale(p2psn::utils::best_match_locale(request().http_accept_language(), request().http_accept_encoding(), settings().get<Array>("localization.locales")));
+	context().locale(p2psn::utils::best_match_locale(request().http_accept_language(), request().http_accept_encoding(), settings()["localization"]["locales"]));
 
     // override locale using session value if exists
     if (session().is_set("locale"))

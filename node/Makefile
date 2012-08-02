@@ -17,8 +17,8 @@ NODE_API_HEADERS=node_api/node_api.h
 NODE_API_CPP=node_api/node_api.cpp
 
 #Shared utils
-UTILS_HEADERS=utils/crypto.h utils/locale_matching.h
-UTILS_CPP=utils/crypto.cpp utils/locale_matching.cpp
+UTILS_HEADERS=utils/crypto.h utils/locale_matching.h utils/regex_utils.h
+UTILS_CPP=utils/crypto.cpp utils/locale_matching.cpp utils/regex_utils.cpp
 
 all: separator run
 
