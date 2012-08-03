@@ -20,13 +20,14 @@ namespace p2psn {
 			avoid_filled_between_match = 1 << 3,
 			avoid_empty_between_match = 1 << 4,
 
-			avoid_matchs = avoid_empty_match & avoid_filled_match,
-			avoid_between_matchs = avoid_filled_between_match & avoid_empty_between_match
+			avoid_matchs = avoid_empty_match | avoid_filled_match,
+			avoid_between_matchs = avoid_filled_between_match | avoid_empty_between_match,
+			avoid_emptys = avoid_empty_match | avoid_empty_between_match,
+			not_set = 0
 		};
 
-		split_options operator&(split_options lhs, split_options rhs) {
-			return static_cast<split_options>(static_cast<int>(lhs) & static_cast<int>(rhs));
-		}
+		split_options operator&(split_options lhs, split_options rhs);
+		split_options operator|(split_options lhs, split_options rhs);
 
 		///
 		/// Match an expression \a r against text \a s
@@ -51,33 +52,33 @@ namespace p2psn {
 				
 				for(auto match : offsets) {
 					if (prev_index == match.first) {
-						if ((options & split_options::avoid_empty_between_match) == split_options::include_all)
-							split.push_back("");
+//						if ((options & split_options::avoid_empty_between_match) == split_options::not_set)
+//							split.push_back("");
 					}
 					else {
-						if ((options & split_options::avoid_empty_between_match) == split_options::include_all)
-							split.push_back(s.substr(prev_index, match.first - prev_index));
+//						if ((options & split_options::avoid_filled_between_match) == split_options::not_set)
+//							split.push_back(s.substr(prev_index, match.first - prev_index));
 					}
 
 					if (match.first == match.second) {
-						if ((options & split_options::avoid_empty_match) == split_options::include_all)
-							split.push_back("");
+//						if ((options & split_options::avoid_empty_match) == split_options::not_set)
+//							split.push_back("");
 					}
 					else {
-						if ((options & split_options::avoid_empty_match) == split_options::include_all)
-							split.push_back(s.substr(match.second - match.first));
+//						if ((options & split_options::avoid_filled_match) == split_options::not_set)
+//							split.push_back(s.substr(match.second - match.first));
 					}
 
 					prev_index = match.second;
 				}
 
-				if (prev_index == s.size()) {
-					if ((options & split_options::avoid_empty_between_match) == split_options::include_all)
-						split.push_back("");
+				if (prev_index == static_cast<int>(s.size())) {
+//					if ((options & split_options::avoid_empty_between_match) == split_options::not_set)
+//						split.push_back("");
 				}
 				else {
-					if ((options & split_options::avoid_empty_between_match) == split_options::include_all)
-						split.push_back(s.substr(prev_index));
+//					if ((options & split_options::avoid_filled_between_match) == split_options::not_set)
+//						split.push_back(s.substr(prev_index));
 				}
 			}
 	
