@@ -1,5 +1,6 @@
 #include "../node_shared/base_app.h"
 
+#include "../utils/log.h"
 #include "../utils/locale_matching.h"
 
 using namespace p2psn::node_admin;
@@ -20,7 +21,9 @@ void base_app::main(string url) {
     if (session().is_set("locale"))
         context().locale(session().get("locale"));
 
+    LOG(booster::log::level_type::alert, "before: "+url);
 	cppcms::application::main(url);
+    LOG(booster::log::level_type::alert, "before: "+url);
 }
 
 void base_app::init(content::master& c) {

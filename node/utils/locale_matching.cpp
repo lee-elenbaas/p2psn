@@ -55,7 +55,7 @@ namespace {
 	}
 }
 
-string best_match_locale(const string& requested_languages, const string& accepted_encoding, const value& supported_locales)
+string p2psn::utils::best_match_locale(const string& requested_languages, const string& accepted_encoding, const value& supported_locales)
 {
 	///
 	/// If no locale options, use system or default locale
