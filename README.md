@@ -73,6 +73,41 @@ At the same time each node is intended to run on a normal home PC with its limit
 Development Blog
 ----------------
 
+2012-08-05
+
+I been thinking about the client side of things.
+The idea is that the server gives the latest (or specific) version of the object data. and gives the correct view for that object type and client type. The question is how to link them together properly.
+The view will of course be an HTML5 fragment, with JS code attached to it. At the same time it should contain some data-binding schema that binds the object data into the html fragment and JS code.
+Frst of there is a separation between the data-binding from the object to the view and the data-updating from the view to the server.
+The data-updating will be done using the json-rpc api that will be exposed.
+The data-binding have two options:
+
+1. Perform the data-binding in the server, and then send the bnded HTML5+JS to the client after the binding.
+2. Send the building blocks to the client (HTML5+JS with binding tags to the client, and JSON object representation) and then perform the binding using JS on the client.
+
+I think both situations will be needed.
+
+A few links i need to remember:
+
+ * http://lovdbyless.com/ - an open source server based social network
+ * http://www.requirejs.org/ - the way i see it - each view needs a template and a scripting support. a url that gives the correct view using a response to requirejs request, will give a very nice result in this.
+
+I need to decide where how my view templates will look - and since i want them to be html5 complient - they can not use the usual <%...%> syntax. One way will be to use the data attributes in something like this: 
+
+View: <a data-p2psn-bind-text="content.title" data-p2psn-bind-href="contenr.url" />
+Json: { content : { title : "P2Psn", url : "https://github.com/lee-elenbaas/p2psn" } /* , more of the object udentification - like signature... */ }
+
+Resulting html: <a href="https://github.com/lee-elenbaas/p2psn">P2Psn<a/>
+
+Another approach is to use JS for the view template - this has the advantage of keeping things locally where each JS view function will recieve the following parameters:
+
+     function form(
+       formId, // string - unique for the page
+       obj // json object of the viewed object
+     )
+
+this way views can be made indipendent and can handle their own id with no collusion for the objects within them.
+
 2012-07-28
 
 I have been reading about all sort of deelopment frameworks, and i am questioning my decision to go CppCMS. 
