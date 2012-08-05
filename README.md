@@ -85,7 +85,28 @@ The data-binding have two options:
 1. Perform the data-binding in the server, and then send the bnded HTML5+JS to the client after the binding.
 2. Send the building blocks to the client (HTML5+JS with binding tags to the client, and JSON object representation) and then perform the binding using JS on the client.
 
-I think both situations will be needed
+I think both situations will be needed.
+
+A few links i need to remember:
+
+ * http://lovdbyless.com/ - an open source server based social network
+ * http://www.requirejs.org/ - the way i see it - each view needs a template and a scripting support. a url that gives the correct view using a response to requirejs request, will give a very nice result in this.
+
+I need to decide where how my view templates will look - and since i want them to be html5 complient - they can not use the usual <%...%> syntax. One way will be to use the data attributes in something like this: 
+
+View: <a data-p2psn-bind-text="content.title" data-p2psn-bind-href="contenr.url" />
+Json: { content : { title : "P2Psn", url : "https://github.com/lee-elenbaas/p2psn" } /* , more of the object udentification - like signature... */ }
+
+Resulting html: <a href="https://github.com/lee-elenbaas/p2psn">P2Psn<a/>
+
+Another approach is to use JS for the view template - this has the advantage of keeping things locally where each JS view function will recieve the following parameters:
+
+     function form(
+       formId, // string - unique for the page
+       obj // json object of the viewed object
+     )
+
+this way views can be made indipendent and can handle their own id with no collusion for the objects within them.
 
 2012-07-28
 
