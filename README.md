@@ -73,6 +73,20 @@ At the same time each node is intended to run on a normal home PC with its limit
 Development Blog
 ----------------
 
+2012-08-05
+
+I been thinking about the client side of things.
+The idea is that the server gives the latest (or specific) version of the object data. and gives the correct view for that object type and client type. The question is how to link them together properly.
+The view will of course be an HTML5 fragment, with JS code attached to it. At the same time it should contain some data-binding schema that binds the object data into the html fragment and JS code.
+Frst of there is a separation between the data-binding from the object to the view and the data-updating from the view to the server.
+The data-updating will be done using the json-rpc api that will be exposed.
+The data-binding have two options:
+
+1. Perform the data-binding in the server, and then send the bnded HTML5+JS to the client after the binding.
+2. Send the building blocks to the client (HTML5+JS with binding tags to the client, and JSON object representation) and then perform the binding using JS on the client.
+
+I think both situations will be needed
+
 2012-07-28
 
 I have been reading about all sort of deelopment frameworks, and i am questioning my decision to go CppCMS. 
