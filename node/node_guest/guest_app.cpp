@@ -16,7 +16,7 @@ guest_app::guest_app(cppcms::service &srv)
     dispatcher().assign("",&guest_app::home,this);
     mapper().assign("");
 
-    dispatcher().assign("/info/",&guest_app::info,this);
+    dispatcher().assign("/info",&guest_app::info,this);
     mapper().assign("info","/info");
 
     dispatcher().assign("/about",&guest_app::about,this);
@@ -27,6 +27,8 @@ guest_app::guest_app(cppcms::service &srv)
 
     dispatcher().assign("/login",&guest_app::login,this);
     mapper().assign("login","/login");
+
+    mapper().root("/node");
 }
 
 void guest_app::home()
