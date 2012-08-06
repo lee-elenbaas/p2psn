@@ -7,8 +7,19 @@
 #define __LOG_H
 
 #include <booster/log.h>
+#include <typeinfo>
 
-#define LOG(lvl, msg) booster::log::logger::instance().log(booster::log::message(booster::log::level_type(lvl), std::string(msg).c_str(), __FILE__, __LINE__))
+namespace p2psn {
+	namespace utils {
+
+	using booster::log::level_type;
+
+	} // namespace utils
+} // namepsace p2psn
+
+#define SLOG(lvl, msg) booster::log::logger::instance().log(booster::log::message(p2psn::utils::level_type(lvl), std::string(msg).c_str(), __FILE__, __LINE__))
+
+#define LOG(lvl, msg) SLOG((lvl), std::string(typeid(*this).name())+": "+(msg))
 
 #endif // __LOG_H
 

@@ -23,6 +23,11 @@ namespace p2psn {
              * handle all incoming requests
              */	
             virtual void main(std::string);
+
+            /**
+             * redirect to a new url - and place a log message in there
+             */
+            void response_redirect(std::string);
         protected:
             /**
              * Shared inialization of page content

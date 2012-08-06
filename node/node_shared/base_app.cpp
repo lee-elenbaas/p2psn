@@ -21,14 +21,19 @@ void base_app::main(string url) {
     if (session().is_set("locale"))
         context().locale(session().get("locale"));
 
-    LOG(booster::log::level_type::alert, "before: "+url);
+    LOG(p2psn::utils::level_type::alert, "before: "+url);
 	cppcms::application::main(url);
-    LOG(booster::log::level_type::alert, "before: "+url);
+    LOG(p2psn::utils::level_type::alert, "before: "+url);
 }
 
 void base_app::init(content::master& c) {
     if (session().is_set("user"))
 	    c.user_name = session()["user"];
+}
+
+void base_app::response_redirect(std::string url) {
+    LOG(p2psn::utils::level_type::alert, "redirecting to: "+url);
+    response().set_redirect_header(url);
 }
 
 // vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

@@ -90,7 +90,7 @@ void admin_app::main(std::string request_url)
     }
     else {
         session()["url_after_login"] = request().path_info();
-        response().set_redirect_header(url("/login"));
+        response_redirect(url("/login"));
     }
 }
 
