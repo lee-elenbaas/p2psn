@@ -33,7 +33,7 @@ guest_app::guest_app(cppcms::service &srv)
 
 void guest_app::home()
 {
-	response().set_redirect_header(url("/info"));
+	response_redirect(url("/info"));
 }
 
 void guest_app::info()
@@ -61,7 +61,7 @@ void guest_app::about()
 void guest_app::logout()
 {
     session().clear();
-	response().set_redirect_header(url("/info"));
+	response_redirect(url("/info"));
 }
 
 void guest_app::login()
@@ -81,7 +81,7 @@ void guest_app::login()
             session()["user"] = c.login_info.user_name.value(); // TODO: replace name with id in session
 
             session().erase("url_after_login");
-            response().set_redirect_header(after_login_url);
+            response_redirect(after_login_url);
 
             return;
 		}
