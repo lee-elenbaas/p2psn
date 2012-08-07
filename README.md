@@ -73,6 +73,28 @@ At the same time each node is intended to run on a normal home PC with its limit
 Development Blog
 ----------------
 
+2012-08-07 2
+
+Ok the logic here is this: node.js server is still not out of the picture, but i dislike that solution. This might be my next port for the node implementation. But i want a natively compiled node version with all the necesary functionality in it. Besides node.js provide sandboxing issues for the views - a bad view should not affect any user who is not viewing that view right now.
+
+the objects and types are static things - and as such should not contain any JS in them. The only dynamic part of the system are the views.
+
+Views are also objects in the system - so they shuold be stored statically - this means that the js code should be enclosed as a string literal.
+views should behave differently for the different clients - so the client system remains - but is extended to the template as well. The client support mechanism is extended in the following ways: 
+
+ - providing an "*" client will result in a catch all clients that will fit all clients that are not specifically listed.
+ - Entries in the parent view are inherited unless they are overriden.
+ - Each entry can contain either: a null value, another entry name, or a js function: function(...){...}
+ - A null value will mean that this client have no specific definition and will fall back to the catch all definition.
+ - another entry name will mean that whatever function that other entry name will be resolved to, this entry will be resolved too as well.
+ - providing a single value will mean that it is used for all clients. (in effect it will mean that all inherited entries have been removed, and a single entry of * was inserted with that value in it. a single value must be a function for a view binder.
+
+The process of inheritance and function resolving will be done ONCE for the type as it is inserted into the db. and the functions will be stored in a single storage where all views using them will reference them. each function will also specify what view it is defined on. This way if a view updates, all inherited views need not update their function definitions. (not entirely true, changes in the function mappings of a view, will result in function mapping re-done for all inherited views, but function definitions can be replaces behind the scenes. (good for bug fixing)
+
+The binding schema of the template will be done by the default parent view - this way different binding schemas can be supported by providing a different binding function.
+
+Perhaps all those binding functions should be defined in a single JS node - providing a way to call one binding schema from another. this will add the need to handle loops in the binding functions - something i want to prevent. So i think the resolving will be done by the server when the type is loaded, and no calls between the different binding functions.
+
 2012-08-07
 
 I been thinking about http://lovdbyless.com/ a bit more. And i think one of the selling points of my new social network - is that any 3rd party can generate new content types and new functionality that will natively be embeded into the social network infrastructure simply by placing a globaly visible node that will publish new object types.
