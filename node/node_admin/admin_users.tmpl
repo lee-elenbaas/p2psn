@@ -3,7 +3,15 @@
 <% view admin_users uses content::admin_users extends master %>
 
 <% template page_content() %>
-<% include existing_users() %>
+<% include new_user() %>
+<% if state == admin_users_state::view %>
+	<% include existing_users() %>
+<% end template %>
+
+<% template new_user() %>
+<h2>New User</h2>
+<form method="post" action="<% url "/admin/users/new" %>">
+<% csrf %>
 <% end template %>
 
 <% template existing_users() %>
@@ -23,19 +31,26 @@
 	<td><%= user.name %></td>
 	<td><%= user.password %></td>
 	<td>
-		<form method="post" action="<% url "/admin/users" %>">
-		<% csrf %>
-		<input type="hidden" name="user_name" value="<%= user.name %>" />	
-		<input type="hidden" name="action" value="delete" />
-		<input type="submit" value="Delete" />
-		</form>
-		<form method="post" action="<% url "/admin/users" %>">
-		<% csrf %>
-		<input type="hidden" name="delete_name" value="<%= user.name %>" />	
-		<input type="hidden" name="user_name" value="<%= user.name %>" />	
-		<input type="hidden" name="action" value="edit" />
-		<input type="submit" value="Edit" />
-		</form>
+		<% if user.state != admin_user_state::edited_user %>
+			<form method="post" action="<% url "/admin/users/edit" %>">
+				<% csrf %>
+				<input type="hidden" name="user_name" value="<%= user.name %>" />	
+				<input type="submit" value="Edit" />
+			</form>
+		<% end %>
+		<% if user.state != admin_user_state::deleted_user %>
+			<form method="post" action="<% url "/admin/users/delete" %>">
+				<% csrf %>
+				<input type="hidden" name="user_name" value="<%= user.name %>" />	
+				<input type="submit" value="Delete" />
+			</form>
+		<% else %>
+			<form method="post" action="<% url "/admin/users/restore" %>">
+				<% csrf %>
+				<input type="hidden" name="user_name" value="<%= user.name %>" />	
+				<input type="submit" value="Restore" />
+			</form>
+		<% end %>
 	</td>
 </tr>
 <% end %>

@@ -16,6 +16,9 @@ admin_app::admin_app(cppcms::service &srv)
     dispatcher().assign("/users",&admin_app::admin_users,this);
     mapper().assign("users","/users");
 
+    dispatcher().assign("/users/new",&admin_app::new_admin_user,this);
+    mapper().assign("users","/users");
+
     dispatcher().assign("/server",&admin_app::admin_server,this);
     mapper().assign("server","/server");
 }
@@ -51,6 +54,10 @@ value admin_app::new_config()
     }
 
     return nc;
+}
+
+void admin_app::new_admin_user()
+{
 }
 
 void admin_app::admin_users()
