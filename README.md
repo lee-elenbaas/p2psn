@@ -73,6 +73,51 @@ At the same time each node is intended to run on a normal home PC with its limit
 Development Blog
 ----------------
 
+2012-08-07
+
+I been thinking about http://lovdbyless.com/ a bit more. And i think one of the selling points of my new social network - is that any 3rd party can generate new content types and new functionality that will natively be embeded into the social network infrastructure simply by placing a globaly visible node that will publish new object types.
+
+Off to another topic. Since the client capabilities are not known, and communication between the client and the node serving it are meant to be trivial in terms of time and avaliability (supposed to be on the same machine or LAN). Then why not provide all the necesary functionality in the server, and rely on server client roundtrips rather then client side scripting.
+I think that support for client side scripting is important, but using the round trips will allow better type system support. But it will mean that the views will have to be run on the server, and since views are defined by their publishers, and are versionint objects themselvs, my best bet will be to have some "compiled"/"prepared" version of them in memory to be used whenever i need to serv an object of that type. (initial versions will not contain any caching of such things, but later an LRU cache is a natural development in my mind.)
+So right now i see an object type as something like this:
+
+    {
+       // all the object regular identification fields, including the type that say this is a type object
+       content {
+         default-client-type: , // the default client type name expected to use this object - web-client or no-support normally - used to find the default view if no view is defined for the current client type. assumed to be no-support if missing
+         default-views: {
+           client-type-1: , // obj ref of the default view object for this type
+           client-type-2: , // obj ref of the default view object for this type
+           client-type-3: , // obj ref of the default view object for this type
+           no-support: // obj ref of a p2psn no support view object - that object simply return the string: "Not Supported object type: "+type identification
+         }
+       },
+       // all the signatures expected form any object
+    }
+
+and a view will be something like this:
+
+{
+       // all the object regular identification fields, including the type that say this is a view object
+       content {
+         base-view: , // obj reference for the view this view inherits from (optional, but if it is ommited, then view will inherit from the p2psn base view object (this is to make sure every view has the necesary functions)
+         template: "", // optional string template that contain all the necesari obj2template binding - this binding is done by the server
+         template-binder: "", // optionally a js function code that defines a function with the following signature: f(template, object) and returns a string of the binded template
+         action_handlers: {
+           action-1: "", // a js function that performs validation and handling on the json object returned from the client. this function follows the signature: f(obj /* the json object got from the action */, server /* the API object for performing server operations like creating a new object version, or generating a new child object */) 
+         }
+       },
+       // all the signatures expected form any object
+    }
+
+all the js functions must assume no state, although i expect to keep an LRU in memory cache of them, each function can be gone from the cache with out any prior warning.
+
+all this work on JS and creating some JS based hirarchy of views and types with actions and handlers and hooks etc... all this brings the question: is cppcms the correct option - or perhaps i am better of living in a nodejs server for example. (http://nodejs.org/)
+if i continue with cppcms, i will need some js engine embeded in it - v8 is a good posibility https://developers.google.com/v8
+Also i need to think how to handle JS dependancies within those embeded js functions (perhaps: http://requirejs.org/)
+
+Lastly just a reminder so i will not lose it: i intend for the noded to be an openid provider for its profiles, and allow any openid authentication provider to be attached to the profiles. this way, people can authenticate using whatever website they want, and if they have a public node - they can also use it to authenticate elseware. (http://openid.net/ perhaps using http://kin.klever.net/libopkele/)
+
 2012-08-05
 
 I been thinking about the client side of things.
