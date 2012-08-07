@@ -118,6 +118,8 @@ Also i need to think how to handle JS dependancies within those embeded js funct
 
 Lastly just a reminder so i will not lose it: i intend for the noded to be an openid provider for its profiles, and allow any openid authentication provider to be attached to the profiles. this way, people can authenticate using whatever website they want, and if they have a public node - they can also use it to authenticate elseware. (http://openid.net/ perhaps using http://kin.klever.net/libopkele/)
 
+One more point: at some point i will want to place: https://flattr.com/ button in - but way into the future
+
 2012-08-05
 
 I been thinking about the client side of things.
