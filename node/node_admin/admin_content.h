@@ -27,7 +27,7 @@ namespace p2psn {
                 admin_user_state state;
             };
 
-            class new_user_form : public cppcms::form {
+            struct new_user_form : public cppcms::form {
                 cppcms::widgets::text user_name;
                 cppcms::widgets::password user_password;
                 cppcms::widgets::submit submit;
@@ -35,7 +35,7 @@ namespace p2psn {
                 new_user_form();
             };
 
-            class edited_user_form : public cppcms::form {
+            struct edited_user_form : public cppcms::form {
                 cppcms::widgets::hidden user_name;
                 cppcms::widgets::password user_password;
                 cppcms::widgets::submit submit;

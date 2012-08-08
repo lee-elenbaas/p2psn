@@ -3,15 +3,28 @@
 <% view admin_users uses content::admin_users extends master %>
 
 <% template page_content() %>
-<% include new_user() %>
 <% if state == admin_users_state::view %>
-	<% include existing_users() %>
+	<% include new_user() %>
+<% else %>
+	<% include edit_user() %>
+<% end %>
+<% include existing_users() %>
 <% end template %>
 
 <% template new_user() %>
 <h2>New User</h2>
 <form method="post" action="<% url "/admin/users/new" %>">
 <% csrf %>
+<% form as_p new_user_form %>
+</form>
+<% end template %>
+
+<% template new_user() %>
+<h2>Edit User</h2>
+<form method="post" action="<% url "/admin/users/update" %>">
+<% csrf %>
+<% form as_p edited_user_form %>
+</form>
 <% end template %>
 
 <% template existing_users() %>
