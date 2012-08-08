@@ -63,7 +63,12 @@ And the static media content using CC Share alike license.
 
 Developers
 ----------
-Lee Elenbaas - lee [dot] elenbaas [at] gmail [dot] com - Owner
+Lee Elenbaas - lee [at] elenbaas [dot] org [dot] il - Owner
+
+Thanks
+------
+Lior Shterenberg for taking his time to sit with me on this. Allowing me to bounce ideas off his mind.
+Anat Elenbaas for giving me the time to do this, and supporting me in making it
 
 Known Issues
 ------------
@@ -72,6 +77,25 @@ At the same time each node is intended to run on a normal home PC with its limit
 
 Development Blog
 ----------------
+
+2012-08-08
+
+Ok after some thinking the rules will be like this:
+
+ - The node will store an in memory JS vm LRU cache for each authenticated client (guest access is something i will have to think about)
+ - This client VM will contain a JS object that will be used for the handling of all content by the server. This object will include a property for each of the used types - this way types can refer to each other.
+ - Loading of a new type will be done by: converting the type definition from json with strings into JS code that will be run inside the VM. A type will reference its parent type as its prototype. Type names will be mangled by the server in order to generate uniqu names - and make them unusable directly - only through inheritance and object inclusions
+ - The basic parent view will have no such prototyping, instead it will contain all the fundamental framework for handling node->client bindings
+ - View actions will be again JS functions, refrences to other actions or to a specific action in another type. calling to another action in the same view can be done simply by using its name - calling actions from another type can be done only by referencing that action inside this view and then calling it by the referencing name.
+ - The implementation of the actions will be as an actions object inside the view object. - again actions will prototype the actions of their parent view.
+ - Each action will recieve the folling parameter:
+    - the json object from the server this action relates too.
+    - some information about the request: (json info recieved from the client for the action, client type, identification, profile, ...)
+    - a response object used to make his response. This object will give API to perform operations on the object: new version, generate a child object of a certain type... This response will also be responsible for performing validity checks on the incoming json object, and will be able to return and attach responses to the server object. That server object will later be used for the rendering phase (along with any additions done to it on the action stage). This server object can also tell the server that a different object & view combination should be returned as a response.
+
+Reading what i just wrote - i guess the binding phase is just another action being performed. So if that is the case perhaps i should just say so and be done with it by handling them together.
+
+Thikning is a hard work...:)
 
 2012-08-07 2
 
