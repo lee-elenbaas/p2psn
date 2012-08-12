@@ -1,9 +1,9 @@
-<% c++ #include "../node_admin/admin_content.h" %>
+<% c++ #include "../node_admin/admin_users_content.h" %>
 <% skin ptp2n_node_admin_skin %>
 <% view admin_users uses content::admin_users extends master %>
 
 <% template page_content() %>
-<% if state == admin_users_state::view %>
+<% if (content.list_state == content::admin_users_list_state::view) %>
 	<% include new_user() %>
 <% else %>
 	<% include edit_user() %>
@@ -15,15 +15,15 @@
 <h2>New User</h2>
 <form method="post" action="<% url "/admin/users/new" %>">
 <% csrf %>
-<% form as_p new_user_form %>
+<% form as_p new_user %>
 </form>
 <% end template %>
 
-<% template new_user() %>
+<% template edit_user() %>
 <h2>Edit User</h2>
 <form method="post" action="<% url "/admin/users/update" %>">
 <% csrf %>
-<% form as_p edited_user_form %>
+<% form as_p edited_user %>
 </form>
 <% end template %>
 
@@ -40,18 +40,18 @@
 <% foreach user in existing_users %>
 	<tbody>
 <% item %>
-<tr>
+<tr class="<%= user.user_state ">
 	<td><%= user.name %></td>
 	<td><%= user.password %></td>
 	<td>
-		<% if user.state != admin_user_state::edited_user %>
+		<% if (user.user_state != content::admin_user_state::edited_user) %>
 			<form method="post" action="<% url "/admin/users/edit" %>">
 				<% csrf %>
 				<input type="hidden" name="user_name" value="<%= user.name %>" />	
 				<input type="submit" value="Edit" />
 			</form>
 		<% end %>
-		<% if user.state != admin_user_state::deleted_user %>
+		<% if (user.user_state != content::admin_user_state::deleted_user) %>
 			<form method="post" action="<% url "/admin/users/delete" %>">
 				<% csrf %>
 				<input type="hidden" name="user_name" value="<%= user.name %>" />	

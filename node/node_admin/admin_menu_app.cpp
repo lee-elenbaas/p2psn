@@ -1,4 +1,4 @@
-#include "admin_app.h"
+#include "admin_menu_app.h"
 
 #include <cppcms/url_dispatcher.h>
 #include "../node_admin/admin_users_app.h"
@@ -8,13 +8,13 @@ using namespace p2psn::node_admin;
 using cppcms::json::value;
 using std::string;
 
-admin_app::admin_menu_app(cppcms::service &srv) 
+admin_menu_app::admin_menu_app(cppcms::service &srv) 
     : admin_base_app(srv) 
 {
     attach(new admin_users_app(srv), "users", "/users{1}", "/users(/(.*))?", 1);
 //    attach(new admin_server_app(srv), "server", "/server{1}", "/server(/(.*))?", 1);
 
-    dispatcher().assign("",&admin_app::admin_menu,this);
+    dispatcher().assign("",&admin_menu_app::admin_menu,this);
     mapper().assign("");
 }
 

@@ -12,7 +12,10 @@ namespace p2psn {
     namespace node_admin {
         namespace content  {
 
-            enum class 
+            enum class admin_users_list_state {
+                view,
+                editing
+            };
 
             enum class admin_user_state {
                 existing_user,
@@ -24,7 +27,7 @@ namespace p2psn {
             struct user {
                 string name;
                 string password;
-                admin_user_state state;
+                admin_user_state user_state;
             };
 
             struct new_user_form : public cppcms::form {
@@ -44,6 +47,7 @@ namespace p2psn {
             };
 
             struct admin_users : public master {
+                admin_users_list_state list_state;
                 std::vector<user> existing_users;
                 
                 new_user_form new_user;

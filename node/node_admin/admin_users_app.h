@@ -20,7 +20,7 @@ namespace p2psn {
             /**
              * Manage admin users
              */
-            void admin_users();
+            void list_users();
 
             /**
              * Add a new user
@@ -42,13 +42,10 @@ namespace p2psn {
              */
             void restore_user();
         private:
-            cppcms::json::value new_config();
-            void new_config(const cppcms::json::value&);
-
             /**
              * show admin users page
              */
-            void admin_users_show(content::admin_users);
+            void admin_users_show(content::admin_users&);
         };
 
     } // namespace node_admin
