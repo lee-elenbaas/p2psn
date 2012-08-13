@@ -7,7 +7,7 @@ admin_base_app::admin_base_app(cppcms::service &srv)
 {
 }
 
-void admin_app::main(std::string request_url)
+void admin_base_app::main(std::string request_url)
 {
     if (session().is_set("user")) {
         base_app::main(request_url);

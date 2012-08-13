@@ -9,8 +9,8 @@ MAIN_CPP=main/noded.cpp main/signal_handler.cpp
 NODE_ADMIN_GENERATED=build/ptp2n_node_admin_skin.cpp
 NODE_ADMIN_SKIN=node_shared/master.tmpl node_guest/info.tmpl node_guest/about.tmpl node_guest/login.tmpl node_admin/admin_menu.tmpl node_admin/admin_users.tmpl
 NODE_ADMIN_CONTENT=node_shared/base_content.h node_guest/guest_content.h node_admin/admin_users_content.h
-NODE_ADMIN_HEADERS=node_shared/base_app.h node_guest/guest_app.h node_admin/admin_menu_app.h node_admin/admin_users_app.h
-NODE_ADMIN_CPP=node_shared/base_app.cpp node_guest/guest_app.cpp node_admin/admin_menu_app.cpp node_admin/admin_users_app.cpp node_shared/base_content.cpp node_guest/guest_content.cpp node_admin/admin_users_content.cpp
+NODE_ADMIN_HEADERS=node_shared/base_app.h node_guest/guest_app.h node_admin/admin_base_app.h node_admin/admin_menu_app.h node_admin/admin_users_app.h
+NODE_ADMIN_CPP=node_shared/base_app.cpp node_guest/guest_app.cpp node_admin/admin_base_app.cpp node_admin/admin_menu_app.cpp node_admin/admin_users_app.cpp node_shared/base_content.cpp node_guest/guest_content.cpp node_admin/admin_users_content.cpp
 
 #JSON-RPC Node API CppCMS application
 NODE_API_HEADERS=node_api/node_api.h
