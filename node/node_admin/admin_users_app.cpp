@@ -49,10 +49,22 @@ void admin_users_app::add_user()
     c.list_state = content::admin_users_list_state::view;
 
     if (request().request_method() == "POST") {
+        c.new_user.load(context());
         
+        if (c.new_user.validate() && avaliable_user(c.new_user.user_name.value())) {
+            // TODO: add the user to the list in the session
+            // TODO: add user message
+            
+            response_redirect("/admin");
+        }
     }
 
     admin_users_show(c);
+}
+
+void admin_users_app::avaliable_user(const string& name) 
+{
+    
 }
 
 void admin_users_app::edit_user()

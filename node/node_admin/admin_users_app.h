@@ -46,6 +46,11 @@ namespace p2psn {
              * show admin users page
              */
             void admin_users_show(content::admin_users&);
+
+            /**
+             * check if the given user is avaliable to be placed into the user list
+             */
+            void avaliable_user(const string&) 
         };
 
     } // namespace node_admin
