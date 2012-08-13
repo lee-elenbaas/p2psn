@@ -34,6 +34,15 @@
 		}      
 	    },  
 	"config_noded" : {
+		"tasks" : {
+			"admin users" : false,
+			"server settings" : {
+				"port" : false,
+				"ip filtering" : false,
+				"admin ip filtering" : false
+			},
+			"apply new settings" : false
+		},
 		"admin" : [
 			{ "user" : "admin", "password" : "admin" },
 			{ "user" : "lior", "password" : "lior" },
