@@ -50,7 +50,7 @@ namespace p2psn {
             /**
              * check if the given user is avaliable to be placed into the user list
              */
-            void avaliable_user(const string&) 
+            bool avaliable_user(const string&) 
         };
 
     } // namespace node_admin

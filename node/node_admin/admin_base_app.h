@@ -2,6 +2,7 @@
 #define __P2PSN_ADMIN_BASE_APP_H
 
 #include "../node_shared/base_app.h"
+#include <vector>
 
 namespace p2psn {
     namespace node_admin {
@@ -20,6 +21,15 @@ namespace p2psn {
              * handle all incoming requests
              */	
             virtual void main(std::string);
+        protected:
+            /**
+             * The current admin users configuration
+             */
+            std::vector<content::user> admin_users();
+            /**
+             * Set the current admin users configuration
+             */
+            void admin_users(std::vector<content::user>);
         };
 
     } // namespace node_admin

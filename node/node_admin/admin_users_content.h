@@ -6,7 +6,7 @@
 #ifndef __P2PSN_ADMIN_USERS_CONTENT_H
 #define __P2PSN_ADMIN_USERS_CONTENT_H
 
-#include "../node_shared/base_content.h"
+#include "../node_admin/admin_shared_content.h"
 
 namespace p2psn {
     namespace node_admin {
@@ -15,19 +15,6 @@ namespace p2psn {
             enum class admin_users_list_state {
                 view,
                 editing
-            };
-
-            enum class admin_user_state {
-                existing_user,
-                new_user,
-                edited_user,
-                deleted_user
-            };
-            
-            struct user {
-                string name;
-                string password;
-                admin_user_state user_state;
             };
 
             struct new_user_form : public cppcms::form {

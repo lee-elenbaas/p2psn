@@ -29,6 +29,7 @@ admin_users_app::admin_users_app(cppcms::service &srv)
 void admin_users_app::admin_users_show(content::admin_users& c) {
     init(c);
     c.title = "Admin Users";
+    c.existing_users = admin_users();
 
     render("admin_users",c);
 }
@@ -50,10 +51,20 @@ void admin_users_app::add_user()
 
     if (request().request_method() == "POST") {
         c.new_user.load(context());
+
+        auto users = admin_users();
         
-        if (c.new_user.validate() && avaliable_user(c.new_user.user_name.value())) {
-            // TODO: add the user to the list in the session
-            // TODO: add user message
+        if (c.new_user.validate() && avaliable_user(c.new_user, users)) {
+            content::user new_user;
+
+            new_user.name = c.new_user.user_name.value();
+            new_user.password = c.new_user.user_password.value();
+            new_user.user_state = content::admin_user_state::new_user;
+
+            users.push_back(new_user);
+
+            admin_users(users);
+            // TODO: place message to user
             
             response_redirect("/admin");
         }
@@ -62,19 +73,35 @@ void admin_users_app::add_user()
     admin_users_show(c);
 }
 
-void admin_users_app::avaliable_user(const string& name) 
+bool admin_users_app::avaliable_user(content::new_user_form& new_user, const vector<content::user>& users) 
 {
-    
+    for (auto u : users) {
+        if (new_user.user_name.value() == u.name) {
+            new_user.user_name.valid(false);
+
+            return false;
+        }
+    }
+
+    return true;
 }
 
 void admin_users_app::edit_user()
 {
+    auto users = admin_users();
     content::admin_users c;
 
-    c.list_state = content::admin_users_list_state::editing;
+    c.list_state = content::admin_users_list_state::view;
 
     if (request().request_method() == "POST") {
-        
+        string user_name = requst().post("user_name");
+
+        for (auto u : users) {
+            if (u.name == user_name) {
+                // TODO: set user to be edited
+                c.list_state = content::admin_users_list_state::editing;
+            }
+        }
     }
 
     admin_users_show(c);

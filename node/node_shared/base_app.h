@@ -3,6 +3,9 @@
 
 #include <cppcms/application.h>
 #include <cppcms/service.h>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <sstream>
 
 #include "base_content.h"
 
@@ -33,6 +36,33 @@ namespace p2psn {
              * Shared inialization of page content
              */
             void init(content::master&);
+
+            /**
+             * Get serialized value from session
+             */
+            template<typename T>
+            T session_get(const std::string& key) {
+                T value;
+
+                istream input_stream(session().get(key));
+                boost::archive::text_iarchive input_archive(input_stream);
+                
+                input_archive >> value;
+
+                return value;
+            }
+            /**
+             * Set serialized value to session
+             */
+            template<typename T>
+            void session_set(const std::string& key, const T& value) {
+                ostream output_stream;
+                boost::archive::text_oarchive output_archive(output_stream);
+
+                output_archive << value;
+
+                session().set(key, output_stream.str());
+            }
         };
 
     } // namespace node_admin
