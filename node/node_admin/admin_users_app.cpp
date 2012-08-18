@@ -24,12 +24,14 @@ admin_users_app::admin_users_app(cppcms::service &srv)
 
     dispatcher().assign("/restore",&admin_users_app::restore_user,this);
     mapper().assign("restore","/restore");
+
+    dispatcher().assign("/update",&admin_users_app::update_user,this);
+    mapper().assign("restore","/update");
 }
 
 void admin_users_app::admin_users_show(content::admin_users& c) {
     init(c);
     c.title = "Admin Users";
-    c.existing_users = admin_users();
 
     render("admin_users",c);
 }
@@ -39,6 +41,7 @@ void admin_users_app::list_users()
     content::admin_users c;
 
     c.list_state = content::admin_users_list_state::view;
+    c.existing_users = admin_users();
 
     admin_users_show(c);
 }
@@ -48,12 +51,11 @@ void admin_users_app::add_user()
     content::admin_users c;
 
     c.list_state = content::admin_users_list_state::view;
+    auto users = admin_users();
 
     if (request().request_method() == "POST") {
         c.new_user.load(context());
 
-        auto users = admin_users();
-        
         if (c.new_user.validate() && avaliable_user(c.new_user, users)) {
             content::user new_user;
 
@@ -64,13 +66,55 @@ void admin_users_app::add_user()
             users.push_back(new_user);
 
             admin_users(users);
-            // TODO: place message to user
+            // TODO: user added message
             
             response_redirect("/admin");
         }
     }
 
+    c.existing_users = users;
     admin_users_show(c);
+}
+
+void admin_users_app::update_user()
+{
+    content::admin_users c;
+
+    c.list_state = content::admin_users_list_state::view;
+    auto users = admin_users();
+
+    if (request().request_method() == "POST") {
+        c.edit_user.load(context());
+
+        if (c.edit_user.validate()) {
+            bool user_found = false;
+
+            for (auto u : users) {
+                if (u.name == u.edit_user.user_name.value()) {
+                    u.password = u.edit_user.user_password.value();
+                    u.user_state = content::admin_user_state::new_user;
+                    // TODO: user updated message
+                    admin_users(users);
+
+                    user_found = true;
+                    break;
+                }
+            }
+
+            if (!user_found) {
+                // TODO: user not exists
+            }
+            
+            response_redirect("/admin");
+        }
+        else {
+            c.existing_users = users;
+            admin_users_show(c);
+        }
+    }
+    else {
+        response_redirect("/admin");
+    }
 }
 
 bool admin_users_app::avaliable_user(content::new_user_form& new_user, const vector<content::user>& users) 
@@ -78,6 +122,8 @@ bool admin_users_app::avaliable_user(content::new_user_form& new_user, const vec
     for (auto u : users) {
         if (new_user.user_name.value() == u.name) {
             new_user.user_name.valid(false);
+            new_user.user_name.message("User name already in use");
+            new_user.valid(false);
 
             return false;
         }
@@ -93,44 +139,92 @@ void admin_users_app::edit_user()
 
     c.list_state = content::admin_users_list_state::view;
 
+    bool user_found = false;
+
     if (request().request_method() == "POST") {
         string user_name = requst().post("user_name");
 
         for (auto u : users) {
             if (u.name == user_name) {
-                // TODO: set user to be edited
+                c.edit_user.user_name.value(u.name);
                 c.list_state = content::admin_users_list_state::editing;
+
+                user_found = true;
+                break;
             }
         }
     }
 
-    admin_users_show(c);
+    if (user_found) {
+        c.existing_users = users;
+        admin_users_show(c);
+    }
+    else {
+        //TODO: no user to edit message
+        response_redirect("/admin");
+    }
 }
 
 void admin_users_app::delete_user()
 {
-    content::admin_users c;
+    auto users = admin_users();
 
-    c.list_state = content::admin_users_list_state::view;
+    bool user_found = false;
 
     if (request().request_method() == "POST") {
+        string user_name = requst().post("user_name");
         
+        for (auto u : users) {
+            if (u.name == user_name) {
+                u.user_state = content::admin_user_state::deleted_user
+                //TODO: user deleted message
+
+                admin_users(users);
+                user_found = true;
+                break;
+            }
+        }
     }
 
-    admin_users_show(c);
+    if (!user_found) {
+        //TODO: no user to edit message
+    }
+
+    response_redirect("/admin");
 }
 
 void admin_users_app::restore_user()
 {
-    content::admin_users c;
+    auto users = admin_users();
 
-    c.list_state = content::admin_users_list_state::view;
+    bool user_found = false;
 
     if (request().request_method() == "POST") {
+        string user_name = requst().post("user_name");
         
+        for (auto u : users) {
+            if (u.name == user_name) {
+                if (u.user_state == content::admin_user_state::deleted_user) {
+                    u.user_state = content::admin_user_state::new_user
+                    //TODO: user restored message
+
+                    admin_users(users);
+                }
+                else {
+                    // TOSO: user is already active message
+                }
+
+                user_found = true;
+                break;
+            }
+        }
     }
 
-    admin_users_show(c);
+    if (!user_found) {
+        //TODO: no user to restore message
+    }
+
+    response_redirect("/admin");
 }
 
 // vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

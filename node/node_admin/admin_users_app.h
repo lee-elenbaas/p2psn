@@ -41,6 +41,11 @@ namespace p2psn {
              * Restore a deleted user
              */
             void restore_user();
+            
+            /**
+             * Update a user definition
+             */
+            void update_user();
         private:
             /**
              * show admin users page

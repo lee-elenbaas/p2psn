@@ -44,7 +44,7 @@ namespace p2psn {
             T session_get(const std::string& key) {
                 T value;
 
-                istream input_stream(session().get(key));
+                std::istringstream input_stream(session().get(key));
                 boost::archive::text_iarchive input_archive(input_stream);
                 
                 input_archive >> value;
@@ -56,7 +56,7 @@ namespace p2psn {
              */
             template<typename T>
             void session_set(const std::string& key, const T& value) {
-                ostream output_stream;
+                std::ostringstream output_stream;
                 boost::archive::text_oarchive output_archive(output_stream);
 
                 output_archive << value;
