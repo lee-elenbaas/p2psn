@@ -2,22 +2,22 @@ LIBS=-lcppcms -lbooster
 OPTIONS=-O2 -Wall -std=gnu++0x -g
 
 #Wrapper C++ application
-MAIN_HEADERS=main/signal_handler.h
+MAIN_HEADERS=main/signal_handler.hpp
 MAIN_CPP=main/noded.cpp main/signal_handler.cpp
 
 #Main node CppCMS application
 NODE_ADMIN_GENERATED=build/ptp2n_node_admin_skin.cpp
 NODE_ADMIN_SKIN=node_shared/master.tmpl node_guest/info.tmpl node_guest/about.tmpl node_guest/login.tmpl node_admin/admin_menu.tmpl node_admin/admin_users.tmpl
-NODE_ADMIN_CONTENT=node_shared/base_content.h node_guest/guest_content.h node_admin/admin_shared_content.h node_admin/admin_users_content.h
-NODE_ADMIN_HEADERS=node_shared/base_app.h node_guest/guest_app.h node_admin/admin_base_app.h node_admin/admin_menu_app.h node_admin/admin_users_app.h
+NODE_ADMIN_CONTENT=node_shared/base_content.hpp node_guest/guest_content.hpp node_admin/admin_shared_content.hpp node_admin/admin_users_content.hpp
+NODE_ADMIN_HEADERS=node_shared/base_app.hpp node_guest/guest_app.hpp node_admin/admin_base_app.hpp node_admin/admin_menu_app.hpp node_admin/admin_users_app.hpp
 NODE_ADMIN_CPP=node_shared/base_app.cpp node_guest/guest_app.cpp node_admin/admin_base_app.cpp node_admin/admin_menu_app.cpp node_admin/admin_users_app.cpp node_shared/base_content.cpp node_guest/guest_content.cpp node_admin/admin_users_content.cpp
 
 #JSON-RPC Node API CppCMS application
-NODE_API_HEADERS=node_api/node_api.h
+NODE_API_HEADERS=node_api/node_api.hpp
 NODE_API_CPP=node_api/node_api.cpp
 
 #Shared utils
-UTILS_HEADERS=utils/crypto.h utils/locale_matching.h utils/regex_utils.h utils/log.h
+UTILS_HEADERS=utils/crypto.hpp utils/locale_matching.hpp utils/regex_utils.hpp utils/log.hpp
 UTILS_CPP=utils/crypto.cpp utils/locale_matching.cpp utils/regex_utils.cpp
 
 all: separator run
