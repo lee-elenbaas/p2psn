@@ -2,8 +2,8 @@ LIBS=-lcppcms -lbooster
 OPTIONS=-O2 -Wall -std=gnu++0x -g
 
 #Wrapper C++ application
-MAIN_HEADERS=main/signal_handler.hpp
-MAIN_CPP=main/noded.cpp main/signal_handler.cpp
+MAIN_HEADERS=
+MAIN_CPP=main/noded.cpp
 
 #Main node CppCMS application
 NODE_ADMIN_GENERATED=build/ptp2n_node_admin_skin.cpp
@@ -17,8 +17,8 @@ NODE_API_HEADERS=node_api/node_api.hpp
 NODE_API_CPP=node_api/node_api.cpp
 
 #Shared utils
-UTILS_HEADERS=utils/crypto.hpp utils/locale_matching.hpp utils/regex_utils.hpp utils/log.hpp
-UTILS_CPP=utils/crypto.cpp utils/locale_matching.cpp utils/regex_utils.cpp
+UTILS_HEADERS=utils/crypto.hpp utils/locale_matching.hpp utils/regex_utils.hpp utils/log.hpp utils/signal_handler.hpp
+UTILS_CPP=utils/crypto.cpp utils/locale_matching.cpp utils/regex_utils.cpp utils/signal_handler.cpp
 
 all: separator run
 
