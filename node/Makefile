@@ -1,4 +1,4 @@
-LIBS=-lcppcms -lbooster
+LIBS=-lcppcms -lbooster -lboost_serialization
 OPTIONS=-O2 -Wall -std=gnu++0x -g
 
 #Wrapper C++ application

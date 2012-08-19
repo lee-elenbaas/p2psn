@@ -46,6 +46,47 @@ void admin_users_app::list_users()
     admin_users_show(c);
 }
 
+void admin_users_app::update_user()
+{
+    content::admin_users c;
+
+    c.list_state = content::admin_users_list_state::view;
+    auto users = admin_users();
+
+    if (request().request_method() == "POST") {
+        c.edited_user.load(context());
+
+        if (c.edited_user.validate()) {
+            bool user_found = false;
+
+            for (auto u : users) {
+                if (u.name == c.edited_user.user_name.value()) {
+                    u.password = c.edited_user.user_password.value();
+                    u.user_state = content::admin_user_state::new_user;
+                    // TODO: user updated message
+                    admin_users(users);
+
+                    user_found = true;
+                    break;
+                }
+            }
+
+            if (!user_found) {
+                // TODO: user not exists
+            }
+            
+            response_redirect("/admin");
+        }
+        else {
+            c.existing_users = users;
+            admin_users_show(c);
+        }
+    }
+    else {
+        response_redirect("/admin");
+    }
+}
+
 void admin_users_app::add_user()
 {
     content::admin_users c;
@@ -76,54 +117,13 @@ void admin_users_app::add_user()
     admin_users_show(c);
 }
 
-void admin_users_app::update_user()
-{
-    content::admin_users c;
-
-    c.list_state = content::admin_users_list_state::view;
-    auto users = admin_users();
-
-    if (request().request_method() == "POST") {
-        c.edit_user.load(context());
-
-        if (c.edit_user.validate()) {
-            bool user_found = false;
-
-            for (auto u : users) {
-                if (u.name == u.edit_user.user_name.value()) {
-                    u.password = u.edit_user.user_password.value();
-                    u.user_state = content::admin_user_state::new_user;
-                    // TODO: user updated message
-                    admin_users(users);
-
-                    user_found = true;
-                    break;
-                }
-            }
-
-            if (!user_found) {
-                // TODO: user not exists
-            }
-            
-            response_redirect("/admin");
-        }
-        else {
-            c.existing_users = users;
-            admin_users_show(c);
-        }
-    }
-    else {
-        response_redirect("/admin");
-    }
-}
-
-bool admin_users_app::avaliable_user(content::new_user_form& new_user, const vector<content::user>& users) 
+bool admin_users_app::avaliable_user(content::new_user_form& new_user, const std::vector<content::user>& users) 
 {
     for (auto u : users) {
         if (new_user.user_name.value() == u.name) {
             new_user.user_name.valid(false);
             new_user.user_name.message("User name already in use");
-            new_user.valid(false);
+            //new_user.valid(false);
 
             return false;
         }
@@ -142,11 +142,11 @@ void admin_users_app::edit_user()
     bool user_found = false;
 
     if (request().request_method() == "POST") {
-        string user_name = requst().post("user_name");
+        string user_name = request().post("user_name");
 
         for (auto u : users) {
             if (u.name == user_name) {
-                c.edit_user.user_name.value(u.name);
+                c.edited_user.user_name.value(u.name);
                 c.list_state = content::admin_users_list_state::editing;
 
                 user_found = true;
@@ -172,11 +172,11 @@ void admin_users_app::delete_user()
     bool user_found = false;
 
     if (request().request_method() == "POST") {
-        string user_name = requst().post("user_name");
+        string user_name = request().post("user_name");
         
         for (auto u : users) {
             if (u.name == user_name) {
-                u.user_state = content::admin_user_state::deleted_user
+                u.user_state = content::admin_user_state::deleted_user;
                 //TODO: user deleted message
 
                 admin_users(users);
@@ -200,12 +200,12 @@ void admin_users_app::restore_user()
     bool user_found = false;
 
     if (request().request_method() == "POST") {
-        string user_name = requst().post("user_name");
+        string user_name = request().post("user_name");
         
         for (auto u : users) {
             if (u.name == user_name) {
                 if (u.user_state == content::admin_user_state::deleted_user) {
-                    u.user_state = content::admin_user_state::new_user
+                    u.user_state = content::admin_user_state::new_user;
                     //TODO: user restored message
 
                     admin_users(users);

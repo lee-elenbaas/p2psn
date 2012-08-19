@@ -30,7 +30,7 @@ namespace p2psn {
             /**
              * Set the current admin users configuration
              */
-            void admin_users(std::vector<content::user>);
+            void admin_users(const std::vector<content::user>&);
         };
 
     } // namespace node_admin

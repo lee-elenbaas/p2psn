@@ -55,7 +55,7 @@ namespace p2psn {
             /**
              * check if the given user is avaliable to be placed into the user list
              */
-            bool avaliable_user(const string&) 
+            bool avaliable_user(content::new_user_form&, const std::vector<content::user>&);
         };
 
     } // namespace node_admin

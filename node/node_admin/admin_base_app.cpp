@@ -31,7 +31,7 @@ vector<content::user> admin_base_app::admin_users()
     /// Convert current config to admin list
     vector<content::user> users;
 
-    value existing_users = settings().get("config_noded.admin");
+    value existing_users = settings().at("config_noded.admin");
     
     if (existing_users.type() == json_type::is_array) {
         for(auto u : existing_users.array()) {
@@ -39,7 +39,7 @@ vector<content::user> admin_base_app::admin_users()
 
             user.name = u["user"].str();
             user.password = u["password"].str();
-            user.user_state = admin_user_state::existing_user;
+            user.user_state = content::admin_user_state::existing_user;
 
             users.push_back(user);
         }
