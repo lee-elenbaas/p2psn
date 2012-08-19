@@ -1,5 +1,5 @@
 
-#include "admin_users_content.h"
+#include "admin_users_content.hpp"
 
 using namespace std;
 using namespace p2psn::node_admin::content;

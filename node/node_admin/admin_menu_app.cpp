@@ -1,8 +1,8 @@
-#include "admin_menu_app.h"
+#include "admin_menu_app.hpp"
 
 #include <cppcms/url_dispatcher.h>
-#include "../node_admin/admin_users_app.h"
-//#include "../node_admin/admin_server_app.h"
+#include "../node_admin/admin_users_app.hpp"
+//#include "../node_admin/admin_server_app.hpp"
 
 using namespace p2psn::node_admin;
 using cppcms::json::value;

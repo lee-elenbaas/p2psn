@@ -1,8 +1,8 @@
 #ifndef __P2PSN_ADMIN_BASE_APP_H
 #define __P2PSN_ADMIN_BASE_APP_H
 
-#include "../node_shared/base_app.h"
-#include "../node_admin/admin_shared_content.h"
+#include "../node_shared/base_app.hpp"
+#include "../node_admin/admin_shared_content.hpp"
 #include <vector>
 
 namespace p2psn {

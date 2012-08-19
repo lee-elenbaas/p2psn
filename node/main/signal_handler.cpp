@@ -1,5 +1,5 @@
 
-#include "signal_handler.h"
+#include "signal_handler.hpp"
 
 // TODO I#6: need to handle win32 case using #ifdef
 #include <errno.h>

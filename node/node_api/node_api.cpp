@@ -1,4 +1,4 @@
-#include "node_api.h"
+#include "node_api.hpp"
 
 using namespace std;
 using namespace p2psn::api;

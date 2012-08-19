@@ -1,9 +1,9 @@
-#include "../node_guest/guest_app.h"
+#include "../node_guest/guest_app.hpp"
 
 #include <cppcms/url_dispatcher.h>
-#include "../node_api/node_api.h"
-#include "../node_admin/admin_menu_app.h"
-#include "../utils/crypto.h"
+#include "../node_api/node_api.hpp"
+#include "../node_admin/admin_menu_app.hpp"
+#include "../utils/crypto.hpp"
 
 using namespace p2psn::node_admin;
 

@@ -1,5 +1,5 @@
 
-#include "guest_content.h"
+#include "guest_content.hpp"
 
 using namespace std;
 using namespace p2psn::node_admin::content;

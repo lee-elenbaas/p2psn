@@ -7,7 +7,7 @@
 #include <boost/archive/text_iarchive.hpp>
 #include <sstream>
 
-#include "base_content.h"
+#include "base_content.hpp"
 
 namespace p2psn {
     namespace node_admin {

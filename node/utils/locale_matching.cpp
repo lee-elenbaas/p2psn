@@ -1,7 +1,7 @@
 
-#include "locale_matching.h"
+#include "locale_matching.hpp"
 
-#include "regex_utils.h"
+#include "regex_utils.hpp"
 #include <list>
 #include <cstdlib>
 

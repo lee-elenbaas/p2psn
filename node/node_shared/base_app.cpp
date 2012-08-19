@@ -1,7 +1,7 @@
-#include "../node_shared/base_app.h"
+#include "../node_shared/base_app.hpp"
 
-#include "../utils/log.h"
-#include "../utils/locale_matching.h"
+#include "../utils/log.hpp"
+#include "../utils/locale_matching.hpp"
 
 using namespace p2psn::node_admin;
 using std::string;

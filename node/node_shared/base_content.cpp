@@ -1,5 +1,5 @@
 
-#include "base_content.h"
+#include "base_content.hpp"
 
 using namespace std;
 using namespace p2psn::node_admin::content;
