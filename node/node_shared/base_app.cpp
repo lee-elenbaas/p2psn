@@ -21,9 +21,7 @@ void base_app::main(string url) {
     if (session().is_set("locale"))
         context().locale(session().get("locale"));
 
-    LOG(p2psn::utils::level_type::alert, "before: "+url);
 	cppcms::application::main(url);
-    LOG(p2psn::utils::level_type::alert, "before: "+url);
 }
 
 void base_app::init(content::master& c) {

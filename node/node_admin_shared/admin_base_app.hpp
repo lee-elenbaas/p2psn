@@ -2,7 +2,7 @@
 #define __P2PSN_ADMIN_BASE_APP_H
 
 #include "../node_shared/base_app.hpp"
-#include "../node_admin/admin_shared_content.hpp"
+#include "../node_admin_shared/admin_shared_content.hpp"
 #include <vector>
 
 namespace p2psn {

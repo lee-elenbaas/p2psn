@@ -1,7 +1,7 @@
 #ifndef __P2PSN_ADMIN_USERS_APP_H
 #define __P2PSN_ADMIN_USERS_APP_H
 
-#include "../node_admin/admin_base_app.hpp"
+#include "../node_admin_shared/admin_base_app.hpp"
 #include "admin_users_content.hpp"
 
 namespace p2psn {

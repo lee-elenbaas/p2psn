@@ -7,10 +7,10 @@ MAIN_CPP=main/noded.cpp
 
 #Main node CppCMS application
 NODE_ADMIN_GENERATED=build/ptp2n_node_admin_skin.cpp
-NODE_ADMIN_SKIN=node_shared/master.tmpl node_guest/info.tmpl node_guest/about.tmpl node_guest/login.tmpl node_admin/admin_menu.tmpl node_admin/admin_users.tmpl
-NODE_ADMIN_CONTENT=node_shared/base_content.hpp node_guest/guest_content.hpp node_admin/admin_shared_content.hpp node_admin/admin_users_content.hpp
-NODE_ADMIN_HEADERS=node_shared/base_app.hpp node_guest/guest_app.hpp node_admin/admin_base_app.hpp node_admin/admin_menu_app.hpp node_admin/admin_users_app.hpp
-NODE_ADMIN_CPP=node_shared/base_app.cpp node_guest/guest_app.cpp node_admin/admin_base_app.cpp node_admin/admin_menu_app.cpp node_admin/admin_users_app.cpp node_shared/base_content.cpp node_guest/guest_content.cpp node_admin/admin_users_content.cpp
+NODE_ADMIN_SKIN=node_shared/master.tmpl node_guest/info.tmpl node_guest/about.tmpl node_guest/login.tmpl node_admin_menu/admin_menu.tmpl node_admin_users/admin_users.tmpl
+NODE_ADMIN_CONTENT=node_shared/base_content.hpp node_guest/guest_content.hpp node_admin_shared/admin_shared_content.hpp node_admin_users/admin_users_content.hpp
+NODE_ADMIN_HEADERS=node_shared/base_app.hpp node_guest/guest_app.hpp node_admin_shared/admin_base_app.hpp node_admin_menu/admin_menu_app.hpp node_admin_users/admin_users_app.hpp
+NODE_ADMIN_CPP=node_shared/base_app.cpp node_guest/guest_app.cpp node_admin_shared/admin_base_app.cpp node_admin_menu/admin_menu_app.cpp node_admin_users/admin_users_app.cpp node_shared/base_content.cpp node_guest/guest_content.cpp node_admin_users/admin_users_content.cpp
 
 #JSON-RPC Node API CppCMS application
 NODE_API_HEADERS=node_api/node_api.hpp
@@ -46,7 +46,7 @@ $(NODE_ADMIN_GENERATED): $(NODE_ADMIN_SKIN)
 	cppcms_tmpl_cc $(NODE_ADMIN_SKIN) -o $(NODE_ADMIN_GENERATED)
 	
 clean:
-	rm -fr run/* cppcms_rundir build/* docs/* ./*~ main/*~ node_shared/*~ node_guest/*~ node_admin/*~ node_api/*~ utils/*~ config/*~
+	rm -fr run/* cppcms_rundir build/* docs/* ./*~ main/*~ node_shared/*~ node_guest/*~ node_admin_shared/*~ node_admin_menu/*~ node_admin_users/*~ node_api/*~ utils/*~ config/*~
 
 run: run/noded run/config.js
 	./noded
