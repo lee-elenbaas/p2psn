@@ -20,8 +20,6 @@ namespace p2psn {
              * The admin menu
              */
 			void admin_menu();
-        
-            void server();
         };
 
     } // namespace node_admin

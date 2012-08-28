@@ -7,10 +7,10 @@ MAIN_CPP=main/noded.cpp
 
 #Main node CppCMS application
 NODE_ADMIN_GENERATED=build/ptp2n_node_admin_skin.cpp
-NODE_ADMIN_SKIN=node_shared/master.tmpl node_guest/info.tmpl node_guest/about.tmpl node_guest/login.tmpl node_admin_menu/admin_menu.tmpl node_admin_menu/server.tmpl node_admin_users/admin_users.tmpl
+NODE_ADMIN_SKIN=node_shared/master.tmpl node_guest/info.tmpl node_guest/about.tmpl node_guest/login.tmpl node_admin_menu/admin_menu.tmpl node_admin_users/admin_users.tmpl node_admin_server/admin_server.tmpl
 NODE_ADMIN_CONTENT=node_shared/base_content.hpp node_guest/guest_content.hpp node_admin_shared/admin_shared_content.hpp node_admin_users/admin_users_content.hpp
-NODE_ADMIN_HEADERS=node_shared/base_app.hpp node_guest/guest_app.hpp node_admin_shared/admin_base_app.hpp node_admin_menu/admin_menu_app.hpp node_admin_users/admin_users_app.hpp
-NODE_ADMIN_CPP=node_shared/base_app.cpp node_guest/guest_app.cpp node_admin_shared/admin_base_app.cpp node_admin_menu/admin_menu_app.cpp node_admin_users/admin_users_app.cpp node_shared/base_content.cpp node_guest/guest_content.cpp node_admin_users/admin_users_content.cpp
+NODE_ADMIN_HEADERS=node_shared/base_app.hpp node_guest/guest_app.hpp node_admin_shared/admin_base_app.hpp node_admin_menu/admin_menu_app.hpp node_admin_users/admin_users_app.hpp node_admin_server/admin_server_app.hpp
+NODE_ADMIN_CPP=node_shared/base_app.cpp node_guest/guest_app.cpp node_admin_shared/admin_base_app.cpp node_admin_menu/admin_menu_app.cpp node_admin_users/admin_users_app.cpp node_shared/base_content.cpp node_guest/guest_content.cpp node_admin_users/admin_users_content.cpp node_admin_server/admin_server_app.cpp
 
 #JSON-RPC Node API CppCMS application
 NODE_API_HEADERS=node_api/node_api.hpp
@@ -22,7 +22,7 @@ UTILS_CPP=utils/crypto.cpp utils/locale_matching.cpp utils/regex_utils.cpp utils
 
 all: separator run
 
-.PHONY: all, separator, clean, documentation, run
+.PHONY: all, separator, clean, documentation, run, dependancies
 
 separator:
 	@echo
@@ -38,6 +38,9 @@ docs/html/index.html: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_ADMIN_HEADERS) $(NODE_A
 
 run/noded: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_ADMIN_HEADERS) $(NODE_ADMIN_CONTENT) $(NODE_ADMIN_CPP) $(NODE_API_HEADERS) $(NODE_API_CPP) $(UTILS_HEADERS) $(UTILS_CPP) $(NODE_ADMIN_GENERATED)
 	$(CXX) $(OPTIONS) $(MAIN_CPP) $(NODE_ADMIN_CPP) $(NODE_API_CPP) $(UTILS_CPP) $(NODE_ADMIN_GENERATED) -o run/noded ${LIBS}
+
+dependancies: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_ADMIN_HEADERS) $(NODE_ADMIN_CONTENT) $(NODE_ADMIN_CPP) $(NODE_API_HEADERS) $(NODE_API_CPP) $(UTILS_HEADERS) $(UTILS_CPP) $(NODE_ADMIN_GENERATED)
+	$(CXX) -MM $(OPTIONS) $(MAIN_CPP) $(NODE_ADMIN_CPP) $(NODE_API_CPP) $(UTILS_CPP) $(NODE_ADMIN_GENERATED) ${LIBS}
 
 run/config.js: config/config.js
 	cp config/config.js run/config.js

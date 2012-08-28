@@ -27,8 +27,6 @@ admin_users_app::admin_users_app(cppcms::service &srv)
 
     dispatcher().assign("/update",&admin_users_app::update_user,this);
     mapper().assign("update","/update");
-
-    mapper().root("/node/admin/users");
 }
 
 void admin_users_app::admin_users_show(content::admin_users& c) {

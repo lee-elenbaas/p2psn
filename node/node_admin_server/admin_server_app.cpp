@@ -1,4 +1,4 @@
-#include "admin_users_app.hpp"
+#include "admin_server_app.hpp"
 
 #include <cppcms/url_dispatcher.h>
 
@@ -18,9 +18,9 @@ void admin_server_app::server()
     content::master c;
 
     init(c);
-    c.title = "Admin Server";
+    c.title = "Server Admin";
 
-    render("server",c);
+    render("admin_server",c);
 }
 
 // vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
