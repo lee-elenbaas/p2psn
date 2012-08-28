@@ -24,13 +24,13 @@ namespace p2psn {
             virtual void main(std::string);
         protected:
             /**
-             * The current admin users configuration
+             * The new settings to be applied
              */
-            std::vector<content::user> admin_users();
+            cppcms::json::value new_settings();
             /**
-             * Set the current admin users configuration
+             * Set a new settings to be applied
              */
-            void admin_users(const std::vector<content::user>&);
+            void new_settings(const cppcms::json::value&);
         };
 
     } // namespace node_admin

@@ -18,39 +18,23 @@ void admin_base_app::main(std::string request_url)
     }
     else {
         session().set("url_after_login", request().path_info());
-        response_redirect(url("/login"));
+        response_redirect(url("/node/login"));
     }
 }
 
-vector<content::user> admin_base_app::admin_users()
+value admin_base_app::new_settings()
 {
     /// Use stores list if present in session
-    if (session().is_set("admin_users"))
-        return session_get<vector<content::user>>("admin_users");
+    if (session().is_set("new_settings"))
+        return session_get<value>("new_settings");
 
     /// Convert current config to admin list
-    vector<content::user> users;
-
-    value existing_users = settings().at("config_noded.admin");
-    
-    if (existing_users.type() == json_type::is_array) {
-        for(auto u : existing_users.array()) {
-            content::user user;
-
-            user.name = u["user"].str();
-            user.password = u["password"].str();
-            user.user_state = content::admin_user_state::existing_user;
-
-            users.push_back(user);
-        }
-    }
-
-    return users;
+    return settings();
 }
 
-void admin_base_app::admin_users(const vector<content::user>& users)
+void admin_base_app::new_settings(const value& settings)
 {
-    session_set("admin_users", users);
+    session_set("new_settings", settings);
 }
 
 // vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

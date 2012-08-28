@@ -47,6 +47,9 @@ namespace p2psn {
              */
             void update_user();
         private:
+            void admin_users(const vector<content::user>&);
+            vector<content::user> admin_users();
+
             /**
              * show admin users page
              */

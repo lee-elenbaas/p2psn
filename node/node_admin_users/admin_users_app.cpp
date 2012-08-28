@@ -29,6 +29,20 @@ admin_users_app::admin_users_app(cppcms::service &srv)
     mapper().assign("update","/update");
 }
 
+void admin_users_app::admin_users(const vector<content::user>& users) {
+    auto s = new_settings();
+
+    s.set("config_noded.admin", users);
+
+    new_settings(s);
+}
+
+vector<content::user> admin_users() {
+    auto s = new_settings();
+    
+    return s.get<vector<content::user>>("config_noded.admin");
+}
+
 void admin_users_app::admin_users_show(content::admin_users& c) {
     init(c);
     c.title = "Admin Users";

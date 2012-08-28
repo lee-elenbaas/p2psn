@@ -29,6 +29,22 @@ namespace p2psn {
     } // namespace node_admin
 } // namespace p2psn
 
+namespace cppcms {
+    namespace json {
+        template<>
+        traits<admin_user_state> {
+            static admin_user_state get(const value&);
+            static void set(value&,const admin_user_state&);
+        };
+
+        template<>
+        traits<user> {
+            static user get(const value&);
+            static void set(value&,const user&);
+        };
+    } // namespace json
+} // namespace cppcms
+
 namespace boost {
     namespace serialization {
 
