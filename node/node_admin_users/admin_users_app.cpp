@@ -26,7 +26,7 @@ admin_users_app::admin_users_app(cppcms::service &srv)
     mapper().assign("restore","/restore");
 
     dispatcher().assign("/update",&admin_users_app::update_user,this);
-    mapper().assign("restore","/update");
+    mapper().assign("update","/update");
 
     mapper().root("/node/admin/users");
 }
@@ -77,7 +77,7 @@ void admin_users_app::update_user()
                 // TODO: user not exists
             }
             
-            response_redirect("/admin");
+            redirect_to_admin_users();
         }
         else {
             c.existing_users = users;
@@ -85,7 +85,7 @@ void admin_users_app::update_user()
         }
     }
     else {
-        response_redirect("/admin");
+        redirect_to_admin_users();
     }
 }
 
@@ -111,7 +111,7 @@ void admin_users_app::add_user()
             admin_users(users);
             // TODO: user added message
             
-            response_redirect("/admin");
+            redirect_to_admin_users();
         }
     }
 
@@ -163,7 +163,7 @@ void admin_users_app::edit_user()
     }
     else {
         //TODO: no user to edit message
-        response_redirect("/admin");
+        redirect_to_admin_users();
     }
 }
 
@@ -192,7 +192,7 @@ void admin_users_app::delete_user()
         //TODO: no user to edit message
     }
 
-    response_redirect("/admin");
+    redirect_to_admin_users();
 }
 
 void admin_users_app::restore_user()
@@ -226,7 +226,7 @@ void admin_users_app::restore_user()
         //TODO: no user to restore message
     }
 
-    response_redirect("/admin");
+    redirect_to_admin_users();
 }
 
 // vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4

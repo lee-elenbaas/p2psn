@@ -53,6 +53,10 @@ namespace p2psn {
             void admin_users_show(content::admin_users&);
 
             /**
+             * redirect user back to admin users list
+             */
+            void redirect_to_admin_users() { response_redirect("/node/admin/users"); }
+            /**
              * check if the given user is avaliable to be placed into the user list
              */
             bool avaliable_user(content::new_user_form&, const std::vector<content::user>&);
