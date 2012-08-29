@@ -32,15 +32,15 @@ namespace p2psn {
 namespace cppcms {
     namespace json {
         template<>
-        traits<admin_user_state> {
-            static admin_user_state get(const value&);
-            static void set(value&,const admin_user_state&);
+        struct traits<p2psn::node_admin::content::admin_user_state> {
+            static p2psn::node_admin::content::admin_user_state get(const value&);
+            static void set(value&,const p2psn::node_admin::content::admin_user_state&);
         };
 
         template<>
-        traits<user> {
-            static user get(const value&);
-            static void set(value&,const user&);
+        struct traits<p2psn::node_admin::content::user> {
+            static p2psn::node_admin::content::user get(const value&);
+            static void set(value&,const p2psn::node_admin::content::user&);
         };
     } // namespace json
 } // namespace cppcms
