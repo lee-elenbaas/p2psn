@@ -77,6 +77,13 @@ At the same time each node is intended to run on a normal home PC with its limit
 
 ## Development Blog
 
+2012-08-30
+
+> Diaspora or not to Diaspora (http://diasporaproject.org/). At a very late stage for me and a very early stage for this project i became aware of the diaspora project. Basically we are looking to solve very similar problems, but we go about it completely different. They decided to make a network of servers, where everyone is free to open up his own server, and users choose what server to trust and register with, but once that decision is made, it is final. (at least for that seed, a user can always open up a new seed.)
+> This approach does eliminate the monopoly of companies over the server, but keeps the user data stored in 3rd party hands.
+> My approach was to eliminate the main servers altogether, and install mini servers that are supposed to serve only a handfull of closely coupled profiles (family members, cubicle partners...) and rely on the transportation medium to do the data sync and management of profile comminications.
+> With a few adjustments to diaspora, and the correct installation package - diaspora could support my philosophy as well. But i am not sure whether i am ready to give up on mine, or whether it can trully work inside the disapora ecosystem.
+
 2012-08-13
 
 > OK a fresh look at things.
