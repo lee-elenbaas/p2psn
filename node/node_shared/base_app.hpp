@@ -3,11 +3,9 @@
 
 #include <cppcms/application.h>
 #include <cppcms/service.h>
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <sstream>
 
 #include "base_content.hpp"
+#include "../utils/serialization.hpp"
 
 namespace p2psn {
     namespace node_admin {
@@ -42,26 +40,14 @@ namespace p2psn {
              */
             template<typename T>
             T session_get(const std::string& key) {
-                T value;
-
-                std::istringstream input_stream(session().get(key));
-                boost::archive::text_iarchive input_archive(input_stream);
-                
-                input_archive >> value;
-
-                return value;
+                return utils::serialization<T>::deserialize(session().get(key));
             }
             /**
              * Set serialized value to session
              */
             template<typename T>
             void session_set(const std::string& key, const T& value) {
-                std::ostringstream output_stream;
-                boost::archive::text_oarchive output_archive(output_stream);
-
-                output_archive << value;
-
-                session().set(key, output_stream.str());
+                session.set(key, utils::seriaization<T>::serialize(value));
             }
         };
 
