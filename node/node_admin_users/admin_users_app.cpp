@@ -4,8 +4,8 @@
 #include <sstream>
 
 using namespace p2psn::node_admin;
-using cppcms::json::value;
-using std::string;
+using namespace cppcms::json;
+using namespace std;
 
 admin_users_app::admin_users_app(cppcms::service &srv) 
     : admin_base_app(srv) 
@@ -37,7 +37,7 @@ void admin_users_app::admin_users(const vector<content::user>& users) {
     new_settings(s);
 }
 
-vector<content::user> admin_users() {
+vector<content::user> admin_users_app::admin_users() {
     auto s = new_settings();
     
     return s.get<vector<content::user>>("config_noded.admin");

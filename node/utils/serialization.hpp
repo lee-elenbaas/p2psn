@@ -11,9 +11,47 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <sstream>
+#include <cppcms/json.h>
 
 namespace p2psn {
 	namespace utils {
+
+		template<typename T>
+		struct serialization;
+
+		/**
+		 * perform serialization of json values
+		 */
+		template<>
+		struct serialization<cppcms::json::value> {
+			static std::string serialize(const cppcms::json::value& v) {
+				return v.save();
+			}
+
+			template<typename U>
+			static std::string serialize(const U& o) {
+				cppcms::json::value v;
+				
+				v.set_value(o);
+
+				return serialize(v);
+			}
+
+			static cppcms::json::value deserialize(const std::string& s) {
+				cppcms::json::value v;
+
+				v.load(std::istringstream(s), true);
+
+				return v;
+			}
+
+			template<typename U>
+			static U deserialize(const std::string& s) {
+				cppcms::json::value v = deserialize(s);
+
+				return v.get_value<U>();
+			}
+		};
 
 		/**
 		 * perform serialization on the given obejects
@@ -22,7 +60,7 @@ namespace p2psn {
 		 */		
 		template<typename T>
 		struct serialization {
-			std::string serialize(const T& value) {
+			static std::string serialize(const T& value) {
 				std::ostringstream output_stream;
 				boost::archive::text_oarchive output_archive(output_stream);
 
@@ -30,7 +68,7 @@ namespace p2psn {
 
 				return output_stream.str();
 			}
-			T deserialize(const std::string& str) {
+			static T deserialize(const std::string& str) {
 				T value;
 
 				std::istringstream input_stream(str);

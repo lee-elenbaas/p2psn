@@ -29,8 +29,8 @@ user traits<user>::get(const value& v) {
 
     user u;
 
-    u.name = v.get("user");
-    u.password = v.get("password");
+    u.name = v.get<string>("user");
+    u.password = v.get<string>("password");
     u.user_state = v.get<admin_user_state>("state");
 
     return u;

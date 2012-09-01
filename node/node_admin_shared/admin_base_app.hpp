@@ -31,6 +31,10 @@ namespace p2psn {
              * Set a new settings to be applied
              */
             void new_settings(const cppcms::json::value&);
+            /**
+             * Whether a new settings has been saved
+             */
+            bool has_new_settings();
         };
 
     } // namespace node_admin

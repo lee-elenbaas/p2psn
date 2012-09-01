@@ -22,10 +22,14 @@ void admin_base_app::main(std::string request_url)
     }
 }
 
+bool admin_base_app::has_new_settings() {
+    return session().is_set("new_settings");
+}
+
 value admin_base_app::new_settings()
 {
     /// Use stores list if present in session
-    if (session().is_set("new_settings"))
+    if (has_new_settings())
         return session_get<value>("new_settings");
 
     /// Convert current config to admin list

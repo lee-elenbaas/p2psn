@@ -4,6 +4,8 @@
 #include "../node_admin_shared/admin_base_app.hpp"
 #include "admin_users_content.hpp"
 
+#include <vector>
+
 namespace p2psn {
     namespace node_admin {
 
@@ -47,8 +49,8 @@ namespace p2psn {
              */
             void update_user();
         private:
-            void admin_users(const vector<content::user>&);
-            vector<content::user> admin_users();
+            void admin_users(const std::vector<content::user>&);
+            std::vector<content::user> admin_users();
 
             /**
              * show admin users page
