@@ -12,7 +12,16 @@
 namespace p2psn {
 	namespace utils {
 
-		// TODO: make the eum correctly inherit from int - and explicitly constructed from int, or converted to int
+		enum class split_options : int;
+
+		split_options operator&(split_options lhs, split_options rhs) {
+			return static_cast<split_options>(static_cast<int>(lhs) & static_cast<int>(rhs));
+		}
+
+		split_options operator|(split_options lhs, split_options rhs) {
+			return static_cast<split_options>(static_cast<int>(lhs) | static_cast<int>(rhs));
+		}
+
 		enum class split_options {
 			include_all = 0,
 			avoid_filled_match = 1 << 0,
@@ -25,9 +34,6 @@ namespace p2psn {
 			avoid_emptys = avoid_empty_match | avoid_empty_between_match,
 			not_set = 0
 		};
-
-		split_options operator&(split_options lhs, split_options rhs);
-		split_options operator|(split_options lhs, split_options rhs);
 
 		///
 		/// Match an expression \a r against text \a s
@@ -52,33 +58,33 @@ namespace p2psn {
 				
 				for(auto match : offsets) {
 					if (prev_index == match.first) {
-//						if ((options & split_options::avoid_empty_between_match) == split_options::not_set)
-//							split.push_back("");
+						if ((options & split_options::avoid_empty_between_match) == split_options::not_set)
+							split.push_back("");
 					}
 					else {
-//						if ((options & split_options::avoid_filled_between_match) == split_options::not_set)
-//							split.push_back(s.substr(prev_index, match.first - prev_index));
+						if ((options & split_options::avoid_filled_between_match) == split_options::not_set)
+							split.push_back(s.substr(prev_index, match.first - prev_index));
 					}
 
 					if (match.first == match.second) {
-//						if ((options & split_options::avoid_empty_match) == split_options::not_set)
-//							split.push_back("");
+						if ((options & split_options::avoid_empty_match) == split_options::not_set)
+							split.push_back("");
 					}
 					else {
-//						if ((options & split_options::avoid_filled_match) == split_options::not_set)
-//							split.push_back(s.substr(match.second - match.first));
+						if ((options & split_options::avoid_filled_match) == split_options::not_set)
+							split.push_back(s.substr(match.second - match.first));
 					}
 
 					prev_index = match.second;
 				}
 
 				if (prev_index == static_cast<int>(s.size())) {
-//					if ((options & split_options::avoid_empty_between_match) == split_options::not_set)
-//						split.push_back("");
+					if ((options & split_options::avoid_empty_between_match) == split_options::not_set)
+						split.push_back("");
 				}
 				else {
-//					if ((options & split_options::avoid_filled_between_match) == split_options::not_set)
-//						split.push_back(s.substr(prev_index));
+					if ((options & split_options::avoid_filled_between_match) == split_options::not_set)
+						split.push_back(s.substr(prev_index));
 				}
 			}
 	

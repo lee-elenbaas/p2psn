@@ -1,5 +1,5 @@
 LIBS=-lcppcms -lbooster
-OPTIONS=-O2 -Wall -std=c++0x -g
+OPTIONS=-O0 -Wall -Wextra -std=c++0x -g
 
 #Wrapper C++ application
 MAIN_HEADERS=
@@ -22,7 +22,7 @@ UTILS_CPP=utils/crypto.cpp utils/locale_matching.cpp utils/regex_utils.cpp utils
 
 all: separator run
 
-.PHONY: all, separator, clean, documentation, run, dependancies
+.PHONY: all separator clean documentation run dependancies
 
 separator:
 	@echo
