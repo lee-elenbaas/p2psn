@@ -5,15 +5,10 @@ using namespace std;
 using namespace cppcms::json;
 
 admin_user_state traits<admin_user_state>::get(const value& v) {
-    switch (v.type()) {
-        case json_type::is_undefined:
-            return admin_user_state::existing_user;
-        case json_type::is_number:
-            return static_cast<admin_user_state>(v.get_value<int>());
-            break;
-        default:
-            throw bad_value_cast();
-    }
+    if (v.is_undefined() || v.is_null())
+        return admin_user_state::existing_user;
+
+    return static_cast<admin_user_state>(v.get_value<int>());
 }
 
 void traits<admin_user_state>::set(value& v,const admin_user_state& s) {

@@ -44,8 +44,8 @@
 			"apply new settings" : false
 		},
 		"admin" : [
-			{ "user" : "admin", "password" : "admin" },
-			{ "user" : "lior", "password" : "lior" },
+			{ "user" : "admin", "password" : "admin", "state" : null },
+			{ "user" : "lior", "password" : "lior", "state" : null },
 		]
 	}
 }
