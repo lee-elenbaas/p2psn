@@ -1,5 +1,5 @@
 LIBS=-lcppcms -lbooster
-OPTIONS=-O2 -Wall -std=gnu++0x -g
+OPTIONS=-O2 -Wall -std=c++0x -g
 
 #Wrapper C++ application
 MAIN_HEADERS=

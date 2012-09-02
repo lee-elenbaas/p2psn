@@ -75,7 +75,6 @@ void guest_app::login()
 
         if (c.login_info.validate() && validate_user(c.login_info)) { 
             string after_login_url = session().get("url_after_login", url("/admin"));
-            DEBUG("after_login_url: "+after_login_url);
 
 			session().reset_session();
             session().erase("prelogin");
