@@ -27,56 +27,33 @@ namespace p2psn {
 			static std::string serialize(const cppcms::json::value& v) {
 				return v.save();
 			}
-
-			template<typename U>
-			static std::string serialize(const U& o) {
-				cppcms::json::value v;
-				
-				v.set_value(o);
-
-				return serialize(v);
-			}
-
 			static cppcms::json::value deserialize(const std::string& s) {
 				cppcms::json::value v;
+				std::istringstream is(s);
 
-				v.load(std::istringstream(s), true);
+				v.load(is, true);
 
 				return v;
-			}
-
-			template<typename U>
-			static U deserialize(const std::string& s) {
-				cppcms::json::value v = deserialize(s);
-
-				return v.get_value<U>();
 			}
 		};
 
 		/**
-		 * perform serialization on the given obejects
-		 *
-		 * The general version uses boost serialization library
-		 */		
+		 * perform serialization of using json values
+		 */
 		template<typename T>
 		struct serialization {
-			static std::string serialize(const T& value) {
-				std::ostringstream output_stream;
-				boost::archive::text_oarchive output_archive(output_stream);
+			static std::string serialize(const T& o) {
+				cppcms::json::value v;
+				
+				v.set_value(o);
 
-				output_archive << value;
-
-				return output_stream.str();
+				return serialization<cppcms::json::value>::serialize(v);
 			}
-			static T deserialize(const std::string& str) {
-				T value;
 
-				std::istringstream input_stream(str);
-				boost::archive::text_iarchive input_archive(input_stream);
-		
-				input_archive >> value;
+			static T deserialize(const std::string& s) {
+				cppcms::json::value v = serialization<cppcms::json::value>::deserialize(s);
 
-				return value;
+				return v.get_value<T>();
 			}
 		};
 

@@ -40,14 +40,14 @@ namespace p2psn {
              */
             template<typename T>
             T session_get(const std::string& key) {
-                return utils::serialization<cppcms::json::value>::deserialize<T>(session().get(key));
+                return utils::serialization<T>::deserialize(session().get(key));
             }
             /**
              * Set serialized value to session
              */
             template<typename T>
             void session_set(const std::string& key, const T& value) {
-                session().set(key, utils::serialization<cppcms::json::value>::serialize(value));
+                session().set(key, utils::serialization<T>::serialize(value));
             }
         };
 
