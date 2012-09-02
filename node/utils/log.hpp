@@ -21,5 +21,8 @@ namespace p2psn {
 
 #define LOG(lvl, msg) SLOG((lvl), std::string(typeid(*this).name())+": "+(msg))
 
+#define DEBUG(msg) LOG(p2psn::utils::level_type::debug, (msg))
+#define SDEBUG(msg) SLOG(p2psn::utils::level_type::debug, (msg))
+
 #endif // __LOG_H
 
