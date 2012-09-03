@@ -28,9 +28,30 @@ void base_app::main(string url) {
 	cppcms::application::main(url);
 }
 
+/**
+ * Add message to show the user into the session
+ */
+void add_message(const std::string& message, const std::string& css) {
+    messages_list m = messages();
+
+    m.add(message, css);
+
+    session_set("user_messages", m);
+}
+
+/**
+ * The current list of messages waiting for the user in session
+ */
+messages_list base_app::messages() {
+    return session_get("user_messages");
+}
+
 void base_app::init(content::master& c) {
     if (session().is_set("user"))
 	    c.user_name = session().get("user");
+
+    c.user_messages.add(messages());
+    session().erase("user_messages");
 }
 
 void base_app::response_redirect(std::string url) {

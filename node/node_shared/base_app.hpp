@@ -50,6 +50,12 @@ namespace p2psn {
             void session_set(const std::string& key, const T& value) {
                 session().set(key, utils::serialization<T>::serialize(value));
             }
+            /**
+             * Add message to show the user into the session
+             */
+            void add_message(const std::string&, const std::string&);
+        private:
+            messages_list messages();
         };
 
     } // namespace node_admin

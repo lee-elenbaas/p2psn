@@ -17,14 +17,22 @@ namespace p2psn {
         namespace content  {
 
             /**
-             * introduce the std::string as string into this namespace - it is used as primitive a lot, so worth the introduction
-             */
-            using std::string;
+             * Messages to be displayed to the user
+             */	
+            struct message {
+                std::string message_str;
+                std::string css_class;
+            }
 
             /**
              * Collection of messages to display to the user.
              */	
-            typedef std::vector<std::pair<string, string>> messages_list;
+            class messages_list : public std::vector<message> {
+            public:
+                void add(const std::string& message, const string& css) {
+                    push_back(message({message, css}));
+                }
+            };
 
             /**
              * Content data shared by all pages
@@ -34,11 +42,11 @@ namespace p2psn {
                 /** 
                  *Rendered page title 
                  */
-                string title; 
+                std::string title; 
                 /**
                  * Currently logged in user
                  */ 
-		        string user_name;
+		        std::string user_name;
                 /**
                  * Messages to render to the user
                  */
@@ -47,12 +55,26 @@ namespace p2psn {
                 /**
                  * Add message to display to the user.
                  */
-		        void add_message(string, string);
+		        void add_message(const std::string& str, const std::string& css) {
+                    user_messages.add(str, css);
+                }
             };
 
         } // namespace content
     } // namespace node_admin
 } // namespace p2psn
+
+namespace cppcms {
+    namespace json {
+
+        template<>
+        traits<p2psn::node_admin::content::message> {
+            static p2psn::node_admin::content::message get(const value&);
+            static void set(value&, const p2psn::node_admin::content::message&);
+        };
+
+    } // namespace json
+} // namespace cppcms
 
 #endif // __P2PSN_BASE_CONTENT_H
 

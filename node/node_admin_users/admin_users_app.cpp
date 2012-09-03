@@ -77,17 +77,17 @@ void admin_users_app::update_user()
                 if (u.name == c.edited_user.user_name.value()) {
                     u.password = c.edited_user.user_password.value();
                     u.user_state = content::admin_user_state::new_user;
-                    // TODO: user updated message
+
                     admin_users(users);
 
+                    c.add_message("user updated", "confirm");
                     user_found = true;
                     break;
                 }
             }
 
-            if (!user_found) {
-                // TODO: user not exists
-            }
+            if (!user_found)
+                c.add_message("user not found", "error");
             
             redirect_to_admin_users();
         }
@@ -121,7 +121,8 @@ void admin_users_app::add_user()
             users.push_back(new_user);
 
             admin_users(users);
-            // TODO: user added message
+                    
+            c.add_message("user added", "confirm");
             
             redirect_to_admin_users();
         }
@@ -174,7 +175,7 @@ void admin_users_app::edit_user()
         admin_users_show(c);
     }
     else {
-        //TODO: no user to edit message
+        c.add_message("user not found", "error");
         redirect_to_admin_users();
     }
 }
@@ -191,18 +192,18 @@ void admin_users_app::delete_user()
         for (auto u : users) {
             if (u.name == user_name) {
                 u.user_state = content::admin_user_state::deleted_user;
-                //TODO: user deleted message
-
+        
                 admin_users(users);
+
+                c.add_message("user deleted", "confirm");
                 user_found = true;
                 break;
             }
         }
     }
 
-    if (!user_found) {
-        //TODO: no user to edit message
-    }
+    if (!user_found)
+        c.add_message("user not found", "error");
 
     redirect_to_admin_users();
 }
@@ -220,12 +221,13 @@ void admin_users_app::restore_user()
             if (u.name == user_name) {
                 if (u.user_state == content::admin_user_state::deleted_user) {
                     u.user_state = content::admin_user_state::new_user;
-                    //TODO: user restored message
 
                     admin_users(users);
+                
+                    c.add_message("user restored", "confirm");
                 }
                 else {
-                    // TOSO: user is already active message
+                    c.add_message("user already active", "error");
                 }
 
                 user_found = true;
@@ -234,9 +236,8 @@ void admin_users_app::restore_user()
         }
     }
 
-    if (!user_found) {
-        //TODO: no user to restore message
-    }
+    if (!user_found)
+        c.add_message("user not found", "error");
 
     redirect_to_admin_users();
 }

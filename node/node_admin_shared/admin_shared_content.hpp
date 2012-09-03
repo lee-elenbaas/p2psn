@@ -34,33 +34,16 @@ namespace cppcms {
         template<>
         struct traits<p2psn::node_admin::content::admin_user_state> {
             static p2psn::node_admin::content::admin_user_state get(const value&);
-            static void set(value&,const p2psn::node_admin::content::admin_user_state&);
+            static void set(value&, const p2psn::node_admin::content::admin_user_state&);
         };
 
         template<>
         struct traits<p2psn::node_admin::content::user> {
             static p2psn::node_admin::content::user get(const value&);
-            static void set(value&,const p2psn::node_admin::content::user&);
+            static void set(value&, const p2psn::node_admin::content::user&);
         };
     } // namespace json
 } // namespace cppcms
-
-namespace boost {
-    namespace serialization {
-
-        /**
-         * serialization support to the admin user
-         */
-        template<class Archive>
-        void serialize(Archive & ar, p2psn::node_admin::content::user & u, const unsigned int version)
-        {
-            ar & u.name;
-            ar & u.password;
-            ar & u.user_state;
-        }
-
-    } // namespace serialization
-} // namespace boost
 
 #endif // __P2PSN_ADMIN_SHARED_CONTENT_H
 

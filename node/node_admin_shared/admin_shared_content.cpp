@@ -13,7 +13,7 @@ admin_user_state traits<admin_user_state>::get(const value& v) {
 
 void traits<admin_user_state>::set(value& v,const admin_user_state& s) {
     if (s == admin_user_state::existing_user)
-        v.undefined();
+        v.null();
     else
         v.set_value(static_cast<int>(s));
 }
