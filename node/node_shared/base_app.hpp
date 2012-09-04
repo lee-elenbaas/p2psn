@@ -35,6 +35,14 @@ namespace p2psn {
              * Shared inialization of page content
              */
             void init(content::master&);
+            /**
+             * Add message to show the user into the session
+             */
+            void add_message(const std::string&, const std::string&);
+            /**
+             * Get current messages in the session
+             */
+            content::messages_list messages();
 
             /**
              * Get serialized value from session
@@ -44,18 +52,19 @@ namespace p2psn {
                 return utils::serialization<T>::deserialize(session().get(key));
             }
             /**
+             * Get serialized value from session with default value in case no information in the session
+             */
+            template<typename T>
+            T session_get(const std::string& key, const T& def) {
+                return utils::serialization<T>::deserialize(session().get(key, utils::serialization<T>::serialize(def)));
+            }
+            /**
              * Set serialized value to session
              */
             template<typename T>
             void session_set(const std::string& key, const T& value) {
                 session().set(key, utils::serialization<T>::serialize(value));
             }
-            /**
-             * Add message to show the user into the session
-             */
-            void add_message(const std::string&, const std::string&);
-        private:
-            content::messages_list messages();
         };
 
     } // namespace node_admin

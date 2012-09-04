@@ -43,7 +43,7 @@ void base_app::add_message(const std::string& message, const std::string& css) {
  * The current list of messages waiting for the user in session
  */
 content::messages_list base_app::messages() {
-    return session_get<content::messages_list>("user_messages");
+    return session_get<content::messages_list>("user_messages", content::messages_list());
 }
 
 void base_app::init(content::master& c) {
