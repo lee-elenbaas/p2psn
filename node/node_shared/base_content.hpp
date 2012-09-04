@@ -32,6 +32,9 @@ namespace p2psn {
                 void add(const std::string& message, const string& css) {
                     push_back(message({message, css}));
                 }
+                void add(const messages_list& messages) {
+                	insert(count, messages.begin(), messages.end());
+                }
             };
 
             /**
