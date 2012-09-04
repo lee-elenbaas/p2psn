@@ -10,7 +10,7 @@
 #include <cppcms/form.h>
 #include <cppcms/json.h>
 #include <string>
-#include <array>
+#include <vector>
 
 namespace p2psn {
     namespace node_admin {
@@ -76,32 +76,14 @@ namespace cppcms {
 
         template<>
         struct traits<p2psn::node_admin::content::message> {
-            static p2psn::node_admin::content::message get(const value& v) {
-                p2psn::node_admin::content::message m;
-
-                m.message_str = v.get<std::string>("message");
-                m.css_class = v.get<std::string>("cssClass");
-
-                return m;
-            }
-            static void set(value& v, const p2psn::node_admin::content::message& m) {
-                v.set("message", m.message_str);
-                v.set("cssClass", m.css_class);
-            }
+            static p2psn::node_admin::content::message get(const value&);
+            static void set(value&, const p2psn::node_admin::content::message&);
         };
 
         template<>
         struct traits<p2psn::node_admin::content::messages_list> {
-            static p2psn::node_admin::content::messages_list get(const value& v) {
-                p2psn::node_admin::content::messages_list ml;
-
-                ml.add(traits<std::vector<p2psn::node_admin::content::message>>::get(v));
-
-                return ml;
-            }
-            static void set(value& v, const p2psn::node_admin::content::messages_list& ml) {
-                traits<std::vector<p2psn::node_admin::content::message>>::set(v, ml);
-            }
+            static p2psn::node_admin::content::messages_list get(const value&);
+            static void set(value&, const p2psn::node_admin::content::messages_list&);
         };
 
     } // namespace json
