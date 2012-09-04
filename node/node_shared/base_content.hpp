@@ -22,18 +22,22 @@ namespace p2psn {
             struct message {
                 std::string message_str;
                 std::string css_class;
-            }
+
+                message() { }
+                message(const std::string& str, const std::string& css)
+                    : message_str(str), css_class(css) { }
+            };
 
             /**
              * Collection of messages to display to the user.
              */	
             class messages_list : public std::vector<message> {
             public:
-                void add(const std::string& message, const string& css) {
-                    push_back(message({message, css}));
+                void add(const std::string& str, const std::string& css) {
+                    push_back(message(str, css));
                 }
-                void add(const messages_list& messages) {
-                	insert(count, messages.begin(), messages.end());
+                void add(const std::vector<message>& messages) {
+                	insert(end(), messages.begin(), messages.end());
                 }
             };
 
@@ -71,9 +75,23 @@ namespace cppcms {
     namespace json {
 
         template<>
-        traits<p2psn::node_admin::content::message> {
+        struct traits<p2psn::node_admin::content::message> {
             static p2psn::node_admin::content::message get(const value&);
             static void set(value&, const p2psn::node_admin::content::message&);
+        };
+
+        template<>
+        struct traits<p2psn::node_admin::content::messages_list> {
+            static p2psn::node_admin::content::messages_list get(const value& v) {
+                p2psn::node_admin::content::messages_list ml;
+
+                ml.add(traits<std::vector<p2psn::node_admin::content::message>>::get(v));
+
+                return ml;
+            }
+            static void set(value& v, const p2psn::node_admin::content::messages_list& ml) {
+                traits<std::vector<p2psn::node_admin::content::message>>::set(v, ml);
+            }
         };
 
     } // namespace json

@@ -3,7 +3,7 @@
 #include "../utils/locale_matching.hpp"
 
 using namespace p2psn::node_admin;
-using std::string;
+using namespace std;
 
 base_app::base_app(cppcms::service &srv) 
     : cppcms::application(srv) 
@@ -31,8 +31,8 @@ void base_app::main(string url) {
 /**
  * Add message to show the user into the session
  */
-void add_message(const std::string& message, const std::string& css) {
-    messages_list m = messages();
+void base_app::add_message(const std::string& message, const std::string& css) {
+    content::messages_list m = messages();
 
     m.add(message, css);
 
@@ -42,8 +42,8 @@ void add_message(const std::string& message, const std::string& css) {
 /**
  * The current list of messages waiting for the user in session
  */
-messages_list base_app::messages() {
-    return session_get("user_messages");
+content::messages_list base_app::messages() {
+    return session_get<content::messages_list>("user_messages");
 }
 
 void base_app::init(content::master& c) {

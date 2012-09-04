@@ -195,7 +195,7 @@ void admin_users_app::delete_user()
         
                 admin_users(users);
 
-                c.add_message("user deleted", "confirm");
+                add_message("user deleted", "confirm");
                 user_found = true;
                 break;
             }
@@ -203,7 +203,7 @@ void admin_users_app::delete_user()
     }
 
     if (!user_found)
-        c.add_message("user not found", "error");
+        add_message("user not found", "error");
 
     redirect_to_admin_users();
 }
@@ -224,10 +224,10 @@ void admin_users_app::restore_user()
 
                     admin_users(users);
                 
-                    c.add_message("user restored", "confirm");
+                    add_message("user restored", "confirm");
                 }
                 else {
-                    c.add_message("user already active", "error");
+                    add_message("user already active", "error");
                 }
 
                 user_found = true;
@@ -237,7 +237,7 @@ void admin_users_app::restore_user()
     }
 
     if (!user_found)
-        c.add_message("user not found", "error");
+        add_message("user not found", "error");
 
     redirect_to_admin_users();
 }

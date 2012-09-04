@@ -20,8 +20,8 @@ namespace p2psn {
             };
             
             struct user {
-                string name;
-                string password;
+                std::string name;
+                std::string password;
                 admin_user_state user_state;
             };
 

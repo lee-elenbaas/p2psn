@@ -55,7 +55,7 @@ namespace p2psn {
              */
             void add_message(const std::string&, const std::string&);
         private:
-            messages_list messages();
+            content::messages_list messages();
         };
 
     } // namespace node_admin

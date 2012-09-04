@@ -14,7 +14,7 @@ namespace p2psn {
 
             struct info : public master {
                 double port;
-                string host;
+                std::string host;
             };
 
             struct login_form : public cppcms::form {
