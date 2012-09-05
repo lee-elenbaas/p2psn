@@ -23,6 +23,8 @@ namespace p2psn {
                 std::string name;
                 std::string password;
                 admin_user_state user_state;
+
+                std::string state_str() const;
             };
 
         } // namespace content
@@ -31,6 +33,7 @@ namespace p2psn {
 
 namespace cppcms {
     namespace json {
+
         template<>
         struct traits<p2psn::node_admin::content::admin_user_state> {
             static p2psn::node_admin::content::admin_user_state get(const value&);
@@ -42,6 +45,7 @@ namespace cppcms {
             static p2psn::node_admin::content::user get(const value&);
             static void set(value&, const p2psn::node_admin::content::user&);
         };
+
     } // namespace json
 } // namespace cppcms
 

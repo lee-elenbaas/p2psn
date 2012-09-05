@@ -61,7 +61,7 @@
 <% foreach user in existing_users %>
 	<tbody>
 		<% item %>
-			<tr class="<%= user.user_state ">
+			<tr class="<%= user.state_str() %>">
 				<td><%= user.name %></td>
 				<td><%= user.password %></td>
 				<td>

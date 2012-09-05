@@ -189,7 +189,7 @@ void admin_users_app::delete_user()
     if (request().request_method() == "POST") {
         string user_name = request().post("user_name");
         
-        for (auto u : users) {
+        for (content::user& u : users) {
             if (u.name == user_name) {
                 u.user_state = content::admin_user_state::deleted_user;
         
@@ -217,7 +217,7 @@ void admin_users_app::restore_user()
     if (request().request_method() == "POST") {
         string user_name = request().post("user_name");
         
-        for (auto u : users) {
+        for (content::user& u : users) {
             if (u.name == user_name) {
                 if (u.user_state == content::admin_user_state::deleted_user) {
                     u.user_state = content::admin_user_state::new_user;

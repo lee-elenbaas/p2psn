@@ -3,6 +3,22 @@
 using namespace p2psn::node_admin::content;
 using namespace std;
 using namespace cppcms::json;
+using namespace booster;
+
+string user::state_str() const {
+    switch (user_state) {
+        case admin_user_state::existing_user:
+            return "existing";
+        case admin_user_state::new_user:
+            return "new";
+        case admin_user_state::edited_user:
+            return "changed";
+        case admin_user_state::deleted_user:
+            return "deleted";
+        default:
+            throw booster::bad_cast();       
+    }
+}
 
 admin_user_state traits<admin_user_state>::get(const value& v) {
     if (v.is_undefined() || v.is_null())
