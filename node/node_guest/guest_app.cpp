@@ -1,8 +1,11 @@
 #include "../node_guest/guest_app.hpp"
 
 #include <cppcms/url_dispatcher.h>
+
 #include "../node_api/node_api.hpp"
 #include "../node_admin_menu/admin_menu_app.hpp"
+#include "../node_statics/statics_app.hpp"
+
 #include "../utils/crypto.hpp"
 
 using namespace p2psn::node_admin;
@@ -14,6 +17,7 @@ guest_app::guest_app(cppcms::service &srv)
 {
     attach(new p2psn::api::node_api(srv), "api", "/api{1}", "/api(/(.*))?", 1);
     attach(new admin_menu_app(srv), "admin", "/admin{1}", "/admin(/(.*))?", 1);
+    attach(new static_app(srv), "static", "/static{1}", "/static(/(.*))?", 1);
 
     dispatcher().assign("",&guest_app::home,this);
     mapper().assign("");

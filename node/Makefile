@@ -22,7 +22,7 @@ UTILS_CPP=utils/crypto.cpp utils/locale_matching.cpp utils/signal_handler.cpp
 
 all: separator run
 
-.PHONY: all separator clean documentation run dependancies
+.PHONY: all separator clean documentation run dependancies statics
 
 separator:
 	@echo
@@ -43,6 +43,7 @@ dependancies: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_ADMIN_HEADERS) $(NODE_ADMIN_CON
 	$(CXX) -MM $(OPTIONS) $(MAIN_CPP) $(NODE_ADMIN_CPP) $(NODE_API_CPP) $(UTILS_CPP) $(NODE_ADMIN_GENERATED) ${LIBS}
 
 run/config.js: config/config.js
+	mkdir -p run
 	cp config/config.js run/config.js
 	
 $(NODE_ADMIN_GENERATED): $(NODE_ADMIN_SKIN)
@@ -53,4 +54,10 @@ clean:
 
 run: run/noded run/config.js
 	./noded
+
+statics: run/css/node.css
+
+run/css/node.css: statics/css/node.css
+	mkdir -p run/css
+	cp statics/css/node.css run/css
 
