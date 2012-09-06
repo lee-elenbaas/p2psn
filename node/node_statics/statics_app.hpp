@@ -15,7 +15,7 @@ namespace p2psn {
             /**
              * Construct the app on the given cppcms service
              */
-            statics_app(cppcms::service &);
+            statics_app(cppcms::service&, const std::string&);
     
             /**
              * handle all incoming requests

@@ -1,18 +1,30 @@
 #include "../node_statics/statics_app.hpp"
 
-#include <ifstream>
+#include <fstream>
 
 using namespace p2psn::node_admin;
 using namespace std;
 using namespace cppcms::json;
 
-statics_app::statics_app(cppcms::service &srv) 
-    : base_app(srv) 
+statics_app::statics_app(cppcms::service &srv, const std::string&) 
+	: base_app(srv) 
 {
+    mapper().assign("");
 }
 
 void statics_app::main(string url) {
- // TODO: serve the CSS as a first step - then convert the statics files into hashed names on the make - and serve files using the hash of the requests as step 2   
+	DEBUG("css requested: "+url);
+
+	ifstream f("run/css/node.css");
+
+	if (!f) {
+		DEBUG("file not found");
+		response().status(404);
+	}
+	else {
+		DEBUG("dumping file");
+		response().content_type("text/css");
+		response().out() << f.rdbuf();
+	}
 }
 
-// vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
