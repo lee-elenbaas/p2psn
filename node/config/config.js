@@ -34,6 +34,13 @@
 		}      
 	    },  
 	"config_noded" : {
+		"static_files" : {
+			"css" : {
+				"folder" : "run/css/",
+				"mime" : "text/css",
+				"extention" : ".css"
+			}
+		},
 		"tasks" : {
 			"admin users" : false,
 			"server settings" : {

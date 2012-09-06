@@ -9,8 +9,8 @@ MAIN_CPP=main/noded.cpp
 NODE_ADMIN_GENERATED=build/ptp2n_node_admin_skin.cpp
 NODE_ADMIN_SKIN=node_shared/master.tmpl node_guest/info.tmpl node_guest/about.tmpl node_guest/login.tmpl node_admin_menu/admin_menu.tmpl node_admin_users/admin_users.tmpl node_admin_server/admin_server.tmpl
 NODE_ADMIN_CONTENT=node_shared/base_content.hpp node_guest/guest_content.hpp node_admin_shared/admin_shared_content.hpp node_admin_users/admin_users_content.hpp
-NODE_ADMIN_HEADERS=node_shared/base_app.hpp node_guest/guest_app.hpp node_statics/statics_app.hpp node_admin_shared/admin_base_app.hpp node_admin_menu/admin_menu_app.hpp node_admin_users/admin_users_app.hpp node_admin_server/admin_server_app.hpp
-NODE_ADMIN_CPP=node_shared/base_app.cpp node_guest/guest_app.cpp node_statics/statics_app.cpp node_admin_shared/admin_base_app.cpp node_admin_menu/admin_menu_app.cpp node_admin_users/admin_users_app.cpp node_shared/base_content.cpp node_guest/guest_content.cpp node_admin_shared/admin_shared_content.cpp node_admin_users/admin_users_content.cpp node_admin_server/admin_server_app.cpp
+NODE_ADMIN_HEADERS=node_shared/base_app.hpp node_guest/guest_app.hpp node_hashed_static/hashed_static_app.hpp node_admin_shared/admin_base_app.hpp node_admin_menu/admin_menu_app.hpp node_admin_users/admin_users_app.hpp node_admin_server/admin_server_app.hpp
+NODE_ADMIN_CPP=node_shared/base_app.cpp node_guest/guest_app.cpp node_hashed_static/hashed_static_app.cpp node_admin_shared/admin_base_app.cpp node_admin_menu/admin_menu_app.cpp node_admin_users/admin_users_app.cpp node_shared/base_content.cpp node_guest/guest_content.cpp node_admin_shared/admin_shared_content.cpp node_admin_users/admin_users_content.cpp node_admin_server/admin_server_app.cpp
 
 #JSON-RPC Node API CppCMS application
 NODE_API_HEADERS=node_api/node_api.hpp
@@ -57,7 +57,7 @@ run: run/noded run/config.js statics
 
 statics: run/css/node.css
 
-run/css/node.css: statics/css/node.css
+run/css/node.css: static/css/node.css
 	mkdir -p run/css
-	cp statics/css/node.css run/css
+	cp static/css/node.css run/css
 
