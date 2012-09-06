@@ -13,9 +13,14 @@ namespace p2psn {
 		 * perform signature on the given strings
 		 */		
 		class signature {
+		public:
+			static std::string md5(const std::string&);
+			static std::string sha1(const std::string&);
+		private:
+			static std::string generate(std::auto_ptr<cppcms::crypto::message_digest>, const std::string&);
 		};
 
 	} // namespace utils
 } // namespace p2psn
 
-#endif // __CRYPTO
+#endif // __CRYPTO_H

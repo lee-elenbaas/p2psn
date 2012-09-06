@@ -1,6 +1,7 @@
 #include "hashed_static_app.hpp"
 
 #include <fstream>
+#include "../utils/crypto.hpp"
 
 using namespace p2psn::node_admin;
 using namespace std;
@@ -19,6 +20,8 @@ hashed_static_app::hashed_static_app(cppcms::service &srv, const std::string& se
 void hashed_static_app::main(string url) {
 	DEBUG("css requested: "+url);
 
+	DEBUG("md5 hash: " + utils::signature::md5(url));
+	DEBUG("sha1 hash: " + utils::signature::sha1(url));
 	string hash = "node";
 
 	ifstream f(folder_+hash+extension_);
