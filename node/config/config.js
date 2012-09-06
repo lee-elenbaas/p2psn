@@ -38,7 +38,7 @@
 			"css" : {
 				"folder" : "run/css/",
 				"mime" : "text/css",
-				"extention" : ".css"
+				"extension" : ".css"
 			}
 		},
 		"tasks" : {

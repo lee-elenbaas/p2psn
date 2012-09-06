@@ -1,4 +1,4 @@
-#include "../node_statics/hashed_static_app.hpp"
+#include "hashed_static_app.hpp"
 
 #include <fstream>
 
@@ -6,16 +6,22 @@ using namespace p2psn::node_admin;
 using namespace std;
 using namespace cppcms::json;
 
-hashed_static_app::hashed_static_app(cppcms::service &srv, const std::string&) 
+hashed_static_app::hashed_static_app(cppcms::service &srv, const std::string& settings_path) 
 	: base_app(srv) 
 {
-    mapper().assign("");
+	mapper().assign("");
+
+	folder_ = settings().get<string>(settings_path+".folder");
+	extension_ = settings().get<string>(settings_path+".extension");
+	mime_ = settings().get<string>(settings_path+".mime");
 }
 
 void hashed_static_app::main(string url) {
 	DEBUG("css requested: "+url);
 
-	ifstream f("run/css/node.css");
+	string hash = "node";
+
+	ifstream f(folder_+hash+extension_);
 
 	if (!f) {
 		DEBUG("file not found");
@@ -23,7 +29,7 @@ void hashed_static_app::main(string url) {
 	}
 	else {
 		DEBUG("dumping file");
-		response().content_type("text/css");
+		response().content_type(mime_);
 		response().out() << f.rdbuf();
 	}
 }

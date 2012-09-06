@@ -21,6 +21,11 @@ namespace p2psn {
 		 * handle all incoming requests by performing the hash and accessing the files correctly
 		 */	
 		virtual void main(std::string);
+
+		private:
+		std::string folder_;
+		std::string extension_;
+		std::string mime_;
 		};
 
 	} // namespace node_admin
