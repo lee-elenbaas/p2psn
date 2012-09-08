@@ -6,6 +6,9 @@
 #ifndef __CRYPTO_H
 #define __CRYPTO_H
 
+#include <cppcms/crypto.h>
+#include <string>
+
 namespace p2psn {
 	namespace utils {
 

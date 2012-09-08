@@ -1,7 +1,8 @@
 
 #include "crypto.hpp"
 
-#include "base64.hpp"
+#include <sstream>
+#include <cppcms/base64.h>
 
 using namespace p2psn::utils;
 using std::string;
@@ -24,6 +25,10 @@ string signature::generate(std::auto_ptr<cppcms::crypto::message_digest> generat
 	generator->append(message.c_str(), message.size()*sizeof(char));
 	generator->readout(hash);
 
-	return base64_encode(hash, hash_size);
+	std::ostringstream os;
+
+	cppcms::b64url::encode(hash, hash+hash_size, os);
+
+	return os.str();
 }
 
