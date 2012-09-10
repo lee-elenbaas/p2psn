@@ -29,7 +29,7 @@ string signature::generate(std::auto_ptr<cppcms::crypto::message_digest> generat
 
 	ostringstream os;
 
-	os << "hash \""<< message<< "\" hash_size="<<hash_size<<" array_size="<<array_size<<" hash:";
+//	os << "hash \""<< message<< "\" hash_size="<<hash_size<<" array_size="<<array_size<<" hash:";
 
 	for (unsigned i=0; i<hash_size;++i)
 		os << setw(2) << setfill('0') << hex << static_cast<unsigned>(hash[i]);
