@@ -1,4 +1,3 @@
-
 #include "crypto.hpp"
 
 #include "base64.hpp"
@@ -24,6 +23,7 @@ string signature::generate(std::auto_ptr<cppcms::crypto::message_digest> generat
 	generator->append(message.c_str(), message.size()*sizeof(char));
 	generator->readout(hash);
 
+// TODO: remove the base64 and simply use itoa, or ostringstream to export the ints into the string
 	return base64_encode(hash, hash_size);
 }
 
