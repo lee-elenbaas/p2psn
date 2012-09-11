@@ -3,22 +3,22 @@ OPTIONS=-O0 -Wall -Wextra -std=c++0x -g3 -rdynamic
 
 #Wrapper C++ application
 MAIN_HEADERS=
-MAIN_CPP=main/noded.cpp
+MAIN_CPP=src/node/main/noded.cpp
 
 #Main node CppCMS application
 NODE_ADMIN_GENERATED=build/ptp2n_node_admin_skin.cpp
-NODE_ADMIN_SKIN=node_shared/master.tmpl node_guest/info.tmpl node_guest/about.tmpl node_guest/login.tmpl node_admin_menu/admin_menu.tmpl node_admin_users/admin_users.tmpl node_admin_server/admin_server.tmpl
-NODE_ADMIN_CONTENT=node_shared/base_content.hpp node_guest/guest_content.hpp node_admin_shared/admin_shared_content.hpp node_admin_users/admin_users_content.hpp
-NODE_ADMIN_HEADERS=node_shared/base_app.hpp node_guest/guest_app.hpp node_hashed_static/hashed_static_app.hpp node_admin_shared/admin_base_app.hpp node_admin_menu/admin_menu_app.hpp node_admin_users/admin_users_app.hpp node_admin_server/admin_server_app.hpp
-NODE_ADMIN_CPP=node_shared/base_app.cpp node_guest/guest_app.cpp node_hashed_static/hashed_static_app.cpp node_admin_shared/admin_base_app.cpp node_admin_menu/admin_menu_app.cpp node_admin_users/admin_users_app.cpp node_shared/base_content.cpp node_guest/guest_content.cpp node_admin_shared/admin_shared_content.cpp node_admin_users/admin_users_content.cpp node_admin_server/admin_server_app.cpp
+NODE_ADMIN_SKIN=src/node/shared/master.tmpl src/node/guest/info.tmpl src/node/guest/about.tmpl src/node/guest/login.tmpl src/node/admin_menu/admin_menu.tmpl src/node/admin_users/admin_users.tmpl src/node/admin_server/admin_server.tmpl
+NODE_ADMIN_CONTENT=src/node/shared/base_content.hpp src/node/guest/guest_content.hpp src/node/admin_shared/admin_shared_content.hpp src/node/admin_users/admin_users_content.hpp
+NODE_ADMIN_HEADERS=src/node/shared/base_app.hpp src/node/guest/guest_app.hpp src/node/admin_shared/admin_base_app.hpp src/node/admin_menu/admin_menu_app.hpp src/node/admin_users/admin_users_app.hpp src/node/admin_server/admin_server_app.hpp
+NODE_ADMIN_CPP=src/node/shared/base_app.cpp src/node/guest/guest_app.cpp src/node/admin_shared/admin_base_app.cpp src/node/admin_menu/admin_menu_app.cpp src/node/admin_users/admin_users_app.cpp src/node/shared/base_content.cpp src/node/guest/guest_content.cpp src/node/admin_shared/admin_shared_content.cpp src/node/admin_users/admin_users_content.cpp src/node/admin_server/admin_server_app.cpp
 
 #JSON-RPC Node API CppCMS application
-NODE_API_HEADERS=node_api/node_api.hpp
-NODE_API_CPP=node_api/node_api.cpp
+NODE_API_HEADERS=src/node/node_api/node_api.hpp
+NODE_API_CPP=src/node/node_api/node_api.cpp
 
 #Shared utils
-UTILS_HEADERS=utils/streamutils.hpp utils/crypto.hpp utils/locale_matching.hpp utils/regex_utils.hpp utils/log.hpp utils/signal_handler.hpp utils/serialization.hpp
-UTILS_CPP=utils/crypto.cpp utils/locale_matching.cpp utils/signal_handler.cpp
+UTILS_HEADERS=src/utils/streamutils.hpp src/utils/crypto.hpp src/utils/locale_matching.hpp src/utils/regex_utils.hpp src/utils/log.hpp src/utils/signal_handler.hpp src/utils/serialization.hpp src/utils/hashed_static_app.hpp
+UTILS_CPP=src/utils/crypto.cpp src/utils/locale_matching.cpp src/utils/signal_handler.cpp src/utils/hashed_static_app.cpp
 
 #hash folder app
 
