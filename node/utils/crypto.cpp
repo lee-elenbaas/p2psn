@@ -1,7 +1,7 @@
 #include "crypto.hpp"
 
 #include <sstream>
-#include <iomanip>
+#include "streamutils.hpp"
 
 using namespace p2psn::utils;
 using namespace std;
@@ -29,10 +29,10 @@ string signature::generate(std::auto_ptr<cppcms::crypto::message_digest> generat
 
 	ostringstream os;
 
-//	os << "hash \""<< message<< "\" hash_size="<<hash_size<<" array_size="<<array_size<<" hash:";
+//	for (unsigned i=0; i<hash_size;++i)
+//		os << hex(hash[i]);
 
-	for (unsigned i=0; i<hash_size;++i)
-		os << setw(2) << setfill('0') << hex << static_cast<unsigned>(hash[i]);
+	os << hex(hash, array_size);
 
 	return os.str();
 }

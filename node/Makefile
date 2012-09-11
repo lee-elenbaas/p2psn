@@ -17,7 +17,7 @@ NODE_API_HEADERS=node_api/node_api.hpp
 NODE_API_CPP=node_api/node_api.cpp
 
 #Shared utils
-UTILS_HEADERS=utils/crypto.hpp utils/locale_matching.hpp utils/regex_utils.hpp utils/log.hpp utils/signal_handler.hpp utils/serialization.hpp
+UTILS_HEADERS=utils/streamutils.hpp utils/crypto.hpp utils/locale_matching.hpp utils/regex_utils.hpp utils/log.hpp utils/signal_handler.hpp utils/serialization.hpp
 UTILS_CPP=utils/crypto.cpp utils/locale_matching.cpp utils/signal_handler.cpp
 
 all: separator run
