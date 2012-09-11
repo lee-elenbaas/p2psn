@@ -1,6 +1,6 @@
-#include "../node_shared/base_app.hpp"
+#include "base_app.hpp"
 
-#include "../utils/locale_matching.hpp"
+#include "../../utils/locale_matching.hpp"
 
 using namespace p2psn::node_admin;
 using namespace std;

@@ -5,8 +5,8 @@
 #include <cppcms/service.h>
 
 #include "base_content.hpp"
-#include "../utils/serialization.hpp"
-#include "../utils/log.hpp"
+#include "../../utils/serialization.hpp"
+#include "../../utils/log.hpp"
 
 namespace p2psn {
     namespace node_admin {

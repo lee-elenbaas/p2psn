@@ -1,12 +1,12 @@
-#include "../node_guest/guest_app.hpp"
+#include "guest_app.hpp"
 
 #include <cppcms/url_dispatcher.h>
 
 #include "../node_api/node_api.hpp"
-#include "../node_admin_menu/admin_menu_app.hpp"
-#include "../node_hashed_static/hashed_static_app.hpp"
+#include "../admin_menu/admin_menu_app.hpp"
+#include "../../utils/hashed_static_app.hpp"
 
-#include "../utils/crypto.hpp"
+#include "../../utils/crypto.hpp"
 
 using namespace p2psn::node_admin;
 using namespace std;

@@ -1,8 +1,8 @@
 #ifndef __P2PSN_MAIN_APP_H
 #define __P2PSN_MAIN_APP_H
 
-#include "../node_shared/base_app.hpp"
-#include "../node_guest/guest_content.hpp"
+#include "../shared/base_app.hpp"
+#include "../guest/guest_content.hpp"
 
 namespace p2psn {
     namespace node_admin {

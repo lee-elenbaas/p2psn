@@ -1,7 +1,7 @@
-#include "../node_guest/guest_app.hpp"
+#include "../node/guest/guest_app.hpp"
 #include <cppcms/applications_pool.h>
 #include <cppcms/url_dispatcher.h>
-#include "../utils/signal_handler.hpp"
+#include "../../utils/signal_handler.hpp"
 
 /**
  * Main C++ application function

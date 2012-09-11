@@ -1,5 +1,4 @@
 #include "admin_base_app.hpp"
-#include <boost/serialization/vector.hpp>
 #include <cppcms/json.h>
 
 using namespace p2psn::node_admin;
