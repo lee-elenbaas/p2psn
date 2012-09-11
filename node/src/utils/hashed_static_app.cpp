@@ -1,7 +1,7 @@
 #include "hashed_static_app.hpp"
 
 #include <fstream>
-#include "../utils/crypto.hpp"
+#include "crypto.hpp"
 
 using namespace p2psn::node_admin;
 using namespace std;

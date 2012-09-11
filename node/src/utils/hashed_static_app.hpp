@@ -1,8 +1,10 @@
 #ifndef __P2PSN_HASHED_STATIC_APP_H
 #define __P2PSN_HASHED_STATIC_APP_H
 
-#include "../node_shared/base_app.hpp"
-#include "../node_guest/guest_content.hpp"
+#include "../node/shared/base_app.hpp"
+#include "../node/guest/guest_content.hpp"
+
+// TODO: make this a real utility app - and remove the inheritance dependancy by providing some other way to tap into the security process
 
 namespace p2psn {
 	namespace node_admin {
