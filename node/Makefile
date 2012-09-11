@@ -20,6 +20,8 @@ NODE_API_CPP=node_api/node_api.cpp
 UTILS_HEADERS=utils/streamutils.hpp utils/crypto.hpp utils/locale_matching.hpp utils/regex_utils.hpp utils/log.hpp utils/signal_handler.hpp utils/serialization.hpp
 UTILS_CPP=utils/crypto.cpp utils/locale_matching.cpp utils/signal_handler.cpp
 
+#hash folder app
+
 all: separator run
 
 .PHONY: all separator clean documentation run dependancies statics
@@ -55,7 +57,10 @@ clean:
 run: run/noded run/config.js statics
 	./noded
 
-statics: run/css/node.css
+statics: run/css/node.css run/hash_folder
+
+run/hash_folder: hash_folder/hash_folder.cpp utils/streamutils.hpp utils/crypto.hpp utils/crypto.cpp
+	$(CXX) $(OPTIONS) hash_folder/hash_folder.cpp utils/crypto.cpp -o run/hash_folder ${LIBS} -lbooster_program_options
 
 run/css/node.css: static/css/node.css
 	mkdir -p run/css

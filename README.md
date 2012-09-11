@@ -77,6 +77,29 @@ At the same time each node is intended to run on a normal home PC with its limit
 
 ## Development Blog
 
+2012-09-11
+
+> In the last several days i managed to get the admin users to perform its actions in the session. 
+> (I still need to apply it and generate a new configuration from it.)
+> But what bothered me while doing this was the lack of CSS, for that i needed to be able to serve static files.
+> Serving a single css file was easy enough, but then came the need to serve others. and to keep the server from being exposed using the static files interface.
+> The solution i initially thought of was hash the requested path, and service from a single folder a file named by that hash. 
+> This solves the problem of visibility from the outside, while keeps all the html links readable. It presents 2 problems:
+
+> - The development files needs to be hashed at build time, and this represent some build dificulties (i started developing a utility to do that for me)
+> - The deployment will contain a folder that is very hard to understand and debug in case of need.
+
+> There is a third problem that comes from a different direction: the web client was supposed to work offline as well, 
+> this means that the html static files of the client needs to be able to use links between them. And hashing the client is not an option (unless we install 2 versions, one for server delivery and one for offline delivery)
+
+> So the approach i am considering now is that of a white list: in the build, place a white list of allowed static paths, each of those can then be hold more then just the allow status, it can also hold the mime type and where 
+> the file is physically located (and even if it should be served directly or using the web server send file capabilities).
+> And on top of it, the deployment will be easy enough. I think i will still hash the path in order to get a key to this whitelist, but the necesity of hashing is really gone for this issue.
+
+> This does raise a different issue: where will the whitelist be located. The obvious place is inside the config file. This makes it harder to build it, but not undoable. And i will still need a tool that will generate the whitelist for me, with the necesary set of rules for that.
+
+> This second utility also brings up another issue: I need to break down the build process, this is getting painfull.
+
 2012-08-30
 
 > Diaspora or not to Diaspora (http://diasporaproject.org/). At a very late stage for me and a very early stage for this project i became aware of the diaspora project. Basically we are looking to solve very similar problems, but we go about it completely different. They decided to make a network of servers, where everyone is free to open up his own server, and users choose what server to trust and register with, but once that decision is made, it is final. (at least for that seed, a user can always open up a new seed.)
