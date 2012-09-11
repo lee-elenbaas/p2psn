@@ -29,9 +29,6 @@ string signature::generate(std::auto_ptr<cppcms::crypto::message_digest> generat
 
 	ostringstream os;
 
-//	for (unsigned i=0; i<hash_size;++i)
-//		os << hex(hash[i]);
-
 	os << hex(hash, array_size);
 
 	return os.str();

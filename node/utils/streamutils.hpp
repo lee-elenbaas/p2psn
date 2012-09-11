@@ -6,6 +6,7 @@
 #ifndef __STREAMUTILS_H
 #define __STREAMUTILS_H
 
+#include <ostream>
 #include <iomanip>
 
 namespace p2psn {
@@ -34,16 +35,22 @@ namespace p2psn {
 			template<typename Char>
 			inline std::ostream& operator<<(std::ostream& o, const HexCharStruct<Char>& hs)
 			{
-			  return (o << std::setw(2*sizeof(Char)) << std::setfill('0') << std::hex << static_cast<long>(hs.c));
+				std::ostream hexout(o.rdbuf());
+
+				hexout << std::setw(2*sizeof(Char)) << std::setfill('0') << std::hex << static_cast<long>(hs.c);
+
+				return o;
 			}
 
 			template<typename Char>
 			inline std::ostream& operator<<(std::ostream& o, const HexBufferStruct<Char>& hs)
 			{
-				o << std::setw(2*sizeof(Char)) << std::setfill('0') << std::hex;
+				std::ostream hexout(o.rdbuf());
+
+				hexout << std::setw(2*sizeof(Char)) << std::setfill('0') << std::hex;
 			  
 				for(unsigned i=0; i<hs.length;++i)
-					o << static_cast<long>(hs.buffer[i]);
+					hexout << static_cast<long>(hs.buffer[i]);
 
 				return o;
 			}
