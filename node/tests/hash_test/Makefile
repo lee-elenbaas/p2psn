@@ -5,8 +5,8 @@ all: hash_test
 
 .PHONY: all clean
 
-hash_test: hash_test.cpp ../../utils/crypto.cpp ../../utils/crypto.hpp
-	$(CXX) $(OPTIONS) hash_test.cpp ../../utils/crypto.cpp -o hash_test ${LIBS}
+hash_test: hash_test.cpp ../../src/utils/crypto.cpp ../../src/utils/crypto.hpp
+	$(CXX) $(OPTIONS) hash_test.cpp ../../src/utils/crypto.cpp -o hash_test ${LIBS}
 	
 clean:
 	rm -f hash_test *~
