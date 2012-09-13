@@ -44,25 +44,23 @@ run/noded: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_ADMIN_HEADERS) $(NODE_ADMIN_CONTEN
 dependancies: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_ADMIN_HEADERS) $(NODE_ADMIN_CONTENT) $(NODE_ADMIN_CPP) $(NODE_API_HEADERS) $(NODE_API_CPP) $(UTILS_HEADERS) $(UTILS_CPP) $(NODE_ADMIN_GENERATED)
 	$(CXX) -MM $(OPTIONS) $(MAIN_CPP) $(NODE_ADMIN_CPP) $(NODE_API_CPP) $(UTILS_CPP) $(NODE_ADMIN_GENERATED) ${LIBS}
 
-run/config.js: config/config.js
+run/config.js: src/node/config/config.js
 	mkdir -p run
-	cp config/config.js run/config.js
+	cp src/node/config/config.js run/config.js
 	
 $(NODE_ADMIN_GENERATED): $(NODE_ADMIN_SKIN)
 	cppcms_tmpl_cc $(NODE_ADMIN_SKIN) -o $(NODE_ADMIN_GENERATED)
 	
 clean:
-	rm -fr run/* cppcms_rundir build/* docs/* ./*~ main/*~ node_shared/*~ node_guest/*~ node_admin_shared/*~ node_admin_menu/*~ node_admin_users/*~ node_api/*~ utils/*~ config/*~
+	rm -fr run/* cppcms_rundir build/* docs/* 
+	find . -type f -name "*~" | xargs rm -f
 
 run: run/noded run/config.js statics
 	./noded
 
-statics: run/css/node.css run/hash_folder
+statics: run/css/node.css
 
-run/hash_folder: hash_folder/hash_folder.cpp utils/streamutils.hpp utils/crypto.hpp utils/crypto.cpp
-	$(CXX) $(OPTIONS) hash_folder/hash_folder.cpp utils/crypto.cpp -o run/hash_folder ${LIBS} -lbooster_program_options
-
-run/css/node.css: static/css/node.css
+run/css/node.css: src/node/static_files/css/node.css
 	mkdir -p run/css
-	cp static/css/node.css run/css
+	cp src/node/static_files/css/node.css run/css
 

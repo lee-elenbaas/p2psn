@@ -1,4 +1,4 @@
-#include "../node/guest/guest_app.hpp"
+#include "../guest/guest_app.hpp"
 #include <cppcms/applications_pool.h>
 #include <cppcms/url_dispatcher.h>
 #include "../../utils/signal_handler.hpp"
