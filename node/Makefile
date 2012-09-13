@@ -24,7 +24,7 @@ UTILS_CPP=src/utils/crypto.cpp src/utils/locale_matching.cpp src/utils/signal_ha
 
 all: separator run
 
-.PHONY: all separator clean documentation run dependancies statics
+.PHONY: all separator clean documentation run statics dependancies
 
 separator:
 	@echo
@@ -41,8 +41,13 @@ docs/html/index.html: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_ADMIN_HEADERS) $(NODE_A
 run/noded: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_ADMIN_HEADERS) $(NODE_ADMIN_CONTENT) $(NODE_ADMIN_CPP) $(NODE_API_HEADERS) $(NODE_API_CPP) $(UTILS_HEADERS) $(UTILS_CPP) $(NODE_ADMIN_GENERATED)
 	$(CXX) $(OPTIONS) $(MAIN_CPP) $(NODE_ADMIN_CPP) $(NODE_API_CPP) $(UTILS_CPP) $(NODE_ADMIN_GENERATED) -o run/noded ${LIBS}
 
-dependancies: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_ADMIN_HEADERS) $(NODE_ADMIN_CONTENT) $(NODE_ADMIN_CPP) $(NODE_API_HEADERS) $(NODE_API_CPP) $(UTILS_HEADERS) $(UTILS_CPP) $(NODE_ADMIN_GENERATED)
-	$(CXX) -MM $(OPTIONS) $(MAIN_CPP) $(NODE_ADMIN_CPP) $(NODE_API_CPP) $(UTILS_CPP) $(NODE_ADMIN_GENERATED) ${LIBS}
+dependancies: build/dependancies.mk
+
+build/dependancies.mk: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_ADMIN_HEADERS) $(NODE_ADMIN_CONTENT) $(NODE_ADMIN_CPP) $(NODE_API_HEADERS) $(NODE_API_CPP) $(UTILS_HEADERS) $(UTILS_CPP) $(NODE_ADMIN_GENERATED)
+	mkdir -p build
+	$(CXX) -MM $(OPTIONS) $(MAIN_CPP) $(NODE_ADMIN_CPP) $(NODE_API_CPP) $(UTILS_CPP) $(NODE_ADMIN_GENERATED) ${LIBS} | sed "s/.*\.o/build\/\0/g" >> build/dependancies.mk
+
+include build/dependancies.mk
 
 run/config.js: src/node/config/config.js
 	mkdir -p run
