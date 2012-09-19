@@ -4,6 +4,6 @@
 void myPrintHelloMake() {
 	using namespace std;
 
-	cout << "Make file test" << endl;
+	cout << "Make file test 2" << endl;
 }
 
