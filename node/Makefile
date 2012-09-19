@@ -26,6 +26,12 @@ all: separator run
 
 .PHONY: all separator clean documentation run statics dependancies
 
+build/%.o: src/%.cpp
+	$(CXX) $(OPTIONS) -c -o $@ $<
+
+%.: %.o
+	$(CXX) $(OPTIONS) -o $@ $<
+
 separator:
 	@echo
 	@echo
@@ -38,8 +44,7 @@ documentation: docs/html/index.html
 docs/html/index.html: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_ADMIN_HEADERS) $(NODE_ADMIN_CONTENT) $(NODE_ADMIN_CPP) $(NODE_API_HEADERS) $(NODE_API_CPP) $(UTILS_HEADERS) $(UTILS_CPP) $(NODE_ADMIN_SKIN)
 	doxygen Doxyfile
 
-run/noded: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_ADMIN_HEADERS) $(NODE_ADMIN_CONTENT) $(NODE_ADMIN_CPP) $(NODE_API_HEADERS) $(NODE_API_CPP) $(UTILS_HEADERS) $(UTILS_CPP) $(NODE_ADMIN_GENERATED)
-	$(CXX) $(OPTIONS) $(MAIN_CPP) $(NODE_ADMIN_CPP) $(NODE_API_CPP) $(UTILS_CPP) $(NODE_ADMIN_GENERATED) -o run/noded ${LIBS}
+run/noded: build/dependancies.mk build/noded.o build/base_app.o build/guest_app.o build/admin_base_app.o build/admin_menu.o build/admin_users_app.o build/base_content.o build/guest_content.o build/admin_shared_content.o build/admin_users_content.o build/admin_server_app.o build/node_api.o build/crypto.o build/locale_matching.o build/signal_handler.o build/hashed_static_app.o build/p2psn_node_admin_skin.o
 
 dependancies: build/dependancies.mk
 
