@@ -6,7 +6,7 @@ MAIN_HEADERS=
 MAIN_CPP=src/node/main/noded.cpp
 
 #Main node CppCMS application
-NODE_ADMIN_GENERATED=build/ptp2n_node_admin_skin.cpp
+NODE_ADMIN_GENERATED=src/generated/noded_skin.cpp
 NODE_ADMIN_SKIN=src/node/shared/master.tmpl src/node/guest/info.tmpl src/node/guest/about.tmpl src/node/guest/login.tmpl src/node/admin_menu/admin_menu.tmpl src/node/admin_users/admin_users.tmpl src/node/admin_server/admin_server.tmpl
 NODE_ADMIN_CONTENT=src/node/shared/base_content.hpp src/node/guest/guest_content.hpp src/node/admin_shared/admin_shared_content.hpp src/node/admin_users/admin_users_content.hpp
 NODE_ADMIN_HEADERS=src/node/shared/base_app.hpp src/node/guest/guest_app.hpp src/node/admin_shared/admin_base_app.hpp src/node/admin_menu/admin_menu_app.hpp src/node/admin_users/admin_users_app.hpp src/node/admin_server/admin_server_app.hpp
@@ -26,12 +26,6 @@ all: separator run
 
 .PHONY: all separator clean documentation run statics dependancies
 
-build/%.o: src/%.cpp
-	$(CXX) $(OPTIONS) -c -o $@ $<
-
-%.: %.o
-	$(CXX) $(OPTIONS) -o $@ $<
-
 separator:
 	@echo
 	@echo
@@ -44,13 +38,42 @@ documentation: docs/html/index.html
 docs/html/index.html: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_ADMIN_HEADERS) $(NODE_ADMIN_CONTENT) $(NODE_ADMIN_CPP) $(NODE_API_HEADERS) $(NODE_API_CPP) $(UTILS_HEADERS) $(UTILS_CPP) $(NODE_ADMIN_SKIN)
 	doxygen Doxyfile
 
-run/noded: build/dependancies.mk build/noded.o build/base_app.o build/guest_app.o build/admin_base_app.o build/admin_menu.o build/admin_users_app.o build/base_content.o build/guest_content.o build/admin_shared_content.o build/admin_users_content.o build/admin_server_app.o build/node_api.o build/crypto.o build/locale_matching.o build/signal_handler.o build/hashed_static_app.o build/p2psn_node_admin_skin.o
+run/noded: build/noded
+
+build/noded:	build/node/main/noded.o \
+		build/node/shared/base_app.o \
+		build/node/guest/guest_app.o \
+		build/node/admin_shared/admin_base_app.o \
+		build/node/admin_menu/admin_menu_app.o \
+		build/node/admin_users/admin_users_app.o \
+		build/node/shared/base_content.o \
+		build/node/guest/guest_content.o \
+		build/node/admin_shared/admin_shared_content.o \
+		build/node/admin_users/admin_users_content.o \
+		build/node/admin_server/admin_server_app.o \
+		build/node/node_api/node_api.o \
+		build/utils/crypto.o \
+		build/utils/locale_matching.o \
+		build/utils/signal_handler.o \
+		build/utils/hashed_static_app.o \
+		build/generated/noded_skin.o
+	$(CXX) $(OPTIONS) $(LIBS) -o $@ $^
+
+run/%: build/%
+	cp $< $@
+
+build/%.o: src/%.cpp
+	-rm $@
+	mkdir -p $@
+	-rmdir $@
+	$(CXX) $(OPTIONS) $(LIBS) -c $^
+	mv *.o $@
 
 dependancies: build/dependancies.mk
 
-build/dependancies.mk: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_ADMIN_HEADERS) $(NODE_ADMIN_CONTENT) $(NODE_ADMIN_CPP) $(NODE_API_HEADERS) $(NODE_API_CPP) $(UTILS_HEADERS) $(UTILS_CPP) $(NODE_ADMIN_GENERATED)
+build/dependancies.mk: $(NODE_ADMIN_GENERATED)
 	mkdir -p build
-	$(CXX) -MM $(OPTIONS) $(MAIN_CPP) $(NODE_ADMIN_CPP) $(NODE_API_CPP) $(UTILS_CPP) $(NODE_ADMIN_GENERATED) ${LIBS} | sed "s/.*\.o/build\/\0/g" >> build/dependancies.mk
+	find . -type f -name "*.cpp" | xargs $(CXX) -MM $(OPTIONS) ${LIBS} | sed "s/.*\.o: src\(\/.*\)\.cpp/build\1\.o: src\1\.cpp/" > build/dependancies.mk
 
 include build/dependancies.mk
 
@@ -59,11 +82,19 @@ run/config.js: src/node/config/config.js
 	cp src/node/config/config.js run/config.js
 	
 $(NODE_ADMIN_GENERATED): $(NODE_ADMIN_SKIN)
+	-rm $@
+	mkdir -p $@
+	-rmdir $@
 	cppcms_tmpl_cc $(NODE_ADMIN_SKIN) -o $(NODE_ADMIN_GENERATED)
 	
 clean:
-	rm -fr run/* cppcms_rundir build/* docs/* 
+	rm -fr run/* cppcms_rundir build/* docs/* src/generated/*
+	-rmdir run
+	-rmdir build
+	-rmdir docs
+	-rmdir src/generated
 	find . -type f -name "*~" | xargs rm -f
+	find . -type f -name "*.gch" | xargs rm -f
 
 run: run/noded run/config.js statics
 	./noded
