@@ -38,6 +38,9 @@ build/noded:	build/node/main/noded.o \
 
 # copy build result to run folder
 run/%: build/%
+	-rm $@
+	mkdir -p $@
+	-rmdir $@
 	cp $< $@
 
 # generate object files
@@ -54,7 +57,7 @@ dependancies: build/dependancies.mk
 build/dependancies.mk:
 	mkdir -p build
 	find . -type f -name "*.cpp" | xargs $(CXX) -MM $(OPTIONS) ${LIBS} | sed "s/.*\.o: src\(\/.*\)\.cpp/build\1\.o: src\1\.cpp/" > $@
-	find . -type f -name "*.tmpl" | xargs echo "$(NODE_ADMIN_GENERATED):" >> $@
+#	find . -type f -name "*.tmpl" | xargs echo "$(NODE_ADMIN_GENERATED):" >> $@
 
 include build/dependancies.mk
 
@@ -90,4 +93,15 @@ statics: run/css/node.css
 run/css/node.css: src/node/static_files/css/node.css
 	mkdir -p run/css
 	cp src/node/static_files/css/node.css run/css
+
+# dependancies for templates
+src/generated/noded_skin.cpp: \
+	src/node/shared/master.tmpl \
+	src/node/guest/login.tmpl \
+	src/node/guest/info.tmpl \
+	src/node/guest/about.tmpl \
+	src/node/admin_menu/admin_menu.tmpl \
+	src/node/admin_users/admin_users.tmpl \
+	src/node/admin_server/admin_server.tmpl
+
 
