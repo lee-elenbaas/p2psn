@@ -13,7 +13,6 @@ docs/html/index.html: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_ADMIN_HEADERS) $(NODE_A
 	doxygen Doxyfile
 
 # node deamon
-run/noded: build/noded
 
 build/noded:	build/node/main/noded.o \
 		build/node/shared/base_app.o \
@@ -33,6 +32,13 @@ build/noded:	build/node/main/noded.o \
 		build/utils/hashed_static_app.o \
 		build/generated/noded_skin.o
 	$(CXX) $(OPTIONS) $^ -o $@ $(LIBS)
+
+# node tools
+build/white_list_files:	\
+		build/tools/white_list_files.o \
+		build/utils/white_list_folder.o \
+		build/utils/crypto.o
+	$(CXX) $(OPTIONS) $^ -o $@ $(LIBS) -lboost_program_options
 
 # rules for generating files
 
@@ -84,8 +90,12 @@ clean:
 	find . -type f -name "*.gch" | xargs rm -f
 
 # run the node deamon
-run: run/noded run/config.js statics
-	./noded
+#run: run/noded run/config.js statics
+#	./noded
+run:	run/white_list_files
+	./run/white_list_files --help
+	./run/white_list_files --version
+	./run/white_list_files --target build/white_list.js --src src/node/static_files/css --dst run/css --pattern "*.css" --mime "text/css" --keep-extension
 
 # static files
 statics: run/css/node.css
