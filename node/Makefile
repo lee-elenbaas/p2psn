@@ -1,6 +1,9 @@
 LIBS=-lcppcms -lbooster
 OPTIONS=-O0 -Wall -Wextra -std=c++0x -g3 -rdynamic
 NODE_ADMIN_GENERATED=src/generated/noded_skin.cpp
+#CPPCMS_TMPL_CC=cppcms_tmpl_cc
+#CPPCMS_TMPL_CC=../../cppcms/cppcms/framework/trunk/bin/cppcms_tmpl_cc
+CPPCMS_TMPL_CC=tools/cppcms_tmpl_cc
 
 all: run
 
@@ -35,9 +38,9 @@ build/noded:	build/node/main/noded.o \
 
 # node tools
 build/white_list_files:	\
-		build/tools/white_list_files.o \
+		build/utils/crypto.o \
 		build/utils/white_list_folder.o \
-		build/utils/crypto.o
+		build/tools/white_list_files.o
 	$(CXX) $(OPTIONS) $^ -o $@ $(LIBS) -lboost_program_options
 
 # rules for generating files
@@ -63,7 +66,7 @@ dependancies: build/dependancies.mk
 build/dependancies.mk:
 	mkdir -p build
 	find . -type f -name "*.cpp" | xargs $(CXX) -MM $(OPTIONS) ${LIBS} | sed "s/.*\.o: src\(\/.*\)\.cpp/build\1\.o: src\1\.cpp/" > $@
-#	find . -type f -name "*.tmpl" | xargs echo "$(NODE_ADMIN_GENERATED):" >> $@
+	find . -type f -name "*.tmpl" | xargs echo "$(NODE_ADMIN_GENERATED):" >> $@
 
 include build/dependancies.mk
 
@@ -77,7 +80,7 @@ $(NODE_ADMIN_GENERATED):
 	-rm $@
 	mkdir -p $@
 	-rmdir $@
-	cppcms_tmpl_cc $^ -o $@
+	$(CPPCMS_TMPL_CC) $^ -o $@
 
 #Clean up	
 clean:
@@ -90,12 +93,12 @@ clean:
 	find . -type f -name "*.gch" | xargs rm -f
 
 # run the node deamon
-#run: run/noded run/config.js statics
-#	./noded
-run:	run/white_list_files
-	./run/white_list_files --help
-	./run/white_list_files --version
-	./run/white_list_files --target build/white_list.js --src src/node/static_files/css --dst run/css --pattern "*.css" --mime "text/css" --keep-extension
+run: run/noded run/config.js statics
+	./noded
+#run:	run/white_list_files
+#	./run/white_list_files --help
+#	./run/white_list_files --version
+#	./run/white_list_files --target build/white_list.js --src src/node/static_files/css --dst run/css --pattern "*.css" --mime "text/css" --keep-extension
 
 # static files
 statics: run/css/node.css
@@ -105,13 +108,13 @@ run/css/node.css: src/node/static_files/css/node.css
 	cp src/node/static_files/css/node.css run/css
 
 # dependancies for templates
-src/generated/noded_skin.cpp: \
-	src/node/shared/master.tmpl \
-	src/node/guest/login.tmpl \
-	src/node/guest/info.tmpl \
-	src/node/guest/about.tmpl \
-	src/node/admin_menu/admin_menu.tmpl \
-	src/node/admin_users/admin_users.tmpl \
-	src/node/admin_server/admin_server.tmpl
+#src/generated/noded_skin.cpp: \
+#	src/node/shared/master.tmpl \
+#	src/node/guest/login.tmpl \
+#	src/node/guest/info.tmpl \
+#	src/node/guest/about.tmpl \
+#	src/node/admin_menu/admin_menu.tmpl \
+#	src/node/admin_users/admin_users.tmpl \
+#	src/node/admin_server/admin_server.tmpl
 
 
