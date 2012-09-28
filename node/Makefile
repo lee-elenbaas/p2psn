@@ -33,7 +33,13 @@ build/noded:	build/node/main/noded.o \
 		build/utils/locale_matching.o \
 		build/utils/signal_handler.o \
 		build/utils/hashed_static_app.o \
-		build/generated/noded_skin.o
+		build/generated/node/shared/master.o \
+		build/generated/node/guest/about.o \
+		build/generated/node/guest/info.o \
+		build/generated/node/guest/login.o \
+		build/generated/node/admin_menu/admin_menu.o \
+		build/generated/node/admin_server/admin_server.o \
+		build/generated/node/admin_users/admin_users.o
 	$(CXX) $(OPTIONS) $^ -o $@ $(LIBS)
 
 # node tools
@@ -60,15 +66,26 @@ build/%.o: src/%.cpp
 	$(CXX) $(OPTIONS) -c $< $(LIBS)
 	mv *.o $@
 
-# dependancies
-dependancies: build/dependancies.mk
+src/generated/%.cpp: src/%.tmpl
+	-rm $@
+	mkdir -p $@
+	-rmdir $@
+	$(CPPCMS_TMPL_CC) -o $@ -H "src/generated/$*.hpp" $^
 
-build/dependancies.mk:
+# dependancies
+dependancies: build/dependancies_tmpl.mk build/dependancies_cpp.mk
+
+build/dependancies_tmpl.mk:
+	mkdir -p build
+	find . -type f -name "*.tmpl" | sed "s/\.\/src\/\(.*\.\)tmpl/src\/generated\/\1cpp: src\/\1tmpl/" > $@
+	find . -type f -name "*.tmpl" | sed "s/\.\/src\/\(.*\.\)tmpl/src\/generated\/\1cpp/" | xargs echo "build/dependancies_cpp.mk:" >> $@
+
+build/dependancies_cpp.mk: build/dependancies_tmpl.mk
 	mkdir -p build
 	find . -type f -name "*.cpp" | xargs $(CXX) -MM $(OPTIONS) ${LIBS} | sed "s/.*\.o: src\(\/.*\)\.cpp/build\1\.o: src\1\.cpp/" > $@
-	find . -type f -name "*.tmpl" | xargs echo "$(NODE_ADMIN_GENERATED):" >> $@
 
-include build/dependancies.mk
+include build/dependancies_tmpl.mk 
+include build/dependancies_cpp.mk
 
 #configuration
 run/config.js: src/node/config/config.js

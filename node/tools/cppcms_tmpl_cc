@@ -41,6 +41,14 @@ def output_declaration(s):
     declarations += '\t' * len(stack) + '#line %d "%s"' % (line_number,file_name)+'\n' + \
         '\t'*len(stack) + s + '\n'
 
+def output_inline_definition(s):
+    global stack
+    global file_name
+    global line_number
+    global inline_definitions
+    inline_definitions += '\t' * len(stack) + '#line %d "%s"' % (line_number,file_name)+'\n' + \
+        '\t'*len(stack) + s + '\n'
+
 def output_definition(s):
     global stack
     global file_name
@@ -138,15 +146,15 @@ class view_block:
         if self.uses!='' : 
             output_declaration( "\t%s &content;" % self.uses)
             output_declaration( "\t%s(std::ostream &_s,%s &_content);" % ( self.class_name, self.uses ))
-            output_definition( "\tinline %s::%s(std::ostream &_s,%s &_content): %s,content(_content)" % ( self.class_name,self.class_name,self.uses,constructor ))
+            output_inline_definition( "\tinline %s::%s(std::ostream &_s,%s &_content): %s,content(_content)" % ( self.class_name,self.class_name,self.uses,constructor ))
         else:
             output_declaration( "\t%s(std::ostream &_s);" % ( self.class_name ))
-            output_definition( "\tinline %s::%s(std::ostream &_s): %s" % ( self.class_name,self.class_name,constructor ))
-        output_definition("\t{")
+            output_inline_definition( "\tinline %s::%s(std::ostream &_s): %s" % ( self.class_name,self.class_name,constructor ))
+        output_inline_definition("\t{")
         global spec_gettext
         if self.topmost and spec_gettext:
-            output_definition('\t\tout() << cppcms::locale::as::domain("%s");' % spec_gettext )
-        output_definition("\t}")
+            output_inline_definition('\t\tout() << cppcms::locale::as::domain("%s");' % spec_gettext )
+        output_inline_definition("\t}")
 
     def use(self,m):
         global inline_cpp_to
@@ -921,11 +929,12 @@ def fetch_content(content):
 
 def help():
     print( "Usage cppcms_tmpl_cc [-o filename.cpp] [-s skin] [-d domain] file1.tmpl ... \n" \
-        "      -o filename.cpp     file name that implements this template\n" \
-        "      -s skin             define skin name\n" \
-        "      -d domain           setup gettext domain for this template\n" \
-        "      -u                  use unsafe static casting instead of dynamic casing for dlls\n" \
-        "      -h/--help           show this help message\n")
+        "      -o filename.cpp               file name that implements this template\n" \
+        "      -s skin                       define skin name\n" \
+        "      -d domain                     setup gettext domain for this template\n" \
+        "      -u                            use unsafe static casting instead of dynamic casing for dlls\n" \
+        "      -H/--header filename.hpp      generate header file. \n" \
+        "      -h/--help                     show this help message\n")
 
 def main():
     global stack
@@ -933,6 +942,7 @@ def main():
     indx=1
     global namespace_name
     global output_file
+    global header_file
     global exit_flag
     unsafe_build = False
     while indx < len(os.sys.argv):
@@ -953,6 +963,15 @@ def main():
                 return
             else:
                 output_file=os.sys.argv[indx+1]
+                indx+=1
+        elif os.sys.argv[indx]=='-H' or os.sys.argv[indx]=='--header':
+            if indx+1>=len(os.sys.argv):
+                sys.stderr.write("%s should be followed by output header file name\n" % (os.sys.argv[indx]))
+                help()
+                exit_flag=1
+                return
+            else:
+                header_file=os.sys.argv[indx+1]
                 indx+=1
         elif os.sys.argv[indx]=='-d':
             if indx+1>=len(os.sys.argv):
@@ -1045,6 +1064,7 @@ def main():
 
 html_type_code='as_html'
 output_file=''
+header_file=''
 output_fd=sys.stdout
 namespace_name=''
 file_name=''
@@ -1063,6 +1083,7 @@ ignore_inline=1
 view_name = ''
 forwards = ''
 declarations = ''
+inline_definitions = ''
 definitions = ''
 inline_cpp_to = output_forward
 
@@ -1070,8 +1091,21 @@ inline_cpp_to = output_forward
 main()
 ################
 
-output_fd.write(forwards);
-output_fd.write(declarations);
+if header_file!='':
+    output_hfd=open(header_file,"w")
+    output_hfd.write("#ifndef __%s_HEADER_INCLUDED\n" % ( header_file ))
+    output_hfd.write("#define __%s_HEADER_INCLUDED\n\n" % ( header_file ))
+    output_hfd.write(forwards);
+    output_hfd.write(declarations);
+    output_hfd.write(inline_definitions);
+    output_hfd.write("#endif // __%s_HEADER_INCLUDED\n" % ( header_file ))
+    output_hfd.close()
+    output_fd.write('#include "%s"\n\n' % ( header_file ))
+else:
+    output_fd.write(forwards);
+    output_fd.write(declarations);
+    output_fd.write(inline_definitions);
+
 output_fd.write(definitions);
 
 if output_fd!=sys.stderr:
