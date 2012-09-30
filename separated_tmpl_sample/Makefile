@@ -3,9 +3,9 @@ OPTIONS=-O0 -Wall -Wextra -std=c++0x -g3 -rdynamic
 #CPPCMS_TMPL_CC=cppcms_tmpl_cc
 CPPCMS_TMPL_CC=tools/cppcms_tmpl_cc
 
-all: run
+all: dependancies run
 
-.PHONY: all clean run build_sources
+.PHONY: all clean run
 
 # rules for generating files
 
@@ -17,12 +17,14 @@ run/%: build/%
 	cp $< $@
 
 #copy files from src to build
-build_sources:
+build/%: src/%
+	mkdir -p build
 	cp -r src/* build/
 
 # generate object files
 build/%.o: build/%.cpp
 	$(CXX) $(OPTIONS) -c $< $(LIBS)
+	mv *.o $@
 
 build/%.cpp: build/%.tmpl
 	$(CPPCMS_TMPL_CC) -o $@ -H "build/$*.h" $^
@@ -37,7 +39,8 @@ build/dependancies_tmpl.mk:
 
 include build/dependancies_tmpl.mk
 
-build/dependancies_cpp.mk: build/dependancies_tmpl.mk build_sources
+build/dependancies_cpp.mk: build/dependancies_tmpl.mk
+	mkdir -p build
 	find build -type f -name "*.cpp" | xargs $(CXX) -MM $(OPTIONS) ${LIBS} | sed "s/.*\.o: \(.*\)\.cpp/\1\.o: \1\.cpp/" > $@
 
 include build/dependancies_cpp.mk
@@ -58,6 +61,7 @@ run: run/separated-tmpl-sample run/config.js
 
 build/separated-tmpl-sample:	\
 		build/separated-tmpl-sample.o \
-		build/first.o
+		build/base.o \
+		build/derived.o
 	$(CXX) $(OPTIONS) $^ -o $@ $(LIBS)
 

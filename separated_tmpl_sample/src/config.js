@@ -4,6 +4,10 @@
 		"port" : 8080
 	},
 	"http" : {
-		"script" : "/hello"
+		"script" : "/sample",
+		"rewrite" : [
+			{ "regex" : "/sample(/.*)?", "pattern" : "$0" },
+			{ "regex" : ".*", "pattern" : "/sample" }
+		]
 	}
 }

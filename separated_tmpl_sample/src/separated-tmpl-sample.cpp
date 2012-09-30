@@ -7,17 +7,42 @@
 
 #include "content.h"
 
-class my_hello_world : public cppcms::application {
+class separated_tmpl_sample : public cppcms::application {
 public:
-    my_hello_world(cppcms::service &s) :
+    separated_tmpl_sample(cppcms::service &s) :
        cppcms::application(s)
     {
+        dispatcher().assign("",&separated_tmpl_sample::home,this);
+        mapper().assign("");
+
+        dispatcher().assign("/base",&separated_tmpl_sample::base,this);
+        mapper().assign("base","/base");
+
+        dispatcher().assign("/derived",&separated_tmpl_sample::derived,this);
+        mapper().assign("derived","/derived");
+
+        mapper().root("/sample");
     }
-    virtual void main(std::string /*url*/)
+private:
+    void home()
     {
-        content::message c;
-        c.text=">>>Hello<<<";
-        render("message",c);
+        response().set_redirect_header(url("/base"));
+    }
+    void base()
+    {
+        content::base c;
+
+        c.page_content = "base content";
+
+        render("base", c);
+    }
+    void derived()
+    {
+        content::base c;
+
+        c.page_content = "derived content";
+
+        render("derived", c);
     }
 };
 
@@ -27,7 +52,7 @@ int main(int argc,char ** argv)
 {
     try {
         cppcms::service srv(argc,argv);
-        srv.applications_pool().mount(cppcms::applications_factory<my_hello_world>());
+        srv.applications_pool().mount(cppcms::applications_factory<separated_tmpl_sample>());
         srv.run();
     }
     catch(std::exception const &e) {

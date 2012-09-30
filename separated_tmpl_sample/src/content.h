@@ -5,8 +5,8 @@
 #include <string>
 
 namespace content  {
-    struct message : public cppcms::base_content {
-        std::string text;
+    struct base : public cppcms::base_content {
+        std::string page_content;
     };
 }
 
