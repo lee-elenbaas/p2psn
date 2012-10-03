@@ -205,7 +205,7 @@ class template_block:
         if m.group(2) and not re.match('^\s*$',m.group(2)):
             params=self.create_parameters(m.group(2))
         if inline_templates:
-            output_declaration( "virtual vois %s(%s) {" % (self.name,params) )
+            output_declaration( "virtual void %s(%s) {" % (self.name,params) )
         else:
             output_declaration( "virtual void %s(%s);" % (self.name,params) )
             output_definition( "void %s::%s(%s) {" % (view_name,self.name,params) )
@@ -219,6 +219,7 @@ class template_block:
         ignore_inline=0
 
     def on_end(self):
+        global output_template
         output_template( "} // end of template %s" % self.name)
         global ignore_inline
         ignore_inline=1
@@ -229,6 +230,7 @@ class template_block:
 
 def inline_content(s):
     global ignore_inline
+    global output_template
     if not ignore_inline:
         output_template( 'out()<<"%s";' % to_string(s))
 
@@ -286,6 +288,7 @@ def make_ident(val):
         return "content." + val
 
 def print_using_block_start(class_name,variable_name,content_name):
+    global output_template
     if content_name:
         content=make_ident(content_name)
         guard=True
@@ -298,6 +301,7 @@ def print_using_block_start(class_name,variable_name,content_name):
     output_template(r'  %s %s(out(),%s);' % ( class_name, variable_name, content));
     
 def print_using_block_end():
+    global output_template
     output_template('}')
 
 class using_block:
@@ -327,6 +331,7 @@ class foreach_block:
     on_first_label=''
     type_name=0
     def use(self,m):
+        global output_template
         self.ident=m.group(1)
         self.seq_name=make_ident(m.group(9))
         self.rowid = m.group(6)
@@ -355,6 +360,7 @@ class foreach_block:
         stack.append(self)
 
     def on_end(self):
+        global output_template
         if not self.has_item:
             error_exit("foreach without item")
 
@@ -365,6 +371,7 @@ class foreach_block:
 
         output_template( "}" )
     def prepare_foreach(self):
+        global output_template
         if not self.type_name:
             ptr_type = 'CPPCMS_TYPEOF((%(s)s).%(r)sbegin())'
         else:
@@ -409,6 +416,7 @@ class item_block:
     type='item'
     def use(self,m):
         global stack
+        global output_template
         if not stack or stack[-1].type!='foreach':
             error_exit("item without foreach")
             return
@@ -422,6 +430,7 @@ class item_block:
         foreachb.has_item=1
         stack.append(self)
     def on_end(self):
+        global output_template
         output_template( "} // end of item" )
 
 class empty_block:
@@ -431,6 +440,7 @@ class empty_block:
     type='empty'
     def use(self,m):
         global stack
+        global output_template
         if not stack or stack[-1].type!='foreach':
             error_exit("empty without foreach")
             return
@@ -442,6 +452,7 @@ class empty_block:
         self.rowid=forb.rowid
         stack.append(self)
     def on_end(self):
+        global output_template
         output_template( "} // end of empty")
         global tmpl_seq
         del tmpl_seq[self.ident]
@@ -455,8 +466,10 @@ class else_block:
     basic_name = 'else'
     type='else'
     def on_end(self):
+        global output_template
         output_template("}")
     def use(self,m):
+        global output_template
         prev=stack.pop()
         if prev.type!='if' and prev.type!='elif':
             error_exit("elif without if");
@@ -469,13 +482,16 @@ class if_block:
     basic_name = 'if/elif'
     type='if'
     def prepare(self):
+        global output_template
         output_template( "if(%s) {" % self.ident)
 
     def on_end(self):
+        global output_template
         output_template( "} // endif")
 
     def use(self,m):
         global stack
+        global output_template
         self.type=m.group(1)
         if m.group(4):
             if m.group(4)=='rtl':
@@ -601,6 +617,7 @@ class form_block:
     def format_input(self,command_type,ident):
    
         global html_type_code
+        global output_template
 
         flags = 'cppcms::form_flags::' + html_type_code;
         output_template('{ cppcms::form_context _form_context(out(),%s);' % flags)
@@ -621,6 +638,7 @@ class form_block:
         output_template('}')
     
     def use(self,m):
+        global output_template
 
         ident=make_ident(m.group(2))
         command_type = m.group(1)
@@ -650,6 +668,7 @@ class render_block:
     basic_pattern = 'render'
     basic_name = 'render'
     def use(self,m):
+        global output_template
         if m.group('content'):
             content = make_ident(m.group('content'))
             guard=True
@@ -694,6 +713,7 @@ class filters_show_block(base_show):
     basic_pattern = '=?'
     basic_name = 'Inline Variable'
     def use(self,m):
+        global output_template
         if not m.group(1):
             warning("Variables syntax like <% foo %> is deprecated, use <%= foo %> syntax");
         expr=self.prepare(m.group(2));
@@ -727,6 +747,7 @@ class cache_block:
     basic_name = 'cache'
     type = 'cache'
     def use(self,m):
+        global output_template
         if(m.group('str')):
             self.parameter = m.group('str')
         else:
@@ -747,6 +768,7 @@ class cache_block:
         global stack
         stack.append(self)
     def on_end(self):
+        global output_template
         if self.timeout:
             timeout_time = self.timeout
         else:
@@ -768,6 +790,7 @@ class trigger_block:
     basic_pattern = 'trigger'
     basic_name = 'trigger'
     def use(self,m):
+        global output_template
         if(m.group('str')):
             parameter = m.group('str')
         else:
@@ -782,6 +805,7 @@ class ngettext_block:
     basic_pattern = 'ngt'
     basic_name = 'ngt'
     def use(self,m):
+        global output_template
         s1=m.group(1)
         s2=m.group(3)
         idt=make_ident(m.group(5))
@@ -799,6 +823,7 @@ class gettext_block:
     basic_pattern = 'gt'
     basic_name = 'gt'
     def use(self,m):
+        global output_template
         s=m.group(1)
         params=[]
         if m.group(3):
@@ -813,6 +838,7 @@ class url_block:
     basic_pattern = 'url'
     basic_name = 'url'
     def use(self,m):
+        global output_template
         s=m.group(1)
         params=[]
         if m.group(3):
@@ -827,6 +853,7 @@ class csrf_block:
     basic_pattern = 'csrf'
     basic_name = 'csrf'
     def use(self,m):
+        global output_template
         s=m.group(2)
 
         global html_type_code
@@ -877,6 +904,7 @@ class include_block:
             + r'\s*%>$'
 
     def print_include(self,call,params):
+        global output_template
         output_template( "%s(%s);" % (call , ','.join(params)))
         
     def use(self,m):
@@ -1006,6 +1034,11 @@ def main():
         inline_templates = True
     else:
         inline_templates = False
+    global output_template
+    if inline_templates:
+        output_template = output_declaration
+    else:
+        output_template = output_definition
     global output_fd
     if output_file!='':
         output_fd=open(output_file,"w")
@@ -1099,9 +1132,6 @@ output_template = output_definition
 ################
 main()
 ################
-
-if inline_templates:
-    output_template = output_declaration
 
 if header_file!='':
     header_define = "__%s_TMPL_HEADER_INCLUDED" % ( re.sub("[\\/\\\\\\.]", "_", header_file ))
