@@ -942,10 +942,11 @@ def fetch_content(content):
 
 def help():
     print( "Usage cppcms_tmpl_cc [-o filename.cpp] [-s skin] [-d domain] file1.tmpl ... \n" \
-        "      -o filename.cpp               file name that implements this template\n" \
-        "      -s skin                       define skin name\n" \
+        "      -o/--code filename.cpp        file name that implements this template\n" \
+        "      -s/-n/--skin skin                       define skin name\n" \
         "      -d domain                     setup gettext domain for this template\n" \
-        "      -u                            use unsafe static casting instead of dynamic casing for dlls\n" \
+        "      -u/--unsafe-cast              use unsafe static casting instead of dynamic casing for dlls\n" \
+        "      -l/--no-loader                do not generate loader for the views. This requires a seperate loader to be implemented in some other cpp.\n" \
         "      -H/--header filename.hpp      generate header file. \n" \
         "      -i/--inline-templates value   Whether to inline the template defiitions inside the view declaration.\n" \
         "                                    value can be one of the following:\n" \
@@ -964,19 +965,20 @@ def main():
     global exit_flag
     global inline_templates
     unsafe_build = False
+    write_loader = True
     while indx < len(os.sys.argv):
-        if os.sys.argv[indx]=='-s' or os.sys.argv[indx]=='-n':
+        if os.sys.argv[indx]=='-s' or os.sys.argv[indx]=='-n' or os.sys.argv[indx]=='--skin':
             if indx+1>=len(os.sys.argv):
-                sys.stderr.write("-s (-n) should be followed by skin name\n")
+                sys.stderr.write("%s should be followed by skin name\n" % (os.sys.argv[indx]))
                 help()
                 exit_flag=1
                 return
             else:
                 namespace_name=os.sys.argv[indx+1];
                 indx+=1
-        elif os.sys.argv[indx]=='-o':
+        elif os.sys.argv[indx]=='-o' or os.sys.argv[indx]=='--code':
             if indx+1>=len(os.sys.argv):
-                sys.stderr.write("-o should be followed by output file name\n")
+                sys.stderr.write("%s should be followed by output file name\n" % (os.sys.argv[indx]))
                 help()
                 exit_flag=1
                 return
@@ -1011,8 +1013,10 @@ def main():
                 global spec_gettext
                 spec_gettext=os.sys.argv[indx+1]
                 indx+=1
-        elif os.sys.argv[indx]=='-u':
+        elif os.sys.argv[indx]=='-u' or os.sys.argv[indx]=='--unsafe-cast':
             unsafe_build = True
+        elif os.sys.argv[indx]=='-l' or os.sys.argv[indx]=='--no-loader':
+            write_loader = False
         elif os.sys.argv[indx]=='--help' or os.sys.argv[indx]=='-h':
             help()
             exit_flag=1
@@ -1096,7 +1100,7 @@ def main():
         if stack:
             error_exit("Unexpected end of file %s" % file)
     global class_list
-    if class_list and exit_flag==0:
+    if class_list and exit_flag==0 and write_loader:
         write_class_loader(unsafe_build)
 
 #######################
