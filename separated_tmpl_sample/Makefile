@@ -3,7 +3,7 @@ OPTIONS=-O0 -Wall -Wextra -std=c++0x -g3 -rdynamic
 #CPPCMS_TMPL_CC=cppcms_tmpl_cc
 CPPCMS_TMPL_CC=tools/cppcms_tmpl_cc
 
-all: dependancies run
+all: run
 
 .PHONY: all clean run
 
@@ -30,20 +30,13 @@ build/%.cpp: build/%.tmpl
 	$(CPPCMS_TMPL_CC) -o $@ -H "build/$*.h" $^
 
 # dependancies
-dependancies: build/dependancies_tmpl.mk build/dependancies_cpp.mk
+build/derived.cpp: build/derived.tmpl
+build/base.cpp: build/base.tmpl
+build/dependancies_cpp.mk: build/derived.cpp build/base.cpp
 
-build/dependancies_tmpl.mk:
-	mkdir -p build
-	find src -type f -name "*.tmpl" | sed "s/src\/\(.*\.\)tmpl/build\/\1cpp: build\/\1tmpl/" > $@
-	find src -type f -name "*.tmpl" | sed "s/src\/\(.*\.\)tmpl/build\/\1cpp/" | xargs echo "build/dependancies_cpp.mk:" >> $@
-
-include build/dependancies_tmpl.mk
-
-build/dependancies_cpp.mk: build/dependancies_tmpl.mk
-	mkdir -p build
-	find build -type f -name "*.cpp" | xargs $(CXX) -MM $(OPTIONS) ${LIBS} | sed "s/.*\.o: \(.*\)\.cpp/\1\.o: \1\.cpp/" > $@
-
-include build/dependancies_cpp.mk
+build/derived.o: build/derived.cpp build/derived.h build/base.h build/content.h
+build/base.o: build/base.cpp build/base.h build/content.h
+build/separated-tmpl-sample.o: build/separated-tmpl-sample.cpp build/content.h
 
 #Clean up	
 clean:
