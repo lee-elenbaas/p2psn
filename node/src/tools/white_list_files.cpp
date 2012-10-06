@@ -8,12 +8,18 @@
 
 #include <string>
 #include <iostream>
+#include <ifstream>
+#include <ofstream>
 #include <boost/program_options.hpp>
+#include <boost/filesystem.hpp>
+#include <cppcms/json.h>
 #include "../utils/white_list_folder.hpp"
 
 using namespace p2psn::utils;
 using namespace std;
+using namespace cppcms::json;
 namespace po = boost::program_options;
+namespace fs = boos::filesystem;
 
 namespace {
 	void version() {
@@ -25,6 +31,32 @@ namespace {
 		cout	<< "Usage: " << app_name << " <options>" << endl
 			<< cli_options << endl;
 	}
+
+	void build_white_list(string target, path src, path dst, string pattern, string mime, bool append, bool keep_extension, bool keep_filename, bool recursive, bool keep_folder) {
+		value white_list;
+
+		if (append) {
+			ifstream existing_white_list(target);
+
+			if (existing_white_list)
+				white_list.load(existing_white_list, true);
+		}
+	
+		white_list_folder(
+			white_list, 
+			src, 
+			dst, 
+			pattern,
+			mime,
+			keep_extension,
+			keep_filename,
+			recursive,
+			keep_folders,
+		);
+
+		ofstream target_file(target);
+		white_list.save(target_file);
+	}
 }
 
 int main(int argc, char** argv) {
@@ -32,18 +64,18 @@ int main(int argc, char** argv) {
 		po::options_description cli_options("Parameters");
 
 		cli_options.add_options()
-			("help", "Generate usage message")
-			("version", "Print the version message")
-			("target", po::value<string>(), "Target file name to place the white list into")
-			("src", po::value<string>(), "Source folder to hash files from")
-			("dst", po::value<string>(), "Target folder to place files into")
-			("pattern", po::value<string>(), "File pattern for files to use")
-			("mime", po::value<string>(), "Mime type of the hashed files")
-			("append", po::value<bool>()->default_value(false)->implicit_value(true), "Append to the target file")
-			("recursive", po::value<bool>()->default_value(false)->implicit_value(true), "Recursive scan inside subfolders")
-			("keep-extension", po::value<bool>()->default_value(false)->implicit_value(true), "Keep extension in destination folder")
-			("keep-filename", po::value<bool>()->default_value(false)->implicit_value(true), "Keep original filename")
-			("keep-folders", po::value<bool>()->default_value(false)->implicit_value(true), "Keep folder structure");
+			("help,h", "Generate usage message")
+			("version,v", "Print the version message")
+			("target,t", po::value<string>(), "Target file name to place the white list into")
+			("src,s", po::value<string>(), "Source folder to hash files from")
+			("dst,d", po::value<string>(), "Target folder to place files into")
+			("pattern,p", po::value<string>(), "File pattern for files to use")
+			("mime,m", po::value<string>(), "Mime type of the hashed files")
+			("append,a", po::value<bool>()->default_value(false)->implicit_value(true), "Append to the target file")
+			("recursive,r", po::value<bool>()->default_value(false)->implicit_value(true), "Recursive scan inside subfolders")
+			("keep-extension,x", po::value<bool>()->default_value(false)->implicit_value(true), "Keep extension in destination folder")
+			("keep-filename,n", po::value<bool>()->default_value(false)->implicit_value(true), "Keep original filename")
+			("keep-folders,f", po::value<bool>()->default_value(false)->implicit_value(true), "Keep folder structure");
 
 		po::variables_map vm;
 
@@ -65,7 +97,7 @@ int main(int argc, char** argv) {
 			return -1;
 		}
 
-		white_list_folder(
+		build_white_list(
 			vm["target"].as<string>(), 
 			vm["src"].as<string>(), 
 			vm["dst"].as<string>(), 

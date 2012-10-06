@@ -47,7 +47,7 @@ build/white_list_files:	\
 		build/utils/crypto.o \
 		build/utils/white_list_folder.o \
 		build/tools/white_list_files.o
-	$(CXX) $(OPTIONS) $^ -o $@ $(LIBS) -lboost_program_options
+	$(CXX) $(OPTIONS) $^ -o $@ $(LIBS) -lboost_program_options -lboost_system
 
 # rules for generating files
 
@@ -110,12 +110,12 @@ clean:
 	find . -type f -name "*.gch" | xargs rm -f
 
 # run the node deamon
-run: run/noded run/config.js statics
-	./noded
-#run:	run/white_list_files
-#	./run/white_list_files --help
-#	./run/white_list_files --version
-#	./run/white_list_files --target build/white_list.js --src src/node/static_files/css --dst run/css --pattern "*.css" --mime "text/css" --keep-extension
+#run: run/noded run/config.js statics
+#	./noded
+run:	run/white_list_files
+	./run/white_list_files --help
+	./run/white_list_files --version
+	./run/white_list_files --target build/white_list.js --src src/node/static_files/css --dst run/css --pattern "*.css" --mime "text/css" --keep-extension
 
 # static files
 statics: run/css/node.css
