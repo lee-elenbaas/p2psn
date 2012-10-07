@@ -22,6 +22,7 @@ namespace po = boost::program_options;
 namespace fs = boos::filesystem;
 
 namespace {
+	us
 	void version() {
 		cout << "White List Folder Utility version 0.1" << endl;
 	}
@@ -32,7 +33,36 @@ namespace {
 			<< cli_options << endl;
 	}
 
-	void build_white_list(string target, path src, path dst, string pattern, string mime, bool append, bool keep_extension, bool keep_filename, bool recursive, bool keep_folder) {
+	inline string hash_file(fs::path file) {
+		return signature::md5(file.string());
+	}
+
+	fs::path storage_path(fs::path file, string hash, bool keep_extension, bool keep_filename, bool keep_folder) {
+		fs::path res;
+
+		if (keep_folder)
+			res /= file.parent_path();
+		if (keep_filename)
+			res /= file.stem();
+		else
+			res /= hash;
+		if (keep_extension)
+			res /= file.extension();
+	}
+
+	void handle_file(value& white_list, fs::path file) {
+		auto hash = hash_file(file);
+	
+		auto tf = storage_path(file, hash, keep_extension, keep_filename, keep_folder);
+
+		create_directory(dst / tf.parent_path());
+		copy_file(src/file, dst/tf);
+
+		white_list.set(hash+".mime", mime);
+		white_list.set(hash+".path", tf);
+	}
+
+	void build_white_list(string target, fs::path src, fs::path dst, string pattern, string mime, bool append, bool keep_extension, bool keep_filename, bool recursive, bool keep_folder) {
 		value white_list;
 
 		if (append) {
@@ -42,17 +72,9 @@ namespace {
 				white_list.load(existing_white_list, true);
 		}
 	
-		white_list_folder(
-			white_list, 
-			src, 
-			dst, 
-			pattern,
-			mime,
-			keep_extension,
-			keep_filename,
-			recursive,
-			keep_folders,
-		);
+		for (auto f = directory_iterator(src), e=directory_iterator(); f!=e; ++f) {
+			handle_file(white_list, f->path(), keep_extension, keep_filename, keep_folder);
+		}
 
 		ofstream target_file(target);
 		white_list.save(target_file);
@@ -69,6 +91,7 @@ int main(int argc, char** argv) {
 			("target,t", po::value<string>(), "Target file name to place the white list into")
 			("src,s", po::value<string>(), "Source folder to hash files from")
 			("dst,d", po::value<string>(), "Target folder to place files into")
+			("base-url,b", po::value<string>(), "Base url the static files should be recognized by")
 			("pattern,p", po::value<string>(), "File pattern for files to use")
 			("mime,m", po::value<string>(), "Mime type of the hashed files")
 			("append,a", po::value<bool>()->default_value(false)->implicit_value(true), "Append to the target file")
@@ -92,7 +115,7 @@ int main(int argc, char** argv) {
 			return 0;
 		}
 
-		if (!vm.count("target") || !vm.count("src") || !vm.count("dst") || !vm.count("pattern") || !vm.count("mime")) {
+		if (!vm.count("target") || !vm.count("src") || !vm.count("dst") || !vm.count("base-url") || !vm.count("pattern") || !vm.count("mime")) {
 			usage(argv[0], cli_options);
 			return -1;
 		}
@@ -101,6 +124,7 @@ int main(int argc, char** argv) {
 			vm["target"].as<string>(), 
 			vm["src"].as<string>(), 
 			vm["dst"].as<string>(), 
+			vm["base-url"].as<string>(),
 			vm["pattern"].as<string>(),
 			vm["mime"].as<string>(),
 			vm["append"].as<bool>(),
