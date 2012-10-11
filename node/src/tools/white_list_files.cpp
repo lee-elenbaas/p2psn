@@ -8,21 +8,19 @@
 
 #include <string>
 #include <iostream>
-#include <ifstream>
-#include <ofstream>
+#include <fstream>
 #include <boost/program_options.hpp>
 #include <boost/filesystem.hpp>
 #include <cppcms/json.h>
-#include "../utils/white_list_folder.hpp"
+#include "../utils/crypto.hpp"
 
 using namespace p2psn::utils;
 using namespace std;
 using namespace cppcms::json;
 namespace po = boost::program_options;
-namespace fs = boos::filesystem;
+namespace fs = boost::filesystem;
 
 namespace {
-	us
 	void version() {
 		cout << "White List Folder Utility version 0.1" << endl;
 	}
@@ -37,32 +35,40 @@ namespace {
 		return signature::md5(file.string());
 	}
 
-	fs::path storage_path(fs::path file, string hash, bool keep_extension, bool keep_filename, bool keep_folder) {
+	fs::path storage_path(const fs::path& file, const string& hash, bool keep_extension, bool keep_filename, bool keep_folder) {
 		fs::path res;
 
 		if (keep_folder)
 			res /= file.parent_path();
 		if (keep_filename)
-			res /= file.stem();
+			res /= fs::stem(file);
 		else
 			res /= hash;
 		if (keep_extension)
 			res /= file.extension();
+
+		return res;
 	}
 
-	void handle_file(value& white_list, fs::path file) {
+	void handle_file(value& white_list, const fs::path& src, const fs::path& dst, fs::path file, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder) {
 		auto hash = hash_file(file);
 	
 		auto tf = storage_path(file, hash, keep_extension, keep_filename, keep_folder);
 
-		create_directory(dst / tf.parent_path());
+//		create_directory(dst / tf.parent_path());
 		copy_file(src/file, dst/tf);
 
 		white_list.set(hash+".mime", mime);
-		white_list.set(hash+".path", tf);
+		white_list.set(hash+".path", tf.string());
 	}
 
-	void build_white_list(string target, fs::path src, fs::path dst, string pattern, string mime, bool append, bool keep_extension, bool keep_filename, bool recursive, bool keep_folder) {
+	template<typename FileIterator>
+	void handle_file_list(value& white_list, const fs::path& src, const fs::path& dst, FileIterator start, FileIterator end, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder) {
+		for(FileIterator f = start; f != end; ++f)
+			handle_file(white_list, src, dst, *f, mime, keep_extension, keep_filename, keep_folder);
+	}
+
+	void build_white_list(string target, const fs::path& src, const fs::path& dst, const string& pattern, const string& mime, bool append, bool recursive, bool keep_extension, bool keep_filename, bool keep_folder) {
 		value white_list;
 
 		if (append) {
@@ -72,9 +78,10 @@ namespace {
 				white_list.load(existing_white_list, true);
 		}
 	
-		for (auto f = directory_iterator(src), e=directory_iterator(); f!=e; ++f) {
-			handle_file(white_list, f->path(), keep_extension, keep_filename, keep_folder);
-		}
+		if (recursive)
+			handle_file_list(white_list, src, dst, fs::recursive_directory_iterator(src), fs::recursive_directory_iterator(), mime, keep_extension, keep_filename, keep_folder);
+		else
+			handle_file_list(white_list, src, dst, fs::directory_iterator(src), fs::directory_iterator(), mime, keep_extension, keep_filename, keep_folder);
 
 		ofstream target_file(target);
 		white_list.save(target_file);
@@ -91,7 +98,6 @@ int main(int argc, char** argv) {
 			("target,t", po::value<string>(), "Target file name to place the white list into")
 			("src,s", po::value<string>(), "Source folder to hash files from")
 			("dst,d", po::value<string>(), "Target folder to place files into")
-			("base-url,b", po::value<string>(), "Base url the static files should be recognized by")
 			("pattern,p", po::value<string>(), "File pattern for files to use")
 			("mime,m", po::value<string>(), "Mime type of the hashed files")
 			("append,a", po::value<bool>()->default_value(false)->implicit_value(true), "Append to the target file")
@@ -124,13 +130,12 @@ int main(int argc, char** argv) {
 			vm["target"].as<string>(), 
 			vm["src"].as<string>(), 
 			vm["dst"].as<string>(), 
-			vm["base-url"].as<string>(),
 			vm["pattern"].as<string>(),
 			vm["mime"].as<string>(),
 			vm["append"].as<bool>(),
+			vm["recursive"].as<bool>(),
 			vm["keep-extension"].as<bool>(),
 			vm["keep-filename"].as<bool>(),
-			vm["recursive"].as<bool>(),
 			vm["keep-folders"].as<bool>()
 		);
 

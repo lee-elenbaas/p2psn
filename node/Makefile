@@ -45,7 +45,6 @@ build/noded:	build/node/main/noded.o \
 # node tools
 build/white_list_files:	\
 		build/utils/crypto.o \
-		build/utils/white_list_folder.o \
 		build/tools/white_list_files.o
 	$(CXX) $(OPTIONS) $^ -o $@ $(LIBS) -lboost_program_options -lboost_system
 
