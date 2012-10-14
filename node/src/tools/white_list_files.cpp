@@ -41,7 +41,7 @@ namespace {
 		if (keep_folder)
 			res /= file.parent_path();
 		if (keep_filename)
-			res /= fs::stem(file);
+			res /= file.stem();
 		else
 			res /= hash;
 		if (keep_extension)
@@ -51,12 +51,12 @@ namespace {
 	}
 
 	void handle_file(value& white_list, const fs::path& src, const fs::path& dst, fs::path file, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder) {
-		auto hash = hash_file(file);
+		string hash = hash_file(file);
 	
-		auto tf = storage_path(file, hash, keep_extension, keep_filename, keep_folder);
+		fs::path tf = storage_path(file, hash, keep_extension, keep_filename, keep_folder);
 
-//		create_directory(dst / tf.parent_path());
-		copy_file(src/file, dst/tf);
+//		fs::create_directory(dst / tf.parent_path());
+		fs::copy_file(src/file, dst/tf);
 
 		white_list.set(hash+".mime", mime);
 		white_list.set(hash+".path", tf.string());
@@ -72,7 +72,7 @@ namespace {
 		value white_list;
 
 		if (append) {
-			ifstream existing_white_list(target);
+			ifstream existing_white_list(target.c_str());
 
 			if (existing_white_list)
 				white_list.load(existing_white_list, true);
@@ -83,7 +83,7 @@ namespace {
 		else
 			handle_file_list(white_list, src, dst, fs::directory_iterator(src), fs::directory_iterator(), mime, keep_extension, keep_filename, keep_folder);
 
-		ofstream target_file(target);
+		ofstream target_file(target.c_str());
 		white_list.save(target_file);
 	}
 }

@@ -1,5 +1,12 @@
 LIBS=-lcppcms -lbooster
-OPTIONS=-O0 -Wall -Wextra -std=c++0x -g3 -rdynamic
+OPTIONS=-O0 -Wall -Wextra -g3 -rdynamic
+
+NODE_LIBS=$(LIBS) -std=c++0x
+NODE_OPTIONS=$(OPTIONS)
+
+TOOL_LIBS=$(LIBS) -lboost_program_options -lboost_filesystem -lboost_system
+TOOL_OPTIONS=$(OPTIONS)
+
 NODE_ADMIN_GENERATED=src/generated/noded_skin.cpp
 #CPPCMS_TMPL_CC=cppcms_tmpl_cc
 #CPPCMS_TMPL_CC=../../cppcms/cppcms/framework/trunk/bin/cppcms_tmpl_cc
@@ -40,35 +47,29 @@ build/noded:	build/node/main/noded.o \
 		build/generated/node/admin_menu/admin_menu.o \
 		build/generated/node/admin_server/admin_server.o \
 		build/generated/node/admin_users/admin_users.o
-	$(CXX) $(OPTIONS) $^ -o $@ $(LIBS)
+	$(CXX) $(NODE_OPTIONS) $^ -o $@ $(NODE_LIBS)
 
 # node tools
 build/white_list_files:	\
 		build/utils/crypto.o \
 		build/tools/white_list_files.o
-	$(CXX) $(OPTIONS) $^ -o $@ $(LIBS) -lboost_program_options -lboost_system
+	$(CXX) $(TOOL_OPTIONS) $^ -o $@ $(TOOLSLIBS)
 
 # rules for generating files
 
 # copy build result to run folder
 run/%: build/%
-	-rm $@
-	mkdir -p $@
-	-rmdir $@
+	echo $@ | sed "s/\/[^\/]*$$//" | xargs mkdir -p 
 	cp $< $@
 
 # generate object files
 build/%.o: src/%.cpp
-	-rm $@
-	mkdir -p $@
-	-rmdir $@
+	echo $@ | sed "s/\/[^\/]*$$//" | xargs mkdir -p 
 	$(CXX) $(OPTIONS) -c $< $(LIBS)
 	mv *.o $@
 
 src/generated/%.cpp: src/%.tmpl
-	-rm $@
-	mkdir -p $@
-	-rmdir $@
+	echo $@ | sed "s/\/[^\/]*$$//" | xargs mkdir -p 
 	$(CPPCMS_TMPL_CC) -o $@ -H "src/generated/$*.hpp" $^
 
 # dependancies
@@ -93,9 +94,7 @@ run/config.js: src/node/config/config.js
 	
 #CppCMS skin
 $(NODE_ADMIN_GENERATED):
-	-rm $@
-	mkdir -p $@
-	-rmdir $@
+	echo $@ | sed "s/\/[^\/]*$$//" | xargs mkdir -p 
 	$(CPPCMS_TMPL_CC) $^ -o $@
 
 #Clean up	
