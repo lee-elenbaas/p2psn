@@ -77,6 +77,14 @@ At the same time each node is intended to run on a normal home PC with its limit
 
 ## Development Blog
 
+2012-10-12
+
+> Its been a while since i wrote anything. In that time i managed to get the user management to update the users into the session correctly.
+> Then i went into the issue of serving static files in order to serve CSS file for the user management.
+> The next detour was to go into splitting the build into separate translation units and use incremental build to speed the build process. This led me to some enhancment to the cppcms template system, and enhancment i delivered to Artyum to be included into the next version of cppcms.
+> And now i am back into the issue of service static files, and generating an app that will serve static files using a white list, and a tool that will generate the whitelist for me.
+> I plan to run this tool as part of my build process.
+
 2012-09-11
 
 > In the last several days i managed to get the admin users to perform its actions in the session. 
