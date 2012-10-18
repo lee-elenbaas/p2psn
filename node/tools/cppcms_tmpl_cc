@@ -11,6 +11,7 @@
 import os
 import re
 import sys
+import StringIO
 
 str_match=r'"([^"\\]|\\[^"]|\\")*"'
 single_var_param_match=r'(?:-?\d+|"(?:[^"\\]|\\[^"]|\\")*")'
@@ -30,16 +31,16 @@ def output_declaration(s):
     global file_name
     global line_number
     global declarations
-    declarations += '\t'*len(stack) + '#line %d "%s"' % (line_number,file_name)+'\n'
-    declarations += '\t'*len(stack) + s + '\n'
+    declarations.write('\t'*len(stack) + '#line %d "%s"' % (line_number,file_name)+'\n')
+    declarations.write('\t'*len(stack) + s + '\n');
 
 def output_definition(s):
     global stack
     global file_name
     global line_number
     global definitions
-    definitions += '\t'*(len(stack)-1) + '#line %d "%s"' % (line_number,file_name)+'\n'
-    definitions += '\t'*(len(stack)-1) + s + '\n'
+    definitions.write('\t'*(len(stack)-1) + '#line %d "%s"' % (line_number,file_name)+'\n')
+    definitions.write('\t'*(len(stack)-1) + s + '\n');
 
 def output_all(s):
     output_definition(s)
@@ -137,10 +138,8 @@ class view_block:
         output_declaration("\t}")
 
     def use(self,m):
-        global inline_cpp_to
         global view_name
         global output_template
-        inline_cpp_to = output_template
         self.class_name=m.group(1)
         view_name = self.class_name
         self.uses=m.group(2)
@@ -161,8 +160,6 @@ class view_block:
             namespace=namespace_name
         class_list.append(information())
     def on_end(self):
-        global inline_cpp_to
-        inline_cpp_to = output_declaration
         output_declaration( "}; // end of class %s" % self.class_name)
 
 
@@ -216,7 +213,9 @@ class template_block:
         global current_template
         current_template=self.name
         global ignore_inline
+        global inline_cpp_to
         ignore_inline=0
+        inline_cpp_to = output_template
 
     def on_end(self):
         global output_template
@@ -225,6 +224,8 @@ class template_block:
         ignore_inline=1
         global tmpl_seq
         tmpl_seq={}
+        global inline_cpp_to
+        inline_cpp_to = output_declaration
 
         
 
@@ -546,12 +547,15 @@ class error_com:
 
 
 class cpp_include_block:
-    pattern=r'^<%\s*c\+\+\s+(.*)%>$'
-    basic_pattern = 'c\+\+'
+    pattern=r'^<%\s*c\+\+(src)?\s+(.*)%>$'
+    basic_pattern = 'c\+\+(src)?'
     basic_name = 'c++'
     def use(self,m):
         global inline_cpp_to
-        inline_cpp_to( m.group(1));
+        if m.group(1):
+            output_definition(m.group(2));
+        else:
+            inline_cpp_to( m.group(2));
 
 
 class base_show:
@@ -943,16 +947,18 @@ def fetch_content(content):
 def help():
     print( "Usage cppcms_tmpl_cc [-o filename.cpp] [-s skin] [-d domain] file1.tmpl ... \n" \
         "      -o/--code filename.cpp        file name that implements this template\n" \
-        "      -s/-n/--skin skin                       define skin name\n" \
+        "      -s/-n/--skin skin             define skin name\n" \
         "      -d domain                     setup gettext domain for this template\n" \
         "      -u/--unsafe-cast              use unsafe static casting instead of dynamic casing for dlls\n" \
-        "      -l/--no-loader                do not generate loader for the views. This requires a seperate loader to be implemented in some other cpp.\n" \
+        "      -l/--no-loader                do not generate loader for the views.\n" \
+        "                                    This requires a seperate loader to be implemented in some other cpp.\n" \
         "      -H/--header filename.hpp      generate header file. \n" \
         "      -i/--inline-templates value   Whether to inline the template defiitions inside the view declaration.\n" \
         "                                    value can be one of the following:\n" \
         "               true                 Inline the template functions inside the view class declaration.\n" \
         "               false                Place the template function definitions outside the class declaration.\n" \
-        "               default              (Default value is parameter is ommited.) If header file is generated, same as false, otherwise same as true.\n" \
+        "               default              (Default value is parameter is ommited.) If header file is\n" \
+        "                                    generated, same as false, otherwise same as true.\n" \
         "      -h/--help                     show this help message\n")
 
 def main():
@@ -1127,8 +1133,8 @@ spec_gettext=''
 ignore_inline=1
 
 view_name = ''
-declarations = ''
-definitions = ''
+declarations = StringIO.StringIO();
+definitions = StringIO.StringIO();
 inline_cpp_to = output_declaration
 inline_templates = "default"
 output_template = output_definition
@@ -1138,18 +1144,18 @@ main()
 ################
 
 if header_file!='':
-    header_define = "__%s_TMPL_HEADER_INCLUDED" % ( re.sub("[\\/\\\\\\.]", "_", header_file ))
+    header_define = "CPPCMS_GENERATED_HEADER_%s_TMPL_HEADER_INCLUDED" % ( re.sub("[^a-zA-Z0-9]+", "_", header_file ).upper())
     output_hfd=open(header_file,"w")
     output_hfd.write("#ifndef %s\n" % ( header_define ))
     output_hfd.write("#define %s\n\n" % ( header_define ))
-    output_hfd.write(declarations);
+    output_hfd.write(declarations.getvalue());
     output_hfd.write("#endif // %s\n" % ( header_define ))
     output_hfd.close()
     output_fd.write('#include "%s"\n\n' % ( os.path.relpath( header_file, os.path.dirname( output_file ))))
 else:
-    output_fd.write(declarations);
+    output_fd.write(declarations.getvalue());
 
-output_fd.write(definitions);
+output_fd.write(definitions.getvalue());
 
 if output_fd!=sys.stderr:
     output_fd.close()
