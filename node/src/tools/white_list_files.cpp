@@ -45,27 +45,29 @@ namespace {
 		else
 			res /= hash;
 		if (keep_extension)
-			res /= file.extension();
+			res += file.extension();
 
 		return res;
 	}
 
-	void handle_file(value& white_list, const fs::path& src, const fs::path& dst, fs::path file, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder) {
+	void handle_file(value& white_list, const fs::path& dst, fs::path file, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder) {
 		string hash = hash_file(file);
 	
 		fs::path tf = storage_path(file, hash, keep_extension, keep_filename, keep_folder);
 
-//		fs::create_directory(dst / tf.parent_path());
-		fs::copy_file(src/file, dst/tf);
+		fs::path dst_file = dst/tf;
+
+		fs::create_directory(dst_file.parent_path());
+		fs::copy_file(file, dst/tf);
 
 		white_list.set(hash+".mime", mime);
 		white_list.set(hash+".path", tf.string());
 	}
 
 	template<typename FileIterator>
-	void handle_file_list(value& white_list, const fs::path& src, const fs::path& dst, FileIterator start, FileIterator end, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder) {
+	void handle_file_list(value& white_list, const fs::path& dst, FileIterator start, FileIterator end, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder) {
 		for(FileIterator f = start; f != end; ++f)
-			handle_file(white_list, src, dst, *f, mime, keep_extension, keep_filename, keep_folder);
+			handle_file(white_list, dst, *f, mime, keep_extension, keep_filename, keep_folder);
 	}
 
 	void build_white_list(string target, const fs::path& src, const fs::path& dst, const string& pattern, const string& mime, bool append, bool recursive, bool keep_extension, bool keep_filename, bool keep_folder) {
@@ -79,9 +81,9 @@ namespace {
 		}
 	
 		if (recursive)
-			handle_file_list(white_list, src, dst, fs::recursive_directory_iterator(src), fs::recursive_directory_iterator(), mime, keep_extension, keep_filename, keep_folder);
+			handle_file_list(white_list, dst, fs::recursive_directory_iterator(src), fs::recursive_directory_iterator(), mime, keep_extension, keep_filename, keep_folder);
 		else
-			handle_file_list(white_list, src, dst, fs::directory_iterator(src), fs::directory_iterator(), mime, keep_extension, keep_filename, keep_folder);
+			handle_file_list(white_list, dst, fs::directory_iterator(src), fs::directory_iterator(), mime, keep_extension, keep_filename, keep_folder);
 
 		ofstream target_file(target.c_str());
 		white_list.save(target_file);
@@ -121,7 +123,28 @@ int main(int argc, char** argv) {
 			return 0;
 		}
 
-		if (!vm.count("target") || !vm.count("src") || !vm.count("dst") || !vm.count("base-url") || !vm.count("pattern") || !vm.count("mime")) {
+		if (!vm.count("target")) {
+			cout << "missing target file" << endl;
+			usage(argv[0], cli_options);
+			return -1;
+		}
+		if (!vm.count("src")) {
+			cout << "missing source folder" << endl;
+			usage(argv[0], cli_options);
+			return -1;
+		}
+		if (!vm.count("dst")) {
+			cout << "missing destination folder" << endl;
+			usage(argv[0], cli_options);
+			return -1;
+		}
+		if (!vm.count("pattern")) {
+			cout << "missing file pattern" << endl;
+			usage(argv[0], cli_options);
+			return -1;
+		}
+		if (!vm.count("mime")) {
+			cout << "missing mime type" << endl;
 			usage(argv[0], cli_options);
 			return -1;
 		}

@@ -26,7 +26,7 @@ build/%.o: build/%.cpp
 	$(CXX) $(OPTIONS) -c $< $(LIBS)
 	mv *.o $@
 
-build/my_skin.cpp: build/base.tmpl build/derived_joined.tmpl
+build/my_skin.cpp: build/base.tmpl build/derived_joined.tmpl build/targeted_joined.tmpl
 	$(CPPCMS_TMPL_CC) -o $@ $^
 
 # dependancies

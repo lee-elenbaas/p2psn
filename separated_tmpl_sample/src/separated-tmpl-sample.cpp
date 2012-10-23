@@ -21,6 +21,9 @@ public:
         dispatcher().assign("/derived",&separated_tmpl_sample::derived,this);
         mapper().assign("derived","/derived");
 
+        dispatcher().assign("/targeted",&separated_tmpl_sample::targeted,this);
+        mapper().assign("targeted","/targeted");
+
         mapper().root("/sample");
     }
 private:
@@ -43,6 +46,14 @@ private:
         c.page_content = "derived content";
 
         render("derived", c);
+    }
+    void targeted()
+    {
+        content::base c;
+
+        c.page_content = "targeted content";
+
+        render("targeted", c);
     }
 };
 

@@ -62,6 +62,7 @@ run: run/separated-tmpl-sample run/config.js
 build/separated-tmpl-sample:	\
 		build/separated-tmpl-sample.o \
 		build/base.o \
-		build/derived.o
+		build/derived.o \
+		build/targeted.o
 	$(CXX) $(OPTIONS) $^ -o $@ $(LIBS)
 

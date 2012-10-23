@@ -1,0 +1,18 @@
+<% skin my_skin %>
+<% view targeted uses content::base extends base %>
+
+<% template title() %>
+Targeted Template
+<% end template %>
+
+<% c++ std::string normal = "normal"; %>
+<% c++header std::string header = "header"; %>
+<% c++src std::string src = "src"; %>
+
+<% template page_content() %>
+<%= page_content %>
+<% end template %>
+
+<% end view %>
+<% end skin %>
+

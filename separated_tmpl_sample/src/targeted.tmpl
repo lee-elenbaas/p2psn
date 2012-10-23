@@ -1,0 +1,22 @@
+<% c++ #include "base.h" %>
+<% skin my_skin %>
+<% view targeted uses content::base extends base %>
+
+<% template title() %>
+Targeted Template
+<% end template %>
+
+<% c++ const static int normal_outside = 1; %>
+<% c++header const static int header_outside = 2; %>
+<% c++src int src_outside = 3; %>
+
+<% template page_content() %>
+<%= page_content %>
+<% c++ int normal_inside = 4; %>
+<% c++header const int header_inside = 5; %>
+<% c++src int src_inside = 6; %>
+<% end template %>
+
+<% end view %>
+<% end skin %>
+

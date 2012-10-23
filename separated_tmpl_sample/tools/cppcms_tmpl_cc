@@ -547,15 +547,17 @@ class error_com:
 
 
 class cpp_include_block:
-    pattern=r'^<%\s*c\+\+(src)?\s+(.*)%>$'
-    basic_pattern = 'c\+\+(src)?'
+    pattern=r'^<%\s*c\+\+(src|header)?\s+(.*)%>$'
+    basic_pattern = 'c\+\+(src|header)?'
     basic_name = 'c++'
     def use(self,m):
         global inline_cpp_to
-        if m.group(1):
+        if m.group(1)=="src":
             output_definition(m.group(2));
+        elif m.group(1)=="header":
+            output_declaration(m.group(2));
         else:
-            inline_cpp_to( m.group(2));
+            inline_cpp_to(m.group(2));
 
 
 class base_show:

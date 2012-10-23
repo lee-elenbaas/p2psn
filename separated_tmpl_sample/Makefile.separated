@@ -30,10 +30,11 @@ build/%.cpp: build/%.tmpl
 	$(CPPCMS_TMPL_CC) -o $@ -H "build/$*.h" $^
 
 # dependancies
+build/targeted.cpp: build/targeted.tmpl
 build/derived.cpp: build/derived.tmpl
 build/base.cpp: build/base.tmpl
-build/dependancies_cpp.mk: build/derived.cpp build/base.cpp
 
+build/targeted.o: build/targeted.cpp build/targeted.h build/base.h build/content.h
 build/derived.o: build/derived.cpp build/derived.h build/base.h build/content.h
 build/base.o: build/base.cpp build/base.h build/content.h
 build/separated-tmpl-sample.o: build/separated-tmpl-sample.cpp build/content.h
@@ -55,6 +56,7 @@ run: run/separated-tmpl-sample run/config.js
 build/separated-tmpl-sample:	\
 		build/separated-tmpl-sample.o \
 		build/base.o \
-		build/derived.o
+		build/derived.o \
+		build/targeted.o
 	$(CXX) $(OPTIONS) $^ -o $@ $(LIBS)
 

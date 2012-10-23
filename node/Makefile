@@ -1,16 +1,8 @@
 LIBS=-lcppcms -lbooster
-OPTIONS=-O0 -Wall -Wextra -g3 -rdynamic
-
-NODE_LIBS=$(LIBS) -std=c++0x
-NODE_OPTIONS=$(OPTIONS)
-
-TOOL_LIBS=$(LIBS) -lboost_program_options -lboost_filesystem -lboost_system
-TOOL_OPTIONS=$(OPTIONS)
+OPTIONS=-O0 -std=c++0x -Wall -Wextra -g3 -rdynamic -I third_party/boost -L third_party/boost/stage/lib
 
 NODE_ADMIN_GENERATED=src/generated/noded_skin.cpp
-#CPPCMS_TMPL_CC=cppcms_tmpl_cc
-#CPPCMS_TMPL_CC=../../cppcms/cppcms/framework/trunk/bin/cppcms_tmpl_cc
-CPPCMS_TMPL_CC=tools/cppcms_tmpl_cc
+CPPCMS_TMPL_CC=third_party/cppcms/bin/cppcms_tmpl_cc
 
 all: run
 
@@ -47,13 +39,13 @@ build/noded:	build/node/main/noded.o \
 		build/generated/node/admin_menu/admin_menu.o \
 		build/generated/node/admin_server/admin_server.o \
 		build/generated/node/admin_users/admin_users.o
-	$(CXX) $(NODE_OPTIONS) $^ -o $@ $(NODE_LIBS)
+	$(CXX) $(OPTIONS) $^ -o $@ $(LIBS)
 
 # node tools
 build/white_list_files:	\
 		build/utils/crypto.o \
 		build/tools/white_list_files.o
-	$(CXX) $(TOOL_OPTIONS) $^ -o $@ $(TOOLSLIBS)
+	$(CXX) $(OPTIONS) $^ -o $@ $(LIBS) -lboost_program_options -lboost_filesystem -lboost_system
 
 # rules for generating files
 
