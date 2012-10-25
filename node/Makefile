@@ -105,7 +105,7 @@ clean:
 run:	run/white_list_files
 	./run/white_list_files --help
 	./run/white_list_files --version
-	./run/white_list_files --target build/white_list.js --src src/node/static_files/css --dst run/css --pattern "*.css" --mime "text/css" --keep-extension
+	./run/white_list_files --target build/white_list.js --src src/node/static_files/css --dst run/css --pattern "*.css" --mime "text/css" --keep-extension --copy-method hasr
 
 # static files
 statics: run/css/node.css

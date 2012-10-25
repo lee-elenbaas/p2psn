@@ -21,6 +21,8 @@ namespace po = boost::program_options;
 namespace fs = boost::filesystem;
 
 namespace {
+	typedef void (*copy_function_t)(const fs::path&, const fs::path&);
+
 	void version() {
 		cout << "White List Folder Utility version 0.1" << endl;
 	}
@@ -50,7 +52,7 @@ namespace {
 		return res;
 	}
 
-	void handle_file(value& white_list, const fs::path& dst, fs::path file, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder) {
+	void handle_file(value& white_list, const fs::path& dst, fs::path file, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy) {
 		string hash = hash_file(file);
 	
 		fs::path tf = storage_path(file, hash, keep_extension, keep_filename, keep_folder);
@@ -58,19 +60,20 @@ namespace {
 		fs::path dst_file = dst/tf;
 
 		fs::create_directory(dst_file.parent_path());
-		fs::copy_file(file, dst/tf);
+		fs::remove(dst_file);
+		copy(file, dst_file);
 
 		white_list.set(hash+".mime", mime);
 		white_list.set(hash+".path", tf.string());
 	}
 
 	template<typename FileIterator>
-	void handle_file_list(value& white_list, const fs::path& dst, FileIterator start, FileIterator end, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder) {
+	void handle_file_list(value& white_list, const fs::path& dst, FileIterator start, FileIterator end, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy) {
 		for(FileIterator f = start; f != end; ++f)
-			handle_file(white_list, dst, *f, mime, keep_extension, keep_filename, keep_folder);
+			handle_file(white_list, dst, *f, mime, keep_extension, keep_filename, keep_folder, copy);
 	}
 
-	void build_white_list(string target, const fs::path& src, const fs::path& dst, const string& pattern, const string& mime, bool append, bool recursive, bool keep_extension, bool keep_filename, bool keep_folder) {
+	void build_white_list(string target, const fs::path& src, const fs::path& dst, const string& pattern, const string& mime, bool append, bool recursive, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy) {
 		value white_list;
 
 		if (append) {
@@ -81,9 +84,9 @@ namespace {
 		}
 	
 		if (recursive)
-			handle_file_list(white_list, dst, fs::recursive_directory_iterator(src), fs::recursive_directory_iterator(), mime, keep_extension, keep_filename, keep_folder);
+			handle_file_list(white_list, dst, fs::recursive_directory_iterator(src), fs::recursive_directory_iterator(), mime, keep_extension, keep_filename, keep_folder, copy);
 		else
-			handle_file_list(white_list, dst, fs::directory_iterator(src), fs::directory_iterator(), mime, keep_extension, keep_filename, keep_folder);
+			handle_file_list(white_list, dst, fs::directory_iterator(src), fs::directory_iterator(), mime, keep_extension, keep_filename, keep_folder, copy);
 
 		ofstream target_file(target.c_str());
 		white_list.save(target_file);
@@ -106,7 +109,8 @@ int main(int argc, char** argv) {
 			("recursive,r", po::value<bool>()->default_value(false)->implicit_value(true), "Recursive scan inside subfolders")
 			("keep-extension,x", po::value<bool>()->default_value(false)->implicit_value(true), "Keep extension in destination folder")
 			("keep-filename,n", po::value<bool>()->default_value(false)->implicit_value(true), "Keep original filename")
-			("keep-folders,f", po::value<bool>()->default_value(false)->implicit_value(true), "Keep folder structure");
+			("keep-folders,f", po::value<bool>()->default_value(false)->implicit_value(true), "Keep folder structure")
+			("copy-method", po::value<string>()->default_value("copy"), "Copy method to copy the files with: copy, hard"); // , soft
 
 		po::variables_map vm;
 
@@ -149,6 +153,20 @@ int main(int argc, char** argv) {
 			return -1;
 		}
 
+		copy_function_t copy;
+
+		if (vm["copy-method"].as<string>() == "copy")
+			copy = (copy_function_t)&fs::copy_file;
+		else if (vm["copy-method"].as<string>() == "hard")
+			copy = (copy_function_t)&fs::create_hard_link;
+//		else if (vm["copy-method"].as<string>() == "soft")
+//			copy == (copy_function_t)&fs::create_symlink;
+		else {
+			cout << "unsupported copy method" << endl;
+			usage(argv[0], cli_options);
+			return -1;
+		}
+
 		build_white_list(
 			vm["target"].as<string>(), 
 			vm["src"].as<string>(), 
@@ -159,7 +177,8 @@ int main(int argc, char** argv) {
 			vm["recursive"].as<bool>(),
 			vm["keep-extension"].as<bool>(),
 			vm["keep-filename"].as<bool>(),
-			vm["keep-folders"].as<bool>()
+			vm["keep-folders"].as<bool>(),
+			copy
 		);
 
 		return 0;
