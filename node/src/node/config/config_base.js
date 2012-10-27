@@ -34,12 +34,8 @@
 		}      
 	    },  
 	"config_noded" : {
-		"static_files" : {
-			"css" : {
-				"folder" : "run/css/",
-				"mime" : "text/css",
-				"extension" : ".css"
-			}
+		"static_files" : 
+#include "node_whitelist.js"
 		},
 		"tasks" : {
 			"admin users" : false,

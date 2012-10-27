@@ -13,10 +13,12 @@
 #include <boost/filesystem.hpp>
 #include <cppcms/json.h>
 #include "../utils/crypto.hpp"
+#include <booster/regex_match.h>
 
 using namespace p2psn::utils;
 using namespace std;
 using namespace cppcms::json;
+using namespace booster;
 namespace po = boost::program_options;
 namespace fs = boost::filesystem;
 
@@ -110,6 +112,7 @@ int main(int argc, char** argv) {
 			("keep-extension,x", po::value<bool>()->default_value(false)->implicit_value(true), "Keep extension in destination folder")
 			("keep-filename,n", po::value<bool>()->default_value(false)->implicit_value(true), "Keep original filename")
 			("keep-folders,f", po::value<bool>()->default_value(false)->implicit_value(true), "Keep folder structure")
+			("pattern-type", po::value<string>()->default_value("pattern"), "Type of file matching mechanism: pattern, regex")
 			("copy-method", po::value<string>()->default_value("copy"), "Copy method to copy the files with: copy, hard"); // , soft
 
 		po::variables_map vm;
@@ -142,16 +145,23 @@ int main(int argc, char** argv) {
 			usage(argv[0], cli_options);
 			return -1;
 		}
-		if (!vm.count("pattern")) {
-			cout << "missing file pattern" << endl;
-			usage(argv[0], cli_options);
-			return -1;
-		}
 		if (!vm.count("mime")) {
 			cout << "missing mime type" << endl;
 			usage(argv[0], cli_options);
 			return -1;
 		}
+		if (!vm.count("pattern")) {
+			cout << "missing file pattern" << endl;
+			usage(argv[0], cli_options);
+			return -1;
+		}
+
+		string pattern_regex;
+
+		if (vm["pattern-type"].as<string>() == "regex") 
+			pattern_regex = vm["pattern"].as<string>();
+		else
+			pattern_regex = regex_replace(vm["pattern"].as<string>();
 
 		copy_function_t copy;
 
