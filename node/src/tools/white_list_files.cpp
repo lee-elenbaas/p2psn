@@ -12,8 +12,8 @@
 #include <boost/program_options.hpp>
 #include <boost/filesystem.hpp>
 #include <cppcms/json.h>
-#include "../utils/crypto.hpp"
 #include <booster/regex_match.h>
+#include "../utils/crypto.hpp"
 
 using namespace p2psn::utils;
 using namespace std;
@@ -70,12 +70,16 @@ namespace {
 	}
 
 	template<typename FileIterator>
-	void handle_file_list(value& white_list, const fs::path& dst, FileIterator start, FileIterator end, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy) {
-		for(FileIterator f = start; f != end; ++f)
-			handle_file(white_list, dst, *f, mime, keep_extension, keep_filename, keep_folder, copy);
+	void handle_file_list(value& white_list, const fs::path& dst, FileIterator start, FileIterator end, const regex& pattern, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy) {
+		regex pattern_regex pattern(pattern);
+
+		for(FileIterator f = start; f != end; ++f) {
+			if (regex_match(f.str(), pattern)
+				handle_file(white_list, dst, *f, mime, keep_extension, keep_filename, keep_folder, copy);
+		}
 	}
 
-	void build_white_list(string target, const fs::path& src, const fs::path& dst, const string& pattern, const string& mime, bool append, bool recursive, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy) {
+	void build_white_list(string target, const fs::path& src, const fs::path& dst, const regex& pattern, const string& mime, bool append, bool recursive, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy) {
 		value white_list;
 
 		if (append) {
@@ -86,9 +90,9 @@ namespace {
 		}
 	
 		if (recursive)
-			handle_file_list(white_list, dst, fs::recursive_directory_iterator(src), fs::recursive_directory_iterator(), mime, keep_extension, keep_filename, keep_folder, copy);
+			handle_file_list(white_list, dst, fs::recursive_directory_iterator(src), fs::recursive_directory_iterator(), pattern, mime, keep_extension, keep_filename, keep_folder, copy);
 		else
-			handle_file_list(white_list, dst, fs::directory_iterator(src), fs::directory_iterator(), mime, keep_extension, keep_filename, keep_folder, copy);
+			handle_file_list(white_list, dst, fs::directory_iterator(src), fs::directory_iterator(), pattern, mime, keep_extension, keep_filename, keep_folder, copy);
 
 		ofstream target_file(target.c_str());
 		white_list.save(target_file);
@@ -156,12 +160,17 @@ int main(int argc, char** argv) {
 			return -1;
 		}
 
-		string pattern_regex;
+		regex pattern_regex;
 
 		if (vm["pattern-type"].as<string>() == "regex") 
-			pattern_regex = vm["pattern"].as<string>();
-		else
-			pattern_regex = regex_replace(vm["pattern"].as<string>();
+			pattern_regex = regex(vm["pattern"].as<string>());
+		else if (vm["pattern-type"].as<string>() == "pattern")
+			pattern_regex = regex(pattern_to_regex<regex>(vm["pattern"].as<string>()));
+		else {
+			cout << "unsupported pattern type" << endl;
+			usage(argv[0], cli_options);
+			return -1;
+		}
 
 		copy_function_t copy;
 
@@ -181,7 +190,7 @@ int main(int argc, char** argv) {
 			vm["target"].as<string>(), 
 			vm["src"].as<string>(), 
 			vm["dst"].as<string>(), 
-			vm["pattern"].as<string>(),
+			pattern_regex,
 			vm["mime"].as<string>(),
 			vm["append"].as<bool>(),
 			vm["recursive"].as<bool>(),

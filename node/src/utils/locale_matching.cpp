@@ -16,7 +16,9 @@ namespace {
 	using booster::regex;
 	
 	const string qvalue_priority_separator_str = "\\w*;\\w*q\\w*=\\w*";
-	regex qvalue_priority_separator(qvalue_priority_separator_str);
+
+	static regex qvalue_priority_separator(qvalue_priority_separator_str);
+	static regex qvalue_regex("([^ ]*)("+qvalue_priority_separator_str+"([01](\\.[0-9]+)?))");
 
 	struct qvalue {
 		string value;
@@ -37,8 +39,6 @@ namespace {
 	};
 
 	bool operator< (const qvalue& rhs, const qvalue& lhs) { return rhs.priority < lhs.priority; }
-
-	regex qvalue_regex("([^ ]*)("+qvalue_priority_separator_str+"([01](\\.[0-9]+)?))");
 
 	list<qvalue> get_qvalue_list(std::string value)
 	{

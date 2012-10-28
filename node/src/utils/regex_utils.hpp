@@ -8,6 +8,7 @@
 
 #include <booster/regex.h>
 #include <vector>
+#include <sstream>
 
 namespace p2psn {
 	namespace utils {
@@ -89,6 +90,37 @@ namespace p2psn {
 			}
 	
 			return split;
+		}
+
+		template<typename Regex>
+		std::string regex_replace(std::string original, Regex regex, std::string replace) {
+			auto splitted = regex_split(original, regex, split_options::avoid_matchs);
+
+			std::ostringstream result;
+
+			bool first = true;
+			for(auto no_match : splitted) {
+				if (!first)
+					result << replace;
+				else
+					first = false;
+
+				result << no_match;
+			}
+
+			return result.str();
+		}
+
+		template<typename Regex>
+		inline std::string pattern_ro_regex(const std::string& pattern) {
+			return	regex_replace(
+					regex_replace(
+						regex_replace(
+							pattern, 
+							Regex("\\."), "\\." // replace all . in the pattern with \.
+						), Regex("\\?"), "." // replace all pattern ? with regex .
+					), Regex("\\*"), ".*" // replace all patten * with regex .*
+				);
 		}
 
 	} // namespace utils
