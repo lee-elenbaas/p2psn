@@ -77,6 +77,10 @@ At the same time each node is intended to run on a normal home PC with its limit
 
 ## Development Blog
 
+2012-11-06
+
+> Yet another link i plan on using and following its rules: http://semver.org/
+
 2012-10-12
 
 > Its been a while since i wrote anything. In that time i managed to get the user management to update the users into the session correctly.
