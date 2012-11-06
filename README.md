@@ -77,6 +77,10 @@ At the same time each node is intended to run on a normal home PC with its limit
 
 ## Development Blog
 
+2012-11-06
+
+> Yet another link i plan on using and following its rules: http://semver.org/
+
 2012-08-30
 
 > Diaspora or not to Diaspora (http://diasporaproject.org/). At a very late stage for me and a very early stage for this project i became aware of the diaspora project. Basically we are looking to solve very similar problems, but we go about it completely different. They decided to make a network of servers, where everyone is free to open up his own server, and users choose what server to trust and register with, but once that decision is made, it is final. (at least for that seed, a user can always open up a new seed.)
