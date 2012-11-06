@@ -15,6 +15,7 @@
 #include <booster/regex.h>
 #include "../utils/crypto.hpp"
 #include "../utils/regex_utils.hpp"
+#include "../utils/log.hpp"
 
 using namespace p2psn::utils;
 using namespace std;
@@ -163,15 +164,20 @@ int main(int argc, char** argv) {
 
 		regex pattern_regex;
 
-		if (vm["pattern-type"].as<string>() == "regex") 
+		if (vm["pattern-type"].as<string>() == "regex") {
+			SDEBUG("pattern reg");
 			pattern_regex = regex(vm["pattern"].as<string>());
-		else if (vm["pattern-type"].as<string>() == "pattern")
+		}
+		else if (vm["pattern-type"].as<string>() == "pattern") {
+			SDEBUG("pattern path");
 			pattern_regex = regex(pattern_to_regex<regex>(vm["pattern"].as<string>()));
+		}
 		else {
 			cout << "unsupported pattern type" << endl;
 			usage(argv[0], cli_options);
 			return -1;
 		}
+		SDEBUG("pattern regex: " + pattern_regex.str());
 
 		copy_function_t copy;
 

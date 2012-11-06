@@ -9,6 +9,7 @@
 #include <booster/regex.h>
 #include <vector>
 #include <sstream>
+#include "log.hpp"
 
 namespace p2psn {
 	namespace utils {
@@ -113,14 +114,14 @@ namespace p2psn {
 
 		template<typename Regex>
 		inline std::string pattern_to_regex(const std::string& pattern) {
-			return	regex_replace(
-					regex_replace(
-						regex_replace(
-							pattern, 
-							Regex("\\."), "\\." // replace all . in the pattern with \.
-						), Regex("\\?"), "." // replace all pattern ? with regex .
-					), Regex("\\*"), ".*" // replace all patten * with regex .*
-				);
+			SDEBUG("pattern: " + pattern);
+			auto reg = regex_replace(pattern, Regex("\\."), "\\."); // replace all . in the pattern with \.
+			SDEBUG("safe dots: "+reg);
+			reg = regex_replace(reg, Regex("\\?"), "."); // replace all pattern ? with regex .
+			SDEBUG("?: "+reg);
+			reg = regex_replace(reg, Regex("\\*"), ".*"); // replace all patten * with regex .*
+			SDEBUG("*: "+reg);
+			return reg;
 		}
 
 	} // namespace utils
