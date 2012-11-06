@@ -12,8 +12,9 @@
 #include <boost/program_options.hpp>
 #include <boost/filesystem.hpp>
 #include <cppcms/json.h>
-#include <booster/regex_match.h>
+#include <booster/regex.h>
 #include "../utils/crypto.hpp"
+#include "../utils/regex_utils.hpp"
 
 using namespace p2psn::utils;
 using namespace std;
@@ -70,12 +71,12 @@ namespace {
 	}
 
 	template<typename FileIterator>
-	void handle_file_list(value& white_list, const fs::path& dst, FileIterator start, FileIterator end, const regex& pattern, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy) {
-		regex pattern_regex pattern(pattern);
-
+	void handle_file_list(value& white_list, const fs::path& dst, FileIterator start, FileIterator end, const booster::regex& pattern, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy) {
 		for(FileIterator f = start; f != end; ++f) {
-			if (regex_match(f.str(), pattern)
-				handle_file(white_list, dst, *f, mime, keep_extension, keep_filename, keep_folder, copy);
+			fs::path file = f->path();
+
+			if (regex_match(file.string(), pattern))
+				handle_file(white_list, dst, file, mime, keep_extension, keep_filename, keep_folder, copy);
 		}
 	}
 
@@ -202,7 +203,7 @@ int main(int argc, char** argv) {
 
 		return 0;
 	}
-	catch(exception const &e) {
+	catch(std::exception const &e) {
 		cerr << e.what() << endl;
         
 		return -2;

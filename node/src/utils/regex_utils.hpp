@@ -112,7 +112,7 @@ namespace p2psn {
 		}
 
 		template<typename Regex>
-		inline std::string pattern_ro_regex(const std::string& pattern) {
+		inline std::string pattern_to_regex(const std::string& pattern) {
 			return	regex_replace(
 					regex_replace(
 						regex_replace(
