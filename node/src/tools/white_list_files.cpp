@@ -76,8 +76,12 @@ namespace {
 		for(FileIterator f = start; f != end; ++f) {
 			fs::path file = f->path();
 
-			if (regex_match(file.string(), pattern))
-				handle_file(white_list, dst, file, mime, keep_extension, keep_filename, keep_folder, copy);
+			if (!is_regular_file(f->status()))
+				continue;
+			if (!regex_match(file.string(), pattern))
+				continue;
+
+			handle_file(white_list, dst, file, mime, keep_extension, keep_filename, keep_folder, copy);
 		}
 	}
 
@@ -96,8 +100,13 @@ namespace {
 		else
 			handle_file_list(white_list, dst, fs::directory_iterator(src), fs::directory_iterator(), pattern, mime, keep_extension, keep_filename, keep_folder, copy);
 
-		ofstream target_file(target.c_str());
-		white_list.save(target_file);
+		if (!white_list.is_undefined()) {
+			ofstream target_file(target.c_str());
+		
+			white_list.save(target_file);
+
+			cout << "written " << white_list << " to path " << target << endl;
+		}
 	}
 }
 
@@ -118,7 +127,7 @@ int main(int argc, char** argv) {
 			("keep-extension,x", po::value<bool>()->default_value(false)->implicit_value(true), "Keep extension in destination folder")
 			("keep-filename,n", po::value<bool>()->default_value(false)->implicit_value(true), "Keep original filename")
 			("keep-folders,f", po::value<bool>()->default_value(false)->implicit_value(true), "Keep folder structure")
-			("pattern-type", po::value<string>()->default_value("pattern"), "Type of file matching mechanism: pattern, regex")
+			("pattern-type", po::value<string>()->default_value("path"), "Type of file matching mechanism: path, regex")
 			("copy-method", po::value<string>()->default_value("copy"), "Copy method to copy the files with: copy, hard"); // , soft
 
 		po::variables_map vm;
@@ -168,7 +177,7 @@ int main(int argc, char** argv) {
 			SDEBUG("pattern reg");
 			pattern_regex = regex(vm["pattern"].as<string>());
 		}
-		else if (vm["pattern-type"].as<string>() == "pattern") {
+		else if (vm["pattern-type"].as<string>() == "path") {
 			SDEBUG("pattern path");
 			pattern_regex = regex(pattern_to_regex<regex>(vm["pattern"].as<string>()));
 		}

@@ -35,8 +35,8 @@
 	    },  
 	"config_noded" : {
 		"static_files" : 
-#include "node_whitelist.js"
-		},
+#include "../../../build/node/config/node_whitelist.js"
+		,
 		"tasks" : {
 			"admin users" : false,
 			"server settings" : {

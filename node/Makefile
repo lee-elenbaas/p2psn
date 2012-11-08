@@ -80,11 +80,12 @@ include build/dependancies_tmpl.mk
 include build/dependancies_cpp.mk
 
 #configuration
-build/config.js: src/node/config/config_base.js build/node_config/node_whitelist.js
-	$(CPP) -E $^ -o $@
+build/config.js: src/node/config/config_base.js build/node/config/node_whitelist.js
+	$(CPP) -E -x c -P -C $< -o $@
 	
-build/node_config/node_whitelist.js: run/white_list_files
-	./run/white_list_files --target "$@" --src src/node/static_files --dst run/static_files --pattern "*.css" --mime "text/css" --keep-extension --copy-method hard
+build/node/config/node_whitelist.js: run/white_list_files
+	echo $@ | sed "s/\/[^\/]*$$//" | xargs mkdir -p 
+	./run/white_list_files --target="$@" --src=src/node/static_files --dst=run/static_files --pattern=".*\\.css" --pattern-type=regex --mime="text/css" --keep-extension --copy-method=hard --recursive
 	
 #CppCMS skin
 #$(NODE_ADMIN_GENERATED):
@@ -104,10 +105,6 @@ clean:
 # run the node deamon
 run: run/noded run/config.js statics
 	./noded
-#run:	run/white_list_files
-#	./run/white_list_files --help
-#	./run/white_list_files --version
-#	./run/white_list_files --target build/white_list.js --src src/node/static_files/css --dst run/css --pattern "*.css" --mime "text/css" --keep-extension --copy-method hasr
 
 # static files
 statics: run/css/node.css
