@@ -15,11 +15,14 @@ namespace p2psn {
 	namespace utils {
 
 		enum class hash_algorithm : int {
+			illegal = 0,
 			md5,
 			sha1
 		};
 
 		std::ostream& operator<<(std::ostream&, hash_algorithm);
+		std::istream& operator>>(std::istream&, hash_algorithm&);
+		hash_algorithm operator(hash_algorithm) (const str::string&);
 
 		class bad_hash_algorithm : public booster::bad_cast {
 		public:

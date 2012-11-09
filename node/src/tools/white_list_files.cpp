@@ -223,13 +223,9 @@ int main(int argc, char** argv) {
 			return -1;
 		}
 
-		hash_algorithm hash;
+		hash_algorithm hash = (hash_algorithm)vm["hash-type"].as<string>();
 
-		if (vm["hash-type"].as<string>() == "md5")
-			hash = hash_algorithm::md5;
-		else if (vm["hash-type"].as<string>() == "sha1")
-			hash = hash_algorithm::sha1;
-		else {
+		if (hash == hash_algorithm::illegel) {
 			cout << "unsupported hash algorithm" << endl;
 			usage(argv[0], cli_options);
 			return -1;
