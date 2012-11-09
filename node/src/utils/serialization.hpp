@@ -36,7 +36,7 @@ namespace p2psn {
 		};
 
 		/**
-		 * perform serialization of using json values
+		 * perform serialization of other types using json values
 		 */
 		template<typename T>
 		struct serialization {

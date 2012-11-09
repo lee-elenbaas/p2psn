@@ -36,10 +36,6 @@ namespace {
 			<< cli_options << endl;
 	}
 
-	inline string hash_file(fs::path file) {
-		return signature::md5(file.string());
-	}
-
 	fs::path storage_path(const fs::path& file, const string& hash, bool keep_extension, bool keep_filename, bool keep_folder) {
 		fs::path res;
 
@@ -55,8 +51,8 @@ namespace {
 		return res;
 	}
 
-	void handle_file(value& white_list, const fs::path& dst, fs::path file, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy) {
-		string hash = hash_file(file);
+	void handle_file(value& white_list, const fs::path& dst, fs::path file, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy, hash_algorithm hash) {
+		string hash = signature::hash(hash, file);
 	
 		fs::path tf = storage_path(file, hash, keep_extension, keep_filename, keep_folder);
 
@@ -71,7 +67,7 @@ namespace {
 	}
 
 	template<typename FileIterator>
-	void handle_file_list(value& white_list, const fs::path& dst, FileIterator start, FileIterator end, const booster::regex& pattern, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy) {
+	void handle_file_list(value& white_list, const fs::path& dst, FileIterator start, FileIterator end, const booster::regex& pattern, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy, hash_algorithm hash) {
 		for(FileIterator f = start; f != end; ++f) {
 			fs::path file = f->path();
 
@@ -80,11 +76,11 @@ namespace {
 			if (!regex_match(file.string(), pattern))
 				continue;
 
-			handle_file(white_list, dst, file, mime, keep_extension, keep_filename, keep_folder, copy);
+			handle_file(white_list, dst, file, mime, keep_extension, keep_filename, keep_folder, copy, hash);
 		}
 	}
 
-	void build_white_list(string target, const fs::path& src, const fs::path& dst, const booster::regex& pattern, const string& mime, bool append, bool recursive, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy) {
+	void build_white_list(string target, const fs::path& src, const fs::path& dst, const booster::regex& pattern, const string& mime, bool append, bool recursive, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy, hash_algorithm hash) {
 		value white_list;
 
 		if (append) {
@@ -105,7 +101,8 @@ namespace {
 				keep_extension, 
 				keep_filename, 
 				keep_folder, 
-				copy
+				copy,
+				hash
 			);
 		else
 			handle_file_list(
@@ -118,7 +115,8 @@ namespace {
 				keep_extension, 
 				keep_filename, 
 				keep_folder, 
-				copy
+				copy,
+				hash
 			);
 
 		if (!white_list.is_undefined()) {
@@ -149,6 +147,7 @@ int main(int argc, char** argv) {
 			("keep-filename,n", po::value<bool>()->default_value(false)->implicit_value(true), "Keep original filename")
 			("keep-folders,f", po::value<bool>()->default_value(false)->implicit_value(true), "Keep folder structure")
 			("pattern-type", po::value<string>()->default_value("path"), "Type of file matching mechanism: path, regex")
+			("hash-type", po::value<string>()->default_value("md5"), "Hash algorithm used for hashing paths: md5, sha1")
 			("copy-method", po::value<string>()->default_value("copy"), "Copy method to copy the files with: copy, hard"); // , soft
 
 		po::variables_map vm;
@@ -226,6 +225,18 @@ int main(int argc, char** argv) {
 			return -1;
 		}
 
+		hash_algorithm hash;
+
+		if (vm["hash-type"].as<string>() == "md5")
+			hash = hash_algorithm::md5;
+		else if (vm["hash-type"].as<string>() == "sha1")
+			hash = hash_algorithm::sha1;
+		else {
+			cout << "unsupported hash algorithm" << endl;
+			usage(argv[0], cli_options);
+			return -1;
+		}
+
 		build_white_list(
 			vm["target"].as<string>(), 
 			vm["src"].as<string>(), 
@@ -237,7 +248,8 @@ int main(int argc, char** argv) {
 			vm["keep-extension"].as<bool>(),
 			vm["keep-filename"].as<bool>(),
 			vm["keep-folders"].as<bool>(),
-			copy
+			copy,
+			hash
 		);
 
 		return 0;
