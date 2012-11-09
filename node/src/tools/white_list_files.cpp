@@ -52,9 +52,9 @@ namespace {
 	}
 
 	void handle_file(value& white_list, const fs::path& dst, fs::path file, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy, hash_algorithm hash) {
-		string hash = signature::hash(hash, file);
+		string sig = signature::hash(hash, file.string());
 	
-		fs::path tf = storage_path(file, hash, keep_extension, keep_filename, keep_folder);
+		fs::path tf = storage_path(file, sig, keep_extension, keep_filename, keep_folder);
 
 		fs::path dst_file = dst/tf;
 
@@ -62,8 +62,8 @@ namespace {
 		fs::remove(dst_file);
 		copy(file, dst_file);
 
-		white_list.set(hash+".mime", mime);
-		white_list.set(hash+".path", tf.string());
+		white_list.set(sig+".mime", mime);
+		white_list.set(sig+".path", tf.string());
 	}
 
 	template<typename FileIterator>
@@ -123,8 +123,6 @@ namespace {
 			ofstream target_file(target.c_str());
 		
 			white_list.save(target_file);
-
-			cout << "written " << white_list << " to path " << target << endl;
 		}
 	}
 }

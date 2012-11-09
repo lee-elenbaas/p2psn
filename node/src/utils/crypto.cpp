@@ -9,7 +9,7 @@ using namespace p2psn::utils;
 using namespace std;
 using cppcms::crypto::message_digest;
 
-ostream& operator<<(ostream& out, hash_algorithm hash) {
+ostream& p2psn::utils::operator<<(ostream& out, hash_algorithm hash) {
 	switch (hash) {
 		case hash_algorithm::md5:
 			out << "md5";
