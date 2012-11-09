@@ -20,7 +20,7 @@ namespace p2psn {
 			static std::string md5(const std::string&);
 			static std::string sha1(const std::string&);
 		private: // TODO: move generate to be templated - in order to support hmac usage as well
-			static std::string generate(std::auto_ptr<cppcms::crypto::message_digest>, const std::string&);
+			static std::string generate(std::unique_ptr<cppcms::crypto::message_digest>, const std::string&);
 		};
 
 	} // namespace utils

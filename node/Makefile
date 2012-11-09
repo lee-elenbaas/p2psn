@@ -86,6 +86,7 @@ build/config.js: src/node/config/config_base.js build/node/config/node_whitelist
 build/node/config/node_whitelist.js: run/white_list_files
 	echo $@ | sed "s/\/[^\/]*$$//" | xargs mkdir -p 
 	./run/white_list_files --target="$@" --src=src/node/static_files --dst=run/static_files --pattern=".*\\.css" --pattern-type=regex --mime="text/css" --keep-extension --copy-method=hard --recursive
+#	./run/white_list_files --target="$@" --src=src/node/static_files --dst=run/static_files --pattern="*.css" --mime="text/css" --keep-extension --copy-method=hard --recursive
 	
 #CppCMS skin
 #$(NODE_ADMIN_GENERATED):

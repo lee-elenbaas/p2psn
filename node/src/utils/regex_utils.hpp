@@ -10,6 +10,7 @@
 #include <vector>
 #include <sstream>
 #include "log.hpp"
+#include <iostream>
 
 namespace p2psn {
 	namespace utils {
@@ -94,9 +95,11 @@ namespace p2psn {
 		}
 
 		template<typename Regex>
-		std::string regex_replace(std::string original, Regex regex, std::string replace) {
+		std::string lee_regex_replace(std::string original, Regex regex, std::string replace) {
+			std::cout << "in \"" << original << "\" replace \"" << regex << "\" with \"" << replace << "\"" << std::endl;
 			auto splitted = regex_split(original, regex, split_options::avoid_matchs);
 
+			std::cout << "splitted " << splitted << std::endl;
 			std::ostringstream result;
 
 			bool first = true;
@@ -114,14 +117,12 @@ namespace p2psn {
 
 		template<typename Regex>
 		inline std::string pattern_to_regex(const std::string& pattern) {
-			SDEBUG("pattern: " + pattern);
-			auto reg = regex_replace(pattern, Regex("\\."), "\\."); // replace all . in the pattern with \.
-			SDEBUG("safe dots: "+reg);
-			reg = regex_replace(reg, Regex("\\?"), "."); // replace all pattern ? with regex .
-			SDEBUG("?: "+reg);
-			reg = regex_replace(reg, Regex("\\*"), ".*"); // replace all patten * with regex .*
-			SDEBUG("*: "+reg);
-			return reg;
+			std::cout << "skip" << std::endl;
+			return pattern;
+//			std::string reg = lee_regex_replace(pattern, Regex("\\."), "\\."); // replace all . in the pattern with \.
+//			reg = lee_regex_replace(reg, Regex("\\?"), "."); // replace all pattern ? with regex .
+//			reg = lee_regex_replace(reg, Regex("\\*"), ".*"); // replace all patten * with regex .*
+//			return reg;
 		}
 
 	} // namespace utils

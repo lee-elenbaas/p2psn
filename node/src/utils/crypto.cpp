@@ -15,7 +15,7 @@ string signature::sha1(const string& message) {
 	return generate(message_digest::sha1(), message);
 }
 
-string signature::generate(std::auto_ptr<cppcms::crypto::message_digest> generator, const std::string& message) {
+string signature::generate(std::unique_ptr<cppcms::crypto::message_digest> generator, const std::string& message) {
 	unsigned hash_size = generator->digest_size();
 	unsigned array_size = hash_size/sizeof(unsigned char);
 

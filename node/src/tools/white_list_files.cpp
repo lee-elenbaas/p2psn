@@ -19,8 +19,7 @@
 
 using namespace p2psn::utils;
 using namespace std;
-using namespace cppcms::json;
-using namespace booster;
+using cppcms::json::value;
 namespace po = boost::program_options;
 namespace fs = boost::filesystem;
 
@@ -85,7 +84,7 @@ namespace {
 		}
 	}
 
-	void build_white_list(string target, const fs::path& src, const fs::path& dst, const regex& pattern, const string& mime, bool append, bool recursive, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy) {
+	void build_white_list(string target, const fs::path& src, const fs::path& dst, const booster::regex& pattern, const string& mime, bool append, bool recursive, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy) {
 		value white_list;
 
 		if (append) {
@@ -96,9 +95,31 @@ namespace {
 		}
 	
 		if (recursive)
-			handle_file_list(white_list, dst, fs::recursive_directory_iterator(src), fs::recursive_directory_iterator(), pattern, mime, keep_extension, keep_filename, keep_folder, copy);
+			handle_file_list(
+				white_list, 
+				dst, 
+				fs::recursive_directory_iterator(src), 
+				fs::recursive_directory_iterator(), 
+				pattern, 
+				mime, 
+				keep_extension, 
+				keep_filename, 
+				keep_folder, 
+				copy
+			);
 		else
-			handle_file_list(white_list, dst, fs::directory_iterator(src), fs::directory_iterator(), pattern, mime, keep_extension, keep_filename, keep_folder, copy);
+			handle_file_list(
+				white_list, 
+				dst,
+				fs::directory_iterator(src), 
+				fs::directory_iterator(), 
+				pattern, 
+				mime, 
+				keep_extension, 
+				keep_filename, 
+				keep_folder, 
+				copy
+			);
 
 		if (!white_list.is_undefined()) {
 			ofstream target_file(target.c_str());
@@ -171,22 +192,25 @@ int main(int argc, char** argv) {
 			return -1;
 		}
 
-		regex pattern_regex;
+		booster::regex pattern_regex;
 
 		if (vm["pattern-type"].as<string>() == "regex") {
-			SDEBUG("pattern reg");
-			pattern_regex = regex(vm["pattern"].as<string>());
+			pattern_regex = booster::regex(vm["pattern"].as<string>());
 		}
 		else if (vm["pattern-type"].as<string>() == "path") {
-			SDEBUG("pattern path");
-			pattern_regex = regex(pattern_to_regex<regex>(vm["pattern"].as<string>()));
+			cout << "path pattern: " << vm["pattern"].as<string>() << endl;
+			string reg = pattern_to_regex<booster::regex>(vm["pattern"].as<string>());
+//			auto reg = regex_replace(vm["pattern"].as<string>(), regex("\\."), "\\."); // replace all . in the pattern with \.
+//			reg = regex_replace(reg, regex("\\?"), "."); // replace all pattern ? with regex .
+//			reg = regex_replace(reg, regex("\\*"), ".*"); // replace all patten * with regex .*
+			cout << "regex pattern: " << reg << endl;
+			pattern_regex = booster::regex(reg);
 		}
 		else {
 			cout << "unsupported pattern type" << endl;
 			usage(argv[0], cli_options);
 			return -1;
 		}
-		SDEBUG("pattern regex: " + pattern_regex.str());
 
 		copy_function_t copy;
 
