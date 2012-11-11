@@ -9,24 +9,24 @@ using namespace p2psn::utils;
 using namespace std;
 using cppcms::crypto::message_digest;
 
-istream& p2psn::utils::operator>>(istream& in, hash_algorithm& hash) {
-	string str;
-
-	in >> str;
-	
-	hash = (hash_algorithm)str;
-
-	return in;
-}
-
-hash_algorithm operator(hash_algorithm)(const string& str) {
+hash_algorithm p2psn::utils::parse_hash_algorithm(const string& str) {
 	if (str == "md5")
 		return hash_algorithm::md5;
 	
 	if (str == "sha")
 		return hash_algorithm::sha1;
 	
-	return hash_algorithm::illegel;
+	return hash_algorithm::illegal;
+}
+
+istream& p2psn::utils::operator>>(istream& in, hash_algorithm& hash) {
+	string str;
+
+	in >> str;
+	
+	hash = parse_hash_algorithm(str);
+
+	return in;
 }
 
 ostream& p2psn::utils::operator<<(ostream& out, hash_algorithm hash) {
@@ -37,11 +37,11 @@ ostream& p2psn::utils::operator<<(ostream& out, hash_algorithm hash) {
 		case hash_algorithm::sha1:
 			out << "sha1";
 			break;
-		case hash_algorithm::illegel:
-			out << "illegel";
+		case hash_algorithm::illegal:
+			out << "illegal";
 			break;
 		default:
-			out << "illegel(" << (int)hash << ')';
+			out << "illegal(" << (int)hash << ')';
 			break;
 	}
 

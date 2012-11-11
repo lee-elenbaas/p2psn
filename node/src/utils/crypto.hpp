@@ -20,9 +20,9 @@ namespace p2psn {
 			sha1
 		};
 
+		hash_algorithm parse_hash_algorithm(const std::string&);
 		std::ostream& operator<<(std::ostream&, hash_algorithm);
 		std::istream& operator>>(std::istream&, hash_algorithm&);
-		hash_algorithm operator(hash_algorithm) (const str::string&);
 
 		class bad_hash_algorithm : public booster::bad_cast {
 		public:

@@ -223,9 +223,9 @@ int main(int argc, char** argv) {
 			return -1;
 		}
 
-		hash_algorithm hash = (hash_algorithm)vm["hash-type"].as<string>();
+		hash_algorithm hash = parse_hash_algorithm(vm["hash-type"].as<string>());
 
-		if (hash == hash_algorithm::illegel) {
+		if (hash == hash_algorithm::illegal) {
 			cout << "unsupported hash algorithm" << endl;
 			usage(argv[0], cli_options);
 			return -1;
