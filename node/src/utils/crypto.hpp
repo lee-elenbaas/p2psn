@@ -14,6 +14,8 @@
 namespace p2psn {
 	namespace utils {
 
+		typedef std::string (*hash_function_t)(const std::string&);
+
 		enum class hash_algorithm : int {
 			illegal = 0,
 			md5,
@@ -43,6 +45,9 @@ namespace p2psn {
 		public:
 			static std::string md5(const std::string&);
 			static std::string sha1(const std::string&);
+
+			static hash_function_t hash_function(hash_algorithm);
+
 			static std::string hash(hash_algorithm, const std::string&);
 		private: // TODO: move generate to be templated - in order to support hmac usage as well
 			static std::string generate(std::unique_ptr<cppcms::crypto::message_digest>, const std::string&);

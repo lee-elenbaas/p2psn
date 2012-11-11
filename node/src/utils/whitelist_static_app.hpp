@@ -17,7 +17,11 @@ namespace p2psn {
 		/**
 		 * Construct the app on the given cppcms service
 		 */
-		hashed_static_app(cppcms::service&, const cppcms::json::value&);
+		hashed_static_app(cppcms::service&, const cppcms::json::value&, const std::string&, const p2psn::utils::hash_algorithm = p2psn::utils::hash_algorithm::md5);
+		/**
+		 * Construct the app on the given cppcms service
+		 */
+		hashed_static_app(cppcms::service&, const cppcms::json::value&, const std::string&, const p2psn::utils::hash_function_t);
 
 		/**
 		 * handle all incoming requests by performing the hash and accessing the files correctly
@@ -29,6 +33,16 @@ namespace p2psn {
 		 * The whitelist value used by this app for specifing what files to serve and how
 		 */
 		const cppcms::json::value& whitelist_;
+		
+		/**
+		 * The hash function used for matching the requests
+		 */
+		const p2psm::utils::hash_function_t hash_function_;
+
+		/**
+		 * The base folder to get the files from
+		 */
+		const std::string folder_;
 		};
 
 	} // namespace node_admin

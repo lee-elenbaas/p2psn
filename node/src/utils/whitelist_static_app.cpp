@@ -7,8 +7,11 @@ using namespace p2psn::node_admin;
 using namespace std;
 using namespace cppcms::json;
 
-whitelist_static_app::whitelist_static_app(cppcms::service &srv, const cppcms::json::value& whitelist) 
-	: base_app(srv), whitelist_(whitelist)
+whitelist_static_app::whitelist_static_app(cppcms::service &srv, const string& folder, const value& whitelist, hash_function_t algo) 
+	: whitelist_static_app(srv, folder, signature::hash_function(algo)) {}
+
+whitelist_static_app::whitelist_static_app(cppcms::service &srv, const string& folder, const value& whitelist, hash_function_t hash_function) 
+	: base_app(srv), whitelist_(whitelist), hash_function_(hash_function), folder_(folder)
 {
 	mapper().assign("");
 }
@@ -16,20 +19,28 @@ whitelist_static_app::whitelist_static_app(cppcms::service &srv, const cppcms::j
 void hashed_static_app::main(string url) {
 	DEBUG("static requested: "+url);
 
-	DEBUG("md5 hash: " + utils::signature::md5(url));
-	DEBUG("sha1 hash: " + utils::signature::sha1(url));
-	string hash = "node";
+	string hash = hash_function_(url);
 
-	ifstream f(folder_+hash+extension_);
+	value file_info = whitelist_.at(hash);
+
+	if (file_info.is_undefined) {
+		DEBUG("Requested url not in white list");
+		response().status(404);
+		return;
+	}
+
+	ifstream f(folder_ + file_info.get<string>("path"));
 
 	if (!f) {
-		DEBUG("file not found");
+		DEBUG("File not found in the folder");
 		response().status(404);
+		return;
 	}
-	else {
-		DEBUG("dumping file");
-		response().content_type(mime_);
-		response().out() << f.rdbuf();
-	}
+
+	// TODO: support file download using headers based on file size
+
+	DEBUG("dumping file");
+	response().content_type(file_info.get<string>("mime"));
+	response().out() << f.rdbuf();
 }
 

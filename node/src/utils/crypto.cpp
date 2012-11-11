@@ -79,18 +79,23 @@ string signature::sha1(const string& message) {
 	return generate(message_digest::sha1(), message);
 }
 
-string signature::hash(hash_algorithm algo, const string& message) {
+hash_function_t signature::hash_function(hash_algorithm) {
 	switch (algo) {
 		case hash_algorithm::md5:
-			return md5(message);
+			return &md5;
 		case hash_algorithm::sha1:
-			return sha1(message);
-//		default: // throw handled outside the switch
-//			throw booster::bad_cast("unsupported hash algorithm");
+			return &sha1;
+		default: // throw handled outside the switch
+			throw bad_hash_algorithm("unsupported hash algorithm", algo);
 	}
 
-	throw bad_hash_algorithm("unsupported hash algorithm", algo);
-	return ""; // only to bypass compiler warning
+	return nullptr; // only to bypass compiler warning
+}
+
+string signature::hash(hash_algorithm algo, const string& message) {
+	hush_function_t f = hash_function(algo);
+
+	return f(message);
 }
 
 string signature::generate(std::unique_ptr<cppcms::crypto::message_digest> generator, const std::string& message) {

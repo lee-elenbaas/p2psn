@@ -51,8 +51,8 @@ namespace {
 		return res;
 	}
 
-	void handle_file(value& white_list, const fs::path& dst, fs::path file, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy, hash_algorithm hash) {
-		string sig = signature::hash(hash, file.string());
+	void handle_file(value& white_list, const fs::path& dst, fs::path file, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy, hash_function_t hash) {
+		string sig = hash(file.string());
 	
 		fs::path tf = storage_path(file, sig, keep_extension, keep_filename, keep_folder);
 
@@ -67,7 +67,7 @@ namespace {
 	}
 
 	template<typename FileIterator>
-	void handle_file_list(value& white_list, const fs::path& dst, FileIterator start, FileIterator end, const booster::regex& pattern, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy, hash_algorithm hash) {
+	void handle_file_list(value& white_list, const fs::path& dst, FileIterator start, FileIterator end, const booster::regex& pattern, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy, hash_function_t hash) {
 		for(FileIterator f = start; f != end; ++f) {
 			fs::path file = f->path();
 
@@ -80,7 +80,7 @@ namespace {
 		}
 	}
 
-	void build_white_list(string target, const fs::path& src, const fs::path& dst, const booster::regex& pattern, const string& mime, bool append, bool recursive, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy, hash_algorithm hash) {
+	void build_white_list(string target, const fs::path& src, const fs::path& dst, const booster::regex& pattern, const string& mime, bool append, bool recursive, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy, hash_function_t hash) {
 		value white_list;
 
 		if (append) {
@@ -243,7 +243,7 @@ int main(int argc, char** argv) {
 			vm["keep-filename"].as<bool>(),
 			vm["keep-folders"].as<bool>(),
 			copy,
-			hash
+			signature::hash_function(hash)
 		);
 
 		return 0;
