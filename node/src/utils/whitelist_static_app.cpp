@@ -7,40 +7,46 @@ using namespace p2psn::node_admin;
 using namespace std;
 using namespace cppcms::json;
 
-whitelist_static_app::whitelist_static_app(cppcms::service &srv, const string& folder, const value& whitelist, hash_function_t algo) 
-	: whitelist_static_app(srv, folder, signature::hash_function(algo)) {}
+namespace p2psn {
+	namespace node_admin {
 
-whitelist_static_app::whitelist_static_app(cppcms::service &srv, const string& folder, const value& whitelist, hash_function_t hash_function) 
-	: base_app(srv), whitelist_(whitelist), hash_function_(hash_function), folder_(folder)
-{
-	mapper().assign("");
-}
+		whitelist_static_app::whitelist_static_app(cppcms::service &srv, const string& folder, const value& whitelist, hash_function_t algo) 
+			: whitelist_static_app(srv, folder, signature::hash_function(algo)) {}
 
-void hashed_static_app::main(string url) {
-	DEBUG("static requested: "+url);
+		whitelist_static_app::whitelist_static_app(cppcms::service &srv, const string& folder, const value& whitelist, hash_function_t hash_function) 
+			: base_app(srv), whitelist_(whitelist), hash_function_(hash_function), folder_(folder)
+		{
+			mapper().assign("");
+		}
 
-	string hash = hash_function_(url);
+		void hashed_static_app::main(string url) {
+			DEBUG("static requested: "+url);
 
-	value file_info = whitelist_.at(hash);
+			string hash = hash_function_(url);
 
-	if (file_info.is_undefined) {
-		DEBUG("Requested url not in white list");
-		response().status(404);
-		return;
-	}
+			value file_info = whitelist_.at(hash);
 
-	ifstream f(folder_ + file_info.get<string>("path"));
+			if (file_info.is_undefined) {
+				DEBUG("Requested url not in white list");
+				response().status(404);
+				return;
+			}
 
-	if (!f) {
-		DEBUG("File not found in the folder");
-		response().status(404);
-		return;
-	}
+			ifstream f(folder_ + file_info.get<string>("path"));
 
-	// TODO: support file download using headers based on file size
+			if (!f) {
+				DEBUG("File not found in the folder");
+				response().status(404);
+				return;
+			}
 
-	DEBUG("dumping file");
-	response().content_type(file_info.get<string>("mime"));
-	response().out() << f.rdbuf();
-}
+			// TODO: support file download using headers based on file size
+
+			DEBUG("dumping file");
+			response().content_type(file_info.get<string>("mime"));
+			response().out() << f.rdbuf();
+		}
+
+	} // namespace node_admin
+} // namespace p2psn
 

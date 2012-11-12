@@ -79,7 +79,7 @@ string signature::sha1(const string& message) {
 	return generate(message_digest::sha1(), message);
 }
 
-hash_function_t signature::hash_function(hash_algorithm) {
+hash_function_t signature::hash_function(hash_algorithm algo) {
 	switch (algo) {
 		case hash_algorithm::md5:
 			return &md5;
@@ -93,7 +93,7 @@ hash_function_t signature::hash_function(hash_algorithm) {
 }
 
 string signature::hash(hash_algorithm algo, const string& message) {
-	hush_function_t f = hash_function(algo);
+	hash_function_t f = hash_function(algo);
 
 	return f(message);
 }

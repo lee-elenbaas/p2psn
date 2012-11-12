@@ -3,6 +3,7 @@
 
 #include "../node/shared/base_app.hpp"
 #include "../node/guest/guest_content.hpp"
+#include "../utils/crypto.hpp"
 
 // TODO: make this a real utility app - and remove the inheritance dependancy by providing some other way to tap into the security process
 
@@ -17,11 +18,11 @@ namespace p2psn {
 		/**
 		 * Construct the app on the given cppcms service
 		 */
-		hashed_static_app(cppcms::service&, const cppcms::json::value&, const std::string&, const p2psn::utils::hash_algorithm = p2psn::utils::hash_algorithm::md5);
+		whitelist_static_app(cppcms::service&, const std::string&, const cppcms::json::value&, const p2psn::utils::hash_algorithm = p2psn::utils::hash_algorithm::md5);
 		/**
 		 * Construct the app on the given cppcms service
 		 */
-		hashed_static_app(cppcms::service&, const cppcms::json::value&, const std::string&, const p2psn::utils::hash_function_t);
+		whitelist_static_app(cppcms::service&, const std::string&, const cppcms::json::value&, const p2psn::utils::hash_function_t);
 
 		/**
 		 * handle all incoming requests by performing the hash and accessing the files correctly
@@ -37,7 +38,7 @@ namespace p2psn {
 		/**
 		 * The hash function used for matching the requests
 		 */
-		const p2psm::utils::hash_function_t hash_function_;
+		const p2psn::utils::hash_function_t hash_function_;
 
 		/**
 		 * The base folder to get the files from

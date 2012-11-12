@@ -4,7 +4,7 @@
 
 #include "../node_api/node_api.hpp"
 #include "../admin_menu/admin_menu_app.hpp"
-#include "../../utils/hashed_static_app.hpp"
+#include "../../utils/whitelist_static_app.hpp"
 
 #include "../../utils/crypto.hpp"
 
@@ -17,7 +17,7 @@ guest_app::guest_app(cppcms::service &srv)
 {
     attach(new p2psn::api::node_api(srv), "api", "/api{1}", "/api(/(.*))?", 1);
     attach(new admin_menu_app(srv), "admin", "/admin{1}", "/admin(/(.*))?", 1);
-    attach(new hashed_static_app(srv, "config_noded.static_files.css"), "css", "/css{1}", "/css(/(.*))?", 1);
+    attach(new whitelist_static_app(srv, "static_files", settings().at("config_noded.static_files")), "static", "/static{1}", "/static(/(.*))?", 1);
 
     dispatcher().assign("",&guest_app::home,this);
     mapper().assign("");
