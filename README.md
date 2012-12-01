@@ -77,6 +77,11 @@ At the same time each node is intended to run on a normal home PC with its limit
 
 ## Development Blog
 
+2012-12-01 2
+
+> After writing the ko part, i came to realize that i need to take a closer look at nodejs - and perhapse use it as the context for each client session processing.
+> I will think about this option later on, but it sure will solve all the JS api issues.
+
 2012-12-01
 
 > Working on this becomes slower as my main work becomes more demanding. Only this time the regular work got me to learn knockout.js. 
