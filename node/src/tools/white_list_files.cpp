@@ -223,9 +223,9 @@ int main(int argc, char** argv) {
 			return -1;
 		}
 
-		hash_algorithm hash = parse_hash_algorithm(vm["hash-type"].as<string>());
+		hash_algorithm algo = parse_hash_algorithm(vm["hash-type"].as<string>());
 
-		if (hash == hash_algorithm::illegal) {
+		if (algo == hash_algorithm::illegal) {
 			cout << "unsupported hash algorithm" << endl;
 			usage(argv[0], cli_options);
 			return -1;
@@ -243,7 +243,7 @@ int main(int argc, char** argv) {
 			vm["keep-filename"].as<bool>(),
 			vm["keep-folders"].as<bool>(),
 			copy,
-			signature::hash_function(hash)
+			signature::hash_function(algo)
 		);
 
 		return 0;

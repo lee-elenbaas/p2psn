@@ -31,7 +31,7 @@ build/noded:	build/node/main/noded.o \
 		build/utils/crypto.o \
 		build/utils/locale_matching.o \
 		build/utils/signal_handler.o \
-		build/utils/hashed_static_app.o \
+		build/utils/whitelist_static_app.o \
 		build/generated/node/shared/master.o \
 		build/generated/node/guest/about.o \
 		build/generated/node/guest/info.o \
@@ -85,7 +85,7 @@ build/config.js: src/node/config/config_base.js build/node/config/node_whitelist
 	
 build/node/config/node_whitelist.js: run/white_list_files
 	echo $@ | sed "s/\/[^\/]*$$//" | xargs mkdir -p 
-	./run/white_list_files --target="$@" --src=src/node/static_files --dst=run/static_files --pattern=".*\\.css" --pattern-type=regex --mime="text/css" --keep-extension --copy-method=hard --recursive
+	./run/white_list_files --target="$@" --src=src/node/static_files --dst=run/static_files --pattern=".*\\.css" --pattern-type=regex --mime="text/css" --keep-extension --copy-method=hard --recursive --hash-type=md5
 #	./run/white_list_files --target="$@" --src=src/node/static_files --dst=run/static_files --pattern="*.css" --mime="text/css" --keep-extension --copy-method=hard --recursive
 	
 #CppCMS skin

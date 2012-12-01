@@ -4,6 +4,7 @@
 #include <booster/backtrace.h>
 #include <sstream>
 #include "streamutils.hpp"
+#include "log.hpp"
 
 using namespace p2psn::utils;
 using namespace std;
@@ -82,13 +83,17 @@ string signature::sha1(const string& message) {
 hash_function_t signature::hash_function(hash_algorithm algo) {
 	switch (algo) {
 		case hash_algorithm::md5:
+			SDEBUG("MD5 hash");
 			return &md5;
 		case hash_algorithm::sha1:
+			SDEBUG("SHA1 hash");
 			return &sha1;
 		default: // throw handled outside the switch
+			SDEBUG("unsupported hash");
 			throw bad_hash_algorithm("unsupported hash algorithm", algo);
 	}
 
+	SDEBUG("Should nver reach this - switch default did not work");
 	return nullptr; // only to bypass compiler warning
 }
 
