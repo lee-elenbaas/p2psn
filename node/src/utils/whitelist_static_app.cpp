@@ -6,20 +6,21 @@
 using namespace p2psn::node_admin;
 using namespace std;
 using namespace cppcms::json;
+using namespace p2psn::utils;
 
 namespace p2psn {
 	namespace node_admin {
 
-		whitelist_static_app::whitelist_static_app(cppcms::service &srv, const string& folder, const value& whitelist, hash_function_t algo) 
+		whitelist_static_app::whitelist_static_app(cppcms::service &srv, const string& folder, const value& whitelist, hash_algorithm algo) 
 			: whitelist_static_app(srv, folder, signature::hash_function(algo)) {}
 
-		whitelist_static_app::whitelist_static_app(cppcms::service &srv, const string& folder, const value& whitelist, hash_function_t hash_function) 
+		whitelist_static_app::whitelist_static_app(cppcms::service &srv, const string& folder, const value& whitelist, const hash_function_t hash_function) 
 			: base_app(srv), whitelist_(whitelist), hash_function_(hash_function), folder_(folder)
 		{
 			mapper().assign("");
 		}
 
-		void hashed_static_app::main(string url) {
+		void whitelist_static_app::main(string url) {
 			DEBUG("static requested: "+url);
 
 			string hash = hash_function_(url);

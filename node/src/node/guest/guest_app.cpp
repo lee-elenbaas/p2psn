@@ -11,13 +11,14 @@
 using namespace p2psn::node_admin;
 using namespace std;
 using namespace cppcms::json;
+using namespace p2psn::utils;
 
 guest_app::guest_app(cppcms::service &srv) 
     : base_app(srv) 
 {
     attach(new p2psn::api::node_api(srv), "api", "/api{1}", "/api(/(.*))?", 1);
     attach(new admin_menu_app(srv), "admin", "/admin{1}", "/admin(/(.*))?", 1);
-    attach(new whitelist_static_app(srv, "static_files", settings().at("config_noded.static_files")), "static", "/static{1}", "/static(/(.*))?", 1);
+    attach(new whitelist_static_app(srv, "static_files", settings().at("config_noded.static_files"), hash_algorithm::md5), "static", "/static{1}", "/static(/(.*))?", 1);
 
     dispatcher().assign("",&guest_app::home,this);
     mapper().assign("");

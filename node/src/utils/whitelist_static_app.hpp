@@ -18,7 +18,7 @@ namespace p2psn {
 		/**
 		 * Construct the app on the given cppcms service
 		 */
-		whitelist_static_app(cppcms::service&, const std::string&, const cppcms::json::value&, const p2psn::utils::hash_algorithm = p2psn::utils::hash_algorithm::md5);
+		whitelist_static_app(cppcms::service&, const std::string&, const cppcms::json::value&, p2psn::utils::hash_algorithm = p2psn::utils::hash_algorithm::md5);
 		/**
 		 * Construct the app on the given cppcms service
 		 */
