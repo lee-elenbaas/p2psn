@@ -22,7 +22,13 @@ namespace p2psn {
 			sha1
 		};
 
-		hash_algorithm parse_hash_algorithm(const std::string&);
+		hash_algorithm parse_hash_algorithm(const string&);
+		constexpr hash_algorithm parse_hash_algorithm(const char * const str) {
+			return	  std::strcmp(str, "md5") == 0 ? hash_algorithm::md5
+				: std::strcmp(str, "sha1") == 0 ? hash_algorithm::sha1
+				: hash_algorithm::illegal;
+		}
+
 		std::ostream& operator<<(std::ostream&, hash_algorithm);
 		std::istream& operator>>(std::istream&, hash_algorithm&);
 
@@ -46,7 +52,11 @@ namespace p2psn {
 			static std::string md5(const std::string&);
 			static std::string sha1(const std::string&);
 
-			static hash_function_t hash_function(hash_algorithm);
+			constexpr static hash_function_t hash_function(hash_algorithm algo) {
+				return	  (algo == hash_algorithm::md5) ? &md5
+					: (algo == hash_algorithm::sha1) ? &sha1
+					: throw bad_hash_algorithm("unsupported hash algorithm", algo);
+			}
 
 			static std::string hash(hash_algorithm, const std::string&);
 		private: // TODO: move generate to be templated - in order to support hmac usage as well
