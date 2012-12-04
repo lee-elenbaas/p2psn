@@ -10,23 +10,6 @@ base_app::base_app(cppcms::service &srv)
 {
 }
 
-void base_app::main(string url) {
-	// filter connections based on allowed IPs
-	
-	// set locale based on user prefrences
-	context().locale(
-        p2psn::utils::best_match_locale(
-            request().http_accept_language(), 
-            request().http_accept_encoding(), 
-            settings().at("localization.locales")
-        ));
-
-    // override locale using session value if exists
-    if (session().is_set("locale"))
-        context().locale(session().get("locale"));
-
-	cppcms::application::main(url);
-}
 
 /**
  * Add message to show the user into the session
