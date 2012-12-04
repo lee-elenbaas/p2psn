@@ -17,11 +17,6 @@ namespace p2psn {
              * Construct the app on the given cppcms service
              */
             admin_base_app(cppcms::service &);
-    
-            /**
-             * handle all incoming requests
-             */	
-            virtual void main(std::string);
         protected:
             /**
              * The new settings to be applied
