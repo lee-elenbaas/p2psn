@@ -53,8 +53,8 @@ namespace p2psn {
 			static std::string sha1(const std::string&);
 
 			constexpr static hash_function_t hash_function(hash_algorithm algo) {
-				return	  (algo == hash_algorithm::md5) ? &md5
-					: (algo == hash_algorithm::sha1) ? &sha1
+				return	  (algo == hash_algorithm::md5) ? md5
+					: (algo == hash_algorithm::sha1) ? sha1
 					: throw bad_hash_algorithm("unsupported hash algorithm", algo);
 			}
 
