@@ -20,11 +20,6 @@ namespace p2psn {
              * Construct the app on the given cppcms service
              */
             base_app(cppcms::service &);
-    
-            /**
-             * handle all incoming requests
-             */	
-            virtual void main(std::string);
 
             /**
              * redirect to a new url - and place a log message in there
