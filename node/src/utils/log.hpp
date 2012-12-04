@@ -17,12 +17,23 @@ namespace p2psn {
 	} // namespace utils
 } // namepsace p2psn
 
-#define SLOG(lvl, msg) booster::log::logger::instance().log(booster::log::message(p2psn::utils::level_type(lvl), std::string(msg).c_str(), __FILE__, __LINE__))
-
-#define LOG(lvl, msg) SLOG((lvl), std::string(typeid(*this).name())+": "+(msg))
+#ifndef FREE_RUN
+	#define SLOG(lvl, msg) booster::log::logger::instance().log(booster::log::message(p2psn::utils::level_type(lvl), std::string(msg).c_str(), __FILE__, __LINE__))
+	#define LOG(lvl, msg) SLOG((lvl), std::string(typeid(*this).name())+": "+(msg))
+#else
+	#define SLOG(lvl, msg) 
+	#define LOG(lvl, msg) 
+#endif
 
 #define DEBUG(msg) LOG(p2psn::utils::level_type::debug, (msg))
 #define SDEBUG(msg) SLOG(p2psn::utils::level_type::debug, (msg))
+
+// TODO: move this to a separate file
+#ifndef FREE_RUN
+	#define ASSERT(cond, exception) if (!(cond)) throw (exception)
+#else
+	#define ASSERT(cond, exception)
+#endif
 
 #endif // __LOG_H
 
