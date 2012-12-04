@@ -38,6 +38,25 @@ guest_app::guest_app(cppcms::service &srv)
     mapper().root("/node");
 }
 
+void base_app::main(string url) {
+	// TODO: filter connections based on allowed IPs
+	DEBUG("Request from IP: "+request().remote_addr());
+	
+	// set locale based on user prefrences
+	context().locale(
+        p2psn::utils::best_match_locale(
+            request().http_accept_language(), 
+            request().http_accept_encoding(), 
+            settings().at("localization.locales")
+        ));
+
+    // override locale using session value if exists
+    if (session().is_set("locale"))
+        context().locale(session().get("locale"));
+
+	cppcms::application::main(url);
+}
+
 void guest_app::home()
 {
 	response_redirect(url("/info"));
