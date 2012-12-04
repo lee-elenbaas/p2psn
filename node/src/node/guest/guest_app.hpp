@@ -16,11 +16,16 @@ namespace p2psn {
              * Construct the app on the given cppcms service
              */
             guest_app(cppcms::service &);
+    
+            /**
+             * handle all incoming requests
+             */	
+            virtual void main(std::string);
 	
             /**
              * The initial page
              */
-			void home();
+		void home();
 			
 			/**
 			 * noded information page
