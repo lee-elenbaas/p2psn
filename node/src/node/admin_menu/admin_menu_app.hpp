@@ -15,7 +15,12 @@ namespace p2psn {
              * Construct the app on the given cppcms service
              */
             admin_menu_app(cppcms::service &);
-    
+		
+		/**
+		 * Filter admin requests based on login information and ip
+		 */
+		virtual void main(std::string request_url);
+
             /**
              * The admin menu
              */
