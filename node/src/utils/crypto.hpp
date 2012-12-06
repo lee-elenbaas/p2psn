@@ -10,6 +10,7 @@
 #include <booster/backtrace.h>
 #include <string>
 #include <ostream>
+#include "cstr.hpp"
 
 namespace p2psn {
 	namespace utils {
@@ -24,9 +25,9 @@ namespace p2psn {
 
 		hash_algorithm parse_hash_algorithm(const std::string&);
 		constexpr hash_algorithm parse_hash_algorithm(const char * const str) {
-			return	  std::strcmp(str, "md5") == 0 ? hash_algorithm::md5
-				: std::strcmp(str, "sha1") == 0 ? hash_algorithm::sha1
-				: hash_algorithm::illegal;
+			return	cstr_equals(str, "md5") ? hash_algorithm::md5
+				:	cstr_equals(str, "sha1") ? hash_algorithm::sha1
+				:	hash_algorithm::illegal;
 		}
 
 		std::ostream& operator<<(std::ostream&, hash_algorithm);

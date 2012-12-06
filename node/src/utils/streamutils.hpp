@@ -1,7 +1,5 @@
 /**
- * cryptographic tools used by p2psn
- *
- * providing easier to user API over the cryptografic tools cppcms provides
+ * stream binary data as hex
  */
 #ifndef __STREAMUTILS_H
 #define __STREAMUTILS_H

@@ -1,7 +1,5 @@
 /**
- * cryptographic tools used by p2psn
- *
- * providing easier to user API over the cryptografic tools cppcms provides
+ * serialization tools base on the json serialization structure
  */
 #ifndef __SERIALIZATION_HPP
 #define __SERIALIZATION_HPP

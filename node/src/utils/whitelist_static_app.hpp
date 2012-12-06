@@ -1,3 +1,6 @@
+/**
+ * cppcms app for serving static files based on a whitelist
+ */
 #ifndef __P2PSN_WHITELIST_STATIC_APP_H
 #define __P2PSN_WHITELIST_STATIC_APP_H
 

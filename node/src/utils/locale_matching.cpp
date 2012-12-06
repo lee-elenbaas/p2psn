@@ -1,6 +1,9 @@
-
+/**
+ * locale matching based on accepted languages and supported locales
+ */
 #include "locale_matching.hpp"
 
+#include "log.hpp"
 #include "regex_utils.hpp"
 #include <list>
 #include <cstdlib>
@@ -27,6 +30,8 @@ namespace {
 		qvalue(string val) {
 			auto parts = regex_split(val, qvalue_priority_separator, split_options::avoid_matchs);
 
+			assert(parts.size()<=2);
+			
 			if (parts.size() > 1) {
 				value = parts[0];
 				priority = atof(parts[1].c_str());

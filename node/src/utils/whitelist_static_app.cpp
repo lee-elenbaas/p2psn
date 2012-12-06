@@ -1,3 +1,6 @@
+/**
+ * cppcms app for serving static files based on a whitelist
+ */
 #include "whitelist_static_app.hpp"
 
 #include <fstream>

@@ -5,7 +5,7 @@
 #include "../node_api/node_api.hpp"
 #include "../admin_menu/admin_menu_app.hpp"
 #include "../../utils/whitelist_static_app.hpp"
-
+#include "../../utils/locale_matching.hpp"
 #include "../../utils/crypto.hpp"
 
 using namespace p2psn::node_admin;
@@ -38,7 +38,7 @@ guest_app::guest_app(cppcms::service &srv)
     mapper().root("/node");
 }
 
-void base_app::main(string url) {
+void guest_app::main(string url) {
 	// TODO: filter connections based on allowed IPs
 	DEBUG("Request from IP: "+request().remote_addr());
 	

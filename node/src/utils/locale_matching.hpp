@@ -1,7 +1,5 @@
 /**
- * cryptographic tools used by p2psn
- *
- * providing easier to user API over the cryptografic tools cppcms provides
+ * locale matching based on accepted languages and supported locales
  */
 #ifndef __LOCALE_MATCHING_H
 #define __LOCALE_MATCHING_H

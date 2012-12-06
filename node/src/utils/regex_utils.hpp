@@ -1,7 +1,5 @@
 /**
- * cryptographic tools used by p2psn
- *
- * providing easier to user API over the cryptografic tools cppcms provides
+ * additional regex utility functions
  */
 #ifndef __REGEX_UTILS_H
 #define __REGEX_UTILS_H
