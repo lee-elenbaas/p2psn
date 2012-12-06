@@ -1,18 +1,14 @@
-/**
- * cryptographic tools used by p2psn
- *
- * providing easier to user API over the cryptografic tools cppcms provides
- */
 #ifndef __LOG_H
 #define __LOG_H
 
+#include <string>
 #include <booster/log.h>
 #include <typeinfo>
 
 namespace p2psn {
 	namespace utils {
 
-	using booster::log::level_type;
+		using booster::log::level_type;
 
 	} // namespace utils
 } // namepsace p2psn
@@ -27,13 +23,6 @@ namespace p2psn {
 
 #define DEBUG(msg) LOG(p2psn::utils::level_type::debug, (msg))
 #define SDEBUG(msg) SLOG(p2psn::utils::level_type::debug, (msg))
-
-// TODO: move this to a separate file
-#ifndef FREE_RUN
-	#define ASSERT(cond, exception) if (!(cond)) throw (exception)
-#else
-	#define ASSERT(cond, exception)
-#endif
 
 #endif // __LOG_H
 

@@ -22,7 +22,7 @@ namespace p2psn {
 			sha1
 		};
 
-		hash_algorithm parse_hash_algorithm(const string&);
+		hash_algorithm parse_hash_algorithm(const std::string&);
 		constexpr hash_algorithm parse_hash_algorithm(const char * const str) {
 			return	  std::strcmp(str, "md5") == 0 ? hash_algorithm::md5
 				: std::strcmp(str, "sha1") == 0 ? hash_algorithm::sha1
