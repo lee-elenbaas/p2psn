@@ -1,5 +1,5 @@
 LIBS=-lcppcms -lbooster
-OPTIONS=-O0 -std=c++0x -Wall -Wextra -g3 -rdynamic -I third_party/boost -L third_party/boost/stage/lib
+OPTIONS=-O0 -std=c++11 -Wall -Wextra -g3 -rdynamic -I third_party/boost -L third_party/boost/stage/lib
 
 NODE_ADMIN_GENERATED=src/generated/noded_skin.cpp
 CPPCMS_TMPL_CC=third_party/cppcms/bin/cppcms_tmpl_cc
