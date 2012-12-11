@@ -26,6 +26,16 @@ namespace fs = boost::filesystem;
 namespace {
 	typedef void (*copy_function_t)(const fs::path&, const fs::path&);
 
+	void copy_file(const fs::path& src, const fs::path& dst) {
+		fs::copy_file(src, dst);
+	}
+	void hard_link_file(const fs::path& src, const fs::path& dst) {
+		fs::create_hard_link(src,dst);
+	}
+	void soft_link_file(const fs::path& src, const fs::path& dst) {
+		fs::create_symlink(src,dst);
+	}
+	
 	void version() {
 		cout << "White List Folder Utility version 0.1" << endl;
 	}
@@ -212,11 +222,11 @@ int main(int argc, char** argv) {
 		copy_function_t copy;
 
 		if (vm["copy-method"].as<string>() == "copy")
-			copy = (copy_function_t)&fs::copy_file;
+			copy = copy_file;
 		else if (vm["copy-method"].as<string>() == "hard")
-			copy = (copy_function_t)&fs::create_hard_link;
-//		else if (vm["copy-method"].as<string>() == "soft")
-//			copy == (copy_function_t)&fs::create_symlink;
+			copy = hard_link_file;
+		else if (vm["copy-method"].as<string>() == "soft")
+			copy == soft_link_file;
 		else {
 			cout << "unsupported copy method" << endl;
 			usage(argv[0], cli_options);

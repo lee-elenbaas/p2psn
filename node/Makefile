@@ -1,5 +1,5 @@
 LIBS=-lcppcms -lbooster
-OPTIONS=-O0 -std=c++11 -Wall -Wextra -g3 -rdynamic -I third_party/boost -L third_party/boost/stage/lib
+OPTIONS=-O0 -std=c++11 -Wall -Wextra -g3 -rdynamic
 
 NODE_ADMIN_GENERATED=src/generated/noded_skin.cpp
 CPPCMS_TMPL_CC=third_party/cppcms/bin/cppcms_tmpl_cc
@@ -16,7 +16,8 @@ docs/html/index.html: $(MAIN_CPP) $(MAIN_HEADERS) $(NODE_ADMIN_HEADERS) $(NODE_A
 
 # node deamon
 
-build/noded:	build/node/main/noded.o \
+build/noded:	\
+		build/node/main/noded.o \
 		build/node/shared/base_app.o \
 		build/node/guest/guest_app.o \
 		build/node/admin_shared/admin_base_app.o \

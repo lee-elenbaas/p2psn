@@ -77,6 +77,13 @@ At the same time each node is intended to run on a normal home PC with its limit
 
 ## Development Blog
 
+2012-12-11
+
+> I reinstalled my machine in order to get GCC 4.7 with some more C++11 support. I got it, but i have to redo all my other dependancies. And right now i am stuck with boost.
+> I tried to build it in the folder like i did before, and then point to that folder from the make file - did not work.
+> Now i tried to follow this guide (http://ubuntuforums.org/showthread.php?t=1180792) and get the necesary libraries installed into the system - did not work either.
+> I'll keep at it
+
 2012-12-01 2
 
 > After writing the ko part, i came to realize that i need to take a closer look at nodejs - and perhapse use it as the context for each client session processing.
