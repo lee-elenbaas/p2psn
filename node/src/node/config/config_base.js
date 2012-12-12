@@ -34,9 +34,11 @@
 		}      
 	    },  
 	"config_noded" : {
-		"static_files" : 
+		"static_files" : {
+			"path" : "run/static_files",
+			"whitelist" :
 #include "../../../build/node/config/node_whitelist.js"
-		,
+		},
 		"tasks" : {
 			"admin users" : false,
 			"server settings" : {

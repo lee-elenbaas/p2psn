@@ -1,4 +1,4 @@
-LIBS=-lcppcms -lbooster
+LIBS=-lcppcms -lbooster -lboost_filesystem -lboost_system
 OPTIONS=-O0 -std=c++11 -Wall -Wextra -g3 -rdynamic
 
 NODE_ADMIN_GENERATED=src/generated/noded_skin.cpp
@@ -46,7 +46,7 @@ build/noded:	\
 build/white_list_files:	\
 		build/utils/crypto.o \
 		build/tools/white_list_files.o
-	$(CXX) $(OPTIONS) $^ -o $@ $(LIBS) -lboost_program_options -lboost_filesystem -lboost_system
+	$(CXX) $(OPTIONS) $^ -o $@ -lboost_program_options $(LIBS)
 
 # rules for generating files
 

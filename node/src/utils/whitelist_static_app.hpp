@@ -7,8 +7,7 @@
 #include "../node/shared/base_app.hpp"
 #include "../node/guest/guest_content.hpp"
 #include "../utils/crypto.hpp"
-
-// TODO: make this a real utility app - and remove the inheritance dependancy by providing some other way to tap into the security process
+#include <boost/filesystem.hpp>
 
 namespace p2psn {
 	namespace node_admin {
@@ -21,11 +20,11 @@ namespace p2psn {
 		/**
 		 * Construct the app on the given cppcms service
 		 */
-		whitelist_static_app(cppcms::service&, const std::string&, const cppcms::json::value&, p2psn::utils::hash_algorithm = p2psn::utils::hash_algorithm::md5);
+		whitelist_static_app(cppcms::service&, const boost::filesystem::path&, const cppcms::json::value&, p2psn::utils::hash_algorithm = p2psn::utils::hash_algorithm::md5);
 		/**
 		 * Construct the app on the given cppcms service
 		 */
-		whitelist_static_app(cppcms::service&, const std::string&, const cppcms::json::value&, const p2psn::utils::hash_function_t);
+		whitelist_static_app(cppcms::service&, const boost::filesystem::path&, const cppcms::json::value&, const p2psn::utils::hash_function_t);
 
 		/**
 		 * handle all incoming requests by performing the hash and accessing the files correctly
@@ -46,7 +45,7 @@ namespace p2psn {
 		/**
 		 * The base folder to get the files from
 		 */
-		const std::string folder_;
+		const boost::filesystem::path folder_;
 		};
 
 	} // namespace node_admin

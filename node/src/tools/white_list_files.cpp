@@ -61,12 +61,14 @@ namespace {
 		return res;
 	}
 
-	void handle_file(value& white_list, const fs::path& dst, fs::path file, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy, hash_function_t hash) {
-		string sig = hash(file.string());
+	void handle_file(value& white_list, const fs::path& src, const fs::path& dst, fs::path file, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy, hash_function_t hash) {
+		auto relative_file = file.string().substr(src.string().length());
+		
+		auto sig = hash(relative_file);
 	
-		fs::path tf = storage_path(file, sig, keep_extension, keep_filename, keep_folder);
-
-		fs::path dst_file = dst/tf;
+		auto tf = storage_path(relative_file.substr(1), sig, keep_extension, keep_filename, keep_folder);
+		
+		auto dst_file = dst/tf;
 
 		fs::create_directory(dst_file.parent_path());
 		fs::remove(dst_file);
@@ -74,10 +76,11 @@ namespace {
 
 		white_list.set(sig+".mime", mime);
 		white_list.set(sig+".path", tf.string());
+		white_list.set(sig+".request_path", relative_file);
 	}
 
 	template<typename FileIterator>
-	void handle_file_list(value& white_list, const fs::path& dst, FileIterator start, FileIterator end, const booster::regex& pattern, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy, hash_function_t hash) {
+	void handle_file_list(value& white_list, const fs::path& src, const fs::path& dst, FileIterator start, FileIterator end, const booster::regex& pattern, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy, hash_function_t hash) {
 		for(FileIterator f = start; f != end; ++f) {
 			fs::path file = f->path();
 
@@ -86,7 +89,7 @@ namespace {
 			if (!regex_match(file.string(), pattern))
 				continue;
 
-			handle_file(white_list, dst, file, mime, keep_extension, keep_filename, keep_folder, copy, hash);
+			handle_file(white_list, src, dst, file, mime, keep_extension, keep_filename, keep_folder, copy, hash);
 		}
 	}
 
@@ -102,7 +105,8 @@ namespace {
 	
 		if (recursive)
 			handle_file_list(
-				white_list, 
+				white_list,
+				src, 
 				dst, 
 				fs::recursive_directory_iterator(src), 
 				fs::recursive_directory_iterator(), 
@@ -117,6 +121,7 @@ namespace {
 		else
 			handle_file_list(
 				white_list, 
+				src, 
 				dst,
 				fs::directory_iterator(src), 
 				fs::directory_iterator(), 
