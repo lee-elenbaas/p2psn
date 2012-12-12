@@ -27,7 +27,7 @@ namespace {
 	typedef void (*copy_function_t)(const fs::path&, const fs::path&);
 
 	void copy_file(const fs::path& src, const fs::path& dst) {
-		fs::copy_file(src, dst);
+	//	fs::copy_file(src, dst);
 	}
 	void hard_link_file(const fs::path& src, const fs::path& dst) {
 		fs::create_hard_link(src,dst);
