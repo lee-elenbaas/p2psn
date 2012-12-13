@@ -3,7 +3,7 @@
  *
  * providing easier to user API over the cryptografic tools cppcms provides
  */
- #include "crypto.hpp"
+#include "crypto.hpp"
 
 #include <stdexcept>
 #include <booster/backtrace.h>
