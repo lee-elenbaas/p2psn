@@ -87,6 +87,13 @@ build/config.js: src/node/config/config_base.js build/node/config/node_whitelist
 build/node/config/node_whitelist.js: run/white_list_files
 	echo $@ | sed "s/\/[^\/]*$$//" | xargs mkdir -p 
 	./run/white_list_files --target="$@" --src=src/node/static_files --dst=run/static_files --pattern=".*\\.css" --pattern-type=regex --mime="text/css" --keep-extension --copy-method=hard --recursive --hash-type=md5
+
+build/node/config/client_whitelist.js: run/white_list_files
+	echo $@ | sed "s/\/[^\/]*$$//" | xargs mkdir -p 
+	./run/white_list_files --target="$@" --src=src/client --dst=run/client --pattern=".*\\.html" --pattern-type=regex --mime="text/html" --keep-extension --keep-filename --keep-folders --copy-method=hard --recursive --hash-type=md5
+	./run/white_list_files --target="$@" --src=src/client --dst=run/client --pattern=".*\\.css" --pattern-type=regex --mime="text/css" --keep-extension --keep-filename --keep-folders --copy-method=hard --recursive --hash-type=md5 --append
+	./run/white_list_files --target="$@" --src=src/client --dst=run/client --pattern=".*\\.js" --pattern-type=regex --mime="text/javascript" --keep-extension --keep-filename --keep-folders --copy-method=hard --recursive --hash-type=md5 --append
+	./run/white_list_files --target="$@" --src=src/client --dst=run/client --pattern=".*\\.png" --pattern-type=regex --mime="image/png" --keep-extension --keep-filename --keep-folders --copy-method=hard --recursive --hash-type=md5 --append
 	
 #CppCMS skin
 #$(NODE_ADMIN_GENERATED):
