@@ -81,7 +81,7 @@ include build/dependancies_tmpl.mk
 include build/dependancies_cpp.mk
 
 #configuration
-build/config.js: src/node/config/config_base.js build/node/config/node_whitelist.js
+build/config.js: src/node/config/config_base.js build/node/config/node_whitelist.js build/node/config/client_whitelist.js
 	$(CPP) -E -x c -P -C $< -o $@
 	
 build/node/config/node_whitelist.js: run/white_list_files

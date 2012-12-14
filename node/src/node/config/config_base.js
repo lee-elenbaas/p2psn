@@ -7,7 +7,7 @@
 		"script" : "/node",
 		"rewrite" : [
 			{ "regex" : "/node(/.*)?", "pattern" : "$0" },
-			{ "regex" : "/client(/.*)?", "pattern", : "/node$0" },
+	//		{ "regex" : "/client(/.*)?", "pattern", : "/node$0" },
 			{ "regex" : "/media(/.*)?", "pattern" : "$0" },
 			{ "regex" : "/favicon\\.ico", "pattern" : "$0" },
 			{ "regex" : ".*", "pattern" : "/node" }
