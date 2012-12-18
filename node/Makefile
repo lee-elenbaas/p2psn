@@ -94,6 +94,7 @@ build/node/config/client_whitelist.js: run/white_list_files
 	./run/white_list_files --target="$@" --src=src/client --dst=run/client --pattern=".*\\.css" --pattern-type=regex --mime="text/css" --keep-extension --keep-filename --keep-folders --copy-method=hard --recursive --hash-type=md5 --append
 	./run/white_list_files --target="$@" --src=src/client --dst=run/client --pattern=".*\\.js" --pattern-type=regex --mime="text/javascript" --keep-extension --keep-filename --keep-folders --copy-method=hard --recursive --hash-type=md5 --append
 	./run/white_list_files --target="$@" --src=src/client --dst=run/client --pattern=".*\\.png" --pattern-type=regex --mime="image/png" --keep-extension --keep-filename --keep-folders --copy-method=hard --recursive --hash-type=md5 --append
+	./run/white_list_files --target="$@" --src=src/client --dst=run/client --pattern=".*\\.svg" --pattern-type=regex --mime="image/svg+xml" --keep-extension --keep-filename --keep-folders --copy-method=hard --recursive --hash-type=md5 --append
 	
 #CppCMS skin
 #$(NODE_ADMIN_GENERATED):
