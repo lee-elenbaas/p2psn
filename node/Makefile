@@ -84,10 +84,12 @@ include build/dependancies_cpp.mk
 build/config.js: src/node/config/config_base.js build/node/config/node_whitelist.js build/node/config/client_whitelist.js
 	$(CPP) -E -x c -P -C $< -o $@
 	
+#noded static files
 build/node/config/node_whitelist.js: run/white_list_files
 	echo $@ | sed "s/\/[^\/]*$$//" | xargs mkdir -p 
 	./run/white_list_files --target="$@" --src=src/node/static_files --dst=run/static_files --pattern=".*\\.css" --pattern-type=regex --mime="text/css" --keep-extension --copy-method=hard --recursive --hash-type=md5
 
+#client static files
 build/node/config/client_whitelist.js: run/white_list_files
 	echo $@ | sed "s/\/[^\/]*$$//" | xargs mkdir -p 
 	./run/white_list_files --target="$@" --src=src/client --dst=run/client --pattern=".*\\.html" --pattern-type=regex --mime="text/html" --keep-extension --keep-filename --keep-folders --copy-method=hard --recursive --hash-type=md5
@@ -96,11 +98,6 @@ build/node/config/client_whitelist.js: run/white_list_files
 	./run/white_list_files --target="$@" --src=src/client --dst=run/client --pattern=".*\\.png" --pattern-type=regex --mime="image/png" --keep-extension --keep-filename --keep-folders --copy-method=hard --recursive --hash-type=md5 --append
 	./run/white_list_files --target="$@" --src=src/client --dst=run/client --pattern=".*\\.svg" --pattern-type=regex --mime="image/svg+xml" --keep-extension --keep-filename --keep-folders --copy-method=hard --recursive --hash-type=md5 --append
 	
-#CppCMS skin
-#$(NODE_ADMIN_GENERATED):
-#	echo $@ | sed "s/\/[^\/]*$$//" | xargs mkdir -p 
-#	$(CPPCMS_TMPL_CC) $^ -o $@
-
 #Clean up	
 clean:
 	rm -fr run/* cppcms_rundir build/* docs/* src/generated/*
@@ -112,24 +109,5 @@ clean:
 	find . -type f -name "*.gch" | xargs rm -f
 
 # run the node deamon
-run: run/noded run/config.js statics
+run: run/noded run/config.js
 	./noded
-
-# static files
-statics: run/css/node.css
-
-run/css/node.css: src/node/static_files/css/node.css
-	mkdir -p run/css
-	cp src/node/static_files/css/node.css run/css
-
-# dependancies for templates
-#src/generated/noded_skin.cpp: \
-#	src/node/shared/master.tmpl \
-#	src/node/guest/login.tmpl \
-#	src/node/guest/info.tmpl \
-#	src/node/guest/about.tmpl \
-#	src/node/admin_menu/admin_menu.tmpl \
-#	src/node/admin_users/admin_users.tmpl \
-#	src/node/admin_server/admin_server.tmpl
-
-
