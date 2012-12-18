@@ -2,3 +2,14 @@ body {
 	background-color: green;
 }
 
+.users .existing {
+}
+.users .new {
+	font-weight: bolder;
+}
+.users .changed {
+	font-weight: bolder;
+}
+.users .deleted {
+	text-decoration: line-through;
+}
