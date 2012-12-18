@@ -77,9 +77,78 @@ At the same time each node is intended to run on a normal home PC with its limit
 
 ## Development Blog
 
+2012-12-11
+
+> I reinstalled my machine in order to get GCC 4.7 with some more C++11 support. I got it, but i have to redo all my other dependancies. And right now i am stuck with boost.
+> I tried to build it in the folder like i did before, and then point to that folder from the make file - did not work.
+> Now i tried to follow this guide (http://ubuntuforums.org/showthread.php?t=1180792) and get the necesary libraries installed into the system - did not work either.
+> I'll keep at it
+
+2012-12-01 2
+
+> After writing the ko part, i came to realize that i need to take a closer look at nodejs - and perhapse use it as the context for each client session processing.
+> I will think about this option later on, but it sure will solve all the JS api issues.
+
+2012-12-01
+
+> Working on this becomes slower as my main work becomes more demanding. Only this time the regular work got me to learn knockout.js. 
+> The main idea behind the views I had in mind is very similar to what ko has, have the object itself as a data model - and then have the correct view mapped to that object either at the client or at the server level. 
+> So why not marry the two and have my views use ko as default. The problem is that this generates dependancies for clients.
+
+> Right now the idea i have is like this:
+> - The object itself is stored and accessed as a json string.
+> - The client identification and session generate a js environment on the server that will be used to "prepare" the object to be sent to the client.
+> - Inside this client JS environemnt there is a separate object for each view that is used. (inherited views are used views and exists as JS objects to allow the JS inheritance to provide the means for the view inheritance.
+> - Each request from the client identifies an object, view and action: and basically translates to a function call inside JS like this: view.action(object)
+> - The result of this processing is passed over to the client.
+> - There will be helper objects (either passed over to the function call as arguments or exists inside the JS environemnt that will allow to perform allowed operations on the object (and other objects) as stored by the server. (fetching of other objects, creating a new version of the object, creating a new object...)
+
+> The downsides of this approache are:
+> - There are a lot of JS processing involved, and the time and resource cost of those calculations is unclear.
+> - How to support existing JS libraries inside the server is still unclear - but there is a natural requirment for that. (require.js for example)
+
+> The positive side (and why i think i will stick with this approach for the time being) is that this approach gives all the behaviors i wanted, at a fairly cheap price.
+> - Inheritance bitween views is automatically supported using the lookup model of JS objects (i set the parent view as the prototype of the inheriting view)
+> - Allows me to maintain a sandbox around each client session, to avoid both clients crushing each other.
+> - Allows me to provide a clear API for view writers tat performs all the necesary checks internally.
+> - Allows me to provide some very simple view implementations
+
+> Back to where i started, i see no reason to allow for ko to be run on the server, although i can see how it can be used as a rendering mechanism - and perhaps i should consider it as such later. But ko is too DOM dependant to be used on the server side, on the other hand, i see no reason not to provide some very simple view that can server a client using ko to update a ko model from a server object, and generate actions using an object coming from ko.
+
 2012-11-06
 
 > Yet another link i plan on using and following its rules: http://semver.org/
+
+2012-10-12
+
+> Its been a while since i wrote anything. In that time i managed to get the user management to update the users into the session correctly.
+> Then i went into the issue of serving static files in order to serve CSS file for the user management.
+> The next detour was to go into splitting the build into separate translation units and use incremental build to speed the build process. This led me to some enhancment to the cppcms template system, and enhancment i delivered to Artyum to be included into the next version of cppcms.
+> And now i am back into the issue of service static files, and generating an app that will serve static files using a white list, and a tool that will generate the whitelist for me.
+> I plan to run this tool as part of my build process.
+
+2012-09-11
+
+> In the last several days i managed to get the admin users to perform its actions in the session. 
+> (I still need to apply it and generate a new configuration from it.)
+> But what bothered me while doing this was the lack of CSS, for that i needed to be able to serve static files.
+> Serving a single css file was easy enough, but then came the need to serve others. and to keep the server from being exposed using the static files interface.
+> The solution i initially thought of was hash the requested path, and service from a single folder a file named by that hash. 
+> This solves the problem of visibility from the outside, while keeps all the html links readable. It presents 2 problems:
+
+> - The development files needs to be hashed at build time, and this represent some build dificulties (i started developing a utility to do that for me)
+> - The deployment will contain a folder that is very hard to understand and debug in case of need.
+
+> There is a third problem that comes from a different direction: the web client was supposed to work offline as well, 
+> this means that the html static files of the client needs to be able to use links between them. And hashing the client is not an option (unless we install 2 versions, one for server delivery and one for offline delivery)
+
+> So the approach i am considering now is that of a white list: in the build, place a white list of allowed static paths, each of those can then be hold more then just the allow status, it can also hold the mime type and where 
+> the file is physically located (and even if it should be served directly or using the web server send file capabilities).
+> And on top of it, the deployment will be easy enough. I think i will still hash the path in order to get a key to this whitelist, but the necesity of hashing is really gone for this issue.
+
+> This does raise a different issue: where will the whitelist be located. The obvious place is inside the config file. This makes it harder to build it, but not undoable. And i will still need a tool that will generate the whitelist for me, with the necesary set of rules for that.
+
+> This second utility also brings up another issue: I need to break down the build process, this is getting painfull.
 
 2012-08-30
 

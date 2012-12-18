@@ -1,3 +1,4 @@
-node
-node.exe
+run/*
+build/*
+src/generated/*
 

@@ -1,0 +1,99 @@
+<% c++ #include "../shared/master.hpp" %>
+<% c++ #include "../../../node/admin_users/admin_users_content.hpp" %>
+<% skin ptp2n_node_admin_skin %>
+<% view admin_users uses content::admin_users extends master %>
+
+<% template page_content() %>
+<% if (content.list_state == content::admin_users_list_state::view) %>
+	<% include new_user() %>
+<% else %>
+	<% include edit_user() %>
+<% end %>
+<% include existing_users() %>
+<% end template %>
+
+<% template new_user() %>
+<h2>New User</h2>
+<form method="post" action="<% url "/admin/users/new" %>">
+<% csrf %>
+<ul>
+<li>
+<b><label for="user_name_box">User Name</label></b> <% form block new_user.user_name %> id="user_name_box" <% end %>
+</li>
+<li>
+<b><label for="password_box">Password</label></b> <% form block new_user.user_password %> id="password_box" <% end %>
+</li>
+<li>
+<% form input new_user.submit %>
+</li>
+</ul>
+</form>
+<% end template %>
+
+<% template edit_user() %>
+<h2>Edit User</h2>
+<form method="post" action="<% url "/admin/users/update" %>">
+<% csrf %>
+<% form input edited_user.user_name %>
+<ul>
+<li>
+<b>User name</b> <span><%= edited_user.user_name.value() %></span>
+</li>
+<li>
+<b><label for="password_box">Password</label></b> <% form block edited_user.user_password %> id="password_box" <% end %>
+</li>
+<li>
+<% form input edited_user.submit %>
+</li>
+</ul>
+</form>
+<% end template %>
+
+<% template existing_users() %>
+<h2>Existing Users</h2>
+<table>
+	<thead>
+	<tr>
+		<th>Name</th>
+		<th>Password</th>
+		<th>&nbsp;</th>
+	</tr>
+	</thead>
+<% foreach user in existing_users %>
+	<tbody>
+		<% item %>
+			<tr class="<%= user.state_str() %>">
+				<td><%= user.name %></td>
+				<td><%= user.password %></td>
+				<td>
+					<% if (user.user_state != content::admin_user_state::edited_user) %>
+						<form method="post" action="<% url "/admin/users/edit" %>">
+							<% csrf %>
+							<input type="hidden" name="user_name" value="<%= user.name %>" />	
+							<input type="submit" value="Edit" />
+						</form>
+					<% end %>
+					<% if (user.user_state != content::admin_user_state::deleted_user) %>
+						<form method="post" action="<% url "/admin/users/delete" %>">
+							<% csrf %>
+							<input type="hidden" name="user_name" value="<%= user.name %>" />	
+							<input type="submit" value="Delete" />
+						</form>
+					<% else %>
+						<form method="post" action="<% url "/admin/users/restore" %>">
+							<% csrf %>
+							<input type="hidden" name="user_name" value="<%= user.name %>" />	
+							<input type="submit" value="Restore" />
+						</form>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+	<% end %>
+</table>
+<% end template %> 
+
+<% end view %>
+<% end skin %>
+
