@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Client concept</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/node_web_client.css" />
+		<script language="javascript" src="js/jquery-1.8.3.min.js"></script>
+		<script language="javascript">
+			jQuery(document).ready(
+				function () {
+					jQuery('#msg').hide();
+					jQuery('#logo').click(
+						function () {
+							jQuery('#msg').fadeIn('slow');
+						}
+					);
+				}
+			);
+		</script>
+	</head>
+	<body>
+		<h1>Client Concept</h1>
+		<p><img id="logo" src="images/logo-concept.svg" height="200" width="200" /></p>
+		<p id="msg">This is merely the concept to show mesh of people in a very similar way to the ubuntu logo.</p>
+	</body>
+</html>

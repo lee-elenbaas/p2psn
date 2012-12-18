@@ -7,6 +7,7 @@
 		"script" : "/node",
 		"rewrite" : [
 			{ "regex" : "/node(/.*)?", "pattern" : "$0" },
+	//		{ "regex" : "/client(/.*)?", "pattern", : "/node$0" },
 			{ "regex" : "/media(/.*)?", "pattern" : "$0" },
 			{ "regex" : "/favicon\\.ico", "pattern" : "$0" },
 			{ "regex" : ".*", "pattern" : "/node" }
@@ -34,6 +35,11 @@
 		}      
 	    },  
 	"config_noded" : {
+		"client" : {
+			"path" : "run/client",
+			"whitelist" :
+#include "../../../build/node/config/client_whitelist.js"
+		},
 		"static_files" : {
 			"path" : "run/static_files",
 			"whitelist" :

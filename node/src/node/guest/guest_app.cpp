@@ -16,6 +16,8 @@ using namespace p2psn::utils;
 guest_app::guest_app(cppcms::service &srv) 
     : base_app(srv) 
 {
+    attach(new whitelist_static_app(srv, settings().get<string>("config_noded.client.path"), settings().at("config_noded.client.whitelist"), hash_algorithm::md5), "client", "/client{1}", "/client(/(.*))?", 1);
+
     attach(new p2psn::api::node_api(srv), "api", "/api{1}", "/api(/(.*))?", 1);
     attach(new admin_menu_app(srv), "admin", "/admin{1}", "/admin(/(.*))?", 1);
     attach(new whitelist_static_app(srv, settings().get<string>("config_noded.static_files.path"), settings().at("config_noded.static_files.whitelist"), hash_algorithm::md5), "static", "/static{1}", "/static(/(.*))?", 1);

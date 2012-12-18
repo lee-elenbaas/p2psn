@@ -77,6 +77,17 @@ At the same time each node is intended to run on a normal home PC with its limit
 
 ## Development Blog
 
+2012-12-14
+
+> I managed in the last few days to get the compilation working dispite a few issues, and get further with the whitelist serving of static files.
+> Currently the status is that i have an App that generates the whitelist for a single mime at a time, and with no support for normal copy (only soft & hard links). But i have a prufe of concept for serving the static files i need both for the client and for the node config.
+
+> Another idea that came to my mind is to help separate the p2psn emails from the normal email, by allowing secondary emails to be defined as transport emails. Those emails should carry most of the p2psn conversations (with the exclusion of invitations) This way a normal p2psn user will not have his normal email polluted by messages he should have a program reading for him.
+> Non p2psn emails in the transport emails will have some basic filtering rules into them (since i do not expect people to ever go into the transport emails to read them - perhaps during p2psn view development, but no more then that):
+> - Discard all non p2psn emails
+> - Forward all non p2psn emails to the normal/master email
+> - Auto reply to non p2psn with a specified response
+
 2012-12-11
 
 > I reinstalled my machine in order to get GCC 4.7 with some more C++11 support. I got it, but i have to redo all my other dependancies. And right now i am stuck with boost.
