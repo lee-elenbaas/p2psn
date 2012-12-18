@@ -65,7 +65,7 @@
 			<tr class="<%= user.state_str() %>">
 				<td><%= user.name %></td>
 				<td><%= user.password %></td>
-				<td>
+				<td class="actions">
 					<% if (user.user_state != content::admin_user_state::edited_user) %>
 						<form method="post" action="<% url "/admin/users/edit" %>">
 							<% csrf %>
