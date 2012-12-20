@@ -2,6 +2,7 @@
 #define __P2PSN_ADMIN_APP_H
 
 #include "../admin_shared/admin_base_app.hpp"
+#include "admin_menu_content.hpp"
 
 namespace p2psn {
     namespace node_admin {

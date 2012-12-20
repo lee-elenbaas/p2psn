@@ -1,14 +1,19 @@
 <% c++ #include "../shared/master.hpp" %>
+<% c++ #include "../../../node/admin_menu/admin_menu_content.hpp" %>
 <% skin ptp2n_node_admin_skin %>
-<% view admin_menu uses content::master extends master %>
+<% view admin_menu uses content::admin_menu extends master %>
 
 <% template page_content() %>
 <ul>
-<li><a href="<% url "/admin/users" %>">Users</a> - manage admin users for the server.</li>
-<li><a href="<% url "/admin/server" %>">Server</a> - mange the server properties.</li>
+	<li><a href="<% url "/admin/users" %>">Users</a> - manage admin users for the server.</li>
+	<li><a href="<% url "/admin/server" %>">Server</a> - mange the server properties.</li>
 </ul>
+<% if has_new_settings %>
+	<ul>
+		<li class="apply"><a href="<% url "/admin/apply" %>">Apply</a> - apply the configuration changes</li>
+	</ul>
+<% end %>
 <% end template %> 
 
 <% end view %>
 <% end skin %>
-

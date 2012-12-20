@@ -35,10 +35,11 @@ admin_menu_app::admin_menu_app(cppcms::service &srv)
 
 void admin_menu_app::admin_menu()
 {
-    content::master c;
+    content::admin_menu c;
 
     init(c);
     c.title = "Admin";
+    c.has_new_settings = has_new_settings();
 
     render("admin_menu",c);
 }

@@ -12,70 +12,70 @@
 <% end template %>
 
 <% template menu() %>
-<div id="navigation">
-<ul>
-<li><a href="<% url "/info" %>"><% gt "Info" %></a></li>
-<li><a href="<% url "/about" %>"><% gt "About" %></a></li>
-<% if empty user_name %>
-<li><a href="<% url "/login" %>"><% gt "Login" %></a></li>
-<% else %>
-<li><a href="<% url "/admin" %>"><% gt "Admin" %></a></li>
-<li><a href="<% url "/logout" %>"><% gt "Logout" %></a></li>
-<% end %>
-</ul>
-</div>
+	<div id="navigation">
+		<ul>
+			<li><a href="<% url "/info" %>"><% gt "Info" %></a></li>
+			<li><a href="<% url "/about" %>"><% gt "About" %></a></li>
+			<% if empty user_name %>
+				<li><a href="<% url "/login" %>"><% gt "Login" %></a></li>
+			<% else %>
+			<li><a href="<% url "/admin" %>"><% gt "Admin" %></a></li>
+			<li><a href="<% url "/logout" %>"><% gt "Logout" %></a></li>
+		<% end %>
+		</ul>
+	</div>
 <% end template %>
 
 <% template messages() %>
-<% foreach msg in user_messages %>
-<div id="messages">
-<ul>
-<% item %>
-<li class="<%= msg.css_class %>"><%= msg.message_str %></li>
-<% end %>
-</ul>
-</div>
-<% end %>
+	<% foreach msg in user_messages %>
+		<div id="messages">
+			<ul>
+				<% item %>
+					<li class="<%= msg.css_class %>"><%= msg.message_str %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
 <% end template %>
 
 <% template identity() %>
-<p id="identity">
-<% if empty user_name %>
-<% gt "guest" %>
-<% else %>
-<% gt "Welcome" %> <%= user_name %>
-<% end %>
-</p>
+	<p id="identity">
+		<% if empty user_name %>
+			<% gt "guest" %>
+		<% else %>
+			<% gt "Welcome" %> <%= user_name %>
+		<% end %>
+	</p>
 <% end template %>
 
 <% template header() %>
 <!DOCTYPE html>
 <html>
-<head>
-	<title><% include title() %></title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" type="text/css" media="all" href="<% url "/static" %>/css/node.css" />
-</head>
-<% if rtl %>  
-<body dir="rtl">  
-<% else %>  
-<body>  
-<% end %>
-<% include menu() %>
-<% include identity() %>
-<h1><% include title() %></h1>
+	<head>
+		<title><% include title() %></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" media="all" href="<% url "/static" %>/css/node.css" />
+	</head>
+	<% if rtl %>  
+		<body dir="rtl">  
+	<% else %>  
+		<body>  
+	<% end %>
+		<% include menu() %>
+		<% include identity() %>
+		<h1><% include title() %></h1>
 <% end template %>
 
 <% template footer() %>
-<% include messages() %>
-</body>
+	<% include messages() %>
+	</body>
 </html>
 <% end template %>
 
 <% template render() %>
 <% include header() %>
 <div id="content">
-<% include page_content() %>
+	<% include page_content() %>
 </div>
 <% include footer() %>
 <% end template %> 
