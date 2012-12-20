@@ -13,6 +13,3 @@ body {
 .users .deleted {
 	text-decoration: line-through;
 }
-.users .deleted input {
-	text-decoration: none;
-}
