@@ -24,13 +24,8 @@ long_line_column=72
 
 [files]
 current_page=0
-FILE_NAME_0=1768;HTML;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fnode%2Fshared%2Fmaster.tmpl;0;4
-FILE_NAME_1=571;HTML;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fnode%2Fadmin_menu%2Fadmin_menu.tmpl;0;4
-FILE_NAME_2=136;C++;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fnode%2Fadmin_menu%2Fadmin_menu_app.hpp;0;4
-FILE_NAME_3=1086;C++;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fnode%2Fadmin_menu%2Fadmin_menu_app.cpp;0;4
-FILE_NAME_4=485;C++;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fnode%2Fadmin_menu%2Fadmin_menu_content.hpp;0;4
-FILE_NAME_5=1414;C++;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fnode%2Fshared%2Fbase_content.hpp;0;4
-FILE_NAME_6=919;C++;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fnode%2Fadmin_shared%2Fadmin_base_app.hpp;0;4
+FILE_NAME_0=1041;C++;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fnode%2Fadmin%2Fadmin_server_app.cpp;0;4
+FILE_NAME_1=505;C++;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fnode%2Fadmin%2Fadmin_server_content.hpp;0;4
 
 [VTE]
 last_dir=/home/lee/projects/p2psn/node
