@@ -40,7 +40,7 @@ namespace p2psn {
 
 			if (file_info.is_undefined()) {
 				DEBUG("Requested url not in white list");
-				response().status(404);
+				response().make_error_response(cppcms::http::response::not_found);
 				return;
 			}
 			
@@ -50,7 +50,7 @@ namespace p2psn {
 
 			if (!f) {
 				DEBUG("File not found in the folder");
-				response().status(404);
+				response().make_error_response(cppcms::http::response::not_found);
 				return;
 			}
 
