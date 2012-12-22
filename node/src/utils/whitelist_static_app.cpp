@@ -2,30 +2,31 @@
  * cppcms app for serving static files based on a whitelist
  */
 #include "whitelist_static_app.hpp"
-
+#include <cppcms/url_mapper.h>
+#include <cppcms/http_response.h>
 #include <fstream>
-#include "crypto.hpp"
+#include "log.hpp"
 
-using namespace p2psn::node_admin;
+using namespace p2psn;
 using namespace std;
 using namespace cppcms::json;
 using namespace p2psn::utils;
 namespace fs = boost::filesystem;
 
 namespace p2psn {
-	namespace node_admin {
+	namespace utils {
 
 		// since in gcc 4.7 construction delegation does not work - provide a work around
 //		whitelist_static_app::whitelist_static_app(cppcms::service &srv, const string& folder, const value& whitelist, hash_algorithm algo) 
 //			: whitelist_static_app(srv, folder, signature::hash_function(algo)) {}
 		whitelist_static_app::whitelist_static_app(cppcms::service &srv, const fs::path& folder, const value& whitelist, hash_algorithm algo) 
-			: base_app(srv), whitelist_(whitelist), hash_function_(signature::hash_function(algo)), folder_(folder)
+			: application(srv), whitelist_(whitelist), hash_function_(signature::hash_function(algo)), folder_(folder)
 		{
 			mapper().assign("");
 		}
 
 		whitelist_static_app::whitelist_static_app(cppcms::service &srv, const fs::path& folder, const value& whitelist, const hash_function_t hash_function) 
-			: base_app(srv), whitelist_(whitelist), hash_function_(hash_function), folder_(folder)
+			: application(srv), whitelist_(whitelist), hash_function_(hash_function), folder_(folder)
 		{
 			mapper().assign("");
 		}

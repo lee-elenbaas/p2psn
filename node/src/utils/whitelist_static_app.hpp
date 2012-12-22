@@ -4,18 +4,18 @@
 #ifndef __P2PSN_WHITELIST_STATIC_APP_H
 #define __P2PSN_WHITELIST_STATIC_APP_H
 
-#include "../node/shared/base_app.hpp"
-#include "../node/guest/guest_content.hpp"
-#include "../utils/crypto.hpp"
+#include <cppcms/application.h>
+#include <cppcms/service.h>
+#include "crypto.hpp"
 #include <boost/filesystem.hpp>
 
 namespace p2psn {
-	namespace node_admin {
+	namespace utils {
 
 		/**
 		 * CppCMS app for serving hash based static files, a different instance of this function should be used for every file type
 		 */
-		class whitelist_static_app : public base_app {
+		class whitelist_static_app : public cppcms::application {
 		public:
 		/**
 		 * Construct the app on the given cppcms service
@@ -40,7 +40,7 @@ namespace p2psn {
 		/**
 		 * The hash function used for matching the requests
 		 */
-		const p2psn::utils::hash_function_t hash_function_;
+		const hash_function_t hash_function_;
 
 		/**
 		 * The base folder to get the files from
