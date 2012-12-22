@@ -3,7 +3,7 @@
 #include <cppcms/url_dispatcher.h>
 
 #include "../node_api/node_api.hpp"
-#include "../admin_menu/admin_menu_app.hpp"
+#include "../admin/admin_menu_app.hpp"
 #include "../../utils/whitelist_static_app.hpp"
 #include "../../utils/locale_matching.hpp"
 #include "../../utils/crypto.hpp"

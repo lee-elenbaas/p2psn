@@ -6,7 +6,7 @@
 #ifndef __P2PSN_GUEST_CONTENT_H
 #define __P2PSN_GUEST_CONTENT_H
 
-#include "../shared/base_content.hpp"
+#include "base_content.hpp"
 
 namespace p2psn {
     namespace node_admin {
