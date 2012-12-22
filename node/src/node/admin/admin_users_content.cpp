@@ -35,6 +35,3 @@ edited_user_form::edited_user_form()
 
     user_password.non_empty();
 }
-
-// vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
-

@@ -241,6 +241,3 @@ void admin_users_app::restore_user()
 
     redirect_to_admin_users();
 }
-
-// vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
-

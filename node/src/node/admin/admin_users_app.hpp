@@ -71,6 +71,3 @@ namespace p2psn {
 } // namespace p2psn
 
 #endif // __P2PSN_ADMIN_USERS_APP_H
-
-// vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
-

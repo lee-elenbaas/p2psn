@@ -28,6 +28,7 @@ build/noded:	\
 		build/node/admin/admin_shared_content.o \
 		build/node/admin/admin_users_content.o \
 		build/node/admin/admin_server_app.o \
+		build/node/admin/admin_server_content.o \
 		build/node/node_api/node_api.o \
 		build/utils/crypto.o \
 		build/utils/locale_matching.o \
