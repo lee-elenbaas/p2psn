@@ -7,14 +7,10 @@
 <p>Server Connection</p>
 <form method="post" action="<% url "/admin/server/connection" %>">
 <% csrf %>
-<ul>
-<li>
+<p>
 <b><label for="port_box">Port</label></b> <% form block connection.port %> id="port_box" <% end %>
-</li>
-<li>
 <% form input connection.submit %>
-</li>
-</ul>
+</p>
 </form>
 <% end template %> 
 

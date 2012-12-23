@@ -16,4 +16,5 @@ connection_form::connection_form()
     add(submit);
 
     port.non_empty();
+    port.range(1024, 49151); // port.range(1, 49151); - possible ports
 }
