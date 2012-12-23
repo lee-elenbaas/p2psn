@@ -29,6 +29,8 @@ build/noded:	\
 		build/node/admin/admin_users_content.o \
 		build/node/admin/admin_server_app.o \
 		build/node/admin/admin_server_content.o \
+		build/node/admin/admin_apply_app.o \
+		build/node/admin/admin_apply_content.o \
 		build/node/node_api/node_api.o \
 		build/utils/crypto.o \
 		build/utils/locale_matching.o \
@@ -39,6 +41,7 @@ build/noded:	\
 		build/generated/node/guest/info.o \
 		build/generated/node/guest/login.o \
 		build/generated/node/admin/admin_menu.o \
+		build/generated/node/admin/admin_apply.o \
 		build/generated/node/admin/admin_server.o \
 		build/generated/node/admin/admin_users.o
 	$(CXX) $(OPTIONS) $^ -o $@ $(LIBS)

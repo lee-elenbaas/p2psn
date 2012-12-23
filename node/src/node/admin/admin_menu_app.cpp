@@ -3,6 +3,7 @@
 #include <cppcms/url_dispatcher.h>
 #include "admin_users_app.hpp"
 #include "admin_server_app.hpp"
+#include "admin_apply_app.hpp"
 
 using namespace p2psn::node_admin;
 using cppcms::json::value;
@@ -26,8 +27,9 @@ admin_menu_app::admin_menu_app(cppcms::service &srv)
     : admin_base_app(srv) 
 {
     attach(new admin_users_app(srv), "users", "/users{1}", "/users(/(.*))?", 1);
-
     attach(new admin_server_app(srv), "server", "/server{1}", "/server(/(.*))?", 1);
+    
+    attach(new admin_apply_app(srv), "apply", "/apply{1}", "/apply(/(.*))?", 1);
 
     dispatcher().assign("",&admin_menu_app::admin_menu,this);
     mapper().assign("");
@@ -43,6 +45,3 @@ void admin_menu_app::admin_menu()
 
     render("admin_menu",c);
 }
-
-// vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4
-

@@ -19,51 +19,35 @@ void admin_apply_app::apply()
 {
     content::admin_apply c;
 
-    c.new_settings = 
+    c.new_settings = new_settings();
     
-    admin_server_show(c);
+    admin_apply_show(c);
 }
 
-void admin_server_app::admin_server_show(content::admin_server& c) {
+void admin_apply_app::admin_apply_show(content::admin_apply& c) {
     init(c);
-    c.title = "Server Admin";
+    c.title = "Apply New Server Configuration";
 
-    render("admin_server",c);
+    render("admin_apply",c);
 }
 
-void admin_server_app::connection()
+void admin_apply_app::set()
 {
-    content::admin_server c;
+    content::admin_apply c;
 
     if (request().request_method() == "POST") {
-        c.connection.load(context());
+        c.apply.load(context());
 
-        if (c.connection.validate()) {
-			port(c.connection.port.value());
-			c.add_message("Port set", "confirmed");
+        if (c.apply.validate()) {
+			// TODO: apply the new settings
 
-            redirect_to_admin_server();
+            redirect_to_admin_apply();
         }
         else {
-			c.connection.port.error_message("Port must be a number in the range: 1024-49151");
-            admin_server_show(c);
+            admin_apply_show(c);
         }
     }
     else {
-        redirect_to_admin_server();
+        redirect_to_admin_apply();
     }
-}
-
-void admin_server_app::port(int p) {
-    auto s = new_settings();
-
-    s.set("service.port", p);
-
-    new_settings(s);
-}
-
-int admin_server_app::port() {
-    auto s = new_settings();
-    
-    return s.get<int>("service.port");
 }
