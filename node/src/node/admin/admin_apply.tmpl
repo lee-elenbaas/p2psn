@@ -1,0 +1,17 @@
+<% c++ #include "../guest/master.hpp" %>
+<% c++ #include "../../../node/admin/admin_apply_content.hpp" %>
+<% skin ptp2n_node_admin_skin %>
+<% view admin_server uses content::admin_apply extends master %>
+
+<% template page_content() %>
+<p>Apply new configuration</p>
+<form method="post" action="<% url "/admin/apply/set" %>">
+<% csrf %>
+<p>
+<% form input apply.submit %>
+</p>
+</form>
+<% end template %> 
+
+<% end view %>
+<% end skin %>
