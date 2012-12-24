@@ -91,7 +91,12 @@ build/config.js: src/node/config/config_base.js build/node/config/node_whitelist
 #noded static files
 build/node/config/node_whitelist.js: run/white_list_files
 	echo $@ | sed "s/\/[^\/]*$$//" | xargs mkdir -p 
-	./run/white_list_files --target="$@" --src=src/node/static_files --dst=run/static_files --pattern=".*\\.css" --pattern-type=regex --mime="text/css" --keep-extension --copy-method=hard --recursive --hash-type=md5
+	./run/white_list_files --target="$@" --src=src/node/static_files --dst=run/static_files --pattern=".*\\.html" --pattern-type=regex --mime="text/html" --keep-extension --copy-method=hard --recursive --hash-type=md5
+	./run/white_list_files --target="$@" --src=src/node/static_files --dst=run/static_files --pattern=".*\\.css" --pattern-type=regex --mime="text/css" --keep-extension --copy-method=hard --recursive --hash-type=md5 --append
+	./run/white_list_files --target="$@" --src=src/node/static_files --dst=run/static_files --pattern=".*\\.js" --pattern-type=regex --mime="text/javascript" --keep-extension --copy-method=hard --recursive --hash-type=md5 --append
+	./run/white_list_files --target="$@" --src=src/node/static_files --dst=run/static_files --pattern=".*\\.png" --pattern-type=regex --mime="image/png" --keep-extension --copy-method=hard --recursive --hash-type=md5 --append
+	./run/white_list_files --target="$@" --src=src/node/static_files --dst=run/static_files --pattern=".*\\.svg" --pattern-type=regex --mime="image/svg+xml" --keep-extension --copy-method=hard --recursive --hash-type=md5 --append
+	./run/white_list_files --target="$@" --src=src/node/static_files --dst=run/static_files --pattern=".*\\.ico" --pattern-type=regex --mime="image/vnd.microsoft.icon" --keep-extension --copy-method=hard --recursive --hash-type=md5 --append
 
 #client static files
 build/node/config/client_whitelist.js: run/white_list_files
@@ -101,6 +106,7 @@ build/node/config/client_whitelist.js: run/white_list_files
 	./run/white_list_files --target="$@" --src=src/client --dst=run/client --pattern=".*\\.js" --pattern-type=regex --mime="text/javascript" --keep-extension --keep-filename --keep-folders --copy-method=hard --recursive --hash-type=md5 --append
 	./run/white_list_files --target="$@" --src=src/client --dst=run/client --pattern=".*\\.png" --pattern-type=regex --mime="image/png" --keep-extension --keep-filename --keep-folders --copy-method=hard --recursive --hash-type=md5 --append
 	./run/white_list_files --target="$@" --src=src/client --dst=run/client --pattern=".*\\.svg" --pattern-type=regex --mime="image/svg+xml" --keep-extension --keep-filename --keep-folders --copy-method=hard --recursive --hash-type=md5 --append
+	./run/white_list_files --target="$@" --src=src/client --dst=run/client --pattern=".*\\.ico" --pattern-type=regex --mime="image/vnd.microsoft.icon" --keep-extension --keep-filename --keep-folders --copy-method=hard --recursive --hash-type=md5 --append
 	
 #Clean up	
 clean:
