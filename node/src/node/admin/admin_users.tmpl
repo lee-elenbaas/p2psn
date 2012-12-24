@@ -73,13 +73,14 @@
 							<input type="submit" value="Edit" />
 						</form>
 					<% end %>
-					<% if (user.user_state != content::admin_user_state::deleted_user) %>
+					<% if (content.allow_removal && (user.user_state != content::admin_user_state::deleted_user)) %>
 						<form method="post" action="<% url "/admin/users/delete" %>">
 							<% csrf %>
 							<input type="hidden" name="user_name" value="<%= user.name %>" />	
 							<input type="submit" value="Delete" />
 						</form>
-					<% else %>
+					<% end %>
+					<% if (user.user_state == content::admin_user_state::deleted_user) %>
 						<form method="post" action="<% url "/admin/users/restore" %>">
 							<% csrf %>
 							<input type="hidden" name="user_name" value="<%= user.name %>" />	

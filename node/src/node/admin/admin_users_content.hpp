@@ -36,6 +36,7 @@ namespace p2psn {
             struct admin_users : public master {
                 admin_users_list_state list_state;
                 std::vector<user> existing_users;
+                bool allow_removal;
                 
                 new_user_form new_user;
                 edited_user_form edited_user;
