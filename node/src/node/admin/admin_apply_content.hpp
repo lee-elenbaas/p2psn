@@ -9,6 +9,7 @@ namespace p2psn {
         namespace content  {
 
             struct apply_form : public cppcms::form {
+				cppcms::widgets::password apply_password;
                 cppcms::widgets::submit submit;
                 
                 apply_form();
