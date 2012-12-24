@@ -76,6 +76,12 @@ At the same time each node is intended to run on a normal home PC with its limit
 
 ## Development Blog
 
+2012-12-24
+
+> I managed to get back on the working track. The static file framework now works, although it has some bugs, i was able to leave it and get back to the admin website, and got it to be almost working.
+
+> In addition i gave some thoughts to how the communication between the clients and the server should be performed, and i came to the conclusion that the best will be UDP (if you combine udp with ip filtering you get an inpenetrable listening port, and this was one of the major points for p2psn - social networking locally without opening my computer to others.
+
 2012-12-14
 
 > I managed in the last few days to get the compilation working dispite a few issues, and get further with the whitelist serving of static files.
