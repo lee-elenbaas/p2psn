@@ -11,20 +11,12 @@
 namespace p2psn {
     namespace node_admin {
         namespace content  {
-
-            enum class admin_user_state {
-                existing_user,
-                new_user,
-                edited_user,
-                deleted_user
-            };
             
             struct user {
                 std::string name;
                 std::string password;
-                admin_user_state user_state;
-
-                std::string state_str() const;
+                bool is_admin;
+                bool is_manager;
             };
 
         } // namespace content
@@ -33,12 +25,6 @@ namespace p2psn {
 
 namespace cppcms {
     namespace json {
-
-        template<>
-        struct traits<p2psn::node_admin::content::admin_user_state> {
-            static p2psn::node_admin::content::admin_user_state get(const value&);
-            static void set(value&, const p2psn::node_admin::content::admin_user_state&);
-        };
 
         template<>
         struct traits<p2psn::node_admin::content::user> {

@@ -52,6 +52,13 @@ namespace p2psn {
             void admin_users(const std::vector<content::user>&);
             std::vector<content::user> admin_users();
 
+            void admin_users_states(const std::vector<content::admin_user_state>& states) {
+				session_set("admin_users_states", states);
+			}
+            std::vector<content::admin_user_state> admin_users_states() {
+				return session_get<std::vector<content::admin_user_state>>("admin_users_states");
+			}
+
             /**
              * show admin users page
              */

@@ -78,6 +78,8 @@ void admin_users_app::update_user()
             for (auto u : users) {
                 if (u.name == c.edited_user.user_name.value()) {
                     u.password = c.edited_user.user_password.value();
+                    u.is_admin = c.edited_user.is_admin.value();
+                    u.is_manager = c.edited_user.is_manager.value();
                     u.user_state = content::admin_user_state::new_user;
 
                     admin_users(users);
@@ -118,6 +120,8 @@ void admin_users_app::add_user()
 
             new_user.name = c.new_user.user_name.value();
             new_user.password = c.new_user.user_password.value();
+			u.is_admin = c.edited_user.is_admin.value();
+			u.is_manager = c.edited_user.is_manager.value();
             new_user.user_state = content::admin_user_state::new_user;
 
             users.push_back(new_user);
@@ -164,6 +168,8 @@ void admin_users_app::edit_user()
         for (auto u : users) {
             if (u.name == user_name) {
                 c.edited_user.user_name.value(u.name);
+                c.edited_user.is_admin.value(u.is_admin);
+                c.edited_user.is_manager.value(u.is_manager);
                 c.list_state = content::admin_users_list_state::editing;
 
                 user_found = true;

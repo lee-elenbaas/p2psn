@@ -51,8 +51,8 @@
 			"apply new settings" : false
 		},
 		"admin" : [
-			{ "user" : "admin", "password" : "admin", "is_admin" : true, "is_manager" : true, "state" : null },
-			{ "user" : "lior", "password" : "lior", "is_admin" : true, "is_manager" : true, "state" : null },
+			{ "user" : "admin", "password" : "admin", "is_admin" : true, "is_manager" : true },
+			{ "user" : "lior", "password" : "lior", "is_admin" : true, "is_manager" : true },
 		]
 	}
 }

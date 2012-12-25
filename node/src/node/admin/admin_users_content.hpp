@@ -12,24 +12,34 @@ namespace p2psn {
     namespace node_admin {
         namespace content  {
 
+			struct admin_user_state {
+				bool is_marked;
+				bool is_removed;
+				bool allow_removal;
+
+                std::string css_class() const;
+			};
+			
             enum class admin_users_list_state {
                 view,
                 editing
             };
 
-            struct new_user_form : public cppcms::form {
+            struct base_user_form : public cppcms::form {
                 cppcms::widgets::text user_name;
                 cppcms::widgets::password user_password;
+                cppcms::widgets::checkbox is_admin;
+                cppcms::widgets::checkbox is_manger;
                 cppcms::widgets::submit submit;
                 
+                base_user_form();
+            };
+
+            struct new_user_form : public base_user_form {
                 new_user_form();
             };
 
-            struct edited_user_form : public cppcms::form {
-                cppcms::widgets::hidden user_name;
-                cppcms::widgets::password user_password;
-                cppcms::widgets::submit submit;
-                
+            struct edited_user_form : public base_user_form {
                 edited_user_form();
             };
 
@@ -45,5 +55,17 @@ namespace p2psn {
         } // namespace content
     } // namespace node_admin
 } // namespace p2psn
+
+namespace cppcms {
+    namespace json {
+
+        template<>
+        struct traits<p2psn::node_admin::content::admin_user_state> {
+            static p2psn::node_admin::content::admin_user_state get(const value&);
+            static void set(value&, const p2psn::node_admin::content::admin_user_state&);
+        };
+
+    } // namespace json
+} // namespace cppcms
 
 #endif // __P2PSN_ADMIN_USERS_CONTENT_H
