@@ -76,6 +76,10 @@ At the same time each node is intended to run on a normal home PC with its limit
 
 ## Development Blog
 
+2012-12-25
+
+> Last night occured to me that i will have 2 user rights: system admin & node managers. Node managers will be able to define and manage profiles, while system admin will manage the configuration. This will leave the option of a user with no rights - this user will only be able to view the logs.
+
 2012-12-24
 
 > I managed to get back on the working track. The static file framework now works, although it has some bugs, i was able to leave it and get back to the admin website, and got it to be almost working.
