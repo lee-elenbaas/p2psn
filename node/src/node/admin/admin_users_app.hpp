@@ -5,6 +5,7 @@
 #include "admin_users_content.hpp"
 
 #include <vector>
+#include <map>
 
 namespace p2psn {
     namespace node_admin {
@@ -52,11 +53,11 @@ namespace p2psn {
             void admin_users(const std::vector<content::user>&);
             std::vector<content::user> admin_users();
 
-            void admin_users_states(const std::vector<content::admin_user_state>& states) {
+            void admin_users_states(const content::admin_users_states_t& states) {
 				session_set("admin_users_states", states);
 			}
-            std::vector<content::admin_user_state> admin_users_states() {
-				return session_get<std::vector<content::admin_user_state>>("admin_users_states");
+            content::admin_users_states_t admin_users_states() {
+				return session_get<content::admin_users_states_t>("admin_users_states");
 			}
 
             /**

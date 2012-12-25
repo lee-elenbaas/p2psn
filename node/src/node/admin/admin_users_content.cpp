@@ -7,18 +7,15 @@ using namespace cppcms::json;
 
 base_user_form::base_user_form() 
 {
-    user_name.message("User name");
     user_password.message("Password");
     is_admin.message("Administrator");
     is_manager.message("Manager");
         
-    add(user_name);
     add(user_password);
     add(submit);
     add(is_admin);
     add(is_manager);
 
-    user_name.non_empty();
     user_password.non_empty();
 }
 
@@ -27,7 +24,12 @@ base_user_form::base_user_form()
  */
 new_user_form::new_user_form() 
 {
+    user_name.message("User name");
+    user_name.non_empty();
+
     submit.value("Add");
+
+    add(user_name);
 }
 
 /**
@@ -36,6 +38,7 @@ new_user_form::new_user_form()
 edited_user_form::edited_user_form() 
 {
     submit.value("Update");
+    add(user_name);
 }
 
 template<>

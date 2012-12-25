@@ -7,6 +7,7 @@
 #define __P2PSN_ADMIN_USERS_CONTENT_H
 
 #include "admin_shared_content.hpp"
+#include <map>
 
 namespace p2psn {
     namespace node_admin {
@@ -19,6 +20,8 @@ namespace p2psn {
 
                 std::string css_class() const;
 			};
+
+			typedef std::map<std::string, admin_user_state> admin_users_states_t;
 			
             enum class admin_users_list_state {
                 view,
@@ -26,7 +29,6 @@ namespace p2psn {
             };
 
             struct base_user_form : public cppcms::form {
-                cppcms::widgets::text user_name;
                 cppcms::widgets::password user_password;
                 cppcms::widgets::checkbox is_admin;
                 cppcms::widgets::checkbox is_manger;
@@ -36,17 +38,20 @@ namespace p2psn {
             };
 
             struct new_user_form : public base_user_form {
+                cppcms::widgets::text user_name;
+
                 new_user_form();
             };
 
             struct edited_user_form : public base_user_form {
+                cppcms::widgets::hidden user_name;
+
                 edited_user_form();
             };
 
             struct admin_users : public master {
                 admin_users_list_state list_state;
                 std::vector<user> existing_users;
-                bool allow_removal;
                 
                 new_user_form new_user;
                 edited_user_form edited_user;
