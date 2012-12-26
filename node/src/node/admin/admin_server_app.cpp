@@ -45,7 +45,7 @@ void admin_server_app::connection()
             redirect_to_admin_server();
         }
         else {
-			c.connection.port.error_message("Port must be a number in the range: 1024-49151");
+			c.connection.port.error_message("Port must be a number in the range: 1-49151");
             admin_server_show(c);
         }
     }

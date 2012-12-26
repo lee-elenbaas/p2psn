@@ -46,9 +46,13 @@ vector<content::user> admin_users_app::admin_users() {
 
 void admin_users_app::admin_users_show(content::admin_users& c) {
     init(c);
+    
     c.title = "Admin Users";
-    c.allow_removal = 1 < count_if(begin(c.existing_users), end(c.existing_users), [](content::user u) { return (u.user_state != content::admin_user_state::deleted_user); });
 
+	for(auto user : c.users) {
+		content::admin_users_states // TODO: generate state object for every user that does not have a state
+	}
+	
     render("admin_users",c);
 }
 
@@ -57,7 +61,7 @@ void admin_users_app::list_users()
     content::admin_users c;
 
     c.list_state = content::admin_users_list_state::view;
-    c.existing_users = admin_users();
+    c.users = admin_users();
 
     admin_users_show(c);
 }
@@ -96,7 +100,7 @@ void admin_users_app::update_user()
             redirect_to_admin_users();
         }
         else {
-            c.existing_users = users;
+            c.users = users;
             admin_users_show(c);
         }
     }
@@ -134,7 +138,7 @@ void admin_users_app::add_user()
         }
     }
 
-    c.existing_users = users;
+    c.users = users;
     admin_users_show(c);
 }
 
@@ -179,7 +183,7 @@ void admin_users_app::edit_user()
     }
 
     if (user_found) {
-        c.existing_users = users;
+        c.users = users;
         admin_users_show(c);
     }
     else {

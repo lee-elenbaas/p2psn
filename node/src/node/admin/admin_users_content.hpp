@@ -14,11 +14,11 @@ namespace p2psn {
         namespace content  {
 
 			struct admin_user_state {
-				bool is_marked;
-				bool is_removed;
-				bool allow_removal;
+				bool allow_edit;
+				bool allow_delete;
+				bool allow_restore;
 
-                std::string css_class() const;
+                std::string css_class;
 			};
 
 			typedef std::map<std::string, admin_user_state> admin_users_states_t;
@@ -51,7 +51,8 @@ namespace p2psn {
 
             struct admin_users : public master {
                 admin_users_list_state list_state;
-                std::vector<user> existing_users;
+                std::vector<user> users;
+                admin_users_states_t user_states;
                 
                 new_user_form new_user;
                 edited_user_form edited_user;

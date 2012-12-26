@@ -57,7 +57,10 @@ namespace p2psn {
 				session_set("admin_users_states", states);
 			}
             content::admin_users_states_t admin_users_states() {
-				return session_get<content::admin_users_states_t>("admin_users_states");
+				if (session().is_set("admin_users_states"))
+					return session_get<content::admin_users_states_t>("admin_users_states");
+					
+				return content::admin_users_states_t();
 			}
 
             /**

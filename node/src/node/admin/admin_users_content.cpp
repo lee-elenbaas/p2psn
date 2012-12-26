@@ -43,12 +43,18 @@ edited_user_form::edited_user_form()
 
 template<>
 admin_user_state traits<admin_user_state>::get(const value& v) {
-	s.is_changed = v.get<bool>("is_changed");
-	s.is_removed = v.get<bool>("is_removed");
+	s.allow_edit = v.get<bool>("allow_edit");
+	s.allow_delete = v.get<bool>("allow_delete");
+	s.allow_restore = v.get<bool>("allow_restore");
+	
+	s.css_class = v.get<string>("css_class");
 }
 
 template<>
 void traits<admin_user_state>set(value& v, const admin_user_state& s) {
-	v.set("is_changed", s.is_changed);
-	v.set("is_removed", s.is_removed);
+	v.set("allow_edit", s.allow_edit);
+	v.set("allow_delete", s.allow_delete);
+	v.set("allow_restore", s.allow_restore);
+
+	v.set("css_class", s.css_class);
 }

@@ -18,6 +18,7 @@ namespace p2psn {
             struct admin_apply : public master {
                 apply_form apply;
                 
+                bool is_valid;
                 cppcms::json::value new_settings;
             };
 

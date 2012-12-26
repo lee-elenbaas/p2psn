@@ -27,6 +27,11 @@ namespace p2psn {
             void redirect_to_admin_apply() { response_redirect("/node/admin/apply"); }
             
             void admin_apply_show(content::admin_apply&);
+            
+            /**
+             * Validate the given settings - and place all the error and warning messages into the user messages
+             */
+            bool validate_settings(const cppcms::json::value&);
         };
 
     } // namespace node_admin
