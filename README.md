@@ -9,10 +9,12 @@ There are several things that bother me with current social networks, the main i
 - Anyone can place data anonymousely, escaping responsibility for the results of the publication.
 - The company hosting the social network also does not accept responsibility on the data.
 - All the data is maintained in one central place providing one central point of failore for security, and ethical misuse of this information. It also adds in the accumulation of data from different sources and deducting things on the users without them knowing about it.
+- Hosting a sharing solution on my own will expose my computer to attacks and increase the legitimate workload on the computer.
 
 The solution is to design a social network where the "master" copy of each object resides with the user who created this object, allowing the user to control it. This leads to a peer 2 peer design of social network where each node provides the necesary services for its profiles to socialize with profiles on other nodes.
+Each user profile sync its visible content based on the author rights with all linked profiles in the background - and provide for the user access to the latest data according to his rights.
 
-This project is currently centrelized on building a node implementation that can be the building block of such a peer to peer network. A web interface for this node that will allow performing operations in the network. And at the same time finalizing an API that will enable such a network to exists indipendently of the specific node implementation, or client application.
+This project is currently centrelized on building a node implementation that can be the building block of such a peer to peer network. A web interface for this node that will allow performing operations in the network. And at the same time finalizing an API that will enable such a network to exists independantly of the specific node implementation, or client application.
 
 ## Network Design
 
@@ -22,14 +24,18 @@ Each node will allow clients to authenticate to a profile, and serve those clien
 
 ## Node Design
 
-The node will contain a cyrarchy of CppCMS web applications:
+The node will contain a hierarchy of CppCMS web applications:
 
 main - The main node app will simply provide links to the apps below it, and display some configuration information needed to configure clients to connect to the node.
  +-- api - The node json-rpc server that will expose the entire functionality to other nodes and client applications.
- +-- web_client - The web client interface implementation that will give some basic user interface to operate inside the network.
- +-- config - Web app that allows to configure the node itself, and to enable/disable the web interface
+ +-- client - The web client interface implementation that will give some basic user interface to operate inside the network.
+ +-- admin - Web app that allows to configure the node itself, and to enable/disable the web interface
 
-The the web-client application will communicate with the node web application using json-rpc - either from the server, or from the js on the client side.
+The the client application will simply be a set of static files served by the CppCMS installation. Those static files will provide all the necesary HTML+js code to communicate with the node using json-rpc or http-REST api.
+
+Aside from the node UI this application will contain the necesary background tasks to services the profiles defined in this node. 
+Communication between the nodes inside the network will be done in two forms: Offline & Online
+
 The api node implementation will use email as the platform for offline communication between nodes, and json-rpc for online communication between nodes and node to clients.
 
 ## Web Client
