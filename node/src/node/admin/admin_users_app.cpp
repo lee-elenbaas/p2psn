@@ -49,10 +49,6 @@ void admin_users_app::admin_users_show(content::admin_users& c) {
     
     c.title = "Admin Users";
 
-	for(auto user : c.users) {
-		content::admin_users_states // TODO: generate state object for every user that does not have a state
-	}
-	
     render("admin_users",c);
 }
 
@@ -60,8 +56,20 @@ void admin_users_app::list_users()
 {
     content::admin_users c;
 
+	// make sure a state exists for every user
+	auto states = admin_users_states();
+	
+	for(auto user : c.users) {
+		auto state = states[user.name];
+		
+		// nothing to do - since default constructor does all the work by calling the [] operator
+	}
+	
+	admin_users_states(states);
+
     c.list_state = content::admin_users_list_state::view;
     c.users = admin_users();
+    c.user_states = states;
 
     admin_users_show(c);
 }
@@ -97,6 +105,7 @@ void admin_users_app::update_user()
             if (!user_found)
                 c.add_message("user not found", "error");
             
+            admin_users_states()
             redirect_to_admin_users();
         }
         else {

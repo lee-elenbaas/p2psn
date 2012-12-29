@@ -19,6 +19,10 @@ namespace p2psn {
 				bool allow_restore;
 
                 std::string css_class;
+                
+                admin_user_state() 
+					: allow_edit(true), allow_delete(true), allow_restore(false), css_class("existing")
+                { }
 			};
 
 			typedef std::map<std::string, admin_user_state> admin_users_states_t;
