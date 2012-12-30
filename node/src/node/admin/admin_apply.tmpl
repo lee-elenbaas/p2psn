@@ -8,7 +8,7 @@
 <form method="post" action="<% url "/admin/apply/set" %>">
 <% csrf %>
 <p>
-<b><label for="apply_password">Password:</label></b> <% form lock apply.apply_password %> id="apply_password" <% end %>
+<b><label for="apply_password">Password:</label></b> <% form block apply.apply_password %> id="apply_password" <% end %>
 <% form input apply.submit %>
 </p>
 </form>

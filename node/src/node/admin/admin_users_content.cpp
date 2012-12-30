@@ -41,17 +41,19 @@ edited_user_form::edited_user_form()
     add(user_name);
 }
 
-template<>
-admin_user_state traits<admin_user_state>::get(const value& v) {
+admin_user_state cppcms::json::traits<admin_user_state>::get(const value& v) {
+	admin_user_state s;
+	
 	s.allow_edit = v.get<bool>("allow_edit");
 	s.allow_delete = v.get<bool>("allow_delete");
 	s.allow_restore = v.get<bool>("allow_restore");
 	
 	s.css_class = v.get<string>("css_class");
+	
+	return s;
 }
 
-template<>
-void traits<admin_user_state>set(value& v, const admin_user_state& s) {
+void cppcms::json::traits<admin_user_state>::set(value& v, const admin_user_state& s) {
 	v.set("allow_edit", s.allow_edit);
 	v.set("allow_delete", s.allow_delete);
 	v.set("allow_restore", s.allow_restore);

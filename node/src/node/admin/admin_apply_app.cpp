@@ -38,7 +38,7 @@ bool admin_apply_app::validate_settings(const value& settings) {
 
 		if (user.get<string>("user") == "admin")
 			add_message("Default admin user was not removed.", "warning");
-        if ((user.get<bool>("is_admin") && user.get<bool>("is_manager"))
+        if (user.get<bool>("is_admin") && user.get<bool>("is_manager"))
 			add_message("User "+user.get<string>("user")+" has no rights.", "warning");
     }
     

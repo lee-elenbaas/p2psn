@@ -35,7 +35,7 @@ namespace p2psn {
             struct base_user_form : public cppcms::form {
                 cppcms::widgets::password user_password;
                 cppcms::widgets::checkbox is_admin;
-                cppcms::widgets::checkbox is_manger;
+                cppcms::widgets::checkbox is_manager;
                 cppcms::widgets::submit submit;
                 
                 base_user_form();
@@ -74,6 +74,23 @@ namespace cppcms {
             static p2psn::node_admin::content::admin_user_state get(const value&);
             static void set(value&, const p2psn::node_admin::content::admin_user_state&);
         };
+        
+        template<typename V>
+        struct traits<std::map<std::string,V>> {
+			static std::map<std::string,V> get(const value& val) {
+				std::map<std::string,V> m;
+				
+				for(auto p : val.object())
+					m[p.first]=traits<V>::get(p.second);
+				
+				return m;
+			}
+			static void set(value& v, const std::map<std::string,V> m) {
+				for(auto p : m) {
+					v.set(p.first, p.second);
+				}
+			}
+		};
 
     } // namespace json
 } // namespace cppcms

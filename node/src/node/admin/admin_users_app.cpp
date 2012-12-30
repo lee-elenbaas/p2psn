@@ -80,6 +80,7 @@ void admin_users_app::update_user()
 
     c.list_state = content::admin_users_list_state::view;
     auto users = admin_users();
+    auto states = admin_users_states();
 
     if (request().request_method() == "POST") {
         c.edited_user.load(context());
@@ -89,27 +90,35 @@ void admin_users_app::update_user()
 
             for (auto u : users) {
                 if (u.name == c.edited_user.user_name.value()) {
-                    u.password = c.edited_user.user_password.value();
-                    u.is_admin = c.edited_user.is_admin.value();
-                    u.is_manager = c.edited_user.is_manager.value();
-                    u.user_state = content::admin_user_state::new_user;
+					u.password = c.edited_user.user_password.value();
+					u.is_admin = c.edited_user.is_admin.value();
+					u.is_manager = c.edited_user.is_manager.value();
 
-                    admin_users(users);
+					auto state = states[u.name];
+					state.css_class = "existing_user";
+					state.allow_edit = true;
+					state.allow_delete = true;
+					state.allow_restore = false;
 
-                    c.add_message("user updated", "confirm");
+					admin_users(users);
+					admin_users_states(states);
+
+					c.add_message("user updated", "confirm");
+					redirect_to_admin_users();
+
                     user_found = true;
                     break;
                 }
             }
 
-            if (!user_found)
+            if (!user_found) {
                 c.add_message("user not found", "error");
-            
-            admin_users_states()
-            redirect_to_admin_users();
+				redirect_to_admin_users();
+            }
         }
         else {
             c.users = users;
+            c.user_states = states;
             admin_users_show(c);
         }
     }
@@ -124,6 +133,7 @@ void admin_users_app::add_user()
 
     c.list_state = content::admin_users_list_state::view;
     auto users = admin_users();
+    auto states = admin_users_states();
 
     if (request().request_method() == "POST") {
         c.new_user.load(context());
@@ -133,13 +143,17 @@ void admin_users_app::add_user()
 
             new_user.name = c.new_user.user_name.value();
             new_user.password = c.new_user.user_password.value();
-			u.is_admin = c.edited_user.is_admin.value();
-			u.is_manager = c.edited_user.is_manager.value();
-            new_user.user_state = content::admin_user_state::new_user;
+			new_user.is_admin = c.edited_user.is_admin.value();
+			new_user.is_manager = c.edited_user.is_manager.value();
 
             users.push_back(new_user);
 
+			auto state = states[new_user.name];
+			
+			state.css_class = "new_user";
+			
             admin_users(users);
+            admin_users_states(states);
                     
             c.add_message("user added", "confirm");
             
@@ -148,6 +162,7 @@ void admin_users_app::add_user()
     }
 
     c.users = users;
+    c.user_states = states;
     admin_users_show(c);
 }
 
@@ -169,6 +184,8 @@ bool admin_users_app::avaliable_user(content::new_user_form& new_user, const std
 void admin_users_app::edit_user()
 {
     auto users = admin_users();
+    auto states = admin_users_states();
+
     content::admin_users c;
 
     c.list_state = content::admin_users_list_state::view;
@@ -183,7 +200,13 @@ void admin_users_app::edit_user()
                 c.edited_user.user_name.value(u.name);
                 c.edited_user.is_admin.value(u.is_admin);
                 c.edited_user.is_manager.value(u.is_manager);
-                c.list_state = content::admin_users_list_state::editing;
+
+				auto state = states[u.name];
+			
+				state.css_class = "editing_user";
+				state.allow_edit = false;
+				state.allow_delete = false;
+				state.allow_restore = false;
 
                 user_found = true;
                 break;
@@ -193,6 +216,7 @@ void admin_users_app::edit_user()
 
     if (user_found) {
         c.users = users;
+        c.user_states = states;
         admin_users_show(c);
     }
     else {
@@ -204,6 +228,7 @@ void admin_users_app::edit_user()
 void admin_users_app::delete_user()
 {
     auto users = admin_users();
+    auto states = admin_users_states();
 
     bool user_found = false;
 
@@ -212,9 +237,15 @@ void admin_users_app::delete_user()
         
         for (content::user& u : users) {
             if (u.name == user_name) {
-                u.user_state = content::admin_user_state::deleted_user;
+				auto state = states[u.name];
+				
+                state.css_class = "deleted_user";
+                state.allow_edit = false;
+                state.allow_delete = false;
+                state.allow_restore = true;
         
                 admin_users(users);
+                admin_users_states(states);
 
                 add_message("user deleted", "confirm");
                 user_found = true;
@@ -232,6 +263,7 @@ void admin_users_app::delete_user()
 void admin_users_app::restore_user()
 {
     auto users = admin_users();
+    auto states = admin_users_states();
 
     bool user_found = false;
 
@@ -240,16 +272,17 @@ void admin_users_app::restore_user()
         
         for (content::user& u : users) {
             if (u.name == user_name) {
-                if (u.user_state == content::admin_user_state::deleted_user) {
-                    u.user_state = content::admin_user_state::new_user;
+				auto state = states[u.name];
+				
+				state.allow_edit = true;
+				state.allow_delete = true;
+				state.allow_restore = false;
+				state.css_class = "changed_user";
 
-                    admin_users(users);
-                
-                    add_message("user restored", "confirm");
-                }
-                else {
-                    add_message("user already active", "error");
-                }
+				admin_users(users);
+				admin_users_states(states);
+			
+				add_message("user restored", "confirm");
 
                 user_found = true;
                 break;

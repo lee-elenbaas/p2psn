@@ -9,7 +9,7 @@
 <% else %>
 	<% include edit_user() %>
 <% end %>
-<% include existing_users() %>
+<% include users_list() %>
 <% end template %>
 
 <% template new_user() %>
@@ -61,7 +61,7 @@
 </form>
 <% end template %>
 
-<% template existing_users() %>
+<% template users_list() %>
 <h2>Existing Users</h2>
 <table class="users">
 	<thead>
@@ -71,12 +71,10 @@
 		<th>&nbsp;</th>
 	</tr>
 	</thead>
-<% foreach user in existing_users %>
+<% foreach user in users %>
 	<tbody>
 		<% item %>
-			<% c++ 
-				auto user_state = content.user_states[user.name]; 
-			%>
+			<% c++ auto user_state = content.user_states[user.name]; %>
 			<tr>
 				<td class="<%= user_state.css_class %>"><%= user.name %></td>
 				<td class="<%= user_state.css_class %>"><%= user.password %></td>
