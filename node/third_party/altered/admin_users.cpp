@@ -3,7 +3,10 @@
 #line 3 "src/node/admin/admin_users.tmpl"
 namespace ptp2n_node_admin_skin {
 	#line 6 "src/node/admin/admin_users.tmpl"
-	void admin_users::page_content() {
+	
+	namespace {
+		struct : public content::admin_users {
+	void admin_users__page_content() {
 		#line 7 "src/node/admin/admin_users.tmpl"
 		out()<<"\n"
 				"";
@@ -40,7 +43,7 @@ namespace ptp2n_node_admin_skin {
 	#line 13 "src/node/admin/admin_users.tmpl"
 	} // end of template page_content
 	#line 15 "src/node/admin/admin_users.tmpl"
-	void admin_users::new_user() {
+	void admin_users__new_user() {
 		#line 17 "src/node/admin/admin_users.tmpl"
 		out()<<"\n"
 				"<h2>New User</h2>\n"
@@ -164,7 +167,7 @@ namespace ptp2n_node_admin_skin {
 	#line 37 "src/node/admin/admin_users.tmpl"
 	} // end of template new_user
 	#line 39 "src/node/admin/admin_users.tmpl"
-	void admin_users::edit_user() {
+	void admin_users__edit_user() {
 		#line 41 "src/node/admin/admin_users.tmpl"
 		out()<<"\n"
 				"<h2>Edit User</h2>\n"
@@ -289,7 +292,7 @@ namespace ptp2n_node_admin_skin {
 	#line 62 "src/node/admin/admin_users.tmpl"
 	} // end of template edit_user
 	#line 64 "src/node/admin/admin_users.tmpl"
-	void admin_users::users_list() {
+	void admin_users__users_list() {
 		#line 74 "src/node/admin/admin_users.tmpl"
 		out()<<"\n"
 				"<h2>Existing Users</h2>\n"
@@ -437,6 +440,10 @@ namespace ptp2n_node_admin_skin {
 				"";
 	#line 109 "src/node/admin/admin_users.tmpl"
 	} // end of template users_list
+		};
+	}
+	
+	//TODO: make the calls - the problem is naming - to make only one masking name - and passing parameters to the functions
 #line 112 "src/node/admin/admin_users.tmpl"
 } // end of namespace ptp2n_node_admin_skin
 #line 114 "src/node/admin/admin_users.tmpl"
