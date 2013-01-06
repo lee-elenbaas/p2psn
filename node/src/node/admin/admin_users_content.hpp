@@ -57,6 +57,7 @@ namespace p2psn {
                 admin_users_list_state list_state;
                 std::vector<user> users;
                 admin_users_states_t user_states;
+                admin_user_state cur_user_state;
                 
                 new_user_form new_user;
                 edited_user_form edited_user;

@@ -54,6 +54,7 @@ admin_user_state cppcms::json::traits<admin_user_state>::get(const value& v) {
 }
 
 void cppcms::json::traits<admin_user_state>::set(value& v, const admin_user_state& s) {
+	SDEBUG("!!!!!!!!!!!!!!!!!! Storing state info");
 	v.set("allow_edit", s.allow_edit);
 	v.set("allow_delete", s.allow_delete);
 	v.set("allow_restore", s.allow_restore);

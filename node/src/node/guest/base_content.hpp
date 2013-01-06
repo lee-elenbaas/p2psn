@@ -6,6 +6,7 @@
 #ifndef __P2PSN_BASE_CONTENT_H
 #define __P2PSN_BASE_CONTENT_H
 
+#include "../../utils/log.hpp"
 #include <cppcms/view.h>
 #include <cppcms/form.h>
 #include <cppcms/json.h>

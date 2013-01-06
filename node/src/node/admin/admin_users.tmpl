@@ -75,9 +75,10 @@
 	<tbody>
 		<% item %>
 			<% c++ auto user_state = content.user_states[user.name]; %>
+			<% c++ cur_user_state =  user_state; %>
 			<tr>
-				<td class="<%= user_state.css_class %>"><%= user.name %></td>
-				<td class="<%= user_state.css_class %>"><%= user.password %></td>
+				<td class="<%= cur_user_state.css_class %>"><%= user.name %></td>
+				<td class="<%= cur_user_state.css_class %>"><%= user.password %></td>
 				<td class="actions">
 					<% if (user_state.allow_edit) %>
 						<form method="post" action="<% url "/admin/users/edit" %>">
