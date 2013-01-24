@@ -2,7 +2,7 @@ LIBS=-lcppcms -lbooster -lboost_filesystem -lboost_system
 OPTIONS=-O0 -std=c++11 -Wall -Wextra -g3 -rdynamic
 
 NODE_ADMIN_GENERATED=src/generated/noded_skin.cpp
-CPPCMS_TMPL_CC=third_party/cppcms/bin/cppcms_tmpl_cc
+CPPCMS_TMPL_CC=cppcms_tmpl_cc
 
 all: run
 

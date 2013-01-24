@@ -39,10 +39,13 @@ namespace p2psn {
 		template<typename T>
 		struct serialization {
 			static std::string serialize(const T& o) {
-				cppcms::json::value v;
+				cppcms::json::value v(o);
 				
-				v.set_value(o);
-
+				if (v.is_undefined())
+					SDEBUG("placing serialized value: undefined");
+				else
+					SDEBUG("placing serialized value");
+				
 				return serialization<cppcms::json::value>::serialize(v);
 			}
 

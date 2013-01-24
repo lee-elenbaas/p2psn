@@ -87,9 +87,40 @@ namespace cppcms {
 				return m;
 			}
 			static void set(value& v, const std::map<std::string,V> m) {
+				SDEBUG("Storing map into json::value init");
+				switch(v.type()){
+					case json_type::is_undefined:
+						SDEBUG("is_undefined");
+						break;
+					case json_type::is_null:
+						SDEBUG("is_null");
+						break;
+					case json_type::is_boolean:
+						SDEBUG("is_boolean");
+						break;
+					case json_type::is_number:
+						SDEBUG("is_number");
+						break;
+					case json_type::is_string:
+						SDEBUG("is_string");
+						break;
+					case json_type::is_object:
+						SDEBUG("is_object");
+						break;
+					case json_type::is_array:
+						SDEBUG("is_array");
+						break;
+					default:
+						SDEBUG("default");
+						break;
+				}
+				//auto o = v.object();
+				SDEBUG("Storing map into json::value start");
 				for(auto p : m) {
+					SDEBUG("Storing map into json::value item");
 					v.set(p.first, p.second);
 				}
+				SDEBUG("Storing map into json::value end");
 			}
 		};
 

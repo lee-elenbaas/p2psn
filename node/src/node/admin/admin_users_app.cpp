@@ -55,20 +55,24 @@ void admin_users_app::admin_users_show(content::admin_users& c) {
 void admin_users_app::list_users()
 {
     content::admin_users c;
+    c.list_state = content::admin_users_list_state::view;
+    c.users = admin_users();
 
 	// make sure a state exists for every user
 	auto states = admin_users_states();
-	
+	DEBUG("Making sure all users have a state");
 	for(auto user : c.users) {
 		auto state = states[user.name];
 		
-		// nothing to do - since default constructor does all the work by calling the [] operator
+		states[user.name] = state;
+		DEBUG("Making sure user "+user.name+" has state");
 	}
+	DEBUG("Making sure all users have a state");
 	
+	DEBUG("Storing user states in session");
 	admin_users_states(states);
+	DEBUG("User states stored in session");
 
-    c.list_state = content::admin_users_list_state::view;
-    c.users = admin_users();
     c.user_states = states;
 
     admin_users_show(c);
