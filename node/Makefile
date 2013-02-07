@@ -2,7 +2,7 @@ LIBS=-lcppcms -lbooster -lboost_filesystem -lboost_system
 OPTIONS=-O0 -std=c++11 -Wall -Wextra -g3 -rdynamic
 
 NODE_ADMIN_GENERATED=src/generated/noded_skin.cpp
-CPPCMS_TMPL_CC=cppcms_tmpl_cc
+CPPCMS_TMPL_CC=third_party/altered/cppcms_tmpl_cc
 
 all: run
 
@@ -75,7 +75,8 @@ dependancies: build/dependancies_tmpl.mk build/dependancies_cpp.mk
 build/dependancies_tmpl.mk:
 	mkdir -p build
 	find . -type f -name "*.tmpl" | sed "s/\.\/src\/\(.*\.\)tmpl/src\/generated\/\1cpp: src\/\1tmpl/" > $@
-	find . -type f -name "*.tmpl" | sed "s/\.\/src\/\(.*\.\)tmpl/src\/generated\/\1cpp/" | xargs echo "build/dependancies_cpp.mk:" >> $@
+	find . -type f -name "*.tmpl" | sed "s/\.\/src\/\(.*\.\)tmpl/src\/generated\/\1hpp: src\/\1tmpl/" > $@
+	find . -type f -name "*.tmpl" | sed "s/\.\/src\/\(.*\.\)tmpl/src\/generated\/\1cpp src\/generated\/\1hpp/" | xargs echo "build/dependancies_cpp.mk:" >> $@
 
 build/dependancies_cpp.mk: build/dependancies_tmpl.mk
 	mkdir -p build
