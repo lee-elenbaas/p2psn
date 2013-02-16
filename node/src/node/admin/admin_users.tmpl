@@ -74,8 +74,8 @@
 <% foreach user in users %>
 	<tbody>
 		<% item %>
-			<% c++ auto user_state = content.user_states[user.name]; %>
-			<% c++ cur_user_state =  user_state; %>
+			<% c++ // auto user_state = content.user_states[user.name]; %>
+			<% c++ // cur_user_state =  user_state; %>
 			<tr>
 				<td class="<%= cur_user_state.css_class %>"><%= user.name %></td>
 				<td class="<%= cur_user_state.css_class %>"><%= user.password %></td>
