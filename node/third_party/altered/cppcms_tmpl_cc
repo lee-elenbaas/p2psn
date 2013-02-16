@@ -938,6 +938,13 @@ def help():
         "               false                Place the template function definitions outside the class declaration.\n" \
         "               default              (Default value is parameter is omitted.) If header file is\n" \
         "                                    generated, same as false, otherwise same as true.\n" \
+        "      --ref-lookup                  How identifiers are treated by the compiler.\n" \
+        "               content (default)    Identifiers are expected to be fields in the content (are preceded with content.),\n" \
+        "                                    or objects defined using the template syntax. (Safe as without the change - default).\n" \
+        "               template             Identifiers are expected to be defined in the template using C++ scope.\n" \
+        "               with-content         Identifiers are expected to be defined in the content, but lookup is done using C++ compile,\n" \
+        "                                    by implementing with. (This limits template parameters to follow a simpler pattern (no\n" \
+        "                                    declaration of function pointers for example, and limit template names not to conflict with content field names.)\n" \
         "      -h/--help                     show this help message\n")
 
 def main():
@@ -950,6 +957,7 @@ def main():
     global exit_flag
     global include_directory
     global inline_templates
+    global lookup
     unsafe_build = False
     write_loader = True
     while indx < len(os.sys.argv):
@@ -960,7 +968,22 @@ def main():
                 exit_flag=1
                 return
             else:
-                namespace_name=os.sys.argv[indx+1];
+                lookup=os.sys.argv[indx+1];
+                if lookup!='contet' and lookup!='template' and lookup!='with-content':
+					sys.stderr.write("%s is not a valid reference lookup\n" % lookup)
+					help()
+					exit_flag=1
+					return
+				else:
+					indx+=1
+        elif os.sys.argv[indx]=='--ref-lookup':
+            if indx+1>=len(os.sys.argv):
+                sys.stderr.write("%s should be followed by reference type\n" % (os.sys.argv[indx]))
+                help()
+                exit_flag=1
+                return
+            else:
+                output_file=os.sys.argv[indx+1]
                 indx+=1
         elif os.sys.argv[indx]=='-o' or os.sys.argv[indx]=='--code':
             if indx+1>=len(os.sys.argv):
@@ -1122,7 +1145,7 @@ exit_flag=0
 current_template=''
 spec_gettext=''
 ignore_inline=1
-
+lookup='content'
 view_name = ''
 declarations = StringIO.StringIO();
 definitions = StringIO.StringIO();
