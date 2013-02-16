@@ -976,6 +976,14 @@ def main():
                 help()
                 exit_flag=1
                 return
+            else:
+                lookup=os.sys.argv[indx+1]
+                indx+=1
+                if (lookup!='content' and lookup!='template' and lookup!='with-content'):
+					sys.stderr.write("%s is not a valid reference lookup\n" % (lookup))
+					help()
+					exit_flag=1
+					return
         elif os.sys.argv[indx]=='-o' or os.sys.argv[indx]=='--code':
             if indx+1>=len(os.sys.argv):
                 sys.stderr.write("%s should be followed by output file name\n" % (os.sys.argv[indx]))
@@ -983,13 +991,8 @@ def main():
                 exit_flag=1
                 return
             else:
-                lookup=os.sys.argv[indx+1];
-                if lookup!='contet' and lookup!='template' and lookup!='with-content':
-					sys.stderr.write("%s is not a valid reference lookup\n" % lookup)
-					help()
-					exit_flag=1
-					return
-				indx+=1
+                output_file=os.sys.argv[indx+1]
+                indx+=1
         elif os.sys.argv[indx]=='-I' or os.sys.argv[indx]=='-include':
             if indx+1>=len(os.sys.argv):
                 sys.stderr.write("%s should be followed by directory name\n" % (os.sys.argv[indx]))
