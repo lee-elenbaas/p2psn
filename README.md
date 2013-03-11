@@ -71,7 +71,8 @@ However i am not sure installing a node on a mobile device is a good idea.
 Perhaps a better idea is to split the 2 roles of the node into two separate roles: storage and management. 
 The management should be installed on the mobile device, but the storage can be kept separatedly in an encripted form so that only nodes of this profile can read it.
 
-Another option is to limit the storage of the profile stored on the mobile device to a very limited number of versions, and very limited number of uptodate objects.
+Another option is to limit the storage of the profile stored on the mobile device to a very limited number of versions, and very limited number of up-to-date objects.
+(I like this option better, since it means a change in the local storage policy and nothing else.)
 
 ## Licensing
 
