@@ -61,6 +61,18 @@ The node database will be contacted through the CppDB library. The default will 
 OpenID support will allow attaching multiple OpenID authentications to every user - and that authentication will be used as a way to login for that user (an opneId will only be allowed to be associated with one user on the same node.) 
 The openID support wull use the library libopkele
 
+## Mobile
+
+After talking to Oded i started thinking about mobile solution.
+
+With Phone Gap or similar things it is possible to place node and client both on the same mobile device.
+However i am not sure installing a node on a mobile device is a good idea.
+
+Perhaps a better idea is to split the 2 roles of the node into two separate roles: storage and management. 
+The management should be installed on the mobile device, but the storage can be kept separatedly in an encripted form so that only nodes of this profile can read it.
+
+Another option is to limit the storage of the profile stored on the mobile device to a very limited number of versions, and very limited number of uptodate objects.
+
 ## Licensing
 
 The current plan is to release this project under GPLv3. 
