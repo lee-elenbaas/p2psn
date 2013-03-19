@@ -32,7 +32,7 @@ def output_declaration(s):
     global line_number
     global declarations
     global template_line_prefix
-	declarations.write('\t'*len(stack) + '%sline %d "%s"' % (template_line_prefix,line_number,file_name)+'\n')
+    declarations.write('\t'*len(stack) + '%sline %d "%s"' % (template_line_prefix,line_number,file_name)+'\n')
     declarations.write('\t'*len(stack) + s + '\n');
 
 def output_definition(s):
@@ -41,7 +41,7 @@ def output_definition(s):
     global line_number
     global definitions
     global template_line_prefix
-	definitions.write('\t'*(len(stack)-1) + '%sline %d "%s"' % (template_line_prefix,line_number,file_name)+'\n')
+    definitions.write('\t'*(len(stack)-1) + '%sline %d "%s"' % (template_line_prefix,line_number,file_name)+'\n')
     definitions.write('\t'*(len(stack)-1) + s + '\n');
 
 def output_all(s):
