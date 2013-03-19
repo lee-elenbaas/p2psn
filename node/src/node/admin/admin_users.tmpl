@@ -1,7 +1,7 @@
 <% c++ #include "../guest/master.hpp" %>
 <% c++ #include "../../../node/admin/admin_users_content.hpp" %>
 <% skin p2psn_node_admin_skin %>
-<% view admin_users uses content::admin_users extends master %>
+<% view admin_users uses node_admin::content::admin_users extends master %>
 
 <% template page_content() %>
 <% if (content.list_state == content::admin_users_list_state::view) %>
