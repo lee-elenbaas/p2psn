@@ -772,7 +772,7 @@ class cache_block:
         output_template('    content.app().cache().store_frame(%s,_cppcms_cache_flt.detach(),%s,%s,%s);' \
                     % (self.parameter,recorded,timeout_time,notriggers))
         output_template('}} // cache')
-<---HERE--->
+
 class trigger_block:
     pattern=r'^<%\s*trigger\s+((?P<str>'+  str_match +')|(?P<var>'+ variable_match +r'))' + r'\s*%>$'
     basic_pattern = 'trigger'
