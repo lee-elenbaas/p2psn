@@ -31,7 +31,8 @@ def output_declaration(s):
     global file_name
     global line_number
     global declarations
-    declarations.write('\t'*len(stack) + '#line %d "%s"' % (line_number,file_name)+'\n')
+    global template_line_prefix
+	declarations.write('\t'*len(stack) + '%sline %d "%s"' % (template_line_prefix,line_number,file_name)+'\n')
     declarations.write('\t'*len(stack) + s + '\n');
 
 def output_definition(s):
@@ -39,7 +40,8 @@ def output_definition(s):
     global file_name
     global line_number
     global definitions
-    definitions.write('\t'*(len(stack)-1) + '#line %d "%s"' % (line_number,file_name)+'\n')
+    global template_line_prefix
+	definitions.write('\t'*(len(stack)-1) + '%sline %d "%s"' % (template_line_prefix,line_number,file_name)+'\n')
     definitions.write('\t'*(len(stack)-1) + s + '\n');
 
 def output_all(s):
@@ -945,6 +947,7 @@ def help():
         "               with-content         Identifiers are expected to be defined in the content, but lookup is done using C++ compile,\n" \
         "                                    by implementing with. (This limits template parameters to follow a simpler pattern (no\n" \
         "                                    declaration of function pointers for example, and limit template names not to conflict with content field names.)\n" \
+        "      --no-template-line            Remove link to the template line from the generated C++ code, (For getting better compiler messages about the generated code)\n" \
         "      -h/--help                     show this help message\n")
 
 def main():
@@ -958,6 +961,7 @@ def main():
     global include_directory
     global inline_templates
     global lookup
+    global template_line_prefix
     unsafe_build = False
     write_loader = True
     while indx < len(os.sys.argv):
@@ -1034,6 +1038,8 @@ def main():
                 indx+=1
         elif os.sys.argv[indx]=='-u' or os.sys.argv[indx]=='--unsafe-cast':
             unsafe_build = True
+        elif os.sys.argv[indx]=='--no-template-line':
+			template_line_prefix = '//'
         elif os.sys.argv[indx]=='-l' or os.sys.argv[indx]=='--no-loader':
             write_loader = False
         elif os.sys.argv[indx]=='--help' or os.sys.argv[indx]=='-h':
@@ -1151,7 +1157,7 @@ definitions = StringIO.StringIO();
 inline_cpp_to = output_declaration
 inline_templates = "default"
 output_template = output_definition
-
+template_line_prefix='#'
 ################
 main()
 ################

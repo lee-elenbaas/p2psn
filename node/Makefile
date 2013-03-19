@@ -67,7 +67,7 @@ build/%.o: src/%.cpp
 
 src/generated/%.cpp: src/%.tmpl
 	echo $@ | sed "s/\/[^\/]*$$//" | xargs mkdir -p 
-	$(CPPCMS_TMPL_CC) -o $@ -H "src/generated/$*.hpp" $^
+	$(CPPCMS_TMPL_CC) --no-template-line -o $@ -H "src/generated/$*.hpp" $^
 
 # dependancies
 dependancies: build/dependancies_tmpl.mk build/dependancies_cpp.mk
