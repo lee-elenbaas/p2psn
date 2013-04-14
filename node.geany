@@ -23,11 +23,26 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=2
-FILE_NAME_0=258;Make;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2FMakefile;0;4
-FILE_NAME_1=116;HTML;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fnode%2Fadmin%2Fadmin_users.tmpl;0;4
-FILE_NAME_2=26325;Python;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fthird_party%2Faltered%2Fcppcms_tmpl_cc;0;4
-FILE_NAME_3=23924;Python;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fcppcms-1.0.3%2Fbin%2Fcppcms_tmpl_cc;0;4
+current_page=17
+FILE_NAME_0=2225;Make;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2FMakefile;0;4
+FILE_NAME_1=176;HTML;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fnode%2Fadmin%2Fadmin_users.tmpl;0;4
+FILE_NAME_2=1439;Python;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fthird_party%2Faltered%2Fcppcms_tmpl_cc;0;4
+FILE_NAME_3=829;C++;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fgenerated%2Fnode%2Fadmin%2Fadmin_users.hpp;0;4
+FILE_NAME_4=0;C++;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fgenerated%2Fnode%2Fguest%2Fmaster.hpp;0;4
+FILE_NAME_5=0;C++;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fnode%2Fguest%2Fbase_content.hpp;0;4
+FILE_NAME_6=168;HTML;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fnode%2Fguest%2Fmaster.tmpl;0;4
+FILE_NAME_7=143;HTML;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fnode%2Fguest%2Flogin.tmpl;0;4
+FILE_NAME_8=154;HTML;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fnode%2Fguest%2Finfo.tmpl;0;4
+FILE_NAME_9=96;HTML;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fnode%2Fguest%2Fabout.tmpl;0;4
+FILE_NAME_10=176;HTML;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fnode%2Fadmin%2Fadmin_apply.tmpl;0;4
+FILE_NAME_11=174;HTML;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fnode%2Fadmin%2Fadmin_menu.tmpl;0;4
+FILE_NAME_12=178;HTML;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fnode%2Fsrc%2Fnode%2Fadmin%2Fadmin_server.tmpl;0;4
+FILE_NAME_13=0;C++;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fmath%2Fmodulu%2Fmod.cpp;0;4
+FILE_NAME_14=2011;C;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fmath%2Fmodulu%2Fmod.h;0;4
+FILE_NAME_15=0;C;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fmath%2Fmodulu%2Fmod_stream_traits.h;0;4
+FILE_NAME_16=0;C++;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fmath%2Fmodulu%2Fmod_stream_traits.cpp;0;4
+FILE_NAME_17=4853;C;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fmath%2Fpolynomial%2Ffull_polynomial.h;0;4
+FILE_NAME_18=0;C++;0;16;1;1;0;%2Fhome%2Flee%2Fprojects%2Fp2psn%2Fmath%2Fpolynomial%2Ffull_polynomial.cpp;0;4
 
 [VTE]
 last_dir=/home/lee/projects/p2psn/node

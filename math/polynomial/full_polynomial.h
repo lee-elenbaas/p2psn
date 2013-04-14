@@ -95,14 +95,34 @@ public:
 	
 	// Scalar assignment
 	constexpr F operator()(const F& scalar) { return eval_scalar(scalar, 0); }
+	F operator()(const F& scalar) {
+		F val;
+		
+		for(auto current =rbegin(_corefficients), auto end = rend(_corefficients); current!=end, ++current) {
+			val = *current+(scalar*val);
+		}
+		
+		return val;
+	}
 
-	// math operations
+	// addition
 	constexpr full_polynomial<F>& operator+=(const full_polynomial<F>& o) { return add_poly(o, 0); }
+	full_polynomial<F> operator+=(const full_polynomial<F>& o) {
+		int level = 0;
+		
+		for(auto shared = min(_corefficients.size(), o._corefficients.size());level<shared;++level)
+			_corefficients[level] += o._corefficients[level];
+			
+		for(;level < o._corefficients.size();++level)
+			_corefficients.push_back(o._corefficients[level]);
+	}
+	
+	// subtraction
+	constexpr full_polynomial<F>& operator-=(const full_polynomial<F>& o) {
+		return *this += -o;
+	}
 	full_polynomial<F>& operator-=(const full_polynomial<F>& o) {
-		for (int i=min(_coefficients.size(), o._coefficients.size();i>=0;--i)
-			_coefficients[i] -= o._coefficients[i];
-		for (int i=_coefficients.size();i<o._coefficients.size();++i)
-			_coefficients.push_back(o._coefficients[i]);
+		return *this += -o;
 	}
 private:
 	std::vector<F> _coefficients;
