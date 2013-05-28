@@ -57,6 +57,7 @@ namespace p2psn {
 
 			DEBUG("dumping file");
 			response().content_type(file_info.get<string>("mime"));
+			response().
 			response().out() << f.rdbuf();
 		}
 

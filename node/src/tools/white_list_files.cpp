@@ -7,6 +7,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 #include <string>
+#include <vector>
 #include <iostream>
 #include <fstream>
 #include <boost/program_options.hpp>
@@ -61,7 +62,7 @@ namespace {
 		return res;
 	}
 
-	void handle_file(value& white_list, const fs::path& src, const fs::path& dst, fs::path file, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy, hash_function_t hash) {
+	void handle_file(value& white_list, const fs::path& src, const fs::path& dst, fs::path file, const string& mime, const string& http_headers, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy, hash_function_t hash) {
 		auto relative_file = file.string().substr(src.string().length());
 		
 		auto sig = hash(relative_file);
@@ -77,10 +78,13 @@ namespace {
 		white_list.set(sig+".mime", mime);
 		white_list.set(sig+".path", tf.string());
 		white_list.set(sig+".request_path", relative_file);
+		
+		if (!http_header.empty())
+			white_list.set(sig+".http_headers", http_headers);
 	}
 
 	template<typename FileIterator>
-	void handle_file_list(value& white_list, const fs::path& src, const fs::path& dst, FileIterator start, FileIterator end, const booster::regex& pattern, const string& mime, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy, hash_function_t hash) {
+	void handle_file_list(value& white_list, const fs::path& src, const fs::path& dst, FileIterator start, FileIterator end, const booster::regex& pattern, const string& mime, const string& http_headers, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy, hash_function_t hash) {
 		for(FileIterator f = start; f != end; ++f) {
 			fs::path file = f->path();
 
@@ -89,11 +93,11 @@ namespace {
 			if (!regex_match(file.string(), pattern))
 				continue;
 
-			handle_file(white_list, src, dst, file, mime, keep_extension, keep_filename, keep_folder, copy, hash);
+			handle_file(white_list, src, dst, file, mime, http_headers, keep_extension, keep_filename, keep_folder, copy, hash);
 		}
 	}
 
-	void build_white_list(string target, const fs::path& src, const fs::path& dst, const booster::regex& pattern, const string& mime, bool append, bool recursive, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy, hash_function_t hash) {
+	void build_white_list(string target, const fs::path& src, const fs::path& dst, const booster::regex& pattern, const string& mime, const string& http_headers, bool append, bool recursive, bool keep_extension, bool keep_filename, bool keep_folder, copy_function_t copy, hash_function_t hash) {
 		value white_list;
 
 		if (append) {
@@ -112,6 +116,7 @@ namespace {
 				fs::recursive_directory_iterator(), 
 				pattern, 
 				mime, 
+				http_headers,
 				keep_extension, 
 				keep_filename, 
 				keep_folder, 
@@ -127,6 +132,7 @@ namespace {
 				fs::directory_iterator(), 
 				pattern, 
 				mime, 
+				http_headers,
 				keep_extension, 
 				keep_filename, 
 				keep_folder, 
@@ -144,28 +150,48 @@ namespace {
 
 int main(int argc, char** argv) {
 	try {
-		po::options_description cli_options("Parameters");
+		po::options_description cli_generic("Generic Options");
+		po::options_description cli_output("Output Options");
+		po::options_description cli_mapping("Mapping Options");
+		po::options_description cli_outfiles("Static File Options");
+		po::options_description cli_scanfiles("Scan File Options");
 
-		cli_options.add_options()
+		cli_generic.add_options()
 			("help,h", "Generate usage message")
 			("version,v", "Print the version message")
+			("config,c", "Config file");
+		cli_output.add_options()
 			("target,t", po::value<string>(), "Target file name to place the white list into")
-			("src,s", po::value<string>(), "Source folder to hash files from")
-			("dst,d", po::value<string>(), "Target folder to place files into")
-			("pattern,p", po::value<string>(), "File pattern for files to use")
+			("append,a", po::value<bool>()->default_value(false)->implicit_value(true), "Append to the target file");
+		cli_mapping.add_options()
 			("mime,m", po::value<string>(), "Mime type of the hashed files")
-			("append,a", po::value<bool>()->default_value(false)->implicit_value(true), "Append to the target file")
-			("recursive,r", po::value<bool>()->default_value(false)->implicit_value(true), "Recursive scan inside subfolders")
+			("http-header,H", po::value<vector<string>>(), "HTTP Header to place in the response (can be specified several times for several headers)")
+			("hash-type", po::value<string>()->default_value("md5"), "Hash algorithm used for hashing paths: md5, sha1");
+		cli_outfiles.add_options()
+			("dst,d", po::value<string>(), "Target folder to place files into")
 			("keep-extension,x", po::value<bool>()->default_value(false)->implicit_value(true), "Keep extension in destination folder")
 			("keep-filename,n", po::value<bool>()->default_value(false)->implicit_value(true), "Keep original filename")
 			("keep-folders,f", po::value<bool>()->default_value(false)->implicit_value(true), "Keep folder structure")
-			("pattern-type", po::value<string>()->default_value("path"), "Type of file matching mechanism: path, regex")
-			("hash-type", po::value<string>()->default_value("md5"), "Hash algorithm used for hashing paths: md5, sha1")
 			("copy-method", po::value<string>()->default_value("copy"), "Copy method to copy the files with: copy, hard"); // , soft
+		cli_scanfiles.add_options()
+			("src,s", po::value<string>(), "Source folder to hash files from")
+			("recursive,r", po::value<bool>()->default_value(false)->implicit_value(true), "Recursive scan inside subfolders")
+			("pattern,p", po::value<string>(), "File pattern for files to use")
+			("pattern-type", po::value<string>()->default_value("path"), "Type of file matching mechanism: path, regex");
 
+		po::options_description cli_options;
+		po::options_description config_options;
+		
+		cli_options.add(cli_generic).add(cli_output).add(cli_outfiles).add(cli_scanfiles);
+		config_options.add(cli_output).add(cli_outfiles).add(cli_scanfiles);
+		
 		po::variables_map vm;
 
-		po::store( po::command_line_parser( argc, argv ).options( cli_options ).run(), vm );
+		po::store( po::parse_command_line( argc, argv, cli_options ), vm );
+		
+		if (vm.count("config"))
+			po::store( po::parse_config_file(vm["config"].as<string>(), config_options), vm);
+
 		po::notify( vm );
 
 		if (vm.count("version")) {
@@ -252,6 +278,7 @@ int main(int argc, char** argv) {
 			vm["dst"].as<string>(), 
 			pattern_regex,
 			vm["mime"].as<string>(),
+			vm["http-header"].as<vector<string>>(),
 			vm["append"].as<bool>(),
 			vm["recursive"].as<bool>(),
 			vm["keep-extension"].as<bool>(),
