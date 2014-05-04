@@ -18,7 +18,8 @@ namespace p2psn {
 		typedef std::string uri; // untyped uri
 		typedef uri email;
 		typedef uri url;
-		typedef uri channel; // online p2p channel
+		typedef uri channel; // online p2p channel // TODO: might be better off as a list of connected servers
+		
 	} // namespace entities
 } // namespace p2psn
 
