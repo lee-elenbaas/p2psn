@@ -5,18 +5,18 @@ namespace p2psn {
 
 		//////////////// object_id /////////////////////////////
 
-		inline identifier object_id::normalized() {
+		inline const identifier object_id::normalized() const {
 			return source_uri + sid; // TODO: clean up the normalized string so it become a valid JS/Angular identifier
 		}
-		
+
 		/////////////// object_view ///////////////////
 
-		inline string object_view::directiveName() {
-			return id.normalized();
+		inline const string object_view::directiveName() const {
+			return id().normalized();
 		}
 		
-		inline json object_view::directiveObject() {
-			return content;
+		inline const json object_view::directiveObject() const {
+			return _content;
 		}
 		
 	} // namespace entities
