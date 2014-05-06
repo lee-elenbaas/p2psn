@@ -19,15 +19,10 @@ namespace p2psn {
 				void store(object obj);
 				
 				template<class Type>
-				Type retrieve(object_reference<Type> ref);
+				Type retrieve(object_reference<Type> ref) {
+					return dynamic_cast<Type>(retrieve(ref.id()));
+				}
 		};
-		
-		template<class Type>
-		Type object_repository::retrieve(object_reference<Type> ref) {
-				auto obj = retrieve(ref.id());
-				
-				return dynamic_cast<Type>(obj);		
-		}
 		
 	} // namespace repository
 } // namespace p2psn
