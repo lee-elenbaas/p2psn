@@ -4,6 +4,7 @@ namespace p2psn {
 	namespace transport {
 		
 		void offline_transport::send_message(contact to, object msg) {
+			// TODO:
 			// * Serialize object to a new buffer
 			// * Crypto msg using contact public key
 			// * Sign message with my signature
@@ -11,6 +12,7 @@ namespace p2psn {
 		}
 		
 		void offline_transport::handle_incoming_message(object msg) {
+			// TODO:
 			// * Check if this is the newest version of the object avaliable
 				// * Store the object in the local repository (If profile is synced, send a new sync message to other installations)
 				// * Update the notification objects on the new object
@@ -18,12 +20,14 @@ namespace p2psn {
 		}
 
 		void offline_transport::handle_sync_message(object msg) {
+			// TODO:
 			// * Check if this is the newest version of the object avaliable
 				// * Store the object in the local repository
 				// * Update UI
 		}
 		
 		void offline_transport::poll_incoming_messages() {
+			// TODO:
 			// * Check for new emails on my offline transport email since last check
 			// * For each new email
 				// * If email is a p2psn incoming message
@@ -34,6 +38,7 @@ namespace p2psn {
 		}
 
 		void offline_transport::poll_sync_messages() {
+			// TODO:
 			// * Check for new emails on my sync transport email since last check
 			// * For each new email
 				// * If email is a p2psn sync message
@@ -44,6 +49,7 @@ namespace p2psn {
 		}
 
 		offline_transport::offline_transport() {
+			// TODO:
 			// * If profile is synced
 				// * poll_sync_messages()
 				// * Start a thread for checking sync messages
@@ -52,6 +58,7 @@ namespace p2psn {
 		}
 
 		offline_transport::~offline_transport() {
+			// TODO:
 			// * If profile is synced
 				// * Stop checking sync messages thread
 			// * Stop checking incoming messages thread

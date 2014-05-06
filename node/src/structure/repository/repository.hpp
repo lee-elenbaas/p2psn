@@ -11,7 +11,7 @@ namespace p2psn {
 			private:
 				std::map<identifier, object> _objects;
 				
-				object retrieve(const object_id& id);
+				object _retrieve(const object_id& id) const;
 			public:
 				object_repository();
 				~object_repository();
@@ -19,8 +19,8 @@ namespace p2psn {
 				void store(object obj);
 				
 				template<class Type>
-				Type retrieve(object_reference<Type> ref) {
-					return dynamic_cast<Type>(retrieve(ref.id()));
+				Type retrieve(object_reference<Type> ref) const {
+					return dynamic_cast<Type>(_retrieve(ref.id()));
 				}
 		};
 		

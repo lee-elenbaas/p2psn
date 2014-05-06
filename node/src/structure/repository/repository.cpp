@@ -4,11 +4,13 @@ namespace p2psn {
 	namespace repository {
 		
 		object_repository::object_repository() {
+			// TODO:
 			// * Load list of objects to load from disk
 			// * Load objects from disk
 		}
 		
 		object_repository::~object_repository() {
+			// TODO:
 			// * Generate new list of objects to load next time
 			// * Save the list to the disk
 		}
