@@ -2,6 +2,8 @@
 #define __P2PSN_CRYPTO_SERVICE_H
 
 #include "../crypto/primitives.hpp"
+#include "../utility/exception.hpp"
+#include <stdexcept>
 
 namespace p2psn {
 	namespace entities {
@@ -11,7 +13,9 @@ namespace p2psn {
 		template<class Message>
 		class crypto_signed;
 
-		class crypto_error : public std::
+		DEFINE_EXCEPTION(crypto_error, std::runtime_error);
+		DEFINE_EXCEPTION(signature_error, crypto_error);
+		
 		class crypto_service {
 			public:
 				template<class Message>
