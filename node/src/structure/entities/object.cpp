@@ -9,6 +9,16 @@ namespace p2psn {
 			return source_uri + sid; // TODO: clean up the normalized string so it become a valid JS/Angular identifier
 		}
 
+		/////////////// object ///////////////////
+		
+		inline const buffer& object::content() const {
+			return _content;
+		}
+		
+		inline const integer& object::version() const {
+			return _version;
+		}
+		
 		/////////////// object_view ///////////////////
 
 		inline const string object_view::directiveName() const {

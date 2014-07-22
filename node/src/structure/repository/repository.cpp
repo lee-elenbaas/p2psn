@@ -22,7 +22,9 @@ namespace p2psn {
 			
 			if (pos != _objects.end()) {
 				auto current = *pos;
-				
+
+				if (current.id() != obj.id())
+					throw id_conflict_error("Attempt to store a different object with a clashing id");
 				// TODO: need to check that new object is indeed a new version of the old object
 				// TODO: throw exception if object is not a different version of the same object, or if it is not a newer version
 			}

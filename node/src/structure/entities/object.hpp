@@ -5,6 +5,8 @@
 
 namespace p2psn {
 	namespace entities {
+		//////////////// forward declarations /////////////////////////////
+
 		// id for finding an object in the repository and for identifing it across the p2psn network
 		class object_id; 
 		
@@ -18,7 +20,7 @@ namespace p2psn {
 		// special types
 		class object_type;
 		class object_view;
-		
+
 		//////////////// object_id /////////////////////////////
 
 		class object_id {
@@ -52,11 +54,15 @@ namespace p2psn {
 				
 				object_reference<object_type> _type; // the type object belongs too
 				object_reference<object_view> _preferred_view; // the preferred view used to render this object in this p2psn profile (TODO: perhaps this information should sit somewhere inside the profile)
+
+				buffer _content; // TODO: perhaps a buffer will be better for performance, but keeping this a string will make this more language portable
 				
 			protected:
-				buffer _content; // TODO: perhaps a buffer will be better for performance, but keeping this a string will make this more language portable
+				const buffer& content() const;
+				
 			public:
 				object(const object_id& id) : object_with_id_imp(id) {}
+				const integer& version() const;
 		};
 		
 		//////////////// object_reference //////////////////
