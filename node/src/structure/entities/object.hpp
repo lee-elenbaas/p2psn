@@ -56,13 +56,14 @@ namespace p2psn {
 				object_reference<object_view> _preferred_view; // the preferred view used to render this object in this p2psn profile (TODO: perhaps this information should sit somewhere inside the profile)
 
 				buffer _content; // TODO: perhaps a buffer will be better for performance, but keeping this a string will make this more language portable
-				
+				crypto_signature _signatue;
 			protected:
 				const buffer& content() const;
 				
 			public:
 				object(const object_id& id) : object_with_id_imp(id) {}
 				const integer& version() const;
+				const crypto_signature& signature() const;
 		};
 		
 		//////////////// object_reference //////////////////

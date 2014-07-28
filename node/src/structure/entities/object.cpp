@@ -18,6 +18,10 @@ namespace p2psn {
 		inline const integer& object::version() const {
 			return _version;
 		}
+
+		inline const crypto_signature& object::signature() const {
+			return _signatue;
+		}
 		
 		/////////////// object_view ///////////////////
 

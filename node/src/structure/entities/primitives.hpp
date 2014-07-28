@@ -14,6 +14,7 @@ namespace p2psn {
 		typedef std::string json; // stringified json/ecmascript object
 		typedef std::string identifier; // ecmascript valid identifier
 		typedef std::string crypto_key; // RSA key
+		typedef std::string crypto_signature; // RSA/Hash signature
 
 		typedef std::string uri; // untyped uri
 		typedef uri email;

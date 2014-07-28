@@ -10,6 +10,8 @@ namespace p2psn {
 		DEFINE_EXCEPTION(storage_error, cppcms_error);
 		DEFINE_EXCEPTION(not_found_error, storage_error);
 		DEFINE_EXCEPTION(id_conflict_error, storage_error);
+		DEFINE_EXCEPTION(version_conflict_error, storage_error);
+		DEFINE_EXCEPTION(store_older_version_error, storage_error);
 		
 		class object_repository {
 			private:

@@ -26,9 +26,16 @@ namespace p2psn {
 				if (current.id() != obj.id())
 					throw id_conflict_error("Attempt to store a different object with a clashing id");
 					
-				if (current.
-				// TODO: need to check that new object is indeed a new version of the old object
-				// TODO: throw exception if object is not a different version of the same object, or if it is not a newer version
+				if (current.version() == obj.version()) {
+					if (current.signature() == obj.signature())
+						return;
+						
+					throw version_conflict_error("Same version of the same object with different content");
+				}
+				
+				if (current.version() > obj.version())
+					throw store_older_version_error("A newer version of the object already exists in the storage");
+					// TODO: need to figure out how to fite injection of false version numbers
 			}
 			
 			_objects[id] = obj;
