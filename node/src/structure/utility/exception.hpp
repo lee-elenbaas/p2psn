@@ -2,22 +2,21 @@
 #define __P2PSN_EXCEPTION_H
 
 #include <exception>
-
-#define DEFINE_EXCEPTION(class_name, base_class) 									\
-			class class_name : public base_class {							\
-				public:														\
-					class_name(const string& what) : base_class(what) { }	\
-					class_name(const char* what) : base_class(what) { }		\
-			}
 			
 namespace p2psn {
-	namespace repository {
+	namespace utility {
 		
-		using std::exception;
-		
-		DEFINE_EXCEPTION(cppcms_error, exception);
-		
-	} // namespace repository
+		template<class B>
+			struct DEFINE_EXCEPTION {
+				class type : public B {						
+				public:														
+					exception(const string& what) : B(what) { }	
+					exception(const char* what) : B(what) { }	
+				};	
+			};
+			
+		typedef DEFINE_EXCEPTION<std::exception>::type cppcms_error;
+	} // namespace utility
 } // namespace p2psn
 
 #endif // __P2PSN_EXCEPTION_H

@@ -7,17 +7,21 @@
 
 namespace p2psn {
 	namespace repository {
-		DEFINE_EXCEPTION(storage_error, cppcms_error);
-		DEFINE_EXCEPTION(not_found_error, storage_error);
-		DEFINE_EXCEPTION(id_conflict_error, storage_error);
-		DEFINE_EXCEPTION(version_conflict_error, storage_error);
-		DEFINE_EXCEPTION(store_older_version_error, storage_error);
+		typedef utility::DEFINE_EXCEPTION<cppcms_error>::type storage_error;
+
+		typedef utility::DEFINE_EXCEPTION<storage_error>::type storage_retrieval_error;
+		typedef utility::DEFINE_EXCEPTION<storage_retrieval_error>::type not_found_error;
+
+		typedef utility::DEFINE_EXCEPTION<storage_error>::type storage_store_error;
+		typedef utility::DEFINE_EXCEPTION<storage_store_error>::type id_conflict_error;
+		typedef utility::DEFINE_EXCEPTION<storage_store_error>::type version_conflict_error;
+		typedef utility::DEFINE_EXCEPTION<storage_store_error>::type store_older_version_error;
 		
 		class object_repository {
 			private:
 				std::map<identifier, object> _objects;
 				
-				object _retrieve(const object_id& id) const throw (storage_error);
+				object _retrieve(const object_id& id) const throw (not_found_error);
 			public:
 				object_repository();
 				~object_repository();
@@ -25,7 +29,7 @@ namespace p2psn {
 				void store(object obj) throw (storage_error);
 				
 				template<class Type>
-				Type retrieve(object_reference<Type> ref) const throw (storage_error) {
+				Type retrieve(object_reference<Type> ref) const throw (id_conflict_error, version_conflict_error, store_older_version_error) {
 					return dynamic_cast<Type>(_retrieve(ref.id()));
 				}
 		};
